@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="WyntIQ — Ask your company anything. Instantly. The Company Intelligence System that captures every decision, reason and context — so nothing is lost when employees leave.">
+<meta name="keywords" content="company intelligence, decision management, knowledge retention, employee offboarding, institutional knowledge">
+<meta property="og:title" content="WyntIQ — Ask your company anything. Instantly.">
+<meta property="og:description" content="The Company Intelligence System that captures every decision made inside your company — so when someone leaves, nothing leaves with them.">
+<meta property="og:url" content="https://wyntiq.com">
+<title>WyntIQ — Ask your company anything. Instantly.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F7F9FC;--white:#FFFFFF;--ink:#0D1B2A;--ink2:#1B2E3F;--ink3:#5A7184;
+  --border:#D8E4EE;--border2:#B8CFDF;
+  --blue:#1A56DB;--blue2:#1E40AF;--blue3:#3B82F6;--bluel:#EFF6FF;--bluel2:#DBEAFE;
+  --surface:#F0F5FA;--surface2:#E4EDF5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:30px;height:30px;background:var(--blue);display:flex;align-items:center;justify-content:center;border-radius:6px;flex-shrink:0}
+.logo-sq{width:12px;height:12px;background:var(--white);border-radius:2px;opacity:.9}
+.logo-wrap-main{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.3px}
+.logo-wrap-main span{color:var(--blue)}
+.logo-wrap-sub{font-size:9px;color:var(--ink3);letter-spacing:.8px;text-transform:uppercase;margin-top:1px}
+.nav-links{display:flex;gap:2px}
+.nl{padding:6px 14px;font-size:13px;color:var(--ink3);background:none;border:none;cursor:pointer;border-radius:4px;font-family:'Inter',sans-serif;transition:all .15s;text-decoration:none;display:inline-block}
+.nl:hover{color:var(--ink);background:var(--surface)}
+.nav-cta{background:var(--blue);color:var(--white);padding:8px 20px;font-size:13px;font-weight:500;border:none;cursor:pointer;border-radius:5px;font-family:'Bricolage Grotesque',sans-serif;transition:opacity .15s;text-decoration:none;display:inline-block}
+.nav-cta:hover{opacity:.88}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+.nav-mobile-btn span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
+
+/* PAGES */
+.page{display:none}.page.active{display:block}
+
+/* SHARED */
+.wrap{max-width:1040px;margin:0 auto;padding:0 48px}
+.eyebrow{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:12px;font-family:'Bricolage Grotesque',sans-serif}
+.section-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(22px,3.5vw,38px);font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-.8px;margin-bottom:14px}
+.body-text{font-size:16px;color:var(--ink3);line-height:1.8;font-weight:300}
+.btn-blue{background:var(--blue);color:var(--white);padding:13px 28px;font-size:14px;font-weight:500;border:none;cursor:pointer;border-radius:5px;font-family:'Bricolage Grotesque',sans-serif;transition:opacity .15s;text-decoration:none;display:inline-block}
+.btn-blue:hover{opacity:.88}
+.btn-ghost{background:transparent;color:var(--ink);padding:13px 28px;font-size:14px;font-weight:500;border:1.5px solid var(--border2);cursor:pointer;border-radius:5px;font-family:'Bricolage Grotesque',sans-serif;transition:all .15s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{border-color:var(--ink)}
+
+/* HOME HERO */
+.hero{padding:96px 48px 80px;max-width:1040px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bluel);border:1px solid var(--bluel2);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--blue2);font-weight:500;margin-bottom:28px;letter-spacing:.3px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--blue3);flex-shrink:0}
+.hero-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(32px,5vw,60px);font-weight:800;color:var(--ink);line-height:1.08;letter-spacing:-1.5px;margin-bottom:0}
+.hero-title span{color:var(--blue)}
+.hero-sub{font-size:18px;color:var(--ink3);max-width:560px;line-height:1.75;margin:20px 0 40px;font-weight:300}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:72px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);background:var(--white)}
+.stat{padding:24px 28px;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-family:'Bricolage Grotesque',sans-serif;font-size:32px;font-weight:800;color:var(--ink);line-height:1}
+.stat-lbl{font-size:12px;color:var(--ink3);margin-top:5px;line-height:1.5}
+
+/* PROBLEM */
+.prob-section{background:var(--ink);padding:80px 48px}
+.prob-inner{max-width:1040px;margin:0 auto}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.07);margin-top:40px;border:1px solid rgba(255,255,255,0.07)}
+.prob-card{background:rgba(255,255,255,0.03);padding:28px 24px}
+.prob-q{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.85);margin-bottom:10px;line-height:1.4}
+.prob-a{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.75}
+.prob-cta{background:var(--blue);border:none}
+.prob-cta .prob-q{color:var(--white)}
+.prob-cta .prob-a{color:rgba(255,255,255,0.7)}
+
+/* EXAMPLE */
+.ex-section{padding:80px 48px;background:var(--surface)}
+.ex-inner{max-width:1040px;margin:0 auto}
+.ex-box{background:var(--ink);border-radius:8px;padding:40px;margin-top:36px}
+.ex-lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:8px;font-family:'Bricolage Grotesque',sans-serif}
+.ex-q{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:28px;line-height:1.3}
+.ex-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ex-card{background:rgba(255,255,255,0.06);border-radius:6px;padding:16px 18px}
+.ex-cl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:6px;font-weight:600}
+.ex-cv{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.65}
+.ex-note{font-size:12px;color:var(--ink3);margin-top:14px;font-style:italic}
+
+/* HOW IT WORKS STRIP */
+.how-strip{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 48px}
+.how-inner{max-width:1040px;margin:0 auto}
+.how-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:32px}
+.how-item{background:var(--white);padding:24px 18px}
+.how-item.accent{background:var(--blue)}
+.how-num{font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;color:var(--border2);margin-bottom:12px}
+.how-item.accent .how-num{color:rgba(255,255,255,0.25)}
+.how-ttl{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;font-family:'Bricolage Grotesque',sans-serif}
+.how-item.accent .how-ttl{color:var(--white)}
+.how-body{font-size:12px;color:var(--ink3);line-height:1.65}
+.how-item.accent .how-body{color:rgba(255,255,255,0.65)}
+
+/* CONTACT STRIP */
+.contact-strip{background:var(--bluel);border-top:1px solid var(--bluel2);border-bottom:1px solid var(--bluel2);padding:22px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.cs-text{font-size:14px;color:var(--ink2)}
+.cs-email{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--blue);text-decoration:none}
+.cs-email:hover{text-decoration:underline}
+
+/* WAITLIST */
+.wl-section{background:var(--ink);padding:80px 48px;text-align:center}
+.wl-inner{max-width:520px;margin:0 auto}
+.wl-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(26px,4vw,42px);font-weight:800;color:var(--white);line-height:1.1;letter-spacing:-1px;margin-bottom:12px}
+.wl-sub{font-size:15px;color:rgba(255,255,255,0.4);line-height:1.75;margin-bottom:32px;font-weight:300}
+.wl-form{display:flex;border:1px solid rgba(255,255,255,0.12);border-radius:5px;overflow:hidden}
+.wl-input{flex:1;background:rgba(255,255,255,0.05);border:none;padding:13px 18px;font-size:13px;color:var(--white);font-family:'Inter',sans-serif;outline:none;min-width:0}
+.wl-input::placeholder{color:rgba(255,255,255,0.2)}
+.wl-btn{background:var(--blue3);color:var(--white);border:none;padding:13px 20px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;letter-spacing:.5px;white-space:nowrap;transition:opacity .15s}
+.wl-btn:hover{opacity:.88}
+.wl-note{font-size:11px;color:rgba(255,255,255,0.2);margin-top:10px;letter-spacing:.3px}
+.wl-success{display:none;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);padding:14px 18px;font-size:13px;color:var(--blue3);margin-top:16px;border-radius:4px}
+
+/* HOW IT WORKS PAGE */
+.hiw-hero{background:var(--white);border-bottom:1px solid var(--border);padding:72px 48px 56px}
+.steps-wrap{padding:0 48px 72px;max-width:1040px;margin:0 auto}
+.steps-grid{display:flex;flex-direction:column;border:1px solid var(--border)}
+.step-row{display:grid;grid-template-columns:60px 1fr;border-bottom:1px solid var(--border)}
+.step-row:last-child{border-bottom:none}
+.step-n{display:flex;align-items:flex-start;justify-content:center;padding:28px 0;border-right:1px solid var(--border);background:var(--surface)}
+.step-num{font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:800;color:var(--border2)}
+.step-body{padding:28px 32px}
+.step-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:6px}
+.step-title{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.step-desc{font-size:13px;color:var(--ink3);line-height:1.75;margin-bottom:12px}
+.step-detail{background:var(--surface);border-left:3px solid var(--blue3);padding:12px 16px;font-size:12px;color:var(--ink3);line-height:1.75}
+.step-detail b{color:var(--ink2);font-weight:500}
+
+/* FEATURES PAGE */
+.feat-hero{background:var(--white);border-bottom:1px solid var(--border);padding:72px 48px 56px}
+.feat-wrap{padding:0 48px 72px;max-width:1040px;margin:0 auto}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:1px}
+.feat-card{background:var(--white);padding:32px 28px;transition:background .15s}
+.feat-card:hover{background:var(--surface)}
+.feat-num{font-family:'Bricolage Grotesque',sans-serif;font-size:11px;font-weight:800;color:var(--border2);letter-spacing:1px;margin-bottom:14px}
+.feat-title{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.feat-body{font-size:13px;color:var(--ink3);line-height:1.75}
+.feat-pill{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:10px;background:var(--bluel);color:var(--blue2);letter-spacing:.5px}
+.integrations-bar{border:1px solid var(--border);border-top:none;background:var(--white);padding:22px 28px}
+.int-label{font-size:11px;color:var(--ink3);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;font-weight:600}
+.int-tags{display:flex;gap:8px;flex-wrap:wrap}
+.int-tag{padding:4px 10px;border:1px solid var(--border);font-size:11px;color:var(--ink3);border-radius:3px}
+.int-tag.soon{opacity:.45}
+
+/* PRICING PAGE */
+.price-hero{background:var(--white);border-bottom:1px solid var(--border);padding:72px 48px 56px}
+.price-wrap{padding:0 48px;max-width:1040px;margin:0 auto}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:40px}
+.p-card{background:var(--white);padding:36px 28px;position:relative}
+.p-card.hero-plan{background:var(--blue)}
+.p-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--white);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:0 0 4px 4px;font-family:'Bricolage Grotesque',sans-serif;white-space:nowrap}
+.p-plan{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--ink3);margin-bottom:18px;font-family:'Bricolage Grotesque',sans-serif}
+.p-card.hero-plan .p-plan{color:rgba(255,255,255,0.45)}
+.p-price{font-family:'Bricolage Grotesque',sans-serif;font-size:36px;font-weight:800;color:var(--ink);letter-spacing:-1px;line-height:1}
+.p-card.hero-plan .p-price{color:var(--white)}
+.p-per{font-size:12px;color:var(--ink3);margin-top:4px;margin-bottom:6px}
+.p-card.hero-plan .p-per{color:rgba(255,255,255,0.45)}
+.p-seats{font-size:12px;color:var(--ink3);padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:18px}
+.p-card.hero-plan .p-seats{color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.15)}
+.p-feat{display:flex;gap:8px;font-size:13px;color:var(--ink3);margin-bottom:9px;line-height:1.5}
+.p-card.hero-plan .p-feat{color:rgba(255,255,255,0.75)}
+.p-check{color:var(--blue);flex-shrink:0;font-weight:600}
+.p-card.hero-plan .p-check{color:rgba(255,255,255,0.9)}
+.p-btn{display:block;width:100%;margin-top:24px;padding:12px;font-size:12px;font-weight:700;letter-spacing:.5px;border:none;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;transition:all .15s;border-radius:4px;text-transform:uppercase;text-align:center;text-decoration:none}
+.p-btn-blue{background:var(--blue);color:var(--white)}.p-btn-blue:hover{opacity:.88}
+.p-btn-white{background:var(--white);color:var(--blue)}.p-btn-white:hover{opacity:.9}
+.p-btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--border2)}.p-btn-ghost:hover{border-color:var(--ink)}
+.price-note{text-align:center;font-size:12px;color:var(--ink3);padding:14px 28px;border:1px solid var(--border);border-top:none;margin-bottom:0;line-height:1.8;background:var(--white)}
+
+/* FAQ */
+.faq-section{padding:72px 48px;background:var(--white)}
+.faq-inner{max-width:680px;margin:0 auto}
+.faq-title{font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;color:var(--ink);margin-bottom:28px;letter-spacing:-.5px}
+.faq-item{border-bottom:1px solid var(--border);padding:16px 0;cursor:pointer}
+.faq-q{font-size:14px;font-weight:500;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:'Bricolage Grotesque',sans-serif;user-select:none}
+.faq-arr{color:var(--ink3);font-size:20px;transition:transform .2s;flex-shrink:0;font-weight:300;line-height:1}
+.faq-a{font-size:13px;color:var(--ink3);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
+.faq-item.open .faq-a{max-height:300px;padding-top:10px}
+.faq-item.open .faq-arr{transform:rotate(45deg)}
+
+/* FOOTER */
+footer{background:var(--white);border-top:1px solid var(--border);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.foot-l-name{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800;color:var(--ink)}
+.foot-l-name span{color:var(--blue)}
+.foot-l-sub{font-size:10px;color:var(--ink3);margin-top:2px;letter-spacing:.3px}
+.foot-r{font-size:11px;color:var(--ink3)}
+.foot-r a{color:var(--ink3);text-decoration:none}
+.foot-r a:hover{color:var(--blue)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .nav-mobile-btn{display:flex}
+  .hero,.prob-section,.ex-section,.how-strip,.wl-section,.contact-strip,.hiw-hero,.feat-hero,.price-hero,.faq-section{padding-left:20px;padding-right:20px}
+  .wrap,.steps-wrap,.feat-wrap,.price-wrap{padding-left:20px;padding-right:20px}
+  .hero{padding-top:48px;padding-bottom:48px}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+  .prob-grid{grid-template-columns:1fr}
+  .ex-cards{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr 1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:1fr}
+  .p-badge{font-size:8px}
+  footer{padding:20px}
+  .wl-form{flex-direction:column;border-radius:5px}
+  .wl-input{border-radius:5px 5px 0 0}
+  .wl-btn{border-radius:0 0 5px 5px;padding:13px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo" onclick="goPage('home');return false;">
+    <div class="logo-mark"><div class="logo-sq"></div></div>
+    <div>
+      <div class="logo-wrap-main">Wynt<span>IQ</span></div>
+      <div class="logo-wrap-sub">by Twinstance Solutions</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a class="nl active" id="nav-home" href="#" onclick="goPage('home');return false;">Home</a>
+    <a class="nl" id="nav-hiw" href="#" onclick="goPage('hiw');return false;">How it works</a>
+    <a class="nl" id="nav-features" href="#" onclick="goPage('features');return false;">Features</a>
+    <a class="nl" id="nav-pricing" href="#" onclick="goPage('pricing');return false;">Pricing</a>
+  </div>
+  <a class="nav-cta" href="#" onclick="goPage('pricing');return false;">Early access</a>
+  <button class="nav-mobile-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div class="page active" id="page-home">
+  <div style="background:var(--white);border-bottom:1px solid var(--border)">
+    <div class="hero">
+      <div class="hero-badge"><div class="hero-badge-dot"></div>Company Intelligence System</div>
+      <h1 class="hero-title">Ask your company<br>anything. <span>Instantly.</span></h1>
+      <p class="hero-sub">WyntIQ captures every decision ever made inside your company — why it happened, who decided, what the context was. So when someone leaves, nothing leaves with them.</p>
+      <div class="btn-row">
+        <a class="btn-blue" href="#" onclick="goPage('pricing');return false;">Get early access</a>
+        <a class="btn-ghost" href="#" onclick="goPage('hiw');return false;">See how it works</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">₹15L+</div><div class="stat-lbl">Average cost of one senior resignation in India</div></div>
+        <div class="stat"><div class="stat-val">92%</div><div class="stat-lbl">Of company knowledge never written down</div></div>
+        <div class="stat"><div class="stat-val">&lt;30s</div><div class="stat-lbl">To get a sourced answer to any company question</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prob-section">
+    <div class="prob-inner">
+      <div class="eyebrow" style="color:rgba(255,255,255,0.35)">The problem</div>
+      <h2 class="section-title" style="color:var(--white)">You've asked these questions before</h2>
+      <div class="prob-grid">
+        <div class="prob-card"><div class="prob-q">"Why did we stop working with that vendor?"</div><div class="prob-a">The person who handled that left 6 months ago. Nobody wrote it down. You're making the same mistake again.</div></div>
+        <div class="prob-card"><div class="prob-q">"Why does this system behave this way?"</div><div class="prob-a">The original developer is gone. The decision lived in a Slack thread from 2022 that nobody can find.</div></div>
+        <div class="prob-card"><div class="prob-q">"Who is our main contact at this client?"</div><div class="prob-a">Your account manager resigned last month. The new hire starts next week with zero context.</div></div>
+        <div class="prob-card prob-cta"><div class="prob-q">WyntIQ answers all of these — in seconds.</div><div class="prob-a">Not a chatbot. Not a documentation tool. Your company's intelligence layer — always on, always available.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-section">
+    <div class="ex-inner">
+      <div class="eyebrow">Live example</div>
+      <h2 class="section-title">See it in action</h2>
+      <div class="ex-box">
+        <div class="ex-lbl">You ask WyntIQ</div>
+        <div class="ex-q">"Why did we hire Rahul as engineering lead?"</div>
+        <div class="ex-cards">
+          <div class="ex-card"><div class="ex-cl">Decision</div><div class="ex-cv">Hired as Engineering Lead, March 2023</div></div>
+          <div class="ex-card"><div class="ex-cl">Reason</div><div class="ex-cv">Only candidate with fintech backend and team leadership experience at scale</div></div>
+          <div class="ex-card"><div class="ex-cl">Context</div><div class="ex-cv">Selected over 2 finalists after 3-round panel with CTO and VP Product</div></div>
+          <div class="ex-card"><div class="ex-cl">Source</div><div class="ex-cv">Email thread: hiring@company · Slack #founders · March 14, 2023</div></div>
+        </div>
+      </div>
+      <div class="ex-note">Nobody typed this manually. WyntIQ found it automatically from your existing Slack and email — in under 30 seconds.</div>
+    </div>
+  </div>
+
+  <div class="how-strip">
+    <div class="how-inner">
+      <div class="eyebrow">How it works</div>
+      <h2 class="section-title">Five steps. Then it runs itself.</h2>
+      <div class="how-grid">
+        <div class="how-item"><div class="how-num">01</div><div class="how-ttl">Connect tools</div><div class="how-body">Slack, email, Notion, Jira. 30 mins, one time.</div></div>
+        <div class="how-item"><div class="how-num">02</div><div class="how-ttl">AI extracts</div><div class="how-body">Decisions, reasons, context — automatically.</div></div>
+        <div class="how-item"><div class="how-num">03</div><div class="how-ttl">Structured</div><div class="how-body">Linked to people, projects and dates.</div></div>
+        <div class="how-item"><div class="how-num">04</div><div class="how-ttl">You ask</div><div class="how-body">Plain English. Clear sourced answer.</div></div>
+        <div class="how-item accent"><div class="how-num">05</div><div class="how-ttl">Handoff</div><div class="how-body">Auto-generated when someone resigns.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-strip">
+    <div class="cs-text">Questions? Interested in a founding partner slot? Reach out directly.</div>
+    <a class="cs-email" href="mailto:contact@wyntiq.com">contact@wyntiq.com</a>
+  </div>
+
+  <div class="wl-section" id="waitlist">
+    <div class="wl-inner">
+      <h2 class="wl-title">Your company's brain starts here</h2>
+      <p class="wl-sub">Founding partner slots are limited to 3 companies. Our team will contact you within 48 hours.</p>
+      <form class="wl-form" action="https://formspree.io/f/mjgaqzyp" method="POST">
+        <input class="wl-input" type="email" name="email" placeholder="Enter your work email" required>
+        <input type="hidden" name="source" value="WyntIQ Home Waitlist">
+        <button class="wl-btn" type="submit">JOIN WAITLIST</button>
+      </form>
+      <div class="wl-note">No spam. No obligation. Powered by Twinstance Solutions LLP · wyntiq.com</div>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <div class="foot-l-name">Wynt<span>IQ</span></div>
+      <div class="foot-l-sub">© 2025 Twinstance Solutions LLP · Registered in India · wyntiq.com</div>
+    </div>
+    <div class="foot-r"><a href="mailto:contact@wyntiq.com">contact@wyntiq.com</a></div>
+  </footer>
+</div>
+
+<!-- ===== HOW IT WORKS ===== -->
+<div class="page" id="page-hiw">
+  <div class="hiw-hero">
+    <div class="wrap">
+      <div class="eyebrow">How it works</div>
+      <h1 class="section-title" style="font-size:clamp(28px,4vw,48px);letter-spacing:-1px">Automatic. Silent. Permanent.</h1>
+      <p class="body-text" style="max-width:520px">Your team changes nothing. WyntIQ runs silently in the background and builds your company's intelligence layer from day one.</p>
+    </div>
+  </div>
+  <div class="steps-wrap">
+    <div class="steps-grid">
+      <div class="step-row">
+        <div class="step-n"><div class="step-num">01</div></div>
+        <div class="step-body">
+          <div class="step-tag">One time · 30 minutes</div>
+          <div class="step-title">Connect your company tools</div>
+          <div class="step-desc">An admin connects your existing tools in a single session. Your team does nothing — no installs, no training, no new habits required.</div>
+          <div class="step-detail"><b>Connects to:</b> Slack · Notion · Jira · Confluence · GitHub<br><br><b>Email — any provider:</b> Gmail, Outlook, or your own company domain (name@yourcompany.com). Works via SMTP/IMAP — compatible with Zoho Mail, Google Workspace, Microsoft 365, GoDaddy, Hostinger, or any private mail server.<br><br><b>Coming soon:</b> Zoom transcripts · Microsoft Teams</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-n"><div class="step-num">02</div></div>
+        <div class="step-body">
+          <div class="step-tag">Automatic · Continuous · Silent</div>
+          <div class="step-title">AI reads and extracts decisions</div>
+          <div class="step-desc">WyntIQ reads your messages, emails, docs and tickets silently. It identifies what was decided, why, who made the call, and the broader context.</div>
+          <div class="step-detail"><b>Extracts:</b> Decisions made · Reasons behind them · Who was involved · Project context · Vendor and client relationships<br><br><b>Never captures:</b> Personal DMs · HR-sensitive conversations · Anything outside your defined work channels</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-n"><div class="step-num">03</div></div>
+        <div class="step-body">
+          <div class="step-tag">Structured · Linked · Tagged</div>
+          <div class="step-title">Knowledge is organised automatically</div>
+          <div class="step-desc">Every decision is tagged to the right person, project, and date. No folders to maintain. No categories to manage. No manual work ever.</div>
+          <div class="step-detail"><b>Example — from one Slack message:</b><br>"Going with Razorpay over Stripe — Rahul's call — better UPI support and GST invoicing for India."<br><br>→ Decision: Razorpay · Reason: UPI + GST · Decision maker: Rahul · Source: Slack (with link)</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-n"><div class="step-num">04</div></div>
+        <div class="step-body">
+          <div class="step-tag">Plain English · Instant · Sourced</div>
+          <div class="step-title">Ask anything. Get a clear answer.</div>
+          <div class="step-desc">Anyone in leadership types a question in plain English and gets an immediate, sourced answer — no digging, no searching, no asking colleagues.</div>
+          <div class="step-detail"><b>Works instantly for:</b> "Why did we choose this vendor?" · "Who owns the payment integration?" · "What was decided in Q3?" · "Why was this feature delayed?" · "Who is our AWS contact?"</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-n"><div class="step-num">05</div></div>
+        <div class="step-body">
+          <div class="step-tag">Automated · When it matters most</div>
+          <div class="step-title">Someone resigns — full handoff in 30 seconds</div>
+          <div class="step-desc">When HR logs a resignation, WyntIQ auto-generates a complete structured handoff report — everything that person knew, owned, and was responsible for.</div>
+          <div class="step-detail"><b>Handoff includes:</b> All projects + status · Key decisions + why · Contacts + vendors · Open tasks · Recommended handover per item<br><br><b>Export as:</b> PDF · Word · Shareable link</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div>
+      <div class="foot-l-name">Wynt<span>IQ</span></div>
+      <div class="foot-l-sub">© 2025 Twinstance Solutions LLP · wyntiq.com</div>
+    </div>
+    <div class="foot-r"><a href="mailto:contact@wyntiq.com">contact@wyntiq.com</a></div>
+  </footer>
+</div>
+
+<!-- ===== FEATURES ===== -->
+<div class="page" id="page-features">
+  <div class="feat-hero">
+    <div class="wrap">
+      <div class="eyebrow">Features</div>
+      <h1 class="section-title" style="font-size:clamp(28px,4vw,48px);letter-spacing:-1px">Built for founders and leadership</h1>
+      <p class="body-text" style="max-width:520px">Not for regular employees daily. WyntIQ is the intelligence layer for the people who need to know everything — and can't afford to lose anything.</p>
+    </div>
+  </div>
+  <div class="feat-wrap">
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-num">01</div><div class="feat-title">Decision intelligence search</div><div class="feat-body">Ask any question about your company's history in plain English. Get an instant sourced answer — across Slack, email, Notion and Jira simultaneously. An actual answer, not a keyword search.</div></div>
+      <div class="feat-card"><div class="feat-num">02</div><div class="feat-title">Employee knowledge profiles</div><div class="feat-body">Auto-built profiles for every team member — what they own, what decisions they've made, their key contacts and open responsibilities. Built from real activity, not self-reporting.</div></div>
+      <div class="feat-card"><div class="feat-num">03</div><div class="feat-title">Instant handoff reports</div><div class="feat-body">When someone resigns, generate their complete knowledge handoff in 30 seconds. Projects, decisions, contacts, open threads. Export as PDF or Word. Never lose context in a transition again.</div></div>
+      <div class="feat-card"><div class="feat-num">04</div><div class="feat-title">Flight risk detection</div><div class="feat-body">WyntIQ monitors subtle signals across your tools to flag employees who may be considering leaving — before they hand in their notice. Time to act, not just react.</div></div>
+      <div class="feat-card"><div class="feat-num">05</div><div class="feat-title">Any email provider supported</div><div class="feat-body">Gmail, Outlook, or your own domain (name@yourcompany.com). Connects via SMTP/IMAP — works with Zoho, Google Workspace, GoDaddy, Hostinger, or any private mail server. No Gmail required.</div><div class="feat-pill">Works with domain email</div></div>
+      <div class="feat-card"><div class="feat-num">06</div><div class="feat-title">New hire fast-track</div><div class="feat-body">New team members search your company's entire decision history from day one. No need to interrupt colleagues with basic questions. Onboarding time cut by up to 60%.</div></div>
+      <div class="feat-card"><div class="feat-num">07</div><div class="feat-title">Company intelligence dashboard</div><div class="feat-body">A live view of your company's knowledge health — coverage by team, knowledge gaps, high-risk employees, and recent captures. Everything leadership needs in one place.</div></div>
+      <div class="feat-card"><div class="feat-num">08</div><div class="feat-title">Privacy by design</div><div class="feat-body">Employees see exactly what is captured about them. Admins define which channels are indexed. Personal messages never read. Enterprise-grade security throughout.</div></div>
+    </div>
+    <div class="integrations-bar">
+      <div class="int-label">Connects with</div>
+      <div class="int-tags">
+        <span class="int-tag">Slack</span>
+        <span class="int-tag">Notion</span>
+        <span class="int-tag">Jira</span>
+        <span class="int-tag">Confluence</span>
+        <span class="int-tag">GitHub</span>
+        <span class="int-tag">Gmail</span>
+        <span class="int-tag">Outlook</span>
+        <span class="int-tag">Any domain email</span>
+        <span class="int-tag soon">Zoom (soon)</span>
+        <span class="int-tag soon">Teams (soon)</span>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div>
+      <div class="foot-l-name">Wynt<span>IQ</span></div>
+      <div class="foot-l-sub">© 2025 Twinstance Solutions LLP · wyntiq.com</div>
+    </div>
+    <div class="foot-r"><a href="mailto:contact@wyntiq.com">contact@wyntiq.com</a></div>
+  </footer>
+</div>
+
+<!-- ===== PRICING ===== -->
+<div class="page" id="page-pricing">
+  <div class="price-hero">
+    <div class="wrap">
+      <div class="eyebrow">Pricing</div>
+      <h1 class="section-title" style="font-size:clamp(28px,4vw,48px);letter-spacing:-1px">Straightforward. No surprises.</h1>
+      <p class="body-text" style="max-width:520px">One senior resignation costs your company ₹10–20 lakh. WyntIQ costs a fraction of that — and stops it from happening again.</p>
+    </div>
+  </div>
+  <div class="price-wrap">
+    <div class="price-grid">
+      <div class="p-card">
+        <div class="p-plan">Starter</div>
+        <div class="p-price">₹12,999</div>
+        <div class="p-per">per month + GST</div>
+        <div class="p-seats">Up to 50 employees</div>
+        <div class="p-feat"><span class="p-check">✓</span>Decision intelligence search</div>
+        <div class="p-feat"><span class="p-check">✓</span>Employee knowledge profiles</div>
+        <div class="p-feat"><span class="p-check">✓</span>Handoff reports</div>
+        <div class="p-feat"><span class="p-check">✓</span>Slack + Notion + any email</div>
+        <div class="p-feat"><span class="p-check">✓</span>Email support</div>
+        <a class="p-btn p-btn-ghost" href="#waitlist" onclick="goPage('home');setTimeout(function(){document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})},100);return false;">Get early access</a>
+      </div>
+      <div class="p-card hero-plan">
+        <div class="p-badge">Most popular</div>
+        <div class="p-plan">Growth</div>
+        <div class="p-price">₹29,999</div>
+        <div class="p-per">per month + GST</div>
+        <div class="p-seats">Up to 200 employees</div>
+        <div class="p-feat"><span class="p-check">✓</span>Everything in Starter</div>
+        <div class="p-feat"><span class="p-check">✓</span>Jira + GitHub + Confluence</div>
+        <div class="p-feat"><span class="p-check">✓</span>Flight risk detection</div>
+        <div class="p-feat"><span class="p-check">✓</span>Auto handoff generation</div>
+        <div class="p-feat"><span class="p-check">✓</span>PDF + Word export</div>
+        <a class="p-btn p-btn-white" href="#waitlist" onclick="goPage('home');setTimeout(function(){document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})},100);return false;">Get early access</a>
+      </div>
+      <div class="p-card">
+        <div class="p-plan">Enterprise</div>
+        <div class="p-price">Custom</div>
+        <div class="p-per">contact us</div>
+        <div class="p-seats">500+ employees</div>
+        <div class="p-feat"><span class="p-check">✓</span>Everything in Growth</div>
+        <div class="p-feat"><span class="p-check">✓</span>Custom integrations</div>
+        <div class="p-feat"><span class="p-check">✓</span>On-premise option</div>
+        <div class="p-feat"><span class="p-check">✓</span>Dedicated account manager</div>
+        <div class="p-feat"><span class="p-check">✓</span>SLA guarantee</div>
+        <a class="p-btn p-btn-blue" href="mailto:contact@wyntiq.com">Talk to us</a>
+      </div>
+    </div>
+    <div class="price-note">Annual billing: 10 months paid, 12 months access &nbsp;·&nbsp; Founding partner deal: ₹40,000 for 6 months (Growth) — 3 slots only &nbsp;·&nbsp; 14-day free trial, no card required</div>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-title">Common questions</div>
+      <div class="faq-item" onclick="tFaq(this)">
+        <div class="faq-q">Do employees need to install or do anything? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Nothing at all. Only an admin connects tools during the initial 30-minute setup. Employees carry on as normal — they won't even know it's running.</div>
+      </div>
+      <div class="faq-item" onclick="tFaq(this)">
+        <div class="faq-q">We use our own company domain email. Will it work? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Yes, completely. WyntIQ connects via SMTP and IMAP — the standard protocols used by every email provider. Works with Zoho Mail, Google Workspace, Microsoft 365, GoDaddy, Hostinger, or any private mail server. You provide the server address and port during setup. No Gmail required.</div>
+      </div>
+      <div class="faq-item" onclick="tFaq(this)">
+        <div class="faq-q">Is this a chatbot or a documentation tool? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Neither. WyntIQ is a Company Intelligence System — it captures why decisions were made, who made them, and what the context was. Fundamentally different from a chatbot or a documentation tool that requires manual input.</div>
+      </div>
+      <div class="faq-item" onclick="tFaq(this)">
+        <div class="faq-q">What about employee privacy? <span class="faq-arr">+</span></div>
+        <div class="faq-a">You define exactly which channels are indexed during setup. Personal DMs and HR-sensitive conversations are never included. Every employee can view their own knowledge profile at any time.</div>
+      </div>
+      <div class="faq-item" onclick="tFaq(this)">
+        <div class="faq-q">How long before we see value? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Setup takes 30 minutes. The AI processes your existing history in 24–48 hours. Most customers get their first useful answer within the first day — usually something their team has been trying to find for weeks.</div>
+      </div>
+      <div class="faq-item" onclick="tFaq(this)">
+        <div class="faq-q">Can I cancel anytime? <span class="faq-arr">+</span></div>
+        <div class="faq-a">Yes. Monthly plans cancel anytime with no penalty. Annual plans cancel with 30 days notice.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-strip">
+    <div class="cs-text">Have a question or want to discuss a founding partner slot?</div>
+    <a class="cs-email" href="mailto:contact@wyntiq.com">contact@wyntiq.com</a>
+  </div>
+
+  <div class="wl-section">
+    <div class="wl-inner">
+      <h2 class="wl-title">Start protecting your company's intelligence</h2>
+      <p class="wl-sub">Join the waitlist. Founding partner slots are limited to 3 companies.</p>
+      <form class="wl-form" action="https://formspree.io/f/mjgaqzyp" method="POST">
+        <input class="wl-input" type="email" name="email" placeholder="Your work email address" required>
+        <input type="hidden" name="source" value="WyntIQ Pricing Waitlist">
+        <button class="wl-btn" type="submit">JOIN WAITLIST</button>
+      </form>
+      <div class="wl-note">No spam. No obligation.</div>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <div class="foot-l-name">Wynt<span>IQ</span></div>
+      <div class="foot-l-sub">© 2025 Twinstance Solutions LLP · wyntiq.com</div>
+    </div>
+    <div class="foot-r"><a href="mailto:contact@wyntiq.com">contact@wyntiq.com</a></div>
+  </footer>
+</div>
+
+<script>
+function goPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.nl').forEach(function(n){n.classList.remove('active')});
+  document.getElementById('page-'+id).classList.add('active');
+  var nm=document.getElementById('nav-'+id);
+  if(nm)nm.classList.add('active');
+  window.scrollTo(0,0);
+}
+function tFaq(el){
+  var o=el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(f){f.classList.remove('open')});
+  if(!o)el.classList.add('open');
+}
+function toggleMobileMenu(){
+  var links=document.querySelector('.nav-links');
+  if(links.style.display==='flex'){
+    links.style.display='none';
+  } else {
+    links.style.cssText='display:flex;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px;gap:4px;z-index:99';
+  }
+}
+</script>
+</body>
+</html>
