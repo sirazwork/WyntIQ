@@ -1,64 +1,56 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>WYNTIQ App</title>
-<style>
-body{font-family:Arial;background:#f5f7fa;margin:0}
-.nav{background:#1e3a5f;color:#fff;padding:10px}
-.card{background:#fff;padding:15px;margin:10px;border-radius:8px}
-</style>
-</head>
+<!-- KEEP YOUR ORIGINAL FILE CONTENT ABOVE UNCHANGED -->
 
-<body>
-
-<div class="nav">WYNTIQ SYSTEM</div>
-
-<div id="app"></div>
+<!-- ADD THIS ENTIRE BLOCK JUST BEFORE </body> -->
 
 <script>
 
 /* =========================
-   DEMO DATA
-========================= */
+   WYNTIQ INTELLIGENCE LAYER
+   ========================= */
 
-let demands = [
-  {id:"D001",status:"pending",priority:"high",stock:2,minStock:5},
-  {id:"D002",status:"delayed",priority:"low",stock:10,minStock:5}
-];
+/* DECISION INSIGHT */
+function wyntiqInsight(d){
+  if(!d) return "No insight available";
 
-let inventory = [
-  {name:"Rotor",stock:2,min:5},
-  {name:"Fuel Pump",stock:10,min:5}
-];
-
-
-/* =========================
-   1. DECISION INTELLIGENCE
-========================= */
-
-function generateDecisionInsight(d){
   let r=[];
 
-  if(d.status==="pending") r.push("Waiting for approval");
-  if(d.status==="delayed") r.push("Approval delay detected");
-  if(d.priority==="high") r.push("High priority escalation");
-  if(d.stock<d.minStock) r.push("Stock shortage");
+  if(d.status === "delayed") r.push("Delay caused by approval bottleneck");
+  if(d.priority === "high") r.push("High priority escalation");
+  if(d.stock !== undefined && d.min !== undefined && d.stock < d.min){
+    r.push("Stock shortage triggered demand");
+  }
 
-  if(r.length===0) r.push("Normal workflow");
+  if(r.length === 0) r.push("Normal workflow execution");
 
   return r.join(" • ");
 }
 
+/* SMART ALERTS */
+function wyntiqAlerts(){
+  let alerts = [];
 
-/* =========================
-   2. SECURE AUDIT (HASH)
-========================= */
+  if(window.demands){
+    window.demands.forEach(d=>{
+      if(d.status === "delayed"){
+        alerts.push("⚠️ Demand " + d.id + " delayed");
+      }
+    });
+  }
 
-let secureLogs=[];
+  if(window.inventory){
+    window.inventory.forEach(i=>{
+      if(i.stock < i.min){
+        alerts.push("📦 Low stock: " + i.name);
+      }
+    });
+  }
 
-function hashAction(a){
-  let s=JSON.stringify(a),h=0;
+  return alerts;
+}
+
+/* SECURE AUDIT */
+function wyntiqHash(obj){
+  let s = JSON.stringify(obj), h = 0;
   for(let i=0;i<s.length;i++){
     h=((h<<5)-h)+s.charCodeAt(i);
     h|=0;
@@ -66,80 +58,50 @@ function hashAction(a){
   return h;
 }
 
-function addAudit(a){
-  a.hash=hashAction(a);
-  secureLogs.push(a);
+if(!window.secureLogs) window.secureLogs = [];
+
+function wyntiqSecureLog(action){
+  action.hash = wyntiqHash(action);
+  window.secureLogs.push(action);
 }
 
-
-/* =========================
-   3. SMART ALERTS
-========================= */
-
-function generateAlerts(){
-  let alerts=[];
-
-  demands.forEach(d=>{
-    if(d.status==="delayed"){
-      alerts.push("⚠️ "+d.id+" delayed");
-    }
-  });
-
-  inventory.forEach(i=>{
-    if(i.stock<i.min){
-      alerts.push("📦 Low stock: "+i.name);
-    }
-  });
-
-  return alerts;
+/* HOOK INTO EXISTING AUDIT */
+if(window.addAudit){
+  const oldAudit = window.addAudit;
+  window.addAudit = function(a){
+    wyntiqSecureLog(a);
+    oldAudit(a);
+  }
 }
-
-
-/* =========================
-   UI RENDER
-========================= */
-
-function render(){
-
-  let html="";
-
-  html+="<div class='card'><b>SMART ALERTS</b><br>";
-  generateAlerts().forEach(a=>{
-    html+=a+"<br>";
-  });
-  html+="</div>";
-
-  demands.forEach(d=>{
-    html+=`
-    <div class="card">
-      <b>${d.id}</b><br>
-      Status: ${d.status}<br>
-      <div style="margin-top:10px;background:#eef;padding:8px;border-radius:6px;">
-        <b>INSIGHT:</b><br>
-        ${generateDecisionInsight(d)}
-      </div>
-    </div>
-    `;
-  });
-
-  html+="<div class='card'><b>SECURE AUDIT LOG</b><br>";
-  secureLogs.forEach(l=>{
-    html+=l.action+" | hash:"+l.hash+"<br>";
-  });
-  html+="</div>";
-
-  document.getElementById("app").innerHTML=html;
-}
-
-
-/* =========================
-   INIT
-========================= */
-
-addAudit({action:"System started"});
-render();
 
 </script>
 
-</body>
-</html>
+<!-- NOW MODIFY EXISTING FUNCTION BELOW -->
+
+<script>
+
+/* FIND YOUR EXISTING FUNCTION: renderDemandDetail
+   AND REPLACE IT WITH THIS VERSION */
+
+function renderDemandDetail(demand){
+  if(!demand){
+    document.getElementById("demand-detail").innerHTML = "No data";
+    return;
+  }
+
+  let insight = wyntiqInsight(demand);
+
+  let html = `
+    <div style="font-size:14px;font-weight:600;">${demand.id}</div>
+    <div style="font-size:12px;color:#666;">Status: ${demand.status}</div>
+
+    <div style="margin-top:12px;padding:10px;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc;">
+      <div style="font-size:10px;color:#64748b;font-weight:600;">SYSTEM INSIGHT</div>
+      <div style="font-size:12px;margin-top:4px;">${insight}</div>
+    </div>
+  `;
+
+  document.getElementById("demand-detail").innerHTML = html;
+}
+
+</script>
