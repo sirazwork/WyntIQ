@@ -333,23 +333,76 @@ footer{background:var(--navy);padding:60px 60px 30px;}
   </div>
 
   <!-- INDUSTRIES -->
-  <div class="section">
+  <div class="section" style="background:#edf0f7;">
     <div class="section-header-row">
       <div><div class="section-tag">Who We Serve</div><h2 class="section-title">Built for Defence.<br>Scales to Enterprise.</h2></div>
       <p class="section-sub" style="max-width:380px;">One platform — tailored for each sector's specific workflow and operational requirements.</p>
     </div>
-    <div style="margin-bottom:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;">🛡️ Defence</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;">
-      <a class="industry-card" href="iaf.html"><div class="ic-icon">✈️</div><div class="ic-title">Indian Air Force</a><div class="ic-desc">Aircraft maintenance, spare parts, IMMS workflow</div><div class="ic-arrow">View IAF Solution →</div></a>
-      <a class="industry-card" href="army.html"><div class="ic-icon">🪖</div><div class="ic-title">Indian Army</a><div class="ic-desc">MT operations, field logistics, multi-base supply chain</div><div class="ic-arrow">View Army Solution →</div></a>
-      <a class="industry-card" href="navy.html"><div class="ic-icon">⚓</div><div class="ic-title">Indian Navy</a><div class="ic-desc">Vessel maintenance, port logistics, defence supply chain</div><div class="ic-arrow">View Navy Solution →</div></a>
+    <!-- DEFENCE ROW -->
+    <div style="margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+      <div style="width:3px;height:28px;background:var(--gold);border-radius:2px;"></div>
+      <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;color:var(--navy);letter-spacing:2px;text-transform:uppercase;">🛡️ Defence</span>
     </div>
-    <div style="margin-bottom:12px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;">🏭 Enterprise & Industry</div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
-      <a class="industry-card" href="mining.html"><div class="ic-icon">⛏️</div><div class="ic-title">Mining</a><div class="ic-desc">Remote site logistics, equipment maintenance</div><div class="ic-arrow">View Solution →</div></a>
-      <a class="industry-card" href="auto.html"><div class="ic-icon">🚗</div><div class="ic-title">Auto Manufacturing</a><div class="ic-desc">Parts procurement, assembly line logistics</div><div class="ic-arrow">View Solution →</div></a>
-      <a class="industry-card" href="#"><div class="ic-icon">📦</div><div class="ic-title">E-Commerce</a><div class="ic-desc">Warehouse management, last-mile tracking</div><div class="ic-arrow">View Solution →</div></a>
-      <a class="industry-card" href="factory.html"><div class="ic-icon">🏭</div><div class="ic-title">Factory & Plant</a><div class="ic-desc">Maintenance management, spare parts</div><div class="ic-arrow">View Solution →</div></a>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px;">
+
+      <a href="iaf.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;padding:28px 24px;display:block;transition:all 0.3s;cursor:pointer;" onmouseover="this.style.borderColor='#c9a84c';this.style.background='#fdf9f0';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.background='#f0f3f9';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:44px;margin-bottom:16px;">✈️</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:#0a1628;margin-bottom:10px;">Indian Air Force</div>
+        <div style="font-size:15px;color:#4a5568;line-height:1.7;margin-bottom:14px;">Aircraft maintenance, spare parts procurement, and integrated material management — replacing paper-based IMMS with a fully digital, offline-capable system.</div>
+        <div style="font-size:13px;font-weight:700;color:#c9a84c;letter-spacing:0.5px;">View IAF Solution →</div>
+      </a>
+
+      <a href="army.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;padding:28px 24px;display:block;transition:all 0.3s;cursor:pointer;" onmouseover="this.style.borderColor='#c9a84c';this.style.background='#fdf9f0';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.background='#f0f3f9';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:44px;margin-bottom:16px;">🪖</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:#0a1628;margin-bottom:10px;">Indian Army</div>
+        <div style="font-size:15px;color:#4a5568;line-height:1.7;margin-bottom:14px;">MT fleet management, field operations logistics, and multi-echelon supply chain — built for Siachen, jungle ops, and every terrain the Indian Army operates in.</div>
+        <div style="font-size:13px;font-weight:700;color:#c9a84c;letter-spacing:0.5px;">View Army Solution →</div>
+      </a>
+
+      <a href="navy.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;padding:28px 24px;display:block;transition:all 0.3s;cursor:pointer;" onmouseover="this.style.borderColor='#c9a84c';this.style.background='#fdf9f0';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.background='#f0f3f9';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:44px;margin-bottom:16px;">⚓</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:#0a1628;margin-bottom:10px;">Indian Navy</div>
+        <div style="font-size:15px;color:#4a5568;line-height:1.7;margin-bottom:14px;">Vessel maintenance, at-sea offline operation, and multi-port inventory management — for a fleet that cannot afford to be caught without the right part at the wrong moment.</div>
+        <div style="font-size:13px;font-weight:700;color:#c9a84c;letter-spacing:0.5px;">View Navy Solution →</div>
+      </a>
+
+    </div>
+
+    <!-- ENTERPRISE ROW -->
+    <div style="margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+      <div style="width:3px;height:28px;background:var(--gold);border-radius:2px;"></div>
+      <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;color:var(--navy);letter-spacing:2px;text-transform:uppercase;">🏭 Enterprise & Industry</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+
+      <a href="mining.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;padding:24px 20px;display:block;transition:all 0.3s;" onmouseover="this.style.borderColor='#c9a84c';this.style.background='#fdf9f0';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.background='#f0f3f9';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:40px;margin-bottom:14px;">⛏️</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#0a1628;margin-bottom:8px;">Mining</div>
+        <div style="font-size:14px;color:#4a5568;line-height:1.7;margin-bottom:12px;">Remote site logistics, heavy equipment maintenance, and predictive downtime prevention for India's mining sector.</div>
+        <div style="font-size:13px;font-weight:700;color:#c9a84c;">View Solution →</div>
+      </a>
+
+      <a href="auto.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;padding:24px 20px;display:block;transition:all 0.3s;" onmouseover="this.style.borderColor='#c9a84c';this.style.background='#fdf9f0';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.background='#f0f3f9';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:40px;margin-bottom:14px;">🚗</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#0a1628;margin-bottom:8px;">Auto Manufacturing</div>
+        <div style="font-size:14px;color:#4a5568;line-height:1.7;margin-bottom:12px;">Assembly line parts intelligence, vendor management, and 90-day demand forecasting for automobile and two-wheeler manufacturers.</div>
+        <div style="font-size:13px;font-weight:700;color:#c9a84c;">View Solution →</div>
+      </a>
+
+      <a href="#" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;padding:24px 20px;display:block;transition:all 0.3s;" onmouseover="this.style.borderColor='#c9a84c';this.style.background='#fdf9f0';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.background='#f0f3f9';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:40px;margin-bottom:14px;">📦</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#0a1628;margin-bottom:8px;">E-Commerce</div>
+        <div style="font-size:14px;color:#4a5568;line-height:1.7;margin-bottom:12px;">Warehouse management, last-mile tracking, vendor coordination, and demand forecasting for India's fast-growing e-commerce sector.</div>
+        <div style="font-size:13px;font-weight:700;color:#c9a84c;">Coming Soon →</div>
+      </a>
+
+      <a href="factory.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;padding:24px 20px;display:block;transition:all 0.3s;" onmouseover="this.style.borderColor='#c9a84c';this.style.background='#fdf9f0';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.background='#f0f3f9';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="font-size:40px;margin-bottom:14px;">🏭</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#0a1628;margin-bottom:8px;">Factory & Plant</div>
+        <div style="font-size:14px;color:#4a5568;line-height:1.7;margin-bottom:12px;">Planned maintenance, critical spares management, OEE tracking, and zero surprise downtime for Indian manufacturers.</div>
+        <div style="font-size:13px;font-weight:700;color:#c9a84c;">View Solution →</div>
+      </a>
+
     </div>
   </div>
 
