@@ -1,107 +1,1341 @@
-<!-- KEEP YOUR ORIGINAL FILE CONTENT ABOVE UNCHANGED -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WYNTIQ — Integrated Material Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+:root{
+  --bg:#f0f4f8;--surface:#fff;--surface2:#f8fafc;--border:#e2e8f0;--border2:#cbd5e1;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --accent:#0ea5e9;--accent-dark:#0284c7;--accent-light:#e0f2fe;
+  --green:#10b981;--green-light:#d1fae5;--orange:#f59e0b;--orange-light:#fef3c7;
+  --red:#ef4444;--red-light:#fee2e2;--purple:#8b5cf6;--purple-light:#ede9fe;
+  --navy:#1e3a5f;--navy2:#152d4a;
+  --shadow-md:0 4px 6px rgba(0,0,0,0.07);--shadow-lg:0 10px 25px rgba(0,0,0,0.12);
+  --r:10px;--r-sm:6px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
-<!-- ADD THIS ENTIRE BLOCK JUST BEFORE </body> -->
+/* ═══ LOGIN ══════════════════════════════════════════════════════════════ */
+#login-screen{
+  position:fixed;inset:0;
+  background:linear-gradient(135deg,#0f1e35 0%,#1e3a5f 50%,#0c2a4a 100%);
+  display:flex;align-items:center;justify-content:center;z-index:99999;
+}
+.login-grid{position:absolute;inset:0;opacity:0.04;background-image:repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,#fff,#fff 1px,transparent 1px,transparent 40px);}
+.login-box{background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:36px;width:440px;position:relative;z-index:1;}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:24px;}
+.login-logo-box{width:40px;height:40px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#fff;}
+.login-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;color:#fff;}
+.login-brand-sub{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1.5px;text-transform:uppercase;}
+.login-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;}
+.login-desc{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:20px;}
+.login-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.55);margin-bottom:5px;display:block;}
+.login-input{width:100%;padding:11px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;font-size:13px;color:#fff;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;margin-bottom:12px;}
+.login-input:focus{border-color:var(--accent);}
+.login-input::placeholder{color:rgba(255,255,255,0.3);}
+.login-input option{background:#1e3a5f;color:#fff;}
+.role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:16px;}
+.role-pill{padding:8px 6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;cursor:pointer;text-align:center;transition:all 0.2s;}
+.role-pill:hover,.role-pill.sel{background:rgba(14,165,233,0.2);border-color:var(--accent);}
+.role-pill-icon{font-size:18px;margin-bottom:3px;}
+.role-pill-name{font-size:10px;font-weight:600;color:#fff;}
+.role-pill-desc{font-size:9px;color:rgba(255,255,255,0.35);margin-top:1px;}
+.login-btn{width:100%;padding:13px;background:var(--accent);border:none;border-radius:8px;font-size:14px;font-weight:700;color:#fff;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;letter-spacing:0.5px;}
+.login-btn:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 4px 15px rgba(14,165,233,0.4);}
+.login-err{font-size:11px;color:#fca5a5;margin-top:8px;padding:8px 10px;background:rgba(239,68,68,0.1);border-radius:6px;display:none;}
+.login-hint{margin-top:14px;padding:10px 12px;background:rgba(255,255,255,0.04);border-radius:8px;font-size:10px;color:rgba(255,255,255,0.3);line-height:1.6;}
+
+/* ═══ APP SHELL ══════════════════════════════════════════════════════════ */
+#app-shell{display:none;flex-direction:column;min-height:100vh;}
+
+/* NAVBAR */
+.navbar{background:var(--navy);height:54px;display:flex;align-items:center;padding:0 16px;justify-content:space-between;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+.nav-brand{display:flex;align-items:center;gap:10px;}
+.logo-box{width:30px;height:30px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:#fff;}
+.brand-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;}
+.brand-sub{font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:-2px;}
+.nav-tabs{display:flex;gap:2px;background:rgba(255,255,255,0.07);padding:3px;border-radius:7px;}
+.nav-tab{padding:5px 11px;border-radius:5px;font-size:11px;font-weight:500;color:rgba(255,255,255,0.5);cursor:pointer;border:none;background:transparent;transition:all 0.2s;white-space:nowrap;position:relative;}
+.nav-tab.active{background:var(--accent);color:#fff;}
+.tab-dot{position:absolute;top:-2px;right:-2px;width:7px;height:7px;border-radius:50%;background:var(--red);border:1px solid var(--navy);display:none;}
+.tab-dot.show{display:block;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.notif-btn{position:relative;cursor:pointer;padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-size:16px;transition:all 0.2s;}
+.notif-btn:hover{background:rgba(255,255,255,0.15);}
+.notif-count{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:8px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:none;align-items:center;justify-content:center;padding:0 3px;}
+.notif-count.show{display:flex;}
+.notif-panel{position:absolute;top:50px;right:80px;width:320px;background:#fff;border-radius:12px;box-shadow:var(--shadow-lg);border:1px solid var(--border);z-index:999;display:none;}
+.notif-panel.show{display:block;}
+.notif-head{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600;}
+.notif-clear{font-size:10px;color:var(--accent);cursor:pointer;font-weight:400;}
+.notif-list-inner{max-height:280px;overflow-y:auto;}
+.notif-item{padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;}
+.notif-item:hover{background:var(--surface2);}
+.notif-item.unread{border-left:3px solid var(--accent);background:#f0f9ff;}
+.ni-t{font-size:12px;font-weight:600;}
+.ni-d{font-size:11px;color:var(--text2);margin-top:1px;}
+.ni-ts{font-size:10px;color:var(--text3);margin-top:2px;}
+.banner{background:var(--red);color:#fff;padding:8px 16px;font-size:12px;font-weight:600;display:none;justify-content:space-between;align-items:center;}
+.banner.show{display:flex;}
+.banner.warn{background:var(--orange);}
+.banner.info{background:var(--accent);}
+.online-pill{display:flex;align-items:center;gap:5px;padding:4px 9px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.25);border-radius:20px;font-size:10px;color:#6ee7b7;font-weight:600;}
+.pulse{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.user-chip{display:flex;align-items:center;gap:7px;padding:4px 10px;background:rgba(255,255,255,0.1);border-radius:20px;}
+.chip-av{width:22px;height:22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;}
+.chip-name{font-size:11px;color:#fff;font-weight:500;}
+.chip-role{font-size:9px;color:rgba(255,255,255,0.5);}
+.clock{font-size:11px;color:rgba(255,255,255,0.4);font-family:monospace;}
+.logout-btn{padding:5px 10px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);border-radius:6px;font-size:11px;color:#fca5a5;cursor:pointer;font-family:'Inter',sans-serif;}
+.logout-btn:hover{background:rgba(239,68,68,0.25);}
+
+/* ═══ PAGES ══════════════════════════════════════════════════════════════ */
+.page{display:none;flex:1;overflow:hidden;height:calc(100vh - 54px);}
+.page.active{display:flex;}
+
+/* DASHBOARD */
+.dash-page{flex-direction:column;overflow-y:auto;padding:16px;gap:14px;}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px;transition:all 0.2s;}
+.kpi:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.kpi-icon{font-size:18px;margin-bottom:4px;}
+.kpi-val{font-size:24px;font-weight:700;font-family:'Space Grotesk',sans-serif;line-height:1;}
+.kpi-lbl{font-size:10px;color:var(--text3);margin-top:2px;}
+.c-blue{color:var(--accent);}.c-green{color:var(--green);}.c-orange{color:var(--orange);}.c-red{color:var(--red);}.c-purple{color:var(--purple);}
+.dash-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.card-head{padding:11px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;}
+.card-body{padding:11px 14px;}
+.mb{font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;text-transform:uppercase;}
+.mb-red{background:var(--red-light);color:var(--red);}
+.mb-orange{background:var(--orange-light);color:var(--orange);}
+.mb-green{background:var(--green-light);color:var(--green);}
+.mb-blue{background:var(--accent-light);color:var(--accent-dark);}
+.mb-purple{background:var(--purple-light);color:var(--purple);}
+
+/* DEMAND */
+.demand-page{gap:0;}
+.split{display:grid;grid-template-columns:300px 1fr;height:100%;}
+.split-l{background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.split-r{display:flex;flex-direction:column;overflow:hidden;background:var(--bg);}
+.ph{padding:11px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.ph-title{font-size:12px;font-weight:600;}
+.pb{flex:1;overflow-y:auto;padding:8px;}
+.di{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;margin-bottom:5px;cursor:pointer;transition:all 0.15s;position:relative;}
+.di:hover,.di.sel{border-color:var(--accent);background:var(--accent-light);}
+.di.new-item::after{content:'NEW';position:absolute;top:8px;right:8px;font-size:8px;font-weight:700;background:var(--red);color:#fff;padding:1px 5px;border-radius:4px;}
+.di-id{font-size:10px;font-weight:700;color:var(--navy);}
+.di-name{font-size:12px;font-weight:600;margin-top:1px;}
+.di-meta{font-size:10px;color:var(--text3);margin-top:2px;}
+.sc{font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;text-transform:uppercase;white-space:nowrap;}
+.sc-officer{background:var(--purple-light);color:var(--purple);}
+.sc-logistics{background:var(--accent-light);color:var(--accent-dark);}
+.sc-accounts{background:#fef9c3;color:#a16207;}
+.sc-vendor{background:#fff7ed;color:#c2410c;}
+.sc-issued{background:var(--green-light);color:var(--green);}
+.sc-rejected{background:var(--red-light);color:var(--red);}
+.dp{flex:1;overflow-y:auto;padding:16px;}
+.dp-empty{display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:8px;color:var(--text3);}
+.wf{display:flex;flex-direction:column;gap:0;margin:12px 0;}
+.wf-s{display:flex;gap:12px;position:relative;}
+.wf-s:not(:last-child)::before{content:'';position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--border);}
+.wf-s.done::before{background:var(--green);}
+.wf-s.act::before{background:var(--orange);}
+.wf-c{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;border:2px solid var(--border);background:var(--surface);}
+.wf-s.done .wf-c{background:var(--green);border-color:var(--green);color:#fff;}
+.wf-s.act .wf-c{background:var(--orange);border-color:var(--orange);color:#fff;animation:glow 2s infinite;}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,0.4);}50%{box-shadow:0 0 0 6px rgba(245,158,11,0);}}
+.wf-info{padding:0 0 12px;}
+.wf-lbl{font-size:12px;font-weight:600;margin-bottom:2px;}
+.wf-sub{font-size:10px;color:var(--text3);}
+.wf-btn{margin-top:5px;padding:5px 11px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;margin-right:4px;}
+.btn-approve{background:var(--green);color:#fff;}
+.btn-reject{background:var(--red);color:#fff;}
+
+/* INVENTORY */
+.inv-page{flex-direction:column;overflow-y:auto;padding:14px;gap:12px;}
+.inv-ctrl{display:flex;gap:8px;align-items:center;}
+.sb{flex:1;padding:8px 12px;border:1px solid var(--border2);border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;outline:none;background:var(--surface);max-width:280px;}
+.sb:focus{border-color:var(--accent);}
+.btn-sm{padding:7px 13px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;}
+.btn-navy{background:var(--navy);color:#fff;}
+.btn-accent{background:var(--accent);color:#fff;}
+.tbl{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.tbl table{width:100%;border-collapse:collapse;}
+.tbl th{padding:9px 12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);background:var(--surface2);border-bottom:1px solid var(--border);text-align:left;}
+.tbl td{padding:9px 12px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--surface2);}
+.sbar{width:70px;height:5px;background:var(--border);border-radius:10px;overflow:hidden;display:inline-block;}
+.sfill{height:100%;border-radius:10px;}
+.stockout td{color:var(--red);}
+
+/* MAP */
+.map-page{flex-direction:column;overflow:hidden;position:relative;}
+.map-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:9px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.fb{padding:4px 11px;border-radius:6px;font-size:11px;font-weight:500;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;transition:all 0.15s;}
+.fb.active,.fb:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+#map{flex:1;}
+
+/* AUDIT */
+.audit-page{flex-direction:column;overflow-y:auto;padding:14px;gap:12px;}
+
+/* ═══ ADMIN PANEL ════════════════════════════════════════════════════════ */
+.admin-page{flex-direction:column;overflow-y:auto;padding:16px;gap:16px;}
+.admin-header{display:flex;justify-content:space-between;align-items:center;}
+.admin-title{font-size:18px;font-weight:700;}
+.admin-sub{font-size:12px;color:var(--text3);margin-top:2px;}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.admin-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.admin-card-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.admin-card-title{font-size:13px;font-weight:600;}
+.admin-card-body{padding:14px 16px;}
+.user-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.user-row:last-child{border-bottom:none;}
+.user-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;}
+.user-info{flex:1;}
+.user-name{font-size:13px;font-weight:600;}
+.user-meta{font-size:11px;color:var(--text3);margin-top:1px;}
+.user-actions{display:flex;gap:6px;}
+.ua-btn{padding:4px 10px;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;}
+.ua-edit{background:var(--accent-light);color:var(--accent-dark);}
+.ua-del{background:var(--red-light);color:var(--red);}
+.ua-toggle{background:var(--orange-light);color:var(--orange);}
+.status-tog{font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;}
+.tog-active{background:var(--green-light);color:var(--green);}
+.tog-inactive{background:var(--border);color:var(--text3);}
+.activity-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.activity-item:last-child{border-bottom:none;}
+.act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.act-text{font-size:12px;flex:1;}
+.act-time{font-size:10px;color:var(--text3);white-space:nowrap;}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);}
+.stat-row:last-child{border-bottom:none;}
+.stat-label{font-size:12px;color:var(--text2);}
+.stat-value{font-size:14px;font-weight:700;}
+.add-user-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+.au-input,.au-select{padding:8px 11px;border:1px solid var(--border2);border-radius:7px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text);background:var(--surface2);outline:none;}
+.au-input:focus,.au-select:focus{border-color:var(--accent);}
+.au-input.full{grid-column:span 2;}
+.au-btn{grid-column:span 2;padding:10px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;}
+.au-btn:hover{background:var(--navy2);}
+
+/* MODALS */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.overlay.show{display:flex;}
+.modal{background:#fff;border-radius:14px;padding:22px;width:460px;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:mIn 0.2s ease;}
+@keyframes mIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
+.m-title{font-size:15px;font-weight:700;margin-bottom:16px;color:var(--navy);}
+.fg{margin-bottom:11px;}
+.fl{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:4px;display:block;}
+.fi,.fs{width:100%;padding:8px 11px;border:1px solid var(--border2);border-radius:7px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text);background:var(--surface2);outline:none;transition:border-color 0.15s;}
+.fi:focus,.fs:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light);}
+.fi-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.m-actions{display:flex;gap:8px;margin-top:14px;}
+.mbtn{flex:1;padding:9px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;}
+.mbtn-p{background:var(--navy);color:#fff;}
+.mbtn-s{background:var(--border);color:var(--text2);}
+.geo-btn{margin-top:5px;padding:5px 11px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;}
+.geo-s{font-size:10px;margin-top:5px;padding:5px 9px;border-radius:5px;display:none;}
+.geo-ok{background:var(--green-light);color:var(--green);display:block;}
+.geo-err{background:var(--red-light);color:var(--red);display:block;}
+.geo-load{background:var(--accent-light);color:var(--accent-dark);display:block;}
+
+/* TOAST */
+.toast{position:fixed;bottom:18px;right:18px;background:var(--navy);color:#fff;padding:11px 16px;border-radius:9px;font-size:12px;font-weight:500;box-shadow:var(--shadow-lg);z-index:99999;display:none;animation:tUp 0.3s ease;max-width:320px;}
+@keyframes tUp{from{transform:translateY(8px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px;}
+.sl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ════════════════════════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-grid"></div>
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-box">W</div>
+      <div>
+        <div class="login-brand">WYNTIQ</div>
+        <div class="login-brand-sub">by TwinStance Solutions</div>
+      </div>
+    </div>
+    <div class="login-title">Sign In</div>
+    <div class="login-desc">Select your role then enter credentials</div>
+
+    <div style="margin-bottom:14px;">
+      <label class="login-label">Your Role</label>
+      <div class="role-grid">
+        <div class="role-pill sel" id="rp-technician" onclick="pickRole('technician')">
+          <div class="role-pill-icon">👷</div>
+          <div class="role-pill-name">Technician</div>
+          <div class="role-pill-desc">Raise demands</div>
+        </div>
+        <div class="role-pill" id="rp-officer" onclick="pickRole('officer')">
+          <div class="role-pill-icon">⭐</div>
+          <div class="role-pill-name">Officer</div>
+          <div class="role-pill-desc">Approve</div>
+        </div>
+        <div class="role-pill" id="rp-logistics" onclick="pickRole('logistics')">
+          <div class="role-pill-icon">🚛</div>
+          <div class="role-pill-name">Logistics</div>
+          <div class="role-pill-desc">Issue stock</div>
+        </div>
+        <div class="role-pill" id="rp-accounts" onclick="pickRole('accounts')">
+          <div class="role-pill-icon">💰</div>
+          <div class="role-pill-name">Accounts</div>
+          <div class="role-pill-desc">Budget</div>
+        </div>
+        <div class="role-pill" id="rp-vendor" onclick="pickRole('vendor')">
+          <div class="role-pill-icon">🏭</div>
+          <div class="role-pill-name">Vendor</div>
+          <div class="role-pill-desc">Supply orders</div>
+        </div>
+        <div class="role-pill" id="rp-admin" onclick="pickRole('admin')">
+          <div class="role-pill-icon">🔧</div>
+          <div class="role-pill-name">Admin</div>
+          <div class="role-pill-desc">Manage users</div>
+        </div>
+      </div>
+    </div>
+
+    <label class="login-label">Username</label>
+    <input class="login-input" id="l-user" placeholder="Enter username" value="demo"/>
+    <label class="login-label">Password</label>
+    <input class="login-input" id="l-pass" type="password" placeholder="Enter password" value="demo123"/>
+    <div class="login-err" id="l-err">❌ Invalid credentials. Check username and password.</div>
+    <button class="login-btn" id="signin-btn">Sign In →</button>
+    <div class="login-hint">
+      Demo credentials — all roles use password: <b style="color:rgba(255,255,255,0.6);">demo123</b><br>
+      Technician: demo · Officer: officer · Logistics: logistics<br>
+      Accounts: accounts · Vendor: vendor · Admin: admin
+    </div>
+  </div>
+</div>
+
+<!-- ═══ APP SHELL ════════════════════════════════════════════════════════ -->
+<div id="app-shell">
+  <div class="banner" id="banner">
+    <span id="banner-text">Alert</span>
+    <span style="cursor:pointer;opacity:0.7;" onclick="document.getElementById('banner').classList.remove('show')">✕</span>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <div class="logo-box">W</div>
+      <div>
+        <div class="brand-text">WYNTIQ</div>
+        <div class="brand-sub">TwinStance Solutions</div>
+      </div>
+    </div>
+    <div class="nav-tabs" id="nav-tabs">
+      <button class="nav-tab active" onclick="goPage('dashboard',this)">📊 Dashboard<span class="tab-dot" id="td-dash"></span></button>
+      <button class="nav-tab" onclick="goPage('demand',this)" id="tab-demand">📋 Demands<span class="tab-dot" id="td-demand"></span></button>
+      <button class="nav-tab" onclick="goPage('inventory',this)">📦 Inventory<span class="tab-dot" id="td-inv"></span></button>
+      <button class="nav-tab" onclick="goPage('map',this)">🗺️ Map</button>
+      <button class="nav-tab" onclick="goPage('audit',this)">🔍 Audit</button>
+      <button class="nav-tab" onclick="goPage('admin',this)" id="tab-admin" style="display:none;">⚙️ Admin</button>
+    </div>
+    <div class="nav-right" style="position:relative;">
+      <div class="notif-btn" id="notif-btn" onclick="toggleNotif()">
+        🔔<div class="notif-count" id="nc"></div>
+      </div>
+      <div class="notif-panel" id="notif-panel">
+        <div class="notif-head">Notifications<span class="notif-clear" onclick="clearNotif()">Clear all</span></div>
+        <div class="notif-list-inner" id="notif-list"></div>
+      </div>
+      <div class="online-pill"><div class="pulse"></div>LIVE</div>
+      <div class="clock" id="clock">--:--:--</div>
+      <div class="user-chip">
+        <div class="chip-av" id="chip-av">?</div>
+        <div><div class="chip-name" id="chip-name">—</div><div class="chip-role" id="chip-role">—</div></div>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </nav>
+
+  <!-- PAGES -->
+  <div class="page dash-page active" id="page-dashboard">
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-icon">📋</div><div class="kpi-val c-blue" id="k-total">0</div><div class="kpi-lbl">Total Demands</div></div>
+      <div class="kpi"><div class="kpi-icon">⏳</div><div class="kpi-val c-orange" id="k-myq">0</div><div class="kpi-lbl">My Queue</div></div>
+      <div class="kpi"><div class="kpi-icon">📦</div><div class="kpi-val c-green" id="k-issued">0</div><div class="kpi-lbl">Issued</div></div>
+      <div class="kpi"><div class="kpi-icon">🔴</div><div class="kpi-val c-red" id="k-so">0</div><div class="kpi-lbl">Stockouts</div></div>
+      <div class="kpi"><div class="kpi-icon">👥</div><div class="kpi-val c-purple" id="k-users">0</div><div class="kpi-lbl">Active Users</div></div>
+    </div>
+    <div class="dash-grid">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card">
+          <div class="card-head"><span class="card-title">🚨 Live Alerts</span><span class="mb mb-red" id="ac-badge">0</span></div>
+          <div class="card-body" id="d-alerts" style="max-height:170px;overflow-y:auto;"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">📋 My Queue</span></div>
+          <div class="card-body" id="d-queue" style="max-height:180px;overflow-y:auto;"></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card">
+          <div class="card-head"><span class="card-title">📦 Low Stock</span></div>
+          <div class="card-body" id="d-low" style="max-height:170px;overflow-y:auto;"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">⚙️ Pipeline</span></div>
+          <div class="card-body" id="d-pipe" style="max-height:180px;overflow-y:auto;"></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card">
+          <div class="card-head"><span class="card-title">👥 Online Users</span></div>
+          <div class="card-body" id="d-online" style="max-height:170px;overflow-y:auto;"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span class="card-title">⚡ Quick Actions</span></div>
+          <div class="card-body" id="d-actions"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page demand-page" id="page-demand">
+    <div class="split">
+      <div class="split-l">
+        <div class="ph"><span class="ph-title">📋 Demand Signals</span><button class="btn-sm btn-accent" id="raise-btn" style="display:none;" onclick="openModal('demand-modal')">＋ Raise</button></div>
+        <div style="padding:7px 9px;border-bottom:1px solid var(--border);"><input class="sb" style="width:100%;" placeholder="Search demands..." oninput="filterDemands(this.value)"/></div>
+        <div class="pb" id="demand-list"></div>
+      </div>
+      <div class="split-r">
+        <div class="dp" id="demand-detail"><div class="dp-empty"><div style="font-size:40px;">📋</div><div style="font-size:13px;font-weight:500;">Select a demand</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page inv-page" id="page-inventory">
+    <div class="inv-ctrl">
+      <input class="sb" placeholder="Search parts..." oninput="filterInv(this.value)"/>
+      <button class="btn-sm btn-navy" id="add-stock-btn" style="display:none;" onclick="openModal('stock-modal')">＋ Add Item</button>
+      <button class="btn-sm btn-accent" onclick="exportInv()">📋 Export</button>
+      <span style="font-size:11px;color:var(--text3);margin-left:auto;" id="inv-sum"></span>
+    </div>
+    <div class="tbl">
+      <table><thead><tr><th>Part No.</th><th>Item</th><th>Category</th><th>Stock</th><th>Min</th><th>Status</th><th>Location</th><th>Last Issued To</th></tr></thead>
+      <tbody id="inv-body"></tbody></table>
+    </div>
+  </div>
+
+  <div class="page map-page" id="page-map" style="position:relative;">
+    <div class="map-bar">
+      <div><div style="font-size:13px;font-weight:600;">Live Operations Map</div><div style="font-size:10px;color:var(--text3);">India Theatre</div></div>
+      <div style="display:flex;gap:4px;">
+        <button class="fb active" onclick="fMap('all',this)">All</button>
+        <button class="fb" onclick="fMap('vehicle',this)">Vehicles</button>
+        <button class="fb" onclick="fMap('supply',this)">Supplies</button>
+        <button class="fb" onclick="fMap('base',this)">Bases</button>
+      </div>
+      <button class="btn-sm btn-navy" onclick="openModal('asset-modal')">＋ Add Asset</button>
+    </div>
+    <div id="map" style="flex:1;"></div>
+    <div style="position:absolute;bottom:16px;left:16px;z-index:999;background:#fff;border-radius:8px;padding:10px 12px;box-shadow:var(--shadow-md);border:1px solid var(--border);font-size:11px;">
+      <div style="font-size:10px;font-weight:700;margin-bottom:5px;">LEGEND</div>
+      <div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:8px;height:8px;border-radius:50%;background:#10b981;"></div>Active</div>
+      <div style="display:flex;align-items:center;gap:5px;margin-bottom:3px;"><div style="width:8px;height:8px;border-radius:50%;background:#f59e0b;"></div>Warning</div>
+      <div style="display:flex;align-items:center;gap:5px;"><div style="width:8px;height:8px;border-radius:50%;background:#ef4444;"></div>Critical</div>
+    </div>
+  </div>
+
+  <div class="page audit-page" id="page-audit">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:16px;font-weight:700;">🔍 Full Audit Trail</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">Every action recorded</div></div>
+      <button class="btn-sm btn-navy" onclick="exportAudit()">📋 Export</button>
+    </div>
+    <div class="tbl">
+      <table><thead><tr><th>#</th><th>Time</th><th>User</th><th>Role</th><th>Action</th><th>Demand</th><th>Item</th><th>Detail</th></tr></thead>
+      <tbody id="audit-body"></tbody></table>
+    </div>
+  </div>
+
+  <!-- ADMIN PAGE -->
+  <div class="page admin-page" id="page-admin">
+    <div class="admin-header">
+      <div>
+        <div class="admin-title">⚙️ Admin Panel</div>
+        <div class="admin-sub">TwinStance Solutions — WYNTIQ System Administration</div>
+      </div>
+      <button class="btn-sm btn-accent" onclick="openModal('adduser-modal')">＋ Add User</button>
+    </div>
+
+    <!-- System Stats -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+      <div class="kpi"><div class="kpi-icon">👥</div><div class="kpi-val c-blue" id="a-totalusers">0</div><div class="kpi-lbl">Total Users</div></div>
+      <div class="kpi"><div class="kpi-icon">✅</div><div class="kpi-val c-green" id="a-active">0</div><div class="kpi-lbl">Active Users</div></div>
+      <div class="kpi"><div class="kpi-icon">📋</div><div class="kpi-val c-orange" id="a-demands">0</div><div class="kpi-lbl">Total Demands</div></div>
+      <div class="kpi"><div class="kpi-icon">🔍</div><div class="kpi-val c-purple" id="a-auditcount">0</div><div class="kpi-lbl">Audit Entries</div></div>
+    </div>
+
+    <div class="admin-grid">
+      <!-- USER MANAGEMENT -->
+      <div class="admin-card" style="grid-column:span 2;">
+        <div class="admin-card-head">
+          <span class="admin-card-title">👥 User Management</span>
+          <span style="font-size:11px;color:var(--text3);" id="user-count-label">0 users</span>
+        </div>
+        <div class="admin-card-body" id="user-list" style="max-height:340px;overflow-y:auto;"></div>
+      </div>
+
+      <!-- ACTIVITY MONITOR -->
+      <div class="admin-card">
+        <div class="admin-card-head"><span class="admin-card-title">📡 Live Activity</span></div>
+        <div class="admin-card-body" id="activity-monitor" style="max-height:240px;overflow-y:auto;"></div>
+      </div>
+
+      <!-- SYSTEM STATS -->
+      <div class="admin-card">
+        <div class="admin-card-head"><span class="admin-card-title">📊 System Health</span></div>
+        <div class="admin-card-body">
+          <div class="stat-row"><span class="stat-label">System Status</span><span class="stat-value c-green">● Online</span></div>
+          <div class="stat-row"><span class="stat-label">Total Demands</span><span class="stat-value" id="sys-demands">0</span></div>
+          <div class="stat-row"><span class="stat-label">Stockout Items</span><span class="stat-value c-red" id="sys-so">0</span></div>
+          <div class="stat-row"><span class="stat-label">Vendor Orders</span><span class="stat-value c-orange" id="sys-vendor">0</span></div>
+          <div class="stat-row"><span class="stat-label">Audit Entries</span><span class="stat-value" id="sys-audit">0</span></div>
+          <div class="stat-row"><span class="stat-label">Last Sync</span><span class="stat-value" id="sys-sync" style="font-size:11px;">—</span></div>
+        </div>
+      </div>
+
+      <!-- ADD USER QUICK FORM -->
+      <div class="admin-card" style="grid-column:span 2;">
+        <div class="admin-card-head"><span class="admin-card-title">➕ Quick Add User</span></div>
+        <div class="admin-card-body">
+          <div class="add-user-form">
+            <input class="au-input" id="qu-name" placeholder="Full Name & Rank"/>
+            <input class="au-input" id="qu-user" placeholder="Username"/>
+            <input class="au-input" id="qu-pass" type="password" placeholder="Password"/>
+            <select class="au-select" id="qu-role">
+              <option value="technician">👷 Technician</option>
+              <option value="officer">⭐ Officer</option>
+              <option value="logistics">🚛 Logistics</option>
+              <option value="accounts">💰 Accounts</option>
+              <option value="vendor">🏭 Vendor</option>
+            </select>
+            <input class="au-input" id="qu-unit" placeholder="Unit / Base / Organisation"/>
+            <input class="au-input" id="qu-email" placeholder="Email (optional)"/>
+            <button class="au-btn" onclick="quickAddUser()">＋ Create User Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMAND MODAL -->
+<div class="overlay" id="demand-modal">
+  <div class="modal">
+    <div class="m-title">📋 Raise Demand Signal</div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Aircraft / Asset *</label><input class="fi" id="dm-aircraft" placeholder="e.g. AN-32, MiG-21"/></div>
+      <div class="fg"><label class="fl">Work Order No.</label><input class="fi" id="dm-wo" placeholder="e.g. WO-2026-042"/></div>
+    </div>
+    <div class="fg"><label class="fl">Item / Part Name *</label><input class="fi" id="dm-item" placeholder="e.g. Fuel Pump Assembly"/></div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Part Number</label><input class="fi" id="dm-part" placeholder="e.g. FP-AN32-007"/></div>
+      <div class="fg"><label class="fl">Quantity *</label><input class="fi" id="dm-qty" type="number" value="1" min="1"/></div>
+    </div>
+    <div class="fg"><label class="fl">Priority</label>
+      <select class="fs" id="dm-priority"><option value="routine">Routine</option><option value="urgent">Urgent</option><option value="emergency">Emergency</option></select>
+    </div>
+    <div class="fg"><label class="fl">Justification *</label><textarea class="fi" id="dm-reason" rows="2" placeholder="Why is this needed?"></textarea></div>
+    <div class="fg"><label class="fl">Requested By *</label><input class="fi" id="dm-req" placeholder="Name and rank"/></div>
+    <div class="m-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('demand-modal')">Cancel</button>
+      <button class="mbtn mbtn-p" onclick="submitDemand()">Submit to Officer →</button>
+    </div>
+  </div>
+</div>
+
+<!-- STOCK MODAL -->
+<div class="overlay" id="stock-modal">
+  <div class="modal">
+    <div class="m-title">📦 Add Inventory Item</div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Part Number *</label><input class="fi" id="st-part" placeholder="e.g. FP-AN32-007"/></div>
+      <div class="fg"><label class="fl">Item Name *</label><input class="fi" id="st-name" placeholder="e.g. Fuel Pump Assembly"/></div>
+    </div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Category</label><select class="fs" id="st-cat"><option>Engine Parts</option><option>Hydraulics</option><option>Avionics</option><option>Airframe</option><option>Electrical</option><option>Tools</option><option>Fuel Systems</option><option>Landing Gear</option><option>Other</option></select></div>
+      <div class="fg"><label class="fl">Quantity</label><input class="fi" id="st-qty" type="number" value="10"/></div>
+    </div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Min Level</label><input class="fi" id="st-min" type="number" value="5"/></div>
+      <div class="fg"><label class="fl">Location</label><input class="fi" id="st-loc" placeholder="Store A, Shelf 3"/></div>
+    </div>
+    <div class="m-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('stock-modal')">Cancel</button>
+      <button class="mbtn mbtn-p" onclick="addStock()">Add to Inventory</button>
+    </div>
+  </div>
+</div>
+
+<!-- ASSET MODAL -->
+<div class="overlay" id="asset-modal">
+  <div class="modal">
+    <div class="m-title">📍 Add Map Asset</div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Name</label><input class="fi" id="as-name" placeholder="e.g. Convoy Alpha-1"/></div>
+      <div class="fg"><label class="fl">Type</label><select class="fs" id="as-type"><option value="vehicle">🚛 Vehicle</option><option value="supply">📦 Supply</option><option value="base">🏠 Base</option><option value="personnel">👤 Personnel</option></select></div>
+    </div>
+    <div class="fg"><label class="fl">Address</label><input class="fi" id="as-addr" placeholder="e.g. Pathankot Air Base, Punjab"/><button class="geo-btn" onclick="geocode()">📍 Locate</button><div class="geo-s" id="as-geo"></div><input type="hidden" id="as-lat"/><input type="hidden" id="as-lng"/><input type="hidden" id="as-lbl"/></div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Status</label><select class="fs" id="as-status"><option value="active">Active</option><option value="idle">Idle</option><option value="warn">Warning</option><option value="critical">Critical</option></select></div>
+      <div class="fg"><label class="fl">Units</label><input class="fi" id="as-qty" type="number" value="1"/></div>
+    </div>
+    <div class="m-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('asset-modal')">Cancel</button>
+      <button class="mbtn mbtn-p" onclick="addAsset()">Add to Map</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD USER MODAL -->
+<div class="overlay" id="adduser-modal">
+  <div class="modal">
+    <div class="m-title">➕ Add New User</div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Full Name & Rank</label><input class="fi" id="au-name" placeholder="e.g. Sgt. R. Kumar"/></div>
+      <div class="fg"><label class="fl">Username</label><input class="fi" id="au-user" placeholder="e.g. rkumar"/></div>
+    </div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Password</label><input class="fi" id="au-pass" type="password" placeholder="Set password"/></div>
+      <div class="fg"><label class="fl">Role</label><select class="fs" id="au-role"><option value="technician">👷 Technician</option><option value="officer">⭐ Officer</option><option value="logistics">🚛 Logistics</option><option value="accounts">💰 Accounts</option><option value="vendor">🏭 Vendor</option></select></div>
+    </div>
+    <div class="fi-row">
+      <div class="fg"><label class="fl">Unit / Base</label><input class="fi" id="au-unit" placeholder="e.g. Pathankot Air Base"/></div>
+      <div class="fg"><label class="fl">Email</label><input class="fi" id="au-email" placeholder="email@unit.mil.in"/></div>
+    </div>
+    <div class="m-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('adduser-modal')">Cancel</button>
+      <button class="mbtn mbtn-p" onclick="addUser()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
+// ═══════════════════════════════════════════════════════════════ DATA ════
 
-/* =========================
-   WYNTIQ INTELLIGENCE LAYER
-   ========================= */
+const USERS_DB = {
+  demo:      {pass:'demo123',name:'Cpl. R. Sharma',role:'technician',unit:'Pathankot AB',email:'sharma@iaf.in',active:true,lastLogin:'2026-03-29 09:15'},
+  officer:   {pass:'demo123',name:'Sqn Ldr. P. Kumar',role:'officer',unit:'Pathankot AB',email:'kumar@iaf.in',active:true,lastLogin:'2026-03-29 08:45'},
+  logistics: {pass:'demo123',name:'Sgt. V. Singh',role:'logistics',unit:'Pathankot AB',email:'singh@iaf.in',active:true,lastLogin:'2026-03-29 09:00'},
+  accounts:  {pass:'demo123',name:'Accts. M. Joshi',role:'accounts',unit:'Air HQ',email:'joshi@iaf.in',active:true,lastLogin:'2026-03-29 08:30'},
+  vendor:    {pass:'demo123',name:'HAL Vendor',role:'vendor',unit:'HAL Bangalore',email:'vendor@hal.in',active:true,lastLogin:'2026-03-28 14:00'},
+  admin:     {pass:'demo123',name:'Admin — TwinStance',role:'admin',unit:'TwinStance Solutions',email:'admin@tssolutionsllp.com',active:true,lastLogin:'2026-03-29 07:00'},
+};
 
-/* DECISION INSIGHT */
-function wyntiqInsight(d){
-  if(!d) return "No insight available";
+const ROLE_COLORS = {technician:'#0ea5e9',officer:'#8b5cf6',logistics:'#10b981',accounts:'#f59e0b',vendor:'#f97316',admin:'#ef4444'};
+const ROLE_ABBR   = {technician:'TN',officer:'OF',logistics:'LG',accounts:'AC',vendor:'VN',admin:'AD'};
 
-  let r=[];
+let currentUser = null;
+let selectedRole = 'technician';
+let notifications = [];
+let mapObj, mapMarkers = {}, mapFilter = 'all';
 
-  if(d.status === "delayed") r.push("Delay caused by approval bottleneck");
-  if(d.priority === "high") r.push("High priority escalation");
-  if(d.stock !== undefined && d.min !== undefined && d.stock < d.min){
-    r.push("Stock shortage triggered demand");
-  }
+// DEMANDS
+let demands = [
+  {id:'DS-001',aircraft:'AN-32 (KF-304)',wo:'WO-2026-001',item:'Fuel Pump Assembly',part:'FP-AN32-007',qty:2,priority:'urgent',reason:'Aircraft grounded — fuel pump failure.',requester:'Cpl. R. Sharma',status:'issued',createdAt:'2026-03-25 09:15',history:[
+    {step:'raised',by:'Cpl. R. Sharma',role:'Technician',at:'2026-03-25 09:15',note:'Demand raised'},
+    {step:'officer',by:'Sqn Ldr. P. Kumar',role:'Officer',at:'2026-03-25 10:30',note:'Approved — urgent ops'},
+    {step:'logistics',by:'Sgt. V. Singh',role:'Logistics',at:'2026-03-25 11:00',note:'In stock — 4 units available'},
+    {step:'accounts',by:'Accts. M. Joshi',role:'Accounts',at:'2026-03-25 11:45',note:'Budget ₹12,500 approved'},
+    {step:'issued',by:'Sgt. V. Singh',role:'Logistics',at:'2026-03-25 12:30',note:'2 units issued to Cpl. R. Sharma'},
+  ]},
+  {id:'DS-002',aircraft:'MiG-21 (KF-201)',wo:'WO-2026-002',item:'Hydraulic Seal Kit',part:'HY-MIG-021',qty:1,priority:'routine',reason:'Scheduled 200hr maintenance.',requester:'Sgt. A. Patel',status:'accounts',createdAt:'2026-03-26 14:20',history:[
+    {step:'raised',by:'Sgt. A. Patel',role:'Technician',at:'2026-03-26 14:20',note:'Demand raised'},
+    {step:'officer',by:'Wg Cdr. S. Nair',role:'Officer',at:'2026-03-26 16:00',note:'Approved for routine maintenance'},
+    {step:'logistics',by:'Cpl. D. Rao',role:'Logistics',at:'2026-03-26 17:30',note:'Out of stock — vendor needed'},
+  ]},
+  {id:'DS-003',aircraft:'Truck-MT-7',wo:'WO-2026-003',item:'Engine Oil Filter',part:'EO-MT-007',qty:6,priority:'routine',reason:'Monthly fleet maintenance.',requester:'Dvr. K. Mehta',status:'officer',createdAt:'2026-03-27 08:00',history:[
+    {step:'raised',by:'Dvr. K. Mehta',role:'Technician',at:'2026-03-27 08:00',note:'Monthly maintenance demand'},
+  ]},
+  {id:'DS-004',aircraft:'Sukhoi-30 (KF-101)',wo:'WO-2026-004',item:'Avionics Circuit Board',part:'AV-SU30-CB4',qty:1,priority:'emergency',reason:'Combat system failure.',requester:'Flt Lt. B. Krishnan',status:'vendor',createdAt:'2026-03-28 06:45',history:[
+    {step:'raised',by:'Flt Lt. B. Krishnan',role:'Technician',at:'2026-03-28 06:45',note:'Emergency — system failure'},
+    {step:'officer',by:'AVM. R. Sinha',role:'Officer',at:'2026-03-28 07:00',note:'Emergency fast-tracked'},
+    {step:'logistics',by:'Sgt. V. Singh',role:'Logistics',at:'2026-03-28 07:15',note:'Zero stock — vendor procurement'},
+    {step:'accounts',by:'Accts. M. Joshi',role:'Accounts',at:'2026-03-28 07:30',note:'₹4,20,000 emergency fund approved'},
+    {step:'vendor',by:'System',role:'System',at:'2026-03-28 07:31',note:'PO-2026-004 sent to HAL vendor'},
+  ]},
+];
+let demandN = 5;
 
-  if(r.length === 0) r.push("Normal workflow execution");
+// INVENTORY
+let inventory = [
+  {part:'FP-AN32-007',name:'Fuel Pump Assembly',cat:'Fuel Systems',qty:2,min:5,loc:'Store A, Shelf 2',lastIssuedTo:'Cpl. R. Sharma',updatedAt:'2026-03-25'},
+  {part:'HY-MIG-021',name:'Hydraulic Seal Kit',cat:'Hydraulics',qty:0,min:3,loc:'Store B, Shelf 1',lastIssuedTo:'Sgt. T. Verma',updatedAt:'2026-03-20'},
+  {part:'EO-MT-007',name:'Engine Oil Filter',cat:'Engine Parts',qty:18,min:10,loc:'Store A, Shelf 5',lastIssuedTo:'Dvr. R. Das',updatedAt:'2026-03-22'},
+  {part:'AV-SU30-CB4',name:'Avionics Circuit Board',cat:'Avionics',qty:0,min:2,loc:'Store C, Secure',lastIssuedTo:'Flt Lt. B. Krishnan',updatedAt:'2026-03-28'},
+  {part:'LG-JAG-003',name:'Landing Gear Actuator',cat:'Landing Gear',qty:4,min:2,loc:'Store B, Shelf 4',lastIssuedTo:'—',updatedAt:'2026-03-15'},
+  {part:'EL-GEN-012',name:'Generator Brush Set',cat:'Electrical',qty:1,min:5,loc:'Store A, Shelf 8',lastIssuedTo:'Cpl. M. Iyer',updatedAt:'2026-03-18'},
+];
 
-  return r.join(" • ");
+// MAP ASSETS
+let assets = [
+  {id:1,name:'Pathankot Air Base',type:'base',lat:32.2333,lng:75.6333,label:'Pathankot, Punjab',status:'active'},
+  {id:2,name:'Hindon Air Base',type:'base',lat:28.7041,lng:77.3200,label:'Ghaziabad, UP',status:'active'},
+  {id:3,name:'Supply Convoy Alpha',type:'vehicle',lat:30.7333,lng:76.7794,label:'Chandigarh',status:'active'},
+  {id:4,name:'Medical Cache Leh',type:'supply',lat:34.1526,lng:77.5771,label:'Leh, Ladakh',status:'critical'},
+  {id:5,name:'Fuel Truck MT-7',type:'vehicle',lat:28.6139,lng:77.2090,label:'Delhi',status:'warn'},
+];
+let assetN = 6;
+
+// AUDIT
+let auditLog = [
+  {ts:'2026-03-25 09:15',user:'Cpl. R. Sharma',role:'Technician',action:'Demand Raised',dem:'DS-001',item:'Fuel Pump Assembly',detail:'Qty:2, Priority:Urgent'},
+  {ts:'2026-03-25 12:30',user:'Sgt. V. Singh',role:'Logistics',action:'Item Issued',dem:'DS-001',item:'Fuel Pump Assembly',detail:'2 units issued'},
+  {ts:'2026-03-28 07:31',user:'System',role:'System',action:'Vendor PO Created',dem:'DS-004',item:'Avionics Circuit Board',detail:'PO sent to HAL'},
+];
+
+// ACTIVITY LOG (admin)
+let activityLog = [
+  {text:'Cpl. R. Sharma signed in',color:'#10b981',time:'09:15'},
+  {text:'DS-001 demand raised',color:'#0ea5e9',time:'09:15'},
+  {text:'DS-001 issued — stock updated',color:'#10b981',time:'12:30'},
+  {text:'DS-004 emergency PO created',color:'#ef4444',time:'07:31'},
+];
+
+// ═══════════════════════════════════════════════════════════════ LOGIN ════
+
+function pickRole(role) {
+  selectedRole = role;
+  document.querySelectorAll('.role-pill').forEach(p => p.classList.remove('sel'));
+  document.getElementById('rp-' + role).classList.add('sel');
+  const u = USERS_DB[role === 'technician' ? 'demo' : role] || USERS_DB.demo;
+  document.getElementById('l-user').value = role === 'technician' ? 'demo' : role;
+  document.getElementById('l-pass').value = 'demo123';
+  document.getElementById('l-err').style.display = 'none';
 }
 
-/* SMART ALERTS */
-function wyntiqAlerts(){
-  let alerts = [];
+function doLogin() {
+  const user = document.getElementById('l-user').value.trim();
+  const pass = document.getElementById('l-pass').value.trim();
+  const err  = document.getElementById('l-err');
 
-  if(window.demands){
-    window.demands.forEach(d=>{
-      if(d.status === "delayed"){
-        alerts.push("⚠️ Demand " + d.id + " delayed");
-      }
-    });
+  // Find user in DB
+  const found = USERS_DB[user];
+  if (!found || found.pass !== pass) {
+    err.style.display = 'block';
+    err.textContent = '❌ Invalid username or password. Try: demo / demo123';
+    return;
   }
-
-  if(window.inventory){
-    window.inventory.forEach(i=>{
-      if(i.stock < i.min){
-        alerts.push("📦 Low stock: " + i.name);
-      }
-    });
-  }
-
-  return alerts;
-}
-
-/* SECURE AUDIT */
-function wyntiqHash(obj){
-  let s = JSON.stringify(obj), h = 0;
-  for(let i=0;i<s.length;i++){
-    h=((h<<5)-h)+s.charCodeAt(i);
-    h|=0;
-  }
-  return h;
-}
-
-if(!window.secureLogs) window.secureLogs = [];
-
-function wyntiqSecureLog(action){
-  action.hash = wyntiqHash(action);
-  window.secureLogs.push(action);
-}
-
-/* HOOK INTO EXISTING AUDIT */
-if(window.addAudit){
-  const oldAudit = window.addAudit;
-  window.addAudit = function(a){
-    wyntiqSecureLog(a);
-    oldAudit(a);
-  }
-}
-
-</script>
-
-<!-- NOW MODIFY EXISTING FUNCTION BELOW -->
-
-<script>
-
-/* FIND YOUR EXISTING FUNCTION: renderDemandDetail
-   AND REPLACE IT WITH THIS VERSION */
-
-function renderDemandDetail(demand){
-  if(!demand){
-    document.getElementById("demand-detail").innerHTML = "No data";
+  if (!found.active) {
+    err.style.display = 'block';
+    err.textContent = '❌ Account disabled. Contact admin.';
     return;
   }
 
-  let insight = wyntiqInsight(demand);
+  currentUser = { username: user, ...found };
+  found.lastLogin = now();
 
-  let html = `
-    <div style="font-size:14px;font-weight:600;">${demand.id}</div>
-    <div style="font-size:12px;color:#666;">Status: ${demand.status}</div>
+  // Hide login, show app
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-shell').style.display = 'flex';
+  document.getElementById('app-shell').style.flexDirection = 'column';
 
-    <div style="margin-top:12px;padding:10px;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc;">
-      <div style="font-size:10px;color:#64748b;font-weight:600;">SYSTEM INSIGHT</div>
-      <div style="font-size:12px;margin-top:4px;">${insight}</div>
-    </div>
-  `;
+  // Update UI
+  document.getElementById('chip-av').textContent = ROLE_ABBR[found.role];
+  document.getElementById('chip-av').style.background = ROLE_COLORS[found.role];
+  document.getElementById('chip-name').textContent = found.name;
+  document.getElementById('chip-role').textContent = found.role.charAt(0).toUpperCase() + found.role.slice(1);
 
-  document.getElementById("demand-detail").innerHTML = html;
+  // Role-specific UI
+  document.getElementById('raise-btn').style.display = found.role === 'technician' ? '' : 'none';
+  document.getElementById('add-stock-btn').style.display = ['logistics','admin'].includes(found.role) ? '' : 'none';
+  document.getElementById('tab-admin').style.display = found.role === 'admin' ? '' : 'none';
+
+  // Init
+  if (typeof L !== 'undefined') setTimeout(initMap, 300);
+  else setTimeout(() => { if (typeof L !== 'undefined') initMap(); }, 1500);
+
+  renderAll();
+  addActivity(`${found.name} signed in`, ROLE_COLORS[found.role]);
+  auditLog.push({ts:now(),user:found.name,role:found.role,action:'User Login',dem:'—',item:'—',detail:`Signed in as ${found.role}`});
+  checkAlerts();
+  toast(`✅ Welcome, ${found.name}`);
 }
 
+function doLogout() {
+  currentUser = null;
+  notifications = [];
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app-shell').style.display = 'none';
+  document.getElementById('l-err').style.display = 'none';
+  toast('👋 Signed out');
+}
+
+// Wire up signin button and enter key
+document.getElementById('signin-btn').addEventListener('click', doLogin);
+document.getElementById('l-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('l-user').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+// ═══════════════════════════════════════════════════ NOTIFICATIONS ════
+
+function pushNotif(title, desc, type = 'info') {
+  notifications.unshift({id:Date.now(),title,desc,type,time:now(),unread:true});
+  renderNotif();
+  if (type === 'critical') showBanner(title + ' — ' + desc, 'critical');
+  else if (type === 'warning') showBanner(title + ' — ' + desc, 'warn');
+}
+
+function renderNotif() {
+  const unread = notifications.filter(n => n.unread).length;
+  const nc = document.getElementById('nc');
+  nc.textContent = unread;
+  nc.className = 'notif-count' + (unread > 0 ? ' show' : '');
+  document.getElementById('notif-list').innerHTML = notifications.length
+    ? notifications.map(n => `<div class="notif-item ${n.unread?'unread':''}" onclick="markNotif(${n.id})"><div class="ni-t">${n.type==='critical'?'🔴':n.type==='warning'?'⚠️':'ℹ️'} ${n.title}</div><div class="ni-d">${n.desc}</div><div class="ni-ts">${n.time}</div></div>`).join('')
+    : '<div style="padding:20px;text-align:center;font-size:12px;color:var(--text3);">No notifications</div>';
+}
+
+function markNotif(id) { notifications = notifications.map(n => n.id === id ? {...n, unread:false} : n); renderNotif(); }
+function clearNotif() { notifications = []; renderNotif(); }
+function toggleNotif() {
+  document.getElementById('notif-panel').classList.toggle('show');
+  notifications = notifications.map(n => ({...n, unread:false}));
+  renderNotif();
+}
+document.addEventListener('click', e => { if (!e.target.closest('#notif-btn') && !e.target.closest('#notif-panel')) document.getElementById('notif-panel').classList.remove('show'); });
+
+function showBanner(msg, type = 'critical') {
+  const b = document.getElementById('banner');
+  document.getElementById('banner-text').textContent = msg;
+  b.className = 'banner show' + (type === 'warn' ? ' warn' : type === 'info' ? ' info' : '');
+}
+
+function checkAlerts() {
+  if (!currentUser) return;
+  const q = myQueue();
+  if (q.length > 0) pushNotif(`${q.length} demand(s) need your action`, q.map(d => d.id).join(', '), 'warning');
+  inventory.filter(i => i.qty === 0).forEach(i => {
+    if (['logistics','officer','admin'].includes(currentUser.role))
+      pushNotif('STOCKOUT: ' + i.name, 'Zero units — vendor order required', 'critical');
+  });
+  updateTabDots();
+}
+
+function updateTabDots() {
+  const q = myQueue().length;
+  const td = document.getElementById('td-demand');
+  td.className = 'tab-dot' + (q > 0 ? ' show' : '');
+  const so = inventory.filter(i => i.qty === 0).length;
+  const ti = document.getElementById('td-inv');
+  ti.className = 'tab-dot' + (so > 0 ? ' show' : '');
+}
+
+function myQueue() {
+  if (!currentUser) return [];
+  const map = {officer:['officer'],logistics:['logistics'],accounts:['accounts'],vendor:['vendor'],technician:[],admin:[]};
+  return demands.filter(d => (map[currentUser.role]||[]).includes(d.status));
+}
+
+// ═══════════════════════════════════════════════════════ NAVIGATION ════
+
+function goPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (id === 'map') setTimeout(() => { if (mapObj) mapObj.invalidateSize(); }, 100);
+  renderAll();
+}
+
+// ═══════════════════════════════════════════════════════ RENDER ALL ════
+
+function renderAll() {
+  if (!currentUser) return;
+  updateKPIs();
+  renderDash();
+  renderDemandList();
+  renderInvTable();
+  renderAudit();
+  renderAdmin();
+  updateTabDots();
+}
+
+function updateKPIs() {
+  document.getElementById('k-total').textContent = demands.length;
+  document.getElementById('k-myq').textContent = myQueue().length;
+  document.getElementById('k-issued').textContent = demands.filter(d => d.status === 'issued').length;
+  document.getElementById('k-so').textContent = inventory.filter(i => i.qty === 0).length;
+  document.getElementById('k-users').textContent = Object.values(USERS_DB).filter(u => u.active).length;
+}
+
+// ═══════════════════════════════════════════════════════ DASHBOARD ════
+
+function renderDash() {
+  // Alerts
+  const alerts = [];
+  inventory.filter(i => i.qty === 0).forEach(i => alerts.push({t:'red',m:`STOCKOUT: ${i.name}`}));
+  inventory.filter(i => i.qty > 0 && i.qty <= i.min).forEach(i => alerts.push({t:'orange',m:`LOW: ${i.name} — ${i.qty} left`}));
+  demands.filter(d => d.priority === 'emergency' && !['issued','rejected'].includes(d.status)).forEach(d => alerts.push({t:'red',m:`EMERGENCY: ${d.item} — ${d.aircraft}`}));
+  document.getElementById('ac-badge').textContent = alerts.length;
+  document.getElementById('d-alerts').innerHTML = alerts.length
+    ? alerts.map(a => `<div style="padding:7px 9px;border-radius:6px;margin-bottom:5px;background:${a.t==='red'?'var(--red-light)':'var(--orange-light)'};border-left:3px solid ${a.t==='red'?'var(--red)':'var(--orange)'};font-size:11px;">${a.t==='red'?'🔴':'⚠️'} ${a.m}</div>`).join('')
+    : '<div style="font-size:11px;color:var(--text3);">✅ No alerts</div>';
+
+  // Queue
+  const q = myQueue();
+  document.getElementById('d-queue').innerHTML = q.length
+    ? q.map(d => `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);"><div><div style="font-size:11px;font-weight:600;">${d.id}: ${d.item}</div><div style="font-size:10px;color:var(--text3);">${d.aircraft}</div></div><span class="sc sc-${d.status}">${sLabel(d.status)}</span></div>`).join('')
+    : '<div style="font-size:11px;color:var(--text3);">✅ No pending actions</div>';
+
+  // Low stock
+  const low = inventory.filter(i => i.qty <= i.min);
+  document.getElementById('d-low').innerHTML = low.length
+    ? low.map(i => { const pct = i.min > 0 ? Math.min(100, Math.round(i.qty/i.min*100)) : 0; return `<div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span style="font-weight:600;">${i.name}</span><span style="color:${i.qty===0?'var(--red)':'var(--orange)'};">${i.qty}/${i.min}</span></div><div style="height:4px;background:var(--border);border-radius:10px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:${i.qty===0?'var(--red)':'var(--orange)'};border-radius:10px;"></div></div></div>`; }).join('')
+    : '<div style="font-size:11px;color:var(--text3);">✅ All above minimum</div>';
+
+  // Pipeline
+  document.getElementById('d-pipe').innerHTML = demands.filter(d => !['issued','rejected'].includes(d.status))
+    .map(d => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);"><div><div style="font-size:11px;font-weight:600;">${d.id}: ${d.item}</div><div style="font-size:10px;color:var(--text3);">${d.aircraft}</div></div><span class="sc sc-${d.status}">${sLabel(d.status)}</span></div>`).join('')
+    || '<div style="font-size:11px;color:var(--text3);">No active pipeline</div>';
+
+  // Online users
+  document.getElementById('d-online').innerHTML = Object.entries(USERS_DB).filter(([,u]) => u.active)
+    .map(([k,u]) => `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);"><div style="width:28px;height:28px;border-radius:50%;background:${ROLE_COLORS[u.role]};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;">${ROLE_ABBR[u.role]}</div><div style="flex:1;"><div style="font-size:12px;font-weight:500;">${u.name}</div><div style="font-size:10px;color:var(--text3);">${u.role} · ${u.unit}</div></div><div style="width:6px;height:6px;border-radius:50%;background:var(--green);"></div></div>`).join('');
+
+  // Actions
+  const acts = [];
+  if (currentUser.role === 'technician') acts.push(`<button class="btn-sm btn-accent" style="width:100%;padding:10px;margin-bottom:6px;" onclick="openModal('demand-modal')">＋ Raise Demand</button>`);
+  if (['logistics','admin'].includes(currentUser.role)) acts.push(`<button class="btn-sm btn-navy" style="width:100%;padding:10px;margin-bottom:6px;" onclick="openModal('stock-modal')">＋ Add Stock</button>`);
+  if (currentUser.role === 'admin') acts.push(`<button class="btn-sm btn-accent" style="width:100%;padding:10px;margin-bottom:6px;" onclick="goPage('admin',document.querySelector('[onclick*=admin]'))">⚙️ Admin Panel</button>`);
+  acts.push(`<button class="btn-sm btn-navy" style="width:100%;padding:10px;" onclick="exportAudit()">📋 Export Report</button>`);
+  document.getElementById('d-actions').innerHTML = acts.join('');
+}
+
+function sLabel(s) { return {officer:'Officer Review',logistics:'Logistics',accounts:'Accounts',vendor:'Vendor Order',issued:'Issued ✅',rejected:'Rejected ❌'}[s]||s; }
+
+// ═══════════════════════════════════════════════════════ DEMANDS ════
+
+function renderDemandList(filter = '') {
+  const allowed = {officer:['officer','issued','rejected'],logistics:['logistics','issued','rejected'],accounts:['accounts','vendor','issued','rejected'],vendor:['vendor','issued'],technician:null,admin:null};
+  const roles = allowed[currentUser.role];
+  let list = roles ? demands.filter(d => roles.includes(d.status)) : demands;
+  if (filter) list = list.filter(d => d.id.toLowerCase().includes(filter) || d.item.toLowerCase().includes(filter));
+  document.getElementById('demand-list').innerHTML = [...list].reverse().map(d => {
+    const inQ = myQueue().some(q => q.id === d.id);
+    return `<div class="di${inQ?' new-item':''}" onclick="showDetail('${d.id}')" id="di-${d.id}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px;">
+        <div><div class="di-id">${d.id}</div><div class="di-name">${d.item}</div></div>
+        <span class="sc sc-${d.status}">${sLabel(d.status)}</span>
+      </div>
+      <div class="di-meta">${d.aircraft} · ${d.requester}</div>
+      <div class="di-meta" style="margin-top:2px;">Priority: <b style="color:${d.priority==='emergency'?'var(--red)':d.priority==='urgent'?'var(--orange)':'var(--green)'};">${d.priority.toUpperCase()}</b></div>
+    </div>`;
+  }).join('') || '<div style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">No demands to show</div>';
+}
+
+function filterDemands(v) { renderDemandList(v.toLowerCase()); }
+
+function showDetail(id) {
+  const d = demands.find(x => x.id === id); if (!d) return;
+  document.querySelectorAll('.di').forEach(el => el.classList.remove('sel'));
+  document.getElementById('di-' + id)?.classList.add('sel');
+
+  const steps = [
+    {key:'raised',label:'Demand Raised',icon:'📋',role:'technician'},
+    {key:'officer',label:'Officer Approval',icon:'⭐',role:'officer'},
+    {key:'logistics',label:'Logistics Check',icon:'🚛',role:'logistics'},
+    {key:'accounts',label:'Accounts Approval',icon:'💰',role:'accounts'},
+    {key:'vendor',label:'Vendor / Issue',icon:'🏭',role:'vendor'},
+    {key:'issued',label:'Completed',icon:'✅',role:'done'},
+  ];
+  const order = ['raised','officer','logistics','accounts','vendor','issued'];
+  const curIdx = order.indexOf(d.status.split('_')[0]);
+
+  const wfHtml = steps.map((s, i) => {
+    const isDone = d.status === 'issued' || (i > 0 && i < curIdx);
+    const isAct  = order[i] === d.status && d.status !== 'issued' && d.status !== 'rejected';
+    const hist   = d.history.find(h => h.step.startsWith(order[i]));
+    let btn = '';
+    if (isAct && s.role === currentUser.role) {
+      if (!['raised','issued'].includes(s.key)) {
+        btn = `<button class="wf-btn btn-approve" onclick="approveStep('${id}','${s.key}')">✅ Approve & Forward</button><button class="wf-btn btn-reject" onclick="rejectDemand('${id}')">❌ Reject</button>`;
+      }
+      if (s.key === 'vendor' && currentUser.role === 'vendor') {
+        btn = `<button class="wf-btn btn-approve" onclick="fulfillOrder('${id}')">✅ Mark Supplied</button>`;
+      }
+    }
+    return `<div class="wf-s ${isDone?'done':isAct?'act':''}">
+      <div class="wf-c">${isDone?'✓':s.icon}</div>
+      <div class="wf-info">
+        <div class="wf-lbl">${s.label}</div>
+        ${hist?`<div class="wf-sub">By: ${hist.by} · ${hist.at}</div><div class="wf-sub" style="font-style:italic;">"${hist.note}"</div>`:'<div class="wf-sub">Pending</div>'}
+        ${btn}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('demand-detail').innerHTML = `
+    <div style="max-width:640px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+        <div><div style="font-size:17px;font-weight:700;color:var(--navy);">${d.id} — ${d.item}</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">By ${d.requester} · ${d.createdAt}</div></div>
+        <span class="sc sc-${d.status}" style="font-size:11px;padding:4px 12px;">${sLabel(d.status)}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px;"><div style="font-size:10px;color:var(--text3);">Aircraft</div><div style="font-size:12px;font-weight:600;margin-top:2px;">${d.aircraft}</div></div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px;"><div style="font-size:10px;color:var(--text3);">Work Order</div><div style="font-size:12px;font-weight:600;margin-top:2px;">${d.wo}</div></div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px;"><div style="font-size:10px;color:var(--text3);">Part · Qty</div><div style="font-size:12px;font-weight:600;margin-top:2px;">${d.part} × ${d.qty}</div></div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px;margin-bottom:12px;"><div style="font-size:10px;color:var(--text3);">Justification</div><div style="font-size:12px;margin-top:3px;">${d.reason}</div></div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">Approval Workflow</div>
+      <div class="wf">${wfHtml}</div>
+    </div>`;
+}
+
+function approveStep(id, step) {
+  const d = demands.find(x => x.id === id); if (!d) return;
+  const next = {officer:'logistics',logistics:'accounts',accounts:'vendor'};
+  const note = {
+    officer:'Approved — forwarded to logistics',
+    logistics: () => { const inv = inventory.find(i => i.part === d.part); return inv && inv.qty >= d.qty ? `In stock (${inv.qty} units) — forwarding to accounts` : 'Out of stock — vendor procurement required'; },
+    accounts:'Budget approved — proceeding',
+  };
+  const n = typeof note[step] === 'function' ? note[step]() : note[step];
+  d.history.push({step,by:currentUser.name,role:currentUser.role,at:now(),note:n});
+  auditLog.push({ts:now(),user:currentUser.name,role:currentUser.role,action:currentUser.role+' Approved',dem:d.id,item:d.item,detail:n});
+  addActivity(`${currentUser.name} approved ${d.id}`, ROLE_COLORS[currentUser.role]);
+
+  if (step === 'accounts') {
+    const inv = inventory.find(i => i.part === d.part);
+    if (inv && inv.qty >= d.qty) {
+      inv.qty = Math.max(0, inv.qty - d.qty);
+      inv.lastIssuedTo = d.requester;
+      inv.updatedAt = now().split(' ')[0];
+      d.status = 'issued';
+      d.history.push({step:'issued',by:currentUser.name,role:'Logistics',at:now(),note:`${d.qty} units issued to ${d.requester}`});
+      auditLog.push({ts:now(),user:currentUser.name,role:'Logistics',action:'Item Issued',dem:d.id,item:d.item,detail:`${d.qty} units issued`});
+      pushNotif('✅ Item Issued', `${d.item} issued to ${d.requester}`, 'info');
+      toast('✅ Item issued — stock updated');
+    } else {
+      d.status = 'vendor';
+      d.history.push({step:'vendor',by:'System',role:'System',at:now(),note:`PO raised for ${d.qty} units`});
+      auditLog.push({ts:now(),user:'System',role:'System',action:'Vendor PO Created',dem:d.id,item:d.item,detail:'PO sent to vendor'});
+      pushNotif('🏭 Vendor PO Created', `PO for ${d.item} sent to vendor`, 'warning');
+      toast('🏭 Out of stock — vendor PO created');
+    }
+  } else {
+    d.status = next[step];
+    pushNotif('📋 Demand forwarded', `${d.id} → ${sLabel(d.status)}`, 'info');
+    toast(`✅ Approved — forwarded to ${sLabel(d.status)}`);
+  }
+  renderAll(); showDetail(id);
+}
+
+function rejectDemand(id) {
+  const d = demands.find(x => x.id === id); if (!d) return;
+  d.status = 'rejected';
+  d.history.push({step:'rejected',by:currentUser.name,role:currentUser.role,at:now(),note:'Rejected'});
+  auditLog.push({ts:now(),user:currentUser.name,role:currentUser.role,action:'Demand Rejected',dem:d.id,item:d.item,detail:'Rejected'});
+  pushNotif('❌ Demand Rejected', `${d.id}: ${d.item}`, 'warning');
+  toast('❌ Rejected');
+  renderAll(); showDetail(id);
+}
+
+function fulfillOrder(id) {
+  const d = demands.find(x => x.id === id); if (!d) return;
+  const inv = inventory.find(i => i.part === d.part);
+  if (inv) { inv.qty += d.qty; inv.updatedAt = now().split(' ')[0]; }
+  else inventory.push({part:d.part,name:d.item,cat:'Other',qty:d.qty,min:1,loc:'Received',lastIssuedTo:'—',updatedAt:now().split(' ')[0]});
+  d.status = 'issued';
+  d.history.push({step:'issued',by:currentUser.name,role:'Vendor',at:now(),note:`${d.qty} units supplied`});
+  auditLog.push({ts:now(),user:currentUser.name,role:'Vendor',action:'Vendor Supplied',dem:d.id,item:d.item,detail:`${d.qty} units received`});
+  pushNotif('📦 Stock Received', `${d.qty}x ${d.item} added to inventory`, 'info');
+  addActivity(`${currentUser.name} fulfilled ${d.id}`, '#f97316');
+  toast('✅ Supplied — stock updated');
+  renderAll(); showDetail(id);
+}
+
+function openDemandModal() { openModal('demand-modal'); }
+
+function submitDemand() {
+  const item = document.getElementById('dm-item').value.trim();
+  const aircraft = document.getElementById('dm-aircraft').value.trim();
+  const req = document.getElementById('dm-req').value.trim();
+  if (!item || !aircraft || !req) { toast('⚠️ Fill all required fields'); return; }
+  const id = `DS-00${demandN++}`;
+  const d = {id,aircraft,wo:document.getElementById('dm-wo').value||`WO-AUTO-${demandN}`,item,part:document.getElementById('dm-part').value||'—',qty:parseInt(document.getElementById('dm-qty').value)||1,priority:document.getElementById('dm-priority').value,reason:document.getElementById('dm-reason').value||'—',requester:req,status:'officer',createdAt:now(),history:[{step:'raised',by:req,role:'Technician',at:now(),note:'Demand raised and submitted to Officer'}]};
+  demands.push(d);
+  auditLog.push({ts:now(),user:req,role:'Technician',action:'Demand Raised',dem:id,item,detail:`Qty:${d.qty}, Priority:${d.priority}`});
+  addActivity(`New demand ${id} raised by ${req}`, '#0ea5e9');
+  closeModal('demand-modal');
+  ['dm-aircraft','dm-wo','dm-item','dm-part','dm-reason','dm-req'].forEach(i => document.getElementById(i).value = '');
+  document.getElementById('dm-qty').value = '1';
+  toast(`✅ ${id} raised — sent to Officer`);
+  renderAll();
+  goPage('demand', document.querySelector('[onclick*=demand]'));
+  setTimeout(() => showDetail(id), 200);
+}
+
+// ═══════════════════════════════════════════════════════ INVENTORY ════
+
+function renderInvTable(filter = '') {
+  const items = filter ? inventory.filter(i => i.name.toLowerCase().includes(filter) || i.part.toLowerCase().includes(filter)) : inventory;
+  const so = items.filter(i => i.qty === 0).length, low = items.filter(i => i.qty > 0 && i.qty <= i.min).length;
+  document.getElementById('inv-sum').textContent = `${items.length} items · ${so} stockout · ${low} low`;
+  document.getElementById('inv-body').innerHTML = items.map(i => {
+    const pct = i.min > 0 ? Math.min(100, Math.round(i.qty/i.min*100)) : 100;
+    const col = i.qty === 0 ? 'var(--red)' : i.qty <= i.min ? 'var(--orange)' : 'var(--green)';
+    return `<tr ${i.qty===0?'class="stockout"':''}>
+      <td><span style="font-family:monospace;font-size:10px;">${i.part}</span></td>
+      <td><b>${i.name}</b></td>
+      <td><span style="font-size:10px;background:var(--accent-light);color:var(--accent-dark);padding:2px 7px;border-radius:10px;">${i.cat}</span></td>
+      <td><b style="color:${col};">${i.qty}</b><div><div class="sbar"><div class="sfill" style="width:${pct}%;background:${col};"></div></div></div></td>
+      <td>${i.min}</td>
+      <td><span class="mb ${i.qty===0?'mb-red':i.qty<=i.min?'mb-orange':'mb-green'}">${i.qty===0?'STOCKOUT':i.qty<=i.min?'LOW':'OK'}</span></td>
+      <td style="font-size:11px;">${i.loc}</td>
+      <td style="font-size:11px;color:var(--text2);">${i.lastIssuedTo}</td>
+    </tr>`;
+  }).join('');
+}
+
+function filterInv(v) { renderInvTable(v.toLowerCase()); }
+
+function addStock() {
+  const name = document.getElementById('st-name').value.trim(), part = document.getElementById('st-part').value.trim();
+  if (!name || !part) { toast('⚠️ Name and part number required'); return; }
+  inventory.push({part,name,cat:document.getElementById('st-cat').value,qty:parseInt(document.getElementById('st-qty').value)||0,min:parseInt(document.getElementById('st-min').value)||5,loc:document.getElementById('st-loc').value||'—',lastIssuedTo:'—',updatedAt:now().split(' ')[0]});
+  auditLog.push({ts:now(),user:currentUser.name,role:currentUser.role,action:'Stock Added',dem:'—',item:name,detail:`Part:${part}`});
+  addActivity(`${currentUser.name} added ${name} to inventory`, '#10b981');
+  closeModal('stock-modal'); toast(`✅ ${name} added`); renderAll();
+  ['st-part','st-name','st-loc'].forEach(i => document.getElementById(i).value = '');
+}
+
+function exportInv() {
+  dlText(['WYNTIQ INVENTORY','='.repeat(50),`Generated: ${now()}`,'',...inventory.map(i=>`${i.part} | ${i.name} | ${i.cat} | Qty:${i.qty} | Min:${i.min} | ${i.qty===0?'STOCKOUT':i.qty<=i.min?'LOW':'OK'}`)].join('\n'),`wyntiq-inventory-${Date.now()}.txt`);
+  toast('📋 Exported');
+}
+
+// ═══════════════════════════════════════════════════════════ MAP ════
+
+const MICONS = {vehicle:'🚛',supply:'📦',base:'🏠',personnel:'👤'};
+const MCOLS  = {active:'#10b981',idle:'#94a3b8',warn:'#f59e0b',critical:'#ef4444'};
+
+function initMap() {
+  try {
+    mapObj = L.map('map').setView([22.5, 78.9], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap',maxZoom:19}).addTo(mapObj);
+    assets.forEach(a => addMapPin(a));
+  } catch(e) {
+    const m = document.getElementById('map');
+    if (m) m.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:10px;color:#64748b;font-size:13px;"><div style="font-size:36px;">🗺️</div><div>Map requires internet connection</div></div>';
+  }
+}
+
+function addMapPin(a) {
+  if (!mapObj || !a.lat || !a.lng) return;
+  const c = MCOLS[a.status]||'#94a3b8', ic = MICONS[a.type]||'📍';
+  const m = L.marker([a.lat, a.lng], {icon:L.divIcon({html:`<div style="width:34px;height:34px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:${c};display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(0,0,0,0.3);border:2px solid #fff;"><span style="transform:rotate(45deg);font-size:12px;">${ic}</span></div>`,iconSize:[34,34],iconAnchor:[17,34],popupAnchor:[0,-34],className:''})})
+    .addTo(mapObj)
+    .bindPopup(`<div style="font-family:Inter,sans-serif;min-width:150px;"><b>${ic} ${a.name}</b><br><span style="font-size:11px;color:#64748b;">📍 ${a.label}</span><br><span style="font-size:11px;font-weight:700;color:${c};">● ${a.status.toUpperCase()}</span></div>`);
+  mapMarkers[a.id] = m;
+}
+
+function fMap(type, btn) {
+  mapFilter = type;
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  Object.keys(mapMarkers).forEach(id => { if (mapObj) mapObj.removeLayer(mapMarkers[id]); delete mapMarkers[id]; });
+  (type === 'all' ? assets : assets.filter(a => a.type === type)).forEach(a => addMapPin(a));
+}
+
+async function geocode() {
+  const addr = document.getElementById('as-addr').value.trim();
+  if (!addr) { toast('⚠️ Enter an address'); return; }
+  const st = document.getElementById('as-geo');
+  st.className = 'geo-s geo-load'; st.textContent = '🔍 Searching...';
+  try {
+    const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(addr)}&limit=1`);
+    const d = await r.json();
+    if (d && d.length > 0) {
+      document.getElementById('as-lat').value = d[0].lat;
+      document.getElementById('as-lng').value = d[0].lon;
+      const lbl = d[0].display_name.split(',').slice(0,3).join(', ');
+      document.getElementById('as-lbl').value = lbl;
+      st.className = 'geo-s geo-ok'; st.textContent = `✅ ${lbl}`;
+    } else { st.className = 'geo-s geo-err'; st.textContent = '❌ Not found'; }
+  } catch(e) { st.className = 'geo-s geo-err'; st.textContent = '❌ Error'; }
+}
+
+function addAsset() {
+  const name = document.getElementById('as-name').value.trim();
+  const lat = parseFloat(document.getElementById('as-lat').value);
+  const lng = parseFloat(document.getElementById('as-lng').value);
+  const label = document.getElementById('as-lbl').value || document.getElementById('as-addr').value;
+  if (!name) { toast('⚠️ Enter name'); return; }
+  if (!lat || !lng) { toast('⚠️ Click Locate first'); return; }
+  const a = {id:assetN++,name,type:document.getElementById('as-type').value,lat,lng,label,status:document.getElementById('as-status').value};
+  assets.push(a);
+  if (mapFilter === 'all' || mapFilter === a.type) addMapPin(a);
+  closeModal('asset-modal'); toast(`✅ ${name} added`);
+  ['as-name','as-addr'].forEach(i => document.getElementById(i).value = '');
+  document.getElementById('as-lat').value = ''; document.getElementById('as-lng').value = '';
+  document.getElementById('as-geo').className = 'geo-s';
+}
+
+// ═══════════════════════════════════════════════════════ AUDIT ════
+
+function renderAudit() {
+  document.getElementById('audit-body').innerHTML = [...auditLog].reverse().map((l,i) => `
+    <tr>
+      <td style="color:var(--text3);">${auditLog.length-i}</td>
+      <td style="font-family:monospace;font-size:10px;">${l.ts}</td>
+      <td style="font-weight:600;">${l.user}</td>
+      <td><span class="mb mb-blue">${l.role}</span></td>
+      <td style="font-weight:500;">${l.action}</td>
+      <td style="font-family:monospace;font-size:11px;color:var(--accent-dark);">${l.dem}</td>
+      <td>${l.item}</td>
+      <td style="color:var(--text2);">${l.detail}</td>
+    </tr>`).join('');
+}
+
+function exportAudit() {
+  dlText(['WYNTIQ AUDIT TRAIL — TwinStance Solutions','='.repeat(60),`Generated: ${now()}`,'',...auditLog.map(l=>`${l.ts} | ${l.user} (${l.role}) | ${l.action} | ${l.dem} | ${l.item} | ${l.detail}`)].join('\n'),`wyntiq-audit-${Date.now()}.txt`);
+  toast('📋 Exported');
+}
+
+// ═══════════════════════════════════════════════════════ ADMIN ════
+
+function renderAdmin() {
+  if (!currentUser || currentUser.role !== 'admin') return;
+
+  // KPIs
+  document.getElementById('a-totalusers').textContent = Object.keys(USERS_DB).length;
+  document.getElementById('a-active').textContent = Object.values(USERS_DB).filter(u => u.active).length;
+  document.getElementById('a-demands').textContent = demands.length;
+  document.getElementById('a-auditcount').textContent = auditLog.length;
+  document.getElementById('user-count-label').textContent = Object.keys(USERS_DB).length + ' users';
+
+  // System stats
+  document.getElementById('sys-demands').textContent = demands.length;
+  document.getElementById('sys-so').textContent = inventory.filter(i => i.qty === 0).length;
+  document.getElementById('sys-vendor').textContent = demands.filter(d => d.status === 'vendor').length;
+  document.getElementById('sys-audit').textContent = auditLog.length;
+  document.getElementById('sys-sync').textContent = now();
+
+  // User list
+  document.getElementById('user-list').innerHTML = Object.entries(USERS_DB).map(([uname, u]) => `
+    <div class="user-row">
+      <div class="user-av" style="background:${ROLE_COLORS[u.role]||'#64748b'};">${ROLE_ABBR[u.role]||'?'}</div>
+      <div class="user-info">
+        <div class="user-name">${u.name} <span class="status-tog ${u.active?'tog-active':'tog-inactive'}">${u.active?'Active':'Disabled'}</span></div>
+        <div class="user-meta">${uname} · ${u.role} · ${u.unit}</div>
+        <div class="user-meta">Last login: ${u.lastLogin}</div>
+      </div>
+      <div class="user-actions">
+        <button class="ua-btn ua-toggle" onclick="toggleUser('${uname}')">${u.active?'Disable':'Enable'}</button>
+        <button class="ua-btn ua-del" onclick="deleteUser('${uname}')">Remove</button>
+      </div>
+    </div>`).join('');
+
+  // Activity
+  document.getElementById('activity-monitor').innerHTML = activityLog.slice(0,20).map(a => `
+    <div class="activity-item">
+      <div class="act-dot" style="background:${a.color};"></div>
+      <div class="act-text">${a.text}</div>
+      <div class="act-time">${a.time}</div>
+    </div>`).join('');
+}
+
+function toggleUser(uname) {
+  if (uname === 'admin') { toast('⚠️ Cannot disable admin'); return; }
+  USERS_DB[uname].active = !USERS_DB[uname].active;
+  addActivity(`Admin ${USERS_DB[uname].active?'enabled':'disabled'} user ${uname}`, '#ef4444');
+  auditLog.push({ts:now(),user:currentUser.name,role:'Admin',action:USERS_DB[uname].active?'User Enabled':'User Disabled',dem:'—',item:uname,detail:USERS_DB[uname].name});
+  toast(`${USERS_DB[uname].active?'✅ Enabled':'❌ Disabled'}: ${USERS_DB[uname].name}`);
+  renderAll();
+}
+
+function deleteUser(uname) {
+  if (uname === 'admin') { toast('⚠️ Cannot remove admin'); return; }
+  const name = USERS_DB[uname].name;
+  delete USERS_DB[uname];
+  addActivity(`Admin removed user ${uname}`, '#ef4444');
+  auditLog.push({ts:now(),user:currentUser.name,role:'Admin',action:'User Removed',dem:'—',item:uname,detail:name});
+  toast(`🗑️ Removed: ${name}`);
+  renderAll();
+}
+
+function quickAddUser() {
+  const name = document.getElementById('qu-name').value.trim();
+  const user = document.getElementById('qu-user').value.trim();
+  const pass = document.getElementById('qu-pass').value.trim();
+  const role = document.getElementById('qu-role').value;
+  const unit = document.getElementById('qu-unit').value.trim();
+  if (!name || !user || !pass) { toast('⚠️ Name, username and password required'); return; }
+  if (USERS_DB[user]) { toast('⚠️ Username already exists'); return; }
+  USERS_DB[user] = {pass,name,role,unit:unit||'—',email:document.getElementById('qu-email').value||'—',active:true,lastLogin:'Never'};
+  addActivity(`Admin created user ${user} (${role})`, '#10b981');
+  auditLog.push({ts:now(),user:currentUser.name,role:'Admin',action:'User Created',dem:'—',item:user,detail:`${name}, ${role}`});
+  ['qu-name','qu-user','qu-pass','qu-unit','qu-email'].forEach(i => document.getElementById(i).value = '');
+  toast(`✅ User ${name} created`);
+  renderAll();
+}
+
+function addUser() {
+  const name = document.getElementById('au-name').value.trim();
+  const user = document.getElementById('au-user').value.trim();
+  const pass = document.getElementById('au-pass').value.trim();
+  const role = document.getElementById('au-role').value;
+  if (!name || !user || !pass) { toast('⚠️ Fill required fields'); return; }
+  if (USERS_DB[user]) { toast('⚠️ Username already exists'); return; }
+  USERS_DB[user] = {pass,name,role,unit:document.getElementById('au-unit').value||'—',email:document.getElementById('au-email').value||'—',active:true,lastLogin:'Never'};
+  addActivity(`Admin created user ${user} (${role})`, '#10b981');
+  auditLog.push({ts:now(),user:currentUser.name,role:'Admin',action:'User Created',dem:'—',item:user,detail:`${name}, ${role}`});
+  closeModal('adduser-modal');
+  toast(`✅ User ${name} created`);
+  renderAll();
+}
+
+function addActivity(text, color) {
+  activityLog.unshift({text, color, time: new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:false})});
+  if (activityLog.length > 50) activityLog.pop();
+}
+
+// ═══════════════════════════════════════════════════════ UTILS ════
+
+function openModal(id)  { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
+function now() { return new Date().toLocaleString('en-IN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).replace(',',''); }
+function dlText(txt, fn) { const b = new Blob([txt],{type:'text/plain'}); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = fn; a.click(); }
+
+// Close modals on outside click
+['demand-modal','stock-modal','asset-modal','adduser-modal'].forEach(id => {
+  document.getElementById(id).addEventListener('click', function(e) { if (e.target === this) closeModal(id); });
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') ['demand-modal','stock-modal','asset-modal','adduser-modal'].forEach(id => closeModal(id)); });
+
+// Clock
+setInterval(() => document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-IN',{hour12:false}), 1000);
+
+// Live alerts every 40s
+setInterval(() => {
+  if (!currentUser) return;
+  const msgs = [
+    {t:'STOCK CHECK',d:'Inventory sync completed',type:'info'},
+    {t:'SYSTEM MONITOR',d:'All bases reporting normally',type:'info'},
+  ];
+  const m = msgs[Math.floor(Math.random()*msgs.length)];
+  pushNotif(m.t, m.d, m.type);
+}, 40000);
 </script>
+</body>
+</html>
