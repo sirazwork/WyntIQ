@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WYNTIQ for Indian Navy | TwinStance Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy2:#0f2040;--navy3:#162850;--navy4:#1e3a6e;--gold:#c9a84c;--gold2:#e8c56d;--gold-light:#fdf6e3;--white:#ffffff;--off-white:#f8f9fc;--light:#eef1f7;--text:#1a2744;--text2:#4a5568;--text3:#8898aa;--border:#dde3ef;--green:#38a169;--red:#e53e3e;--shadow:0 2px 8px rgba(10,22,40,0.08);--shadow-md:0 8px 24px rgba(10,22,40,0.12);--r:8px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text);}
+.topbar{background:var(--navy);padding:8px 60px;display:flex;justify-content:space-between;}
+.topbar-text{font-size:11px;color:rgba(255,255,255,0.5);}
+.topbar-text span{color:var(--gold);}
+.topbar-links{display:flex;gap:16px;}
+.topbar-links a{font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;}
+nav{background:var(--white);padding:0 60px;height:68px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow);position:sticky;top:0;z-index:1000;border-bottom:3px solid var(--gold);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--navy),var(--navy4));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;color:var(--gold);}
+.nav-logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:21px;color:var(--navy);}
+.nav-logo-sub{font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:-2px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{padding:6px 14px;font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;border-radius:6px;}
+.nav-link:hover{background:var(--light);}
+.nav-btn{padding:10px 22px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;text-decoration:none;}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2) 50%,var(--navy3));padding:90px 60px 70px;position:relative;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));}
+.breadcrumb{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:20px;}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+.hero-badge{display:inline-flex;padding:6px 14px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:20px;margin-bottom:20px;}
+.hero-badge span{font-size:11px;font-weight:600;color:var(--gold2);letter-spacing:1px;text-transform:uppercase;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,62px);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:20px;}
+.hero-title .gold{color:var(--gold2);}
+.hero-sub{font-size:17px;color:rgba(255,255,255,0.65);line-height:1.8;max-width:720px;margin-bottom:32px;}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;}
+.hs-val{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--gold2);}
+.hs-lbl{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
+.section{padding:70px 60px;}
+.section-alt{background:var(--off-white);}
+.section-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.section-tag::before{content:'';width:24px;height:2px;background:var(--gold);}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:18px;}
+.lead{font-size:17px;color:var(--text2);line-height:1.85;margin-bottom:20px;}
+.body-text{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:16px;}
+.highlight-box{background:var(--gold-light);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:22px 28px;margin:24px 0;}
+.hb-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--navy);margin-bottom:8px;}
+.hb-text{font-size:14px;color:var(--text2);line-height:1.8;}
+.navy-box{background:var(--navy);border-radius:10px;padding:28px;margin:24px 0;}
+.nb-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--gold2);margin-bottom:12px;}
+.nb-text{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.8;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:26px;transition:all 0.3s;}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);border-color:var(--gold);}
+.card-icon{font-size:30px;margin-bottom:14px;}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.card-text{font-size:13px;color:var(--text2);line-height:1.75;}
+.cta-band{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:60px;text-align:center;}
+.cta-title{font-family:'Playfair Display',serif;font-size:36px;color:var(--white);margin-bottom:12px;}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:28px;}
+.btn-gold{padding:14px 36px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:700;font-size:14px;border:none;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block;}
+footer{background:var(--navy);padding:30px 60px;text-align:center;}
+.footer-text{font-size:12px;color:rgba(255,255,255,0.3);}
+.footer-text a{color:var(--gold);text-decoration:none;}
+@media(max-width:900px){.topbar{display:none;}.hero,.section,.cta-band{padding:60px 20px;}nav{padding:0 20px;}.grid-2,.grid-3,.hero-stats{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-text">A product of <span>TwinStance Solutions LLP</span> · LLPIN: AAQ-0042 · Est. July 2019 · Cuttack, Odisha</div>
+  <div class="topbar-links"><a href="index.html">Home</a><a href="mailto:contact@tssolutionsllp.com">Contact</a></div>
+</div>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">W</div>
+    <div><div class="nav-logo-text">WYNTIQ</div><div class="nav-logo-sub">by TwinStance Solutions</div></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="iaf.html">IAF</a>
+    <a class="nav-link" href="army.html">Army</a>
+    <a class="nav-link" href="navy.html">Navy</a>
+    <a class="nav-link" href="mining.html">Mining</a>
+    <a class="nav-link" href="auto.html">Auto</a>
+    <a class="nav-link" href="factory.html">Factory</a>
+  </div>
+  <a class="nav-btn" href="app/index.html">Sign In →</a>
+</nav>
+
+<div class="hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Defence</span><span>/</span><span>Indian Navy</span></div>
+  <div class="hero-badge"><span>⚓ Naval Grade · At-Sea Ready · Offline First</span></div>
+  <h1 class="hero-title">WYNTIQ for the<br><span class="gold">Indian Navy</span></h1>
+  <p class="hero-sub">Naval vessel maintenance, multi-port logistics, and fleet readiness management — built for the unique operational requirements of the Indian Navy, including at-sea operations where connectivity is unavailable and every delay in spare parts has direct operational consequences.</p>
+  <div class="hero-stats">
+    <div><div class="hs-val">130+</div><div class="hs-lbl">Naval Vessels</div></div>
+    <div><div class="hs-val">3</div><div class="hs-lbl">Major Commands</div></div>
+    <div><div class="hs-val">100%</div><div class="hs-lbl">Offline Capable</div></div>
+    <div><div class="hs-val">CSV</div><div class="hs-lbl">Audit Export</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">The Challenge</div>
+  <h2 class="section-title">A Ship Without the Right Parts Is Not a Warship</h2>
+  <p class="lead">The Indian Navy operates one of the most complex and demanding logistics environments of any organisation in India. A warship at sea is a self-contained operational unit that must carry within itself — or have reliable access to — everything it needs to continue operating for weeks at a time. When a critical component fails at sea, the options are limited: repair with available spares, improvise a repair, or return to port. All three options have operational costs. The best outcome — repair with available spares — depends entirely on having the right spares on board. That depends on intelligent logistics management before the ship leaves port.</p>
+  <p class="body-text">The Indian Navy operates over 130 commissioned vessels of various types — aircraft carriers, destroyers, frigates, corvettes, submarines, amphibious ships, offshore patrol vessels, and various auxiliary vessels. Each type of vessel has a distinct maintenance profile, a distinct spare parts requirement, and a distinct operational rhythm. Managing the spare parts inventory across this diverse fleet, across three Command headquarters at Mumbai (Western Naval Command), Vishakhapatnam (Eastern Naval Command), and Kochi (Southern Naval Command), plus numerous subsidiary naval stations — is an extraordinary logistics challenge.</p>
+  <p class="body-text">Naval engineering requires precision. The systems on a modern warship — propulsion, weapons, navigation, communications, sensors — are complex, interdependent, and unforgiving of neglect. A diesel engine that develops a fault at sea cannot be fixed by ordering a part online. The part must have been carried aboard or it must be available at the next port of call. Knowing in advance what parts a ship will need on a particular deployment requires sophisticated demand forecasting based on the ship's operational history, its maintenance schedule, and the nature of the deployment.</p>
+  <p class="body-text">Beyond the technical complexity, naval logistics has a data security dimension that makes commercial logistics software inappropriate without significant modification. Information about which ships are operational, what their maintenance status is, what spare parts are held at which naval base, and what the procurement lead times are for critical components is sensitive military information. Any system handling this data must operate within appropriate security frameworks, with robust access controls and audit logging.</p>
+
+  <div class="highlight-box">
+    <div class="hb-title">The At-Sea Offline Challenge</div>
+    <div class="hb-text">A warship on patrol in the Indian Ocean, the Arabian Sea, or the Bay of Bengal does not have reliable internet connectivity. Satellite bandwidth is expensive, limited, and often restricted to operational communications rather than logistics data systems. Any logistics platform that requires internet connectivity to function is simply unusable for the most critical phase of a ship's operational life — when it is at sea on a mission. WYNTIQ was designed from the ground up to work offline. The entire platform — demand management, inventory tracking, maintenance records, audit logging — functions identically with or without connectivity. When the ship returns to port, or when satellite bandwidth allows, data synchronises automatically with the shore-based systems. No transaction is lost. No data is corrupted. The at-sea record is as complete and accurate as the ashore record.</div>
+  </div>
+
+  <p class="body-text">WYNTIQ addresses these challenges comprehensively. It provides real-time inventory visibility across all naval bases and between ships and shore facilities. It operates fully offline — essential for at-sea operations. It enforces appropriate role-based access controls — the engineer lieutenant on board a frigate sees the maintenance and spare parts data relevant to that ship; the Chief Engineer sees fleet-wide engineering readiness; the Command Logistics staff officer sees command-level aggregates. Each role has exactly the information it needs and no more. And every transaction is permanently logged with a complete audit trail.</p>
+</div>
+
+<div class="section section-alt">
+  <div class="section-tag">Key Capabilities</div>
+  <h2 class="section-title">Built for Every Aspect of Naval Logistics</h2>
+  <div class="grid-3">
+    <div class="card"><div class="card-icon">⚓</div><div class="card-title">Vessel-Tagged Maintenance Records</div><div class="card-text">Every maintenance task, every spare part used, every repair carried out — linked to the specific vessel's pennant number and hull number. The complete maintenance history of every ship is immediately accessible. When a frigate comes in for refit, its entire operational maintenance history — every fault, every repair, every part replaced — is available in seconds. This history informs decisions about the scope and priorities of the refit and helps identify systems with recurring problems that may need design-level solutions.</div></div>
+    <div class="card"><div class="card-icon">🌊</div><div class="card-title">At-Sea Full Functionality</div><div class="card-text">WYNTIQ operates identically at sea as in port. The ship's engineering officer can raise demands, check inventory, approve issues, and log maintenance work while the ship is on patrol — with no internet connectivity required. When the ship returns to port, or when a brief satellite window is available, all data synchronises with the shore system. The port logistics staff can see the maintenance work done at sea and the spare parts consumed, enabling them to prepare the replenishment and maintenance schedule before the ship even berths.</div></div>
+    <div class="card"><div class="card-icon">🚢</div><div class="card-title">Multi-Port Inventory Network</div><div class="card-text">Real-time inventory visibility across all naval bases and stores depots — Naval Dockyard Mumbai, Naval Base Karwar, Naval Station Vishakhapatnam, INS Dega Vishakhapatnam, INS Garuda Kochi, and all subsidiary stations. If a critical part is not available at the home port of a ship, the system immediately identifies which other naval station has it and initiates a lateral transfer request. This cross-port visibility dramatically reduces the delay in sourcing parts that are in the naval system but at the wrong location.</div></div>
+    <div class="card"><div class="card-icon">⚙️</div><div class="card-title">Complex Systems Lifecycle Management</div><div class="card-text">Naval systems — gas turbines, diesel engines, weapons fire control systems, radar arrays, sonar transducers — have complex maintenance requirements with multiple echelons of repair: ship level, base workshop, OEM, and fleet maintenance authority. WYNTIQ manages the parts and maintenance workflow at each level, tracks which components have been sent to which level of repair and when they are expected back, and maintains the complete lifecycle history of each major system from commissioning to decommissioning.</div></div>
+    <div class="card"><div class="card-icon">🛡️</div><div class="card-title">Classified Item Handling</div><div class="card-text">Naval stores include sensitive and classified items — cryptographic equipment components, weapons system parts, sensor modules with sensitive specifications. WYNTIQ supports classified item handling with appropriate access controls — only personnel with the required clearance can view, demand, or issue classified items. The audit trail for classified items is separate and more detailed, providing complete visibility for security inspections while restricting access to those without appropriate authorisation.</div></div>
+    <div class="card"><div class="card-icon">📊</div><div class="card-title">Fleet Readiness Dashboard</div><div class="card-text">The Flag Officer Commanding sees the readiness status of every vessel in his command — fully operational, degraded capability, under maintenance, or in refit. For each vessel, the dashboard shows what maintenance is currently underway, what spare parts are pending, and what the estimated return to full operational status is. This gives the Flag Officer the information needed to make informed decisions about task force composition and operational planning based on actual fleet status rather than reported status.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">Predictive and Analytics</div>
+  <h2 class="section-title">Know What Your Fleet Will Need Before It Needs It</h2>
+  <p class="lead">Effective naval logistics requires predictive capability — knowing what parts a ship will need before it needs them, anticipating maintenance requirements based on operational history, and positioning spares at the right port before the ship arrives. WYNTIQ's analytics engine provides this predictive capability based on actual operational data.</p>
+  <p class="body-text">For each class of vessel in the naval inventory, WYNTIQ analyses the historical maintenance demands — which parts are demanded most frequently, at what operational intervals, and with what lead time for procurement. This analysis generates a Class Maintenance Profile that informs both the pre-deployment stores embarked on each ship and the base stock levels maintained at naval stations. When a ship is being prepared for a patrol or deployment, WYNTIQ generates a recommended stores list based on the deployment duration, the operational profile, and the ship's maintenance history — ensuring that the most likely required spares are embarked before departure.</p>
+  <p class="body-text">The system also tracks the condition of major components through their maintenance history. A gas turbine engine that has received frequent minor repairs may be approaching the end of its service life and may need to be scheduled for overhaul — a decision that requires planning months in advance given the lead times for naval engineering work. WYNTIQ flags components whose maintenance history suggests they may be approaching major maintenance milestones, giving the Fleet Maintenance Authority early warning to schedule overhauls and arrange for replacement modules during the overhaul period.</p>
+  <p class="body-text">Port turnaround time — the time a ship spends in port for replenishment and maintenance between operational patrols — is a key measure of naval efficiency. WYNTIQ contributes to minimising turnaround time by ensuring that when a ship returns to port, the shore logistics organisation already knows what maintenance work needs to be done (from the at-sea maintenance records), what spares were consumed and need to be replenished (from the at-sea inventory records), and what the ship's next operational commitment requires in terms of stores and readiness. With this advance information, preparations can begin before the ship berths, reducing turnaround time significantly.</p>
+</div>
+
+<div class="cta-band">
+  <h2 class="cta-title">Ready to See WYNTIQ in Action?</h2>
+  <p class="cta-sub">Request a private demonstration for Indian Navy requirements. We will walk through vessel maintenance workflows, at-sea offline operation, and fleet readiness management.</p>
+  <a class="btn-gold" href="index.html#demo">Request Navy Demo →</a>
+</div>
+<footer>
+  <div class="footer-text">© 2026 TwinStance Solutions LLP · LLPIN: AAQ-0042 · <a href="index.html">Home</a> · <a href="mailto:contact@tssolutionsllp.com">Contact</a></div>
+</footer>
+</body>
+</html>

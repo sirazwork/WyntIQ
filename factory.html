@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WYNTIQ for Factory & Plant Operations | TwinStance Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy2:#0f2040;--navy3:#162850;--navy4:#1e3a6e;--gold:#c9a84c;--gold2:#e8c56d;--gold-light:#fdf6e3;--white:#ffffff;--off-white:#f8f9fc;--light:#eef1f7;--text:#1a2744;--text2:#4a5568;--text3:#8898aa;--border:#dde3ef;--green:#38a169;--red:#e53e3e;--shadow:0 2px 8px rgba(10,22,40,0.08);--shadow-md:0 8px 24px rgba(10,22,40,0.12);--r:8px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text);}
+.topbar{background:var(--navy);padding:8px 60px;display:flex;justify-content:space-between;}
+.topbar-text{font-size:11px;color:rgba(255,255,255,0.5);}
+.topbar-text span{color:var(--gold);}
+.topbar-links{display:flex;gap:16px;}
+.topbar-links a{font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;}
+nav{background:var(--white);padding:0 60px;height:68px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow);position:sticky;top:0;z-index:1000;border-bottom:3px solid var(--gold);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--navy),var(--navy4));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;color:var(--gold);}
+.nav-logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:21px;color:var(--navy);}
+.nav-logo-sub{font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:-2px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{padding:6px 14px;font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;border-radius:6px;}
+.nav-link:hover{background:var(--light);}
+.nav-btn{padding:10px 22px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;text-decoration:none;}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2) 50%,var(--navy3));padding:90px 60px 70px;position:relative;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));}
+.breadcrumb{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:20px;}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+.hero-badge{display:inline-flex;padding:6px 14px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:20px;margin-bottom:20px;}
+.hero-badge span{font-size:11px;font-weight:600;color:var(--gold2);letter-spacing:1px;text-transform:uppercase;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,62px);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:20px;}
+.hero-title .gold{color:var(--gold2);}
+.hero-sub{font-size:17px;color:rgba(255,255,255,0.65);line-height:1.8;max-width:720px;margin-bottom:32px;}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;}
+.hs-val{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--gold2);}
+.hs-lbl{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
+.section{padding:70px 60px;}
+.section-alt{background:var(--off-white);}
+.section-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.section-tag::before{content:'';width:24px;height:2px;background:var(--gold);}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:18px;}
+.lead{font-size:17px;color:var(--text2);line-height:1.85;margin-bottom:20px;}
+.body-text{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:16px;}
+.highlight-box{background:var(--gold-light);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:22px 28px;margin:24px 0;}
+.hb-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--navy);margin-bottom:8px;}
+.hb-text{font-size:14px;color:var(--text2);line-height:1.8;}
+.navy-box{background:var(--navy);border-radius:10px;padding:28px;margin:24px 0;}
+.nb-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--gold2);margin-bottom:12px;}
+.nb-text{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.8;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:26px;transition:all 0.3s;}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);border-color:var(--gold);}
+.card-icon{font-size:30px;margin-bottom:14px;}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.card-text{font-size:13px;color:var(--text2);line-height:1.75;}
+.cta-band{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:60px;text-align:center;}
+.cta-title{font-family:'Playfair Display',serif;font-size:36px;color:var(--white);margin-bottom:12px;}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:28px;}
+.btn-gold{padding:14px 36px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:700;font-size:14px;border:none;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block;}
+footer{background:var(--navy);padding:30px 60px;text-align:center;}
+.footer-text{font-size:12px;color:rgba(255,255,255,0.3);}
+.footer-text a{color:var(--gold);text-decoration:none;}
+@media(max-width:900px){.topbar{display:none;}.hero,.section,.cta-band{padding:60px 20px;}nav{padding:0 20px;}.grid-2,.grid-3,.hero-stats{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-text">A product of <span>TwinStance Solutions LLP</span> · LLPIN: AAQ-0042 · Est. July 2019 · Cuttack, Odisha</div>
+  <div class="topbar-links"><a href="index.html">Home</a><a href="mailto:contact@tssolutionsllp.com">Contact</a></div>
+</div>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">W</div>
+    <div><div class="nav-logo-text">WYNTIQ</div><div class="nav-logo-sub">by TwinStance Solutions</div></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="iaf.html">IAF</a>
+    <a class="nav-link" href="army.html">Army</a>
+    <a class="nav-link" href="navy.html">Navy</a>
+    <a class="nav-link" href="mining.html">Mining</a>
+    <a class="nav-link" href="auto.html">Auto</a>
+    <a class="nav-link" href="factory.html">Factory</a>
+  </div>
+  <a class="nav-btn" href="app/index.html">Sign In →</a>
+</nav>
+
+<div class="hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Industries</span><span>/</span><span>Factory & Plant</span></div>
+  <div class="hero-badge"><span>🏭 Industrial Grade · Predictive Maintenance · Zero Surprise Downtime</span></div>
+  <h1 class="hero-title">WYNTIQ for<br><span class="gold">Factory & Plant Operations</span></h1>
+  <p class="hero-sub">Maintenance management, spare parts intelligence, and production floor logistics — for manufacturers who cannot afford unplanned downtime. WYNTIQ transforms reactive breakdown management into predictive maintenance excellence, eliminating the unnecessary stoppages that drain profitability from Indian manufacturing operations.</p>
+  <div class="hero-stats">
+    <div><div class="hs-val">60%</div><div class="hs-lbl">Downtime Reduction</div></div>
+    <div><div class="hs-val">100%</div><div class="hs-lbl">Equipment Visibility</div></div>
+    <div><div class="hs-val">0</div><div class="hs-lbl">Manual Ledger Entries</div></div>
+    <div><div class="hs-val">CSV</div><div class="hs-lbl">Audit Export</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">The Challenge</div>
+  <h2 class="section-title">Unplanned Downtime Is the Silent Profit Killer</h2>
+  <p class="lead">Every factory manager in India knows the feeling. It is 2 AM on a Sunday. The night shift supervisor calls to say that the main production line has stopped — a critical bearing has seized, the conveyor motor has failed, a gearbox has broken down. The maintenance team is on site, they know what needs to be done, but the required spare part is not in stores. The stores supervisor tries to recall whether the part was ever ordered. Someone suggests it might be in the overflow storage area. Two hours of searching confirms it is not there. The plant remains stopped. Production losses mount. By the time the plant restarts Monday morning, the loss runs into lakhs.</p>
+  <p class="body-text">This scenario plays out every day across thousands of Indian factories — cement plants, steel mills, chemical facilities, pharmaceutical manufacturers, FMCG production lines, textile mills, paper mills, and food processing plants. The common thread is a failure of preventive maintenance and spare parts management. Not a failure of knowledge or intent — the maintenance teams typically know their equipment and know what needs to be done. The failure is a system failure — the absence of a system that ensures the right parts are in stock before they are needed, that maintenance is scheduled before equipment fails, and that when equipment does fail unexpectedly, the information needed to respond quickly is immediately available.</p>
+  <p class="body-text">The financial cost of unplanned downtime in manufacturing is staggering. A study of Indian manufacturing found that the average plant loses 15-20% of its potential production time to unplanned downtime. In a ₹100-crore annual revenue factory, this represents ₹15-20 crore of unrealised production. The cost of implementing a world-class maintenance management system — including WYNTIQ — would typically be a fraction of this, with payback in months rather than years.</p>
+  <p class="body-text">Beyond the direct financial cost, unplanned downtime creates other operational problems. Customer delivery commitments are missed, damaging relationships and potentially triggering penalty clauses. Quality suffers when production is rushed to make up lost time after a breakdown. Worker morale suffers when the plant repeatedly fails to meet production targets despite everyone's best efforts. And maintenance technicians, constantly fighting fires and working emergency repairs, cannot invest the time needed in genuine preventive maintenance — creating a vicious cycle where reactive maintenance creates more reactive maintenance.</p>
+
+  <div class="highlight-box">
+    <div class="hb-title">The Reactive Maintenance Trap</div>
+    <div class="hb-text">Most Indian factories are trapped in reactive maintenance — they fix equipment after it breaks down rather than before. This approach seems economical on the surface — you only spend money on a repair when you need to. In reality it is far more expensive. When equipment fails catastrophically rather than being maintained in a controlled way, the failure often causes secondary damage. A bearing that should have been replaced costs ₹2,000. A seized bearing that damages the shaft it runs on costs ₹50,000 to repair plus significant downtime. Emergency procurement of spare parts — needed immediately after a breakdown — costs 20-40% more than planned procurement due to premium shipping charges, express freight costs, and the inability to negotiate prices. And the labour cost of emergency repairs — often involving overtime and special arrangements — is significantly higher than planned maintenance during normal working hours. WYNTIQ eliminates the reactive maintenance trap by making planned, preventive maintenance operationally straightforward.</div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="section-tag">How WYNTIQ Transforms Factory Maintenance</div>
+  <h2 class="section-title">From Fire-Fighting to Proactive Excellence</h2>
+  <p class="lead">The transformation from reactive to proactive maintenance management that WYNTIQ enables does not happen overnight — but it begins immediately and accelerates rapidly as the system accumulates operational data and as the maintenance team adapts to working with real-time information rather than from memory and experience alone.</p>
+  <p class="body-text">The foundation of the transformation is equipment registration and maintenance scheduling. Every significant piece of equipment in the factory is registered in WYNTIQ — with its make, model, serial number, installation date, and the manufacturer's recommended maintenance schedule. For a cement grinding mill, this might include bearing inspections every 500 operating hours, lubricant change every 1,000 hours, liner thickness measurements every 2,000 hours, and major overhaul every 10,000 hours. WYNTIQ tracks the actual operating hours of each machine — either entered manually by operators or fed automatically from instrumentation where available — and generates alerts as each maintenance interval approaches.</p>
+  <p class="body-text">The critical linkage between maintenance scheduling and spare parts management is what makes WYNTIQ particularly powerful. When a maintenance alert is generated for an upcoming bearing replacement, WYNTIQ simultaneously checks whether the required bearings are in stock. If they are not, a procurement request is automatically generated and routed for approval. The timing is calculated to ensure that by the time the maintenance interval arrives, the parts will have been delivered, inspected, and placed in the designated storage location ready for use. The maintenance technician who comes to do the job finds the parts waiting for him — not an empty shelf and a scramble for emergency procurement.</p>
+  <p class="body-text">For unscheduled failures — which will always occur despite the best preventive maintenance programme — WYNTIQ provides immediate support rather than adding to the confusion. When a breakdown occurs, the maintenance team opens WYNTIQ and immediately sees whether the required part is in stock, at which location in the stores, and who is the approving authority for issue. If the part is in stock, it is issued immediately. If it is not in stock, WYNTIQ immediately generates an emergency procurement request and shows the nearest alternative sources — whether from a supplier, from a sister plant, or from a rental/repair option. The information that would currently require multiple phone calls and searches is available in seconds.</p>
+
+  <div class="navy-box">
+    <div class="nb-title">The Knowledge Retention Problem — Solved</div>
+    <div class="nb-text">One of the most underappreciated challenges in Indian factory maintenance is knowledge retention. A senior maintenance technician who has worked on a particular machine for fifteen years carries an enormous amount of institutional knowledge — how the machine behaves when a particular bearing is about to fail, which settings work best in summer versus winter, what the warning signs of a particular failure mode look like. When this technician retires, transfers, or resigns, that knowledge walks out the door with him. New technicians must learn everything from scratch, often through expensive trial and error. WYNTIQ addresses this problem by systematically capturing maintenance knowledge in the system. Every maintenance task completed creates a record — what was done, what was found, what was replaced, and any notes the technician adds about what was observed. Over time, this creates a comprehensive knowledge base about each machine that is available to any technician working on it — not just the one who has worked on it the longest. The institutional knowledge of the most experienced technician becomes accessible to the newest apprentice through the system records.</div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card"><div class="card-icon">🏭</div><div class="card-title">Planned Maintenance System</div><div class="card-text">Comprehensive maintenance scheduling based on manufacturer recommendations, operating hours, and the plant's own maintenance experience. Every machine has a maintenance calendar that is tracked automatically. Alerts generated in advance of each maintenance interval — enough time to ensure parts are available and personnel are scheduled. The right maintenance, on the right machine, at the right time, with the right resources. Zero surprise breakdowns from predictable component wear.</div></div>
+    <div class="card"><div class="card-icon">⚙️</div><div class="card-title">Complete Equipment History</div><div class="card-text">Every machine has a complete, permanent digital maintenance history — every inspection, every repair, every part replaced, every breakdown and its cause, every maintenance technician who worked on it. This history is immediately searchable. When a machine develops a recurring problem, the maintenance history reveals the pattern — enabling a root cause fix rather than repeated symptomatic repairs. When selling or transferring equipment, the complete maintenance history adds genuine value and buyer confidence.</div></div>
+    <div class="card"><div class="card-icon">🔧</div><div class="card-title">Critical Spares Management</div><div class="card-text">Identify the critical spare parts whose unavailability would cause production stoppages — the parts that must always be in stock, regardless of cost. Set minimum stock levels for each critical spare. WYNTIQ monitors these levels continuously and auto-generates procurement requests when stock drops below the minimum. The result is that the parts which matter most are always available. Never again run out of a part whose absence stops your entire production line.</div></div>
+    <div class="card"><div class="card-icon">👷</div><div class="card-title">Work Order Management</div><div class="card-text">Every maintenance job — planned or unplanned — managed as a formal work order in WYNTIQ. The work order specifies what needs to be done, which machine, which personnel are assigned, what parts and materials are required, the target start and completion time, and the safety precautions required. When the job is done, the technician records what was actually done, what was found, what was replaced, and the actual time taken. This creates the maintenance history record and updates the parts inventory automatically.</div></div>
+    <div class="card"><div class="card-icon">📊</div><div class="card-title">OEE and Availability Analytics</div><div class="card-text">Overall Equipment Effectiveness (OEE) is the gold standard metric for manufacturing equipment performance — combining availability, performance, and quality. WYNTIQ feeds the availability component of OEE automatically — tracking planned downtime, unplanned downtime, and the reasons for each stoppage. Management can see which machines are dragging down OEE, what the reasons are, and what actions would have the most impact on improvement. Data-driven decisions rather than instinctive ones.</div></div>
+    <div class="card"><div class="card-icon">🚨</div><div class="card-title">Breakdown Emergency Response</div><div class="card-text">When a machine breaks down unexpectedly, WYNTIQ immediately provides the information the maintenance team needs — what spare parts are available for this machine, where they are located in stores, who is the authorised person to issue them, and who is the responsible maintenance engineer. The response to a breakdown becomes organised and fast rather than chaotic and slow. In WYNTIQ-enabled plants, the average time from breakdown report to maintenance team arrival with the correct parts has been reduced significantly compared to systems relying on phone calls and manual store searches.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">Accountability and Compliance</div>
+  <h2 class="section-title">Every Transaction Traceable. Every Approval Documented.</h2>
+  <p class="lead">Factory maintenance involves significant expenditure — spare parts, consumables, contract maintenance services, and capital items for replacement or upgrade. This expenditure must be properly authorised, properly accounted for, and properly documented for both internal audit purposes and for statutory compliance. WYNTIQ provides the complete accountability framework that modern manufacturing governance requires.</p>
+  <p class="body-text">In WYNTIQ, every purchase order for spare parts requires authorisation from the appropriate person based on the value of the purchase. A small consumable purchase might be self-authorised by the stores incharge. A medium-value spare part purchase requires the Maintenance Manager's approval. A high-value capital item requires General Manager or Director level approval. These Delegation of Financial Authority levels are configured in WYNTIQ at the time of implementation and enforced automatically — no purchase order can be generated beyond the authorised limits of the person approving it.</p>
+  <p class="body-text">Every maintenance transaction is also linked to the appropriate cost centre — enabling accurate allocation of maintenance costs to the production lines or departments they relate to. This cost centre allocation is essential for accurate product costing, for performance measurement of individual production units, and for management decisions about maintenance investment levels. Currently, most Indian factories have only a rough idea of how much maintenance costs per production line — with WYNTIQ, this information is available precisely and in real time.</p>
+  <p class="body-text">For ISO 9001 quality management certification, ISO 14001 environmental management certification, and other management system certifications that require documented maintenance records and calibration records — WYNTIQ provides the complete, auditable documentation that certification auditors require. Generating the maintenance records required for an ISO certification audit currently takes days of document preparation. With WYNTIQ, the records are always current, always complete, and available for auditor inspection in minutes.</p>
+
+  <div class="navy-box">
+    <div class="nb-title">Why Indian Factories Are Under-Investing in Maintenance Management</div>
+    <div class="nb-text">Many Indian factory owners and managers know that their maintenance management is inadequate — that they are losing money to avoidable downtime and inefficient spare parts management. But they also feel that the solutions they have seen are either too expensive, too complex to implement, or too dependent on infrastructure they do not have. Enterprise Resource Planning systems from global vendors like SAP or Oracle cost crores to implement and require months of disruption during implementation. They are designed for large multinationals with dedicated IT departments, not for Indian SME manufacturers with lean management teams. WYNTIQ is different — it is designed for Indian conditions, deploys quickly, requires minimal IT infrastructure, and is priced to be accessible to the mid-market Indian manufacturer. It is not SAP. It is something that Indian manufacturers actually need and can actually use — a focused, effective tool for maintenance management and spare parts control that starts delivering value from day one.</div>
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2 class="cta-title">Eliminate Unplanned Downtime. Permanently.</h2>
+  <p class="cta-sub">Request a factory and plant operations demonstration. We will show you how predictive maintenance scheduling, critical spares management, and real-time accountability can transform your plant performance.</p>
+  <a class="btn-gold" href="index.html#demo">Request Factory Demo →</a>
+</div>
+<footer>
+  <div class="footer-text">© 2026 TwinStance Solutions LLP · LLPIN: AAQ-0042 · <a href="index.html">Home</a> · <a href="mailto:contact@tssolutionsllp.com">Contact</a></div>
+</footer>
+</body>
+</html>

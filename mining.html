@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WYNTIQ for Mining Operations | TwinStance Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy2:#0f2040;--navy3:#162850;--navy4:#1e3a6e;--gold:#c9a84c;--gold2:#e8c56d;--gold-light:#fdf6e3;--white:#ffffff;--off-white:#f8f9fc;--light:#eef1f7;--text:#1a2744;--text2:#4a5568;--text3:#8898aa;--border:#dde3ef;--green:#38a169;--red:#e53e3e;--shadow:0 2px 8px rgba(10,22,40,0.08);--shadow-md:0 8px 24px rgba(10,22,40,0.12);--r:8px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text);}
+.topbar{background:var(--navy);padding:8px 60px;display:flex;justify-content:space-between;}
+.topbar-text{font-size:11px;color:rgba(255,255,255,0.5);}
+.topbar-text span{color:var(--gold);}
+.topbar-links{display:flex;gap:16px;}
+.topbar-links a{font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;}
+nav{background:var(--white);padding:0 60px;height:68px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow);position:sticky;top:0;z-index:1000;border-bottom:3px solid var(--gold);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--navy),var(--navy4));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;color:var(--gold);}
+.nav-logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:21px;color:var(--navy);}
+.nav-logo-sub{font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:-2px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{padding:6px 14px;font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;border-radius:6px;}
+.nav-link:hover{background:var(--light);}
+.nav-btn{padding:10px 22px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;text-decoration:none;}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2) 50%,var(--navy3));padding:90px 60px 70px;position:relative;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));}
+.breadcrumb{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:20px;}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+.hero-badge{display:inline-flex;padding:6px 14px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:20px;margin-bottom:20px;}
+.hero-badge span{font-size:11px;font-weight:600;color:var(--gold2);letter-spacing:1px;text-transform:uppercase;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,62px);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:20px;}
+.hero-title .gold{color:var(--gold2);}
+.hero-sub{font-size:17px;color:rgba(255,255,255,0.65);line-height:1.8;max-width:720px;margin-bottom:32px;}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;}
+.hs-val{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--gold2);}
+.hs-lbl{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
+.section{padding:70px 60px;}
+.section-alt{background:var(--off-white);}
+.section-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.section-tag::before{content:'';width:24px;height:2px;background:var(--gold);}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:18px;}
+.lead{font-size:17px;color:var(--text2);line-height:1.85;margin-bottom:20px;}
+.body-text{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:16px;}
+.highlight-box{background:var(--gold-light);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:22px 28px;margin:24px 0;}
+.hb-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--navy);margin-bottom:8px;}
+.hb-text{font-size:14px;color:var(--text2);line-height:1.8;}
+.navy-box{background:var(--navy);border-radius:10px;padding:28px;margin:24px 0;}
+.nb-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--gold2);margin-bottom:12px;}
+.nb-text{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.8;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:26px;transition:all 0.3s;}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);border-color:var(--gold);}
+.card-icon{font-size:30px;margin-bottom:14px;}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.card-text{font-size:13px;color:var(--text2);line-height:1.75;}
+.cost-box{background:linear-gradient(135deg,#7f1d1d,#991b1b);border-radius:10px;padding:28px;margin:24px 0;text-align:center;}
+.cost-val{font-family:'Barlow Condensed',sans-serif;font-size:60px;font-weight:800;color:#fca5a5;line-height:1;}
+.cost-lbl{font-size:14px;color:rgba(255,255,255,0.7);margin-top:8px;}
+.cta-band{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:60px;text-align:center;}
+.cta-title{font-family:'Playfair Display',serif;font-size:36px;color:var(--white);margin-bottom:12px;}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:28px;}
+.btn-gold{padding:14px 36px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:700;font-size:14px;border:none;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block;}
+footer{background:var(--navy);padding:30px 60px;text-align:center;}
+.footer-text{font-size:12px;color:rgba(255,255,255,0.3);}
+.footer-text a{color:var(--gold);text-decoration:none;}
+@media(max-width:900px){.topbar{display:none;}.hero,.section,.cta-band{padding:60px 20px;}nav{padding:0 20px;}.grid-2,.grid-3,.hero-stats{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-text">A product of <span>TwinStance Solutions LLP</span> · LLPIN: AAQ-0042 · Est. July 2019 · Cuttack, Odisha</div>
+  <div class="topbar-links"><a href="index.html">Home</a><a href="mailto:contact@tssolutionsllp.com">Contact</a></div>
+</div>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">W</div>
+    <div><div class="nav-logo-text">WYNTIQ</div><div class="nav-logo-sub">by TwinStance Solutions</div></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="iaf.html">IAF</a>
+    <a class="nav-link" href="army.html">Army</a>
+    <a class="nav-link" href="navy.html">Navy</a>
+    <a class="nav-link" href="mining.html">Mining</a>
+    <a class="nav-link" href="auto.html">Auto</a>
+    <a class="nav-link" href="factory.html">Factory</a>
+  </div>
+  <a class="nav-btn" href="app/index.html">Sign In →</a>
+</nav>
+
+<div class="hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Industries</span><span>/</span><span>Mining</span></div>
+  <div class="hero-badge"><span>⛏️ Mining Grade · Remote Site Ready · Predictive Maintenance</span></div>
+  <h1 class="hero-title">WYNTIQ for<br><span class="gold">Mining Operations</span></h1>
+  <p class="hero-sub">Remote mining sites share the same logistics challenge as military forward bases — no internet, critical equipment, massive cost of every hour of downtime. WYNTIQ brings defence-grade logistics intelligence to India's mining sector — predictive maintenance, offline operation, and real-time visibility across all sites.</p>
+  <div class="hero-stats">
+    <div><div class="hs-val">₹10L+</div><div class="hs-lbl">Cost Per Downtime Hour</div></div>
+    <div><div class="hs-val">24/7</div><div class="hs-lbl">Operations</div></div>
+    <div><div class="hs-val">100%</div><div class="hs-lbl">Offline Capable</div></div>
+    <div><div class="hs-val">60%</div><div class="hs-lbl">Downtime Reduction</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">The Challenge</div>
+  <h2 class="section-title">Every Hour of Downtime Is a Financial Emergency</h2>
+  <p class="lead">India is a mining powerhouse — the world's second-largest producer of coal, a leading producer of iron ore, bauxite, manganese, mica, and chromite. The mining sector contributes significantly to India's industrial output and is a critical input to steel, cement, power, and aluminium industries that drive the broader economy. But behind this output is an industry that has long struggled with logistics — specifically with spare parts management for the heavy equipment that is the lifeblood of any mining operation.</p>
+  <p class="body-text">A Caterpillar 797F haul truck — the largest mining truck in the world, used in Indian coal and iron ore mines — costs approximately ₹25 crore. When this truck breaks down, every hour it sits unrepaired represents a direct financial loss. At a large coal mine producing 10 million tonnes per year, a single haul truck contributes approximately ₹8-12 lakh of production value per day. A one-week breakdown due to a missing spare part represents a loss of ₹56-84 lakhs from that single truck. When multiple trucks are affected simultaneously — which happens when spare parts run out — the losses are multiplied.</p>
+  <p class="body-text">The tragedy of most mining equipment downtime in India is that it is avoidable. In the majority of cases, the maintenance team knew the component was wearing out. They raised a demand for the replacement part. But the demand went through an approval process that took days. Then procurement took weeks. Then the part arrived, was received into stores, and finally reached the maintenance workshop — by which time the component had already failed catastrophically, potentially causing additional damage and extending the repair time beyond what would have been necessary with a timely replacement.</p>
+  <p class="body-text">Remote location compounds every problem. Most significant mining operations in India — coal mines in Jharkhand and Chhattisgarh, iron ore mines in Odisha, bauxite mines in Odisha and Andhra Pradesh — are located far from major commercial centres. Internet connectivity may be poor or intermittent. The supply chain for specialised mining equipment parts may involve importation from equipment OEMs overseas, with lead times of 4-12 weeks. In this environment, the difference between a mine that runs profitably and one that doesn't often comes down to how well spare parts are managed.</p>
+
+  <div class="highlight-box">
+    <div class="hb-title">The Hidden Cost of Reactive Maintenance</div>
+    <div class="hb-text">Most Indian mines run on reactive maintenance — they fix equipment after it breaks down. This approach has several hidden costs beyond the direct downtime cost. When equipment fails catastrophically rather than being retired from service in a controlled way, the failure often causes secondary damage — a seized bearing that should have been replaced damages the shaft it runs on, turning a ₹50,000 replacement into a ₹5,00,000 repair. Emergency procurement of parts is more expensive than planned procurement — premium shipping costs, express freight charges, and the inability to negotiate volume discounts add 20-40% to part costs. And emergency maintenance consumes skilled maintenance labour at premium rates, while planned maintenance can be scheduled to optimise labour utilisation. WYNTIQ eliminates reactive maintenance by making predictive maintenance operationally achievable.</div>
+  </div>
+
+  <p class="body-text">WYNTIQ was originally developed for defence applications — specifically for military forward bases that face exactly the same challenges as remote mining sites. No internet connectivity. Critical equipment that cannot be allowed to fail. Accountability requirements for every transaction. The technology that allows an IAF technician to manage aircraft spare parts at a forward operating location in Ladakh works equally well for a maintenance engineer managing heavy equipment parts at a coal mine in Jharkhand. The platform is the same. The problems it solves are the same. Only the equipment type and the personnel involved are different.</p>
+</div>
+
+<div class="section section-alt">
+  <div class="section-tag">How WYNTIQ Transforms Mining Maintenance</div>
+  <h2 class="section-title">From Reactive Breakdown to Predictive Excellence</h2>
+  <p class="lead">WYNTIQ changes the fundamental approach to maintenance management in mining operations — from reacting to breakdowns after they happen to anticipating them before they occur, and from scrambling to find parts after a machine fails to having the right parts available before the maintenance window.</p>
+  <p class="body-text">The transformation begins with complete equipment visibility. Every piece of major equipment at every mine site is registered in WYNTIQ — from the massive haul trucks and loading excavators to the conveyor belts, crushing plants, and draglines that move ore through the processing chain. Each equipment item has a digital identity in the system — its make, model, serial number, purchase date, and the complete maintenance history from the date it was registered.</p>
+  <p class="body-text">Against each equipment item, WYNTIQ maintains a maintenance schedule based on manufacturer recommendations and the operation's experience. For a diesel engine that requires oil change every 500 operating hours, WYNTIQ tracks the operating hours and generates an alert when the service is due — not when it is overdue. The alert is sent to the Maintenance Supervisor, the Mine Manager, and the Stores Incharge simultaneously. The Stores Incharge checks whether the required consumables and filter elements are in stock. If they are not, a procurement request is automatically generated and sent for approval. The goal is that when the service is due, the materials are already in stock — not that when the materials are ordered, the service is already overdue.</p>
+  <p class="body-text">For wear parts — bucket teeth on excavators, conveyor belt sections, drill bits on drilling rigs — WYNTIQ tracks consumption rates and generates reorder recommendations based on the current stock level and the average consumption rate. When stock drops below the reorder point, a procurement request is generated automatically. The mine does not run out of bucket teeth because someone forgot to check the stores. The system checks the stores continuously and acts automatically when action is required.</p>
+
+  <div class="navy-box">
+    <div class="nb-title">The Power of Cross-Site Visibility</div>
+    <div class="nb-text">For mining companies operating multiple sites across a coalfield or mineral belt, WYNTIQ provides something that is currently almost impossible — real-time visibility of spare parts holdings across all sites simultaneously. When a haul truck at Site A breaks down and needs a specific hydraulic pump, the maintenance manager at Site A does not need to call every other site to ask if they have one in stock. He opens WYNTIQ and immediately sees that Site C, 45 kilometres away, has two units of the required pump. He raises a lateral transfer request, which is approved in minutes, and the pump is on its way in a vehicle within the hour. The total downtime is measured in hours rather than the days or weeks it would take to procure from the OEM. This cross-site visibility is one of the highest-value features of WYNTIQ for multi-site mining operations.</div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card"><div class="card-icon">⛏️</div><div class="card-title">Predictive Maintenance Alerts</div><div class="card-text">AI-driven alerts before equipment fails — based on operating hours, historical failure patterns, and manufacturer maintenance intervals. Parts ordered automatically before the maintenance date. Engineers scheduled in advance. Zero unplanned downtime from predictable component failures. The system knows your equipment's maintenance needs better than any spreadsheet could.</div></div>
+    <div class="card"><div class="card-icon">🏔️</div><div class="card-title">Remote Site Offline Operation</div><div class="card-text">No internet at your mine? WYNTIQ works fully offline on tablets and smartphones. All inventory data, maintenance records, and pending demands stored locally. Syncs automatically when connectivity is available — 2G, 4G, WiFi, or satellite link. No data loss. No forced interruption to maintenance management. Identical functionality whether connected or disconnected.</div></div>
+    <div class="card"><div class="card-icon">📦</div><div class="card-title">Multi-Site Inventory Control</div><div class="card-text">See real-time stock levels across all mine sites from one dashboard. Know exactly what is at Site A, B, and C without calling anyone. Identify surplus at one site and shortage at another. Initiate inter-site transfers with full tracking and chain of custody. Reduce total system inventory while improving availability through better visibility and sharing.</div></div>
+    <div class="card"><div class="card-icon">💰</div><div class="card-title">Downtime Cost Tracking</div><div class="card-text">WYNTIQ tracks the actual cost of every equipment breakdown — downtime hours multiplied by the cost per hour for that equipment type. This makes the ROI of preventive maintenance visible and compelling. When the Mine Manager can see that reactive maintenance on a single haul truck cost ₹45 lakhs in downtime last quarter versus ₹8 lakhs for planned maintenance of the same truck, the business case for investment in better maintenance management is undeniable.</div></div>
+    <div class="card"><div class="card-icon">🔧</div><div class="card-title">Work Order Management</div><div class="card-text">Every maintenance job tracked as a work order — what needs to be done, which equipment, which mechanic assigned, what parts required, time started, time completed. Complete maintenance history for every piece of equipment. When an equipment item is sold or transferred, its complete maintenance history goes with it — adding genuine value and transparency to the transaction.</div></div>
+    <div class="card"><div class="card-icon">📊</div><div class="card-title">Management Reporting</div><div class="card-text">Automatic generation of maintenance performance reports — equipment availability percentage, mean time between failures, mean time to repair, spare parts consumption, maintenance cost per tonne of ore produced. These reports give Mine Managers and company leadership the information needed to make evidence-based decisions about equipment replacement, maintenance strategy, and spare parts investment levels.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">Accountability and Compliance</div>
+  <h2 class="section-title">Complete Accountability for Every Transaction</h2>
+  <p class="lead">Mining operations are subject to regulatory oversight from multiple agencies — the Directorate General of Mines Safety (DGMS), environmental regulators, and company internal audit. Maintenance records are a critical part of regulatory compliance — demonstrating that equipment has been maintained to required standards and that safety-critical maintenance has been carried out on schedule.</p>
+  <p class="body-text">WYNTIQ provides the complete, permanent maintenance record that regulatory compliance requires. Every maintenance task is logged — what was done, by whom, when, against which work order, using which parts. This record cannot be altered after the fact and is immediately available for inspection. When a DGMS inspector visits and requests maintenance records for a specific piece of equipment over the past 12 months, those records can be retrieved and printed in under a minute — compared to the hours or days currently required to assemble the same information from physical registers and worksheets.</p>
+  <p class="body-text">For internal audit and company governance, WYNTIQ provides complete visibility of all stores transactions. Every spare part received, issued, transferred, or returned is logged against a specific work order and authorised by a specific individual. The stores balance at any point in time can be verified against the transaction log. Discrepancies are immediately visible and traceable to specific transactions. The days when a physical stores audit might reveal significant unexplained discrepancies are over — with WYNTIQ, the system continuously maintains an accurate record that any competent person can verify at any time.</p>
+</div>
+
+<div class="cta-band">
+  <h2 class="cta-title">Stop Losing Money to Avoidable Downtime</h2>
+  <p class="cta-sub">Request a mining sector demonstration of WYNTIQ. We will show you how predictive maintenance intelligence, multi-site visibility, and real-time accountability can transform your operations.</p>
+  <a class="btn-gold" href="index.html#demo">Request Mining Demo →</a>
+</div>
+<footer>
+  <div class="footer-text">© 2026 TwinStance Solutions LLP · LLPIN: AAQ-0042 · <a href="index.html">Home</a> · <a href="mailto:contact@tssolutionsllp.com">Contact</a></div>
+</footer>
+</body>
+</html>

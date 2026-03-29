@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WYNTIQ for Auto Manufacturing | TwinStance Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy2:#0f2040;--navy3:#162850;--navy4:#1e3a6e;--gold:#c9a84c;--gold2:#e8c56d;--gold-light:#fdf6e3;--white:#ffffff;--off-white:#f8f9fc;--light:#eef1f7;--text:#1a2744;--text2:#4a5568;--text3:#8898aa;--border:#dde3ef;--green:#38a169;--red:#e53e3e;--shadow:0 2px 8px rgba(10,22,40,0.08);--shadow-md:0 8px 24px rgba(10,22,40,0.12);--r:8px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text);}
+.topbar{background:var(--navy);padding:8px 60px;display:flex;justify-content:space-between;}
+.topbar-text{font-size:11px;color:rgba(255,255,255,0.5);}
+.topbar-text span{color:var(--gold);}
+.topbar-links{display:flex;gap:16px;}
+.topbar-links a{font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;}
+nav{background:var(--white);padding:0 60px;height:68px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow);position:sticky;top:0;z-index:1000;border-bottom:3px solid var(--gold);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--navy),var(--navy4));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;color:var(--gold);}
+.nav-logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:21px;color:var(--navy);}
+.nav-logo-sub{font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:-2px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{padding:6px 14px;font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;border-radius:6px;}
+.nav-link:hover{background:var(--light);}
+.nav-btn{padding:10px 22px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;text-decoration:none;}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2) 50%,var(--navy3));padding:90px 60px 70px;position:relative;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));}
+.breadcrumb{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:20px;}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+.hero-badge{display:inline-flex;padding:6px 14px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:20px;margin-bottom:20px;}
+.hero-badge span{font-size:11px;font-weight:600;color:var(--gold2);letter-spacing:1px;text-transform:uppercase;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,62px);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:20px;}
+.hero-title .gold{color:var(--gold2);}
+.hero-sub{font-size:17px;color:rgba(255,255,255,0.65);line-height:1.8;max-width:720px;margin-bottom:32px;}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;}
+.hs-val{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--gold2);}
+.hs-lbl{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
+.section{padding:70px 60px;}
+.section-alt{background:var(--off-white);}
+.section-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.section-tag::before{content:'';width:24px;height:2px;background:var(--gold);}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:18px;}
+.lead{font-size:17px;color:var(--text2);line-height:1.85;margin-bottom:20px;}
+.body-text{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:16px;}
+.highlight-box{background:var(--gold-light);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:22px 28px;margin:24px 0;}
+.hb-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--navy);margin-bottom:8px;}
+.hb-text{font-size:14px;color:var(--text2);line-height:1.8;}
+.navy-box{background:var(--navy);border-radius:10px;padding:28px;margin:24px 0;}
+.nb-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--gold2);margin-bottom:12px;}
+.nb-text{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.8;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:26px;transition:all 0.3s;}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);border-color:var(--gold);}
+.card-icon{font-size:30px;margin-bottom:14px;}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.card-text{font-size:13px;color:var(--text2);line-height:1.75;}
+.cta-band{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:60px;text-align:center;}
+.cta-title{font-family:'Playfair Display',serif;font-size:36px;color:var(--white);margin-bottom:12px;}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:28px;}
+.btn-gold{padding:14px 36px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:700;font-size:14px;border:none;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block;}
+footer{background:var(--navy);padding:30px 60px;text-align:center;}
+.footer-text{font-size:12px;color:rgba(255,255,255,0.3);}
+.footer-text a{color:var(--gold);text-decoration:none;}
+@media(max-width:900px){.topbar{display:none;}.hero,.section,.cta-band{padding:60px 20px;}nav{padding:0 20px;}.grid-2,.grid-3,.hero-stats{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-text">A product of <span>TwinStance Solutions LLP</span> · LLPIN: AAQ-0042 · Est. July 2019 · Cuttack, Odisha</div>
+  <div class="topbar-links"><a href="index.html">Home</a><a href="mailto:contact@tssolutionsllp.com">Contact</a></div>
+</div>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">W</div>
+    <div><div class="nav-logo-text">WYNTIQ</div><div class="nav-logo-sub">by TwinStance Solutions</div></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="iaf.html">IAF</a>
+    <a class="nav-link" href="army.html">Army</a>
+    <a class="nav-link" href="navy.html">Navy</a>
+    <a class="nav-link" href="mining.html">Mining</a>
+    <a class="nav-link" href="auto.html">Auto</a>
+    <a class="nav-link" href="factory.html">Factory</a>
+  </div>
+  <a class="nav-btn" href="app/index.html">Sign In →</a>
+</nav>
+
+<div class="hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Industries</span><span>/</span><span>Auto Manufacturing</span></div>
+  <div class="hero-badge"><span>🚗 Auto Grade · Assembly Line Intelligence · Vendor Management</span></div>
+  <h1 class="hero-title">WYNTIQ for<br><span class="gold">Auto & Bike Manufacturing</span></h1>
+  <p class="hero-sub">Assembly line logistics intelligence for India's automobile and two-wheeler manufacturers — real-time parts tracking, automated vendor management, multi-plant visibility, and production floor supply chain control. Built for the speed and precision that modern automotive manufacturing demands.</p>
+  <div class="hero-stats">
+    <div><div class="hs-val">26M</div><div class="hs-lbl">Vehicles Made Yearly</div></div>
+    <div><div class="hs-val">₹1Cr+</div><div class="hs-lbl">Downtime Cost Per Hour</div></div>
+    <div><div class="hs-val">90 Days</div><div class="hs-lbl">Demand Forecasting</div></div>
+    <div><div class="hs-val">0</div><div class="hs-lbl">Manual PO Writing</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">The Challenge</div>
+  <h2 class="section-title">India's Auto Sector Cannot Afford Supply Chain Failures</h2>
+  <p class="lead">India is the world's third-largest automobile market and the global leader in two-wheeler production. Companies like Tata Motors, Maruti Suzuki, Hyundai India, Hero MotoCorp, Bajaj Auto, Honda Motorcycles, TVS Motor Company, and Royal Enfield collectively produce tens of millions of vehicles every year from plants across the country. The common thread running through every one of these operations is dependency on an unbroken supply chain — components that must arrive at the right place, at the right time, in the right quantity, to keep assembly lines moving.</p>
+  <p class="body-text">Modern automobile assembly lines are engineered for continuous, high-volume production. The entire production system is designed around the assumption that parts will be available when needed. When a critical component is missing — when the inventory management system fails to trigger a reorder in time, when a vendor delivers late and the buffer stock has been drawn down, when a quality rejection creates an unexpected shortage — the assembly line stops. And when an assembly line stops, the financial consequences are severe and immediate.</p>
+  <p class="body-text">A compact car assembly plant producing 300,000 vehicles per year operates at roughly 1,200 vehicles per shift — approximately one vehicle every 45 seconds. At an average vehicle value of ₹8 lakhs, each hour of assembly line stoppage represents approximately ₹96 lakhs of lost production. Direct costs — idle labour, fixed overheads, missed deliveries — add further to this figure. A single day of assembly line stoppage due to a parts shortage can cost a mid-sized automotive plant ₹5-10 crore. This is why automotive companies invest heavily in supply chain management — and why those that do it better have a significant competitive advantage.</p>
+  <p class="body-text">The two-wheeler sector faces similar challenges at different scale. India produces approximately 21 million two-wheelers per year, making it the world's largest two-wheeler market by volume. Two-wheeler assembly lines are typically even faster than car lines — a large Hero MotoCorp plant can produce a motorcycle every 12-15 seconds. The parts management challenge is correspondingly intense — hundreds of different component types, thousands of vendors, multiple plants, and assembly schedules that change in response to market demand.</p>
+
+  <div class="highlight-box">
+    <div class="hb-title">Just-In-Time Requires Perfect Information</div>
+    <div class="hb-text">The Japanese automotive industry pioneered Just-In-Time (JIT) manufacturing — a system where parts arrive at the assembly line exactly when they are needed, minimising inventory holding costs and waste. JIT is now the global standard for automotive manufacturing. But JIT is not a simple system to implement — it requires absolute precision in information. The assembly line must know exactly what it needs and when. Vendors must know exactly what to deliver and when. Logistics must coordinate the movement of hundreds of component types from thousands of vendors to the right assembly station at the right moment. WYNTIQ provides the information backbone that makes JIT logistics achievable — real-time inventory visibility, automated reorder triggers, vendor performance tracking, and predictive demand forecasting that keeps the assembly line fed without overstocking.</div>
+  </div>
+</div>
+
+<div class="section section-alt">
+  <div class="section-tag">Platform Capabilities</div>
+  <h2 class="section-title">End-to-End Assembly Line Supply Chain Intelligence</h2>
+  <div class="grid-3">
+    <div class="card"><div class="card-icon">🏎️</div><div class="card-title">Assembly Line Parts Tracking</div><div class="card-text">Every component at every stage of the assembly line — tracked in real time. When a particular station is approaching the minimum stock level for a critical component, WYNTIQ generates an alert before the line stops. Supervisors can see which stations are at risk of stoppage based on current inventory and the projected assembly rate for the next four hours. This gives production management a 4-6 hour window to resolve shortages before they become stoppages.</div></div>
+    <div class="card"><div class="card-icon">🔩</div><div class="card-title">Automated Procurement Triggers</div><div class="card-text">When any stock item reaches its reorder point, WYNTIQ automatically generates a purchase order for the approved vendor — no manual intervention required. The purchase order includes the required quantity calculated based on the reorder quantity formula, the delivery address, the required delivery date based on the vendor's contracted lead time, and any special delivery instructions. The vendor receives the purchase order immediately and must acknowledge receipt. The entire procurement initiation process is zero-touch.</div></div>
+    <div class="card"><div class="card-icon">🏭</div><div class="card-title">Multi-Plant Visibility</div><div class="card-text">For automotive companies with multiple plants — perhaps a main assembly plant in Pune, a component manufacturing facility in Chennai, and a second assembly plant in Haryana — WYNTIQ provides real-time inventory visibility across all plants simultaneously. When one plant has a critical shortage and another has a surplus, an inter-plant transfer can be arranged in minutes. This level of coordination currently requires multiple phone calls and manual checks; WYNTIQ makes it a matter of seconds.</div></div>
+    <div class="card"><div class="card-icon">📊</div><div class="card-title">Vendor Performance Scorecards</div><div class="card-text">WYNTIQ tracks every vendor delivery — on-time delivery rate, quantity accuracy, quality rejection rate, and response time to purchase orders. These metrics are automatically calculated and presented as vendor scorecards. Procurement managers can see at a glance which vendors are performing well and which are creating supply chain risk. This data-driven vendor evaluation replaces subjective assessments and enables negotiation from a position of evidence rather than impression.</div></div>
+    <div class="card"><div class="card-icon">🔮</div><div class="card-title">90-Day Demand Forecasting</div><div class="card-text">Based on the confirmed production schedule and historical component consumption rates, WYNTIQ generates demand forecasts for every component for the next 30, 60, and 90 days. These forecasts are shared with vendors automatically, giving them advance notice of expected orders and allowing them to plan their own production schedules accordingly. When vendors can plan ahead, they deliver more reliably — which means the assembly line is fed more reliably.</div></div>
+    <div class="card"><div class="card-icon">⚡</div><div class="card-title">Instant Issue for Production</div><div class="card-text">When a production supervisor needs to issue components from stores to the assembly line, WYNTIQ makes the transaction instant — scan the component, confirm the quantity, select the work order or production order, and the transaction is complete. No paperwork. No manual register entry. The stores balance updates in real time. If the requested quantity would take the stock below the safety stock level, an automatic alert is generated for the materials planning team. Speed where speed matters, with intelligence built in.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">Quality and Accountability</div>
+  <h2 class="section-title">Complete Traceability for Every Component</h2>
+  <p class="lead">In automotive manufacturing, component traceability is not just a logistical convenience — it is a regulatory and safety requirement. When a recall is necessary, manufacturers must be able to identify exactly which vehicles were assembled using components from a particular batch, from a particular vendor, on a particular date. WYNTIQ's complete transaction audit trail provides the traceability backbone for this requirement.</p>
+  <p class="body-text">Every batch of components received from a vendor is recorded in WYNTIQ with the vendor name, purchase order number, delivery challan number, batch or lot number, quantity received, date of receipt, and the name of the stores staff who received and inspected the goods. When these components are issued for assembly, the issue transaction links to the same receipt record. When a vehicle is assembled using these components, the production record links to the issue transaction. The complete chain — from vendor delivery to vehicle assembly — is traceable in seconds.</p>
+  <p class="body-text">When a quality concern arises — whether from a customer complaint, an internal audit, or a regulatory notification — the materials management team can instantly identify which production batch used the components in question, which vehicles were produced in that batch, and where those vehicles were delivered. This traceability is the foundation of effective recall management. With WYNTIQ, what might currently take weeks of manual record searching can be done in minutes.</p>
+
+  <div class="navy-box">
+    <div class="nb-title">The Vendor Accountability Revolution</div>
+    <div class="nb-text">One of the most powerful outcomes of WYNTIQ deployment in automotive plants is the transformation of vendor relationships. When vendors know that every delivery is being tracked — on-time performance measured to the hour, quantity accuracy verified to the unit, quality rejection rates calculated and reported — they behave differently. They prioritise the deliveries where their performance is being measured and reported. They communicate proactively when they anticipate a delay. They invest in their own quality systems to reduce rejection rates. The discipline of measurement and transparency creates a culture of accountability throughout the supply chain that cannot be achieved through contracts and penalties alone. WYNTIQ makes the data that drives this accountability available automatically, without requiring anyone to manually compile delivery performance reports.</div>
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2 class="cta-title">Transform Your Assembly Line Supply Chain</h2>
+  <p class="cta-sub">Request a demonstration tailored for automotive manufacturing. We will walk through assembly line tracking, vendor management, and multi-plant visibility scenarios specific to your operation.</p>
+  <a class="btn-gold" href="index.html#demo">Request Auto Demo →</a>
+</div>
+<footer>
+  <div class="footer-text">© 2026 TwinStance Solutions LLP · LLPIN: AAQ-0042 · <a href="index.html">Home</a> · <a href="mailto:contact@tssolutionsllp.com">Contact</a></div>
+</footer>
+</body>
+</html>
