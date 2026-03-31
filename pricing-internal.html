@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WYNTIQ Pricing Calculator | Internal Use Only</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0a1628;--navy2:#0f2040;--navy3:#162850;--navy4:#1e3a6e;
+  --gold:#c9a84c;--gold2:#e8c56d;--gold3:#f5d98a;--gold-light:#fdf6e3;
+  --white:#ffffff;--off:#f4f6fb;--light:#eef1f7;
+  --text:#1a2744;--text2:#4a5568;--text3:#8898aa;
+  --border:#dde3ef;--border2:#c8d0e0;
+  --green:#276749;--green-bg:#f0fff4;--green-border:#9ae6b4;
+  --red:#c53030;--red-bg:#fff5f5;
+  --shadow:0 2px 8px rgba(10,22,40,0.08);
+  --shadow-md:0 8px 28px rgba(10,22,40,0.13);
+  --shadow-lg:0 20px 60px rgba(10,22,40,0.18);
+  --r:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--text);min-height:100vh;}
+
+/* TOP CONFIDENTIAL BANNER */
+.confidential-bar{background:linear-gradient(90deg,#7f1d1d,#991b1b);padding:10px 40px;display:flex;align-items:center;justify-content:space-between;}
+.conf-left{display:flex;align-items:center;gap:10px;font-size:12px;color:#fca5a5;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.conf-lock{font-size:16px;}
+.conf-right{font-size:11px;color:rgba(252,165,165,0.7);}
+
+/* NAV */
+.top-nav{background:var(--navy);padding:0 40px;height:62px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--gold);}
+.nav-brand{display:flex;align-items:center;gap:12px;}
+.nav-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--navy3),var(--navy4));border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;color:var(--gold);}
+.nav-name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;color:var(--white);letter-spacing:1px;}
+.nav-tag{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-badge{padding:5px 12px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:20px;font-size:11px;color:var(--gold2);font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.nav-home{font-size:12px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;}
+.nav-home:hover{color:var(--gold);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,var(--navy3) 100%);padding:56px 40px 48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);}
+.hero-inner{max-width:900px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);border-radius:20px;margin-bottom:18px;}
+.hero-eyebrow span{font-size:11px;font-weight:600;color:var(--gold2);letter-spacing:1.5px;text-transform:uppercase;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,50px);font-weight:800;color:var(--white);line-height:1.15;margin-bottom:14px;}
+.hero-title .gold{color:var(--gold2);}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.8;max-width:620px;}
+.hero-note{margin-top:20px;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;font-size:12px;color:rgba(255,255,255,0.5);}
+.hero-note strong{color:rgba(255,255,255,0.8);}
+
+/* LAYOUT */
+.main{max-width:1100px;margin:0 auto;padding:40px 40px 80px;}
+.calc-layout{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;}
+.calc-form{display:flex;flex-direction:column;gap:20px;}
+.calc-panel{position:sticky;top:24px;}
+
+/* SECTION CARDS */
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);}
+.fc-header{padding:18px 24px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;}
+.fc-num{width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.fc-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;color:var(--navy);letter-spacing:0.5px;}
+.fc-subtitle{font-size:11px;color:var(--text3);margin-top:1px;}
+.fc-body{padding:20px 24px;}
+
+/* FORM ELEMENTS */
+.field{margin-bottom:18px;}
+.field:last-child{margin-bottom:0;}
+.field-label{font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.field-hint{font-size:11px;color:var(--text3);font-weight:400;text-transform:none;letter-spacing:0;}
+.radio-grid{display:grid;gap:8px;}
+.radio-grid-2{grid-template-columns:1fr 1fr;}
+.radio-grid-3{grid-template-columns:1fr 1fr 1fr;}
+.radio-option{position:relative;}
+.radio-option input{position:absolute;opacity:0;width:0;height:0;}
+.radio-label{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s;background:var(--white);}
+.radio-label:hover{border-color:var(--gold);background:var(--gold-light);}
+.radio-option input:checked + .radio-label{border-color:var(--navy);background:var(--light);}
+.radio-name{font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px;}
+.radio-desc{font-size:11px;color:var(--text3);line-height:1.4;}
+.radio-price{font-size:11px;font-weight:700;color:var(--gold);margin-top:2px;font-family:'JetBrains Mono',monospace;}
+.slider-wrap{display:flex;flex-direction:column;gap:8px;}
+.slider-row{display:flex;align-items:center;gap:14px;}
+.slider{-webkit-appearance:none;appearance:none;flex:1;height:5px;border-radius:3px;background:var(--border2);outline:none;cursor:pointer;}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--navy);border:3px solid var(--gold);cursor:pointer;transition:all 0.2s;}
+.slider::-webkit-slider-thumb:hover{transform:scale(1.2);}
+.slider-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--navy);min-width:36px;text-align:right;}
+.slider-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.module-item{position:relative;}
+.module-item input{position:absolute;opacity:0;width:0;height:0;}
+.module-label{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s;}
+.module-label:hover{border-color:var(--gold);background:var(--gold-light);}
+.module-item input:checked + .module-label{border-color:var(--green);background:var(--green-bg);}
+.module-check{width:18px;height:18px;border-radius:4px;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all 0.2s;font-size:10px;}
+.module-item input:checked + .module-label .module-check{background:var(--green);border-color:var(--green);color:white;}
+.module-info{}
+.module-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.module-desc{font-size:10px;color:var(--text3);line-height:1.4;}
+.module-cost{font-size:10px;font-weight:700;color:var(--gold);font-family:'JetBrains Mono',monospace;margin-top:3px;}
+.support-options{display:flex;flex-direction:column;gap:8px;}
+.support-option{position:relative;}
+.support-option input{position:absolute;opacity:0;width:0;height:0;}
+.support-label{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s;}
+.support-label:hover{border-color:var(--gold);}
+.support-option input:checked + .support-label{border-color:var(--navy);background:var(--light);}
+.support-left{display:flex;flex-direction:column;gap:2px;}
+.support-name{font-size:13px;font-weight:700;color:var(--text);}
+.support-desc{font-size:11px;color:var(--text3);}
+.support-right{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--gold);}
+.duration-tabs{display:flex;gap:8px;}
+.dur-option{position:relative;flex:1;}
+.dur-option input{position:absolute;opacity:0;width:0;height:0;}
+.dur-label{display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s;text-align:center;}
+.dur-label:hover{border-color:var(--gold);}
+.dur-option input:checked + .dur-label{border-color:var(--navy);background:var(--navy);color:var(--white);}
+.dur-name{font-size:13px;font-weight:700;}
+.dur-discount{font-size:10px;font-weight:700;color:var(--green);background:var(--green-bg);padding:2px 6px;border-radius:4px;}
+.dur-option input:checked + .dur-label .dur-discount{background:rgba(72,187,120,0.2);color:#68d391;}
+
+/* RESULTS PANEL */
+.result-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-md);overflow:hidden;}
+.rc-header{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:20px 22px;}
+.rc-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;color:var(--gold2);letter-spacing:0.5px;margin-bottom:4px;}
+.rc-sub{font-size:11px;color:rgba(255,255,255,0.45);}
+.rc-body{padding:20px 22px;}
+.estimate-display{text-align:center;padding:20px 0 16px;border-bottom:1px solid var(--border);}
+.est-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:8px;}
+.est-range{font-family:'Playfair Display',serif;font-size:32px;font-weight:800;color:var(--navy);line-height:1.1;}
+.est-period{font-size:12px;color:var(--text3);margin-top:4px;}
+.est-note{font-size:10px;color:var(--text3);margin-top:8px;padding:6px 10px;background:var(--gold-light);border-radius:5px;text-align:left;}
+.breakdown{padding:16px 0;}
+.breakdown-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:12px;}
+.breakdown-row{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--light);}
+.breakdown-row:last-child{border-bottom:none;}
+.br-name{font-size:12px;color:var(--text2);flex:1;}
+.br-detail{font-size:10px;color:var(--text3);margin-top:2px;}
+.br-amount{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--navy);white-space:nowrap;margin-left:8px;}
+.br-amount.zero{color:var(--text3);}
+.total-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0 0;margin-top:4px;border-top:2px solid var(--navy);}
+.tr-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;color:var(--navy);}
+.tr-amount{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--navy);}
+.disclaimer{padding:12px;background:var(--off);border-radius:7px;margin-top:14px;}
+.disc-text{font-size:10px;color:var(--text3);line-height:1.6;}
+.disc-text strong{color:var(--text2);}
+.quote-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:800;font-size:14px;border:none;border-radius:7px;cursor:pointer;margin-top:14px;letter-spacing:0.5px;transition:all 0.2s;font-family:'Inter',sans-serif;}
+.quote-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,0.4);}
+.copy-btn{width:100%;padding:11px;background:transparent;color:var(--text2);font-weight:600;font-size:13px;border:1px solid var(--border2);border-radius:7px;cursor:pointer;margin-top:8px;transition:all 0.2s;font-family:'Inter',sans-serif;}
+.copy-btn:hover{background:var(--light);}
+.savings-badge{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:7px;margin-top:12px;}
+.sb-icon{font-size:18px;}
+.sb-text{font-size:12px;color:var(--green);font-weight:600;}
+.config-summary{margin-top:14px;}
+.cs-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px;}
+.cs-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.cs-tag{font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;background:var(--light);color:var(--text2);}
+
+/* QUOTE MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,22,40,0.7);z-index:9999;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:12px;width:100%;max-width:520px;margin:20px;overflow:hidden;box-shadow:var(--shadow-lg);}
+.modal-header{background:linear-gradient(135deg,var(--navy),var(--navy2));padding:24px 28px;display:flex;justify-content:space-between;align-items:center;}
+.modal-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--white);}
+.modal-close{background:none;border:none;color:rgba(255,255,255,0.5);font-size:22px;cursor:pointer;padding:4px;}
+.modal-body{padding:24px 28px;}
+.modal-context{background:var(--off);border-radius:8px;padding:14px;margin-bottom:20px;font-size:12px;color:var(--text2);line-height:1.7;}
+.modal-context strong{color:var(--navy);display:block;margin-bottom:4px;}
+.mf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.mf-field{display:flex;flex-direction:column;gap:5px;}
+.mf-field.full{grid-column:span 2;}
+.mf-label{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.8px;}
+.mf-input{padding:10px 12px;border:1px solid var(--border2);border-radius:6px;font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;color:var(--text);}
+.mf-input:focus{border-color:var(--gold);}
+.mf-select{padding:10px 12px;border:1px solid var(--border2);border-radius:6px;font-size:13px;font-family:'Inter',sans-serif;outline:none;background:var(--white);color:var(--text);}
+.modal-submit{width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:800;font-size:14px;border:none;border-radius:7px;cursor:pointer;margin-top:4px;}
+.modal-success{display:none;text-align:center;padding:32px;}
+.ms-icon{font-size:52px;margin-bottom:14px;}
+.ms-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px;}
+.ms-sub{font-size:14px;color:var(--text2);line-height:1.7;}
+
+/* PRICING LOGIC INFO */
+.logic-card{background:var(--navy);border-radius:var(--r);padding:22px 24px;margin-top:20px;}
+.lc-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;color:var(--gold2);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.lc-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.lc-row:last-child{border-bottom:none;}
+.lc-item{font-size:12px;color:rgba(255,255,255,0.6);}
+.lc-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold2);font-weight:600;}
+
+@media(max-width:900px){
+  .calc-layout{grid-template-columns:1fr;}
+  .calc-panel{position:static;}
+  .main{padding:24px 16px 60px;}
+  .confidential-bar,.hero{padding-left:16px;padding-right:16px;}
+  .top-nav{padding:0 16px;}
+  .radio-grid-3,.radio-grid-2,.module-grid{grid-template-columns:1fr 1fr;}
+  .mf-row{grid-template-columns:1fr;}
+  .mf-field.full{grid-column:span 1;}
+}
+</style>
+</head>
+<body>
+
+<!-- CONFIDENTIAL BANNER -->
+<div class="confidential-bar">
+  <div class="conf-left"><span class="conf-lock">🔒</span> INTERNAL USE ONLY — DO NOT SHARE THIS URL — WYNTIQ PRICING CALCULATOR</div>
+  <div class="conf-right">TwinStance Solutions LLP · LLPIN: AAQ-0042</div>
+</div>
+
+<!-- NAV -->
+<div class="top-nav">
+  <div class="nav-brand">
+    <div class="nav-icon">W</div>
+    <div>
+      <div class="nav-name">WYNTIQ</div>
+      <div class="nav-tag">Pricing Calculator · Internal</div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-badge">🔐 Confidential</div>
+    <a class="nav-home" href="index.html">← Back to Site</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span>Internal Pricing Tool · Not Public</span></div>
+    <h1 class="hero-title">WYNTIQ Pricing <span class="gold">Calculator</span></h1>
+    <p class="hero-sub">Configure your organisation's requirements and get an indicative price estimate. All estimates are for internal reference only — final pricing is sent by TwinStance Solutions after reviewing your specific requirements.</p>
+    <div class="hero-note"><strong>Note:</strong>&nbsp; This page is not linked from the public website. Do not share this URL. Estimates shown here are ranges — not binding quotes.</div>
+  </div>
+</div>
+
+<!-- MAIN CALCULATOR -->
+<div class="main">
+  <div class="calc-layout">
+
+    <!-- LEFT: FORM -->
+    <div class="calc-form">
+
+      <!-- STEP 1: SECTOR -->
+      <div class="form-card">
+        <div class="fc-header">
+          <div class="fc-num">1</div>
+          <div><div class="fc-title">Select Sector</div><div class="fc-subtitle">Defence or Enterprise — determines base platform pricing</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="radio-grid radio-grid-2">
+            <div class="radio-option">
+              <input type="radio" name="sector" id="s-defence" value="defence" checked onchange="calc()">
+              <label class="radio-label" for="s-defence">
+                <span class="radio-name">🛡️ Defence</span>
+                <span class="radio-desc">IAF, Army, Navy — classified deployment, air-gap support, defence-grade security</span>
+                <span class="radio-price">Base: ₹3,00,000/yr</span>
+              </label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="sector" id="s-enterprise" value="enterprise" onchange="calc()">
+              <label class="radio-label" for="s-enterprise">
+                <span class="radio-name">🏭 Enterprise</span>
+                <span class="radio-desc">Mining, Auto, Factory, E-Commerce — standard deployment</span>
+                <span class="radio-price">Base: ₹1,80,000/yr</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: DEPLOYMENT -->
+      <div class="form-card">
+        <div class="fc-header">
+          <div class="fc-num">2</div>
+          <div><div class="fc-title">Deployment Type</div><div class="fc-subtitle">Where and how WYNTIQ will be hosted</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="radio-grid radio-grid-3">
+            <div class="radio-option">
+              <input type="radio" name="deploy" id="d-cloud" value="cloud" checked onchange="calc()">
+              <label class="radio-label" for="d-cloud">
+                <span class="radio-name">☁️ Cloud</span>
+                <span class="radio-desc">Hosted on WYNTIQ servers. Easy setup, automatic updates.</span>
+                <span class="radio-price">Included</span>
+              </label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="deploy" id="d-onprem" value="onprem" onchange="calc()">
+              <label class="radio-label" for="d-onprem">
+                <span class="radio-name">🖥️ On-Premise</span>
+                <span class="radio-desc">Installed on your own servers. Full data control.</span>
+                <span class="radio-price">+₹80,000/yr</span>
+              </label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="deploy" id="d-airgap" value="airgap" onchange="calc()">
+              <label class="radio-label" for="d-airgap">
+                <span class="radio-name">🔒 Air-Gapped</span>
+                <span class="radio-desc">Fully isolated network. No internet required. Defence only.</span>
+                <span class="radio-price">+₹1,80,000/yr</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: USERS -->
+      <div class="form-card">
+        <div class="fc-header">
+          <div class="fc-num">3</div>
+          <div><div class="fc-title">Number of Users</div><div class="fc-subtitle">Total named users who will access WYNTIQ across all roles</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="field">
+            <div class="field-label">Named Users <span class="field-hint">— Technicians, Officers, Logistics, Accounts, Vendors, Admins</span></div>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" class="slider" id="users" min="5" max="500" value="25" step="5" oninput="updateSlider('users','usersVal');calc()">
+                <div class="slider-val" id="usersVal">25</div>
+              </div>
+              <div class="slider-labels"><span>5 users</span><span>100</span><span>250</span><span>500 users</span></div>
+            </div>
+          </div>
+          <div class="field" style="margin-top:16px;">
+            <div class="field-label">Concurrent Users <span class="field-hint">— Users active at same time (typically 20-30% of named)</span></div>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" class="slider" id="concurrent" min="1" max="100" value="8" step="1" oninput="updateSlider('concurrent','concurrentVal');calc()">
+                <div class="slider-val" id="concurrentVal">8</div>
+              </div>
+              <div class="slider-labels"><span>1</span><span>25</span><span>50</span><span>100</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: SITES -->
+      <div class="form-card">
+        <div class="fc-header">
+          <div class="fc-num">4</div>
+          <div><div class="fc-title">Number of Sites / Bases</div><div class="fc-subtitle">Distinct locations, air bases, units, or plant sites</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="field">
+            <div class="field-label">Total Sites <span class="field-hint">— Each site gets its own local database and offline capability</span></div>
+            <div class="slider-wrap">
+              <div class="slider-row">
+                <input type="range" class="slider" id="sites" min="1" max="50" value="3" step="1" oninput="updateSlider('sites','sitesVal');calc()">
+                <div class="slider-val" id="sitesVal">3</div>
+              </div>
+              <div class="slider-labels"><span>1 site</span><span>10</span><span>25</span><span>50 sites</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: MODULES -->
+      <div class="form-card">
+        <div class="fc-header">
+          <div class="fc-num">5</div>
+          <div><div class="fc-title">Select Modules</div><div class="fc-subtitle">Core platform included free — add-on modules priced separately</div></div>
+        </div>
+        <div class="fc-body">
+          <div style="padding:10px 14px;background:var(--light);border-radius:7px;margin-bottom:16px;font-size:12px;color:var(--text2);">
+            ✅ <strong>Always Included:</strong> Demand Signal Workflow · Role-Based Access · Inventory Management · Offline Sync · Basic Audit Trail · CSV Export
+          </div>
+          <div class="module-grid">
+            <div class="module-item">
+              <input type="checkbox" id="m-ai" onchange="calc()">
+              <label class="module-label" for="m-ai">
+                <div class="module-check">✓</div>
+                <div class="module-info">
+                  <div class="module-name">🧠 AI Bottleneck Detection</div>
+                  <div class="module-desc">Identifies which role/stage causes most delays. Auto-generates reports.</div>
+                  <div class="module-cost">+₹40,000/yr</div>
+                </div>
+              </label>
+            </div>
+            <div class="module-item">
+              <input type="checkbox" id="m-predict" onchange="calc()">
+              <label class="module-label" for="m-predict">
+                <div class="module-check">✓</div>
+                <div class="module-info">
+                  <div class="module-name">🔮 Predictive Alerts</div>
+                  <div class="module-desc">Stockout predictions, delay forecasting, surge detection.</div>
+                  <div class="module-cost">+₹35,000/yr</div>
+                </div>
+              </label>
+            </div>
+            <div class="module-item">
+              <input type="checkbox" id="m-map" onchange="calc()">
+              <label class="module-label" for="m-map">
+                <div class="module-check">✓</div>
+                <div class="module-info">
+                  <div class="module-name">🗺️ Live Map Tracking</div>
+                  <div class="module-desc">Real-time asset location, route tracking, geofencing.</div>
+                  <div class="module-cost">+₹30,000/yr</div>
+                </div>
+              </label>
+            </div>
+            <div class="module-item">
+              <input type="checkbox" id="m-escalation" onchange="calc()">
+              <label class="module-label" for="m-escalation">
+                <div class="module-check">✓</div>
+                <div class="module-info">
+                  <div class="module-name">🚨 Auto Escalation</div>
+                  <div class="module-desc">Urgent demands auto-escalate to higher authority on delay.</div>
+                  <div class="module-cost">+₹25,000/yr</div>
+                </div>
+              </label>
+            </div>
+            <div class="module-item">
+              <input type="checkbox" id="m-analytics" onchange="calc()">
+              <label class="module-label" for="m-analytics">
+                <div class="module-check">✓</div>
+                <div class="module-info">
+                  <div class="module-name">📊 Advanced Analytics</div>
+                  <div class="module-desc">Time-to-complete, OEE, vendor scorecards, cost tracking.</div>
+                  <div class="module-cost">+₹45,000/yr</div>
+                </div>
+              </label>
+            </div>
+            <div class="module-item">
+              <input type="checkbox" id="m-api" onchange="calc()">
+              <label class="module-label" for="m-api">
+                <div class="module-check">✓</div>
+                <div class="module-info">
+                  <div class="module-name">🔌 API Integration</div>
+                  <div class="module-desc">Connect with ERP, SAP, existing systems via REST API.</div>
+                  <div class="module-cost">+₹60,000/yr</div>
+                </div>
+              </label>
+            </div>
+            <div class="module-item">
+              <input type="checkbox" id="m-mobile" onchange="calc()">
+              <label class="module-label" for="m-mobile">
+                <div class="module-check">✓</div>
+                <div class="module-info">
+                  <div class="module-name">📱 Mobile App</div>
+                  <div class="module-desc">Native Android app for field technicians and officers.</div>
+                  <div class="module-cost">+₹50,000/yr</div>
+                </div>
+              </label>
+            </div>
+            <div class="module-item">
+              <input type="checkbox" id="m-audit" onchange="calc()">
+              <label class="module-label" for="m-audit">
+                <div class="module-check">✓</div>
+                <div class="module-info">
+                  <div class="module-name">📋 Enhanced Audit</div>
+                  <div class="module-desc">Court of Inquiry format, CAG-ready reports, digital signatures.</div>
+                  <div class="module-cost">+₹30,000/yr</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6: IMPLEMENTATION -->
+      <div class="form-card">
+        <div class="fc-header">
+          <div class="fc-num">6</div>
+          <div><div class="fc-title">Implementation & Onboarding</div><div class="fc-subtitle">One-time setup, data migration, and staff training</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="radio-grid radio-grid-3">
+            <div class="radio-option">
+              <input type="radio" name="impl" id="i-self" value="self" checked onchange="calc()">
+              <label class="radio-label" for="i-self">
+                <span class="radio-name">📖 Self-Setup</span>
+                <span class="radio-desc">Documentation + video guides. You set it up with support tickets.</span>
+                <span class="radio-price">₹0 one-time</span>
+              </label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="impl" id="i-assisted" value="assisted" onchange="calc()">
+              <label class="radio-label" for="i-assisted">
+                <span class="radio-name">🤝 Assisted</span>
+                <span class="radio-desc">Remote setup + 2 days of online training + data import.</span>
+                <span class="radio-price">₹75,000 one-time</span>
+              </label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="impl" id="i-full" value="full" onchange="calc()">
+              <label class="radio-label" for="i-full">
+                <span class="radio-name">🏗️ Full Deploy</span>
+                <span class="radio-desc">On-site deployment + 5 days training + custom config + data migration.</span>
+                <span class="radio-price">₹2,00,000 one-time</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 7: SUPPORT -->
+      <div class="form-card">
+        <div class="fc-header">
+          <div class="fc-num">7</div>
+          <div><div class="fc-title">Support Tier</div><div class="fc-subtitle">Ongoing technical support and SLA commitment</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="support-options">
+            <div class="support-option">
+              <input type="radio" name="support" id="sup-basic" value="basic" checked onchange="calc()">
+              <label class="support-label" for="sup-basic">
+                <div class="support-left">
+                  <div class="support-name">📧 Standard Support</div>
+                  <div class="support-desc">Email support · 48hr response · Business hours · Community forum</div>
+                </div>
+                <div class="support-right">Included</div>
+              </label>
+            </div>
+            <div class="support-option">
+              <input type="radio" name="support" id="sup-pro" value="pro" onchange="calc()">
+              <label class="support-label" for="sup-pro">
+                <div class="support-left">
+                  <div class="support-name">📞 Priority Support</div>
+                  <div class="support-desc">Phone + email · 8hr response · Extended hours · Dedicated account manager</div>
+                </div>
+                <div class="support-right">+₹60,000/yr</div>
+              </label>
+            </div>
+            <div class="support-option">
+              <input type="radio" name="support" id="sup-defence" value="defence" onchange="calc()">
+              <label class="support-label" for="sup-defence">
+                <div class="support-left">
+                  <div class="support-name">🛡️ Defence SLA</div>
+                  <div class="support-desc">24/7 support · 2hr response · On-site within 48hrs · Security-cleared team</div>
+                </div>
+                <div class="support-right">+₹1,50,000/yr</div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 8: DURATION -->
+      <div class="form-card">
+        <div class="fc-header">
+          <div class="fc-num">8</div>
+          <div><div class="fc-title">Contract Duration</div><div class="fc-subtitle">Longer contracts receive significant discounts</div></div>
+        </div>
+        <div class="fc-body">
+          <div class="duration-tabs">
+            <div class="dur-option">
+              <input type="radio" name="duration" id="dur-1" value="1" checked onchange="calc()">
+              <label class="dur-label" for="dur-1">
+                <span class="dur-name">1 Year</span>
+                <span class="dur-discount">Standard</span>
+              </label>
+            </div>
+            <div class="dur-option">
+              <input type="radio" name="duration" id="dur-2" value="2" onchange="calc()">
+              <label class="dur-label" for="dur-2">
+                <span class="dur-name">2 Years</span>
+                <span class="dur-discount">Save 10%</span>
+              </label>
+            </div>
+            <div class="dur-option">
+              <input type="radio" name="duration" id="dur-3" value="3" onchange="calc()">
+              <label class="dur-label" for="dur-3">
+                <span class="dur-name">3 Years</span>
+                <span class="dur-discount">Save 18%</span>
+              </label>
+            </div>
+            <div class="dur-option">
+              <input type="radio" name="duration" id="dur-5" value="5" onchange="calc()">
+              <label class="dur-label" for="dur-5">
+                <span class="dur-name">5 Years</span>
+                <span class="dur-discount">Save 28%</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: RESULTS PANEL -->
+    <div class="calc-panel">
+      <div class="result-card">
+        <div class="rc-header">
+          <div class="rc-title">💰 Indicative Estimate</div>
+          <div class="rc-sub">Updates live · Not a binding quote</div>
+        </div>
+        <div class="rc-body">
+
+          <div class="estimate-display">
+            <div class="est-label">Annual Platform Cost</div>
+            <div class="est-range" id="est-range">₹3.8L – ₹4.6L</div>
+            <div class="est-period">per year · excluding GST</div>
+            <div class="est-note">⚠️ This is an indicative range only. Final pricing depends on specific requirements, negotiation, and applicable government pricing frameworks.</div>
+          </div>
+
+          <div class="breakdown">
+            <div class="breakdown-title">Cost Breakdown (Annual)</div>
+            <div class="breakdown-row">
+              <div><div class="br-name">Base Platform Fee</div><div class="br-detail" id="br-base-detail">Defence sector</div></div>
+              <div class="br-amount" id="br-base">₹3,00,000</div>
+            </div>
+            <div class="breakdown-row">
+              <div><div class="br-name">Deployment Premium</div><div class="br-detail" id="br-deploy-detail">Cloud hosted</div></div>
+              <div class="br-amount" id="br-deploy">—</div>
+            </div>
+            <div class="breakdown-row">
+              <div><div class="br-name">User Licences</div><div class="br-detail" id="br-users-detail">25 users × ₹4,000</div></div>
+              <div class="br-amount" id="br-users">₹1,00,000</div>
+            </div>
+            <div class="breakdown-row">
+              <div><div class="br-name">Site Licences</div><div class="br-detail" id="br-sites-detail">3 sites × ₹15,000</div></div>
+              <div class="br-amount" id="br-sites">₹45,000</div>
+            </div>
+            <div class="breakdown-row">
+              <div><div class="br-name">Add-on Modules</div><div class="br-detail" id="br-modules-detail">None selected</div></div>
+              <div class="br-amount" id="br-modules">—</div>
+            </div>
+            <div class="breakdown-row">
+              <div><div class="br-name">Support Tier</div><div class="br-detail" id="br-support-detail">Standard included</div></div>
+              <div class="br-amount" id="br-support">—</div>
+            </div>
+            <div class="breakdown-row">
+              <div><div class="br-name">Duration Discount</div><div class="br-detail" id="br-disc-detail">1 year — no discount</div></div>
+              <div class="br-amount" id="br-discount" style="color:#276749;">—</div>
+            </div>
+            <div class="total-row">
+              <div class="tr-label">ANNUAL TOTAL</div>
+              <div class="tr-amount" id="total-amount">₹4,45,000</div>
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            <div class="disc-text"><strong>One-time Implementation:</strong> <span id="impl-cost">₹0 (Self-setup)</span><br>
+            <strong>Total Year 1:</strong> <span id="year1-total">₹4,45,000</span><br>
+            <strong>GST (18%):</strong> <span id="gst-amount">₹80,100</span><br>
+            <strong>Total Year 1 incl. GST:</strong> <span id="total-gst">₹5,25,100</span></div>
+          </div>
+
+          <div id="savings-section" style="display:none;" class="savings-badge">
+            <span class="sb-icon">🎉</span>
+            <span class="sb-text" id="savings-text">You save ₹0 with this contract duration</span>
+          </div>
+
+          <div class="config-summary">
+            <div class="cs-title">Your Configuration</div>
+            <div class="cs-tags" id="config-tags">
+              <span class="cs-tag">Defence</span>
+              <span class="cs-tag">Cloud</span>
+              <span class="cs-tag">25 Users</span>
+              <span class="cs-tag">3 Sites</span>
+              <span class="cs-tag">1 Year</span>
+            </div>
+          </div>
+
+          <button class="quote-btn" onclick="openModal()">📩 Request Formal Quote</button>
+          <button class="copy-btn" onclick="copyEstimate()">📋 Copy Estimate Summary</button>
+
+        </div>
+      </div>
+
+      <!-- PRICING LOGIC REFERENCE -->
+      <div class="logic-card">
+        <div class="lc-title">📐 Pricing Logic Reference</div>
+        <div class="lc-row"><span class="lc-item">Defence Base</span><span class="lc-val">₹3,00,000/yr</span></div>
+        <div class="lc-row"><span class="lc-item">Enterprise Base</span><span class="lc-val">₹1,80,000/yr</span></div>
+        <div class="lc-row"><span class="lc-item">Per User (1–50)</span><span class="lc-val">₹4,000/yr</span></div>
+        <div class="lc-row"><span class="lc-item">Per User (51–200)</span><span class="lc-val">₹3,000/yr</span></div>
+        <div class="lc-row"><span class="lc-item">Per User (200+)</span><span class="lc-val">₹2,200/yr</span></div>
+        <div class="lc-row"><span class="lc-item">Per Site (1–5)</span><span class="lc-val">₹15,000/yr</span></div>
+        <div class="lc-row"><span class="lc-item">Per Site (6–20)</span><span class="lc-val">₹10,000/yr</span></div>
+        <div class="lc-row"><span class="lc-item">Per Site (21+)</span><span class="lc-val">₹7,000/yr</span></div>
+        <div class="lc-row"><span class="lc-item">On-Premise add-on</span><span class="lc-val">₹80,000/yr</span></div>
+        <div class="lc-row"><span class="lc-item">Air-Gap add-on</span><span class="lc-val">₹1,80,000/yr</span></div>
+        <div class="lc-row"><span class="lc-item">2yr contract discount</span><span class="lc-val">10%</span></div>
+        <div class="lc-row"><span class="lc-item">3yr contract discount</span><span class="lc-val">18%</span></div>
+        <div class="lc-row"><span class="lc-item">5yr contract discount</span><span class="lc-val">28%</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE MODAL -->
+<div class="modal-overlay" id="quoteModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Request Formal Quote</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modal-form-area">
+      <div class="modal-context">
+        <strong>Configuration Summary</strong>
+        <span id="modal-config-text">Loading...</span>
+      </div>
+      <div class="mf-row">
+        <div class="mf-field"><label class="mf-label">Full Name</label><input class="mf-input" id="q-name" placeholder="Name / Rank"></div>
+        <div class="mf-field"><label class="mf-label">Organisation</label><input class="mf-input" id="q-org" placeholder="Unit / Company / Base"></div>
+        <div class="mf-field"><label class="mf-label">Email</label><input class="mf-input" id="q-email" type="email" placeholder="Official email"></div>
+        <div class="mf-field"><label class="mf-label">Phone</label><input class="mf-input" id="q-phone" placeholder="+91 xxxxx xxxxx"></div>
+        <div class="mf-field full"><label class="mf-label">Specific Requirements</label><input class="mf-input" id="q-notes" placeholder="Any specific customisation, timeline, or procurement process details"></div>
+        <div class="mf-field full">
+          <label class="mf-label">Procurement Route</label>
+          <select class="mf-select" id="q-route">
+            <option value="">Select procurement route</option>
+            <option>Direct procurement</option>
+            <option>GeM (Government e-Marketplace)</option>
+            <option>iDEX / ADITI grant</option>
+            <option>DFP (Defence Finance Procedure)</option>
+            <option>MSME Direct</option>
+            <option>Corporate procurement</option>
+            <option>Other / Unsure</option>
+          </select>
+        </div>
+      </div>
+      <button class="modal-submit" onclick="submitQuote()">Send Quote Request to TwinStance →</button>
+    </div>
+    <div class="modal-success" id="modal-success-area">
+      <div class="ms-icon">✅</div>
+      <div class="ms-title">Quote Request Received</div>
+      <div class="ms-sub">TwinStance Solutions will review your configuration and send a formal quotation within 48 business hours.<br><br><strong>contact@tssolutionsllp.com</strong><br>LLPIN: AAQ-0042 · Cuttack, Odisha</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PRICING CONSTANTS ──────────────────────────────────────────
+const BASE = { defence: 300000, enterprise: 180000 };
+const DEPLOY = { cloud: 0, onprem: 80000, airgap: 180000 };
+const SUPPORT = { basic: 0, pro: 60000, defence: 150000 };
+const IMPL = { self: 0, assisted: 75000, full: 200000 };
+const DURATION_DISC = { '1': 0, '2': 0.10, '3': 0.18, '5': 0.28 };
+const MODULES = {
+  'm-ai': 40000, 'm-predict': 35000, 'm-map': 30000,
+  'm-escalation': 25000, 'm-analytics': 45000, 'm-api': 60000,
+  'm-mobile': 50000, 'm-audit': 30000
+};
+const MODULE_NAMES = {
+  'm-ai':'AI Bottleneck', 'm-predict':'Predictive Alerts', 'm-map':'Live Map',
+  'm-escalation':'Auto Escalation', 'm-analytics':'Analytics', 'm-api':'API Integration',
+  'm-mobile':'Mobile App', 'm-audit':'Enhanced Audit'
+};
+
+function userRate(n) {
+  if (n <= 50) return 4000;
+  if (n <= 200) return 3000;
+  return 2200;
+}
+function siteRate(n) {
+  if (n <= 5) return 15000;
+  if (n <= 20) return 10000;
+  return 7000;
+}
+function fmt(n) {
+  if (n === 0) return '—';
+  if (n >= 100000) return '₹' + (n/100000).toFixed(1).replace(/\.0$/,'') + 'L';
+  return '₹' + n.toLocaleString('en-IN');
+}
+function fmtFull(n) {
+  return '₹' + n.toLocaleString('en-IN');
+}
+
+function calc() {
+  const sector = document.querySelector('input[name=sector]:checked').value;
+  const deploy = document.querySelector('input[name=deploy]:checked').value;
+  const users  = parseInt(document.getElementById('users').value);
+  const sites  = parseInt(document.getElementById('sites').value);
+  const support= document.querySelector('input[name=support]:checked').value;
+  const impl   = document.querySelector('input[name=impl]:checked').value;
+  const dur    = document.querySelector('input[name=duration]:checked').value;
+
+  // Base
+  const base = BASE[sector];
+  // Deploy
+  const deployCost = DEPLOY[deploy];
+  // Users
+  const userCost = users * userRate(users);
+  // Sites
+  const siteCost = sites * siteRate(sites);
+  // Modules
+  let moduleCost = 0;
+  let moduleNames = [];
+  Object.keys(MODULES).forEach(id => {
+    if (document.getElementById(id).checked) {
+      moduleCost += MODULES[id];
+      moduleNames.push(MODULE_NAMES[id]);
+    }
+  });
+  // Support
+  const supportCost = SUPPORT[support];
+  // Subtotal before discount
+  const subtotal = base + deployCost + userCost + siteCost + moduleCost + supportCost;
+  // Discount
+  const discRate = DURATION_DISC[dur];
+  const discount = Math.round(subtotal * discRate);
+  const annual = subtotal - discount;
+  // Implementation (one-time)
+  const implCost = IMPL[impl];
+  const year1 = annual + implCost;
+  const gst = Math.round(year1 * 0.18);
+  const year1gst = year1 + gst;
+
+  // Range (±12%)
+  const lo = Math.round(annual * 0.92 / 5000) * 5000;
+  const hi = Math.round(annual * 1.12 / 5000) * 5000;
+
+  // Update DOM
+  document.getElementById('est-range').textContent = fmt(lo) + ' – ' + fmt(hi);
+  document.getElementById('br-base').textContent = fmt(base);
+  document.getElementById('br-base-detail').textContent = sector === 'defence' ? 'Defence platform' : 'Enterprise platform';
+  document.getElementById('br-deploy').textContent = deployCost ? fmt(deployCost) : '—';
+  document.getElementById('br-deploy-detail').textContent = deploy === 'cloud' ? 'Cloud hosted' : deploy === 'onprem' ? 'On-premise deployment' : 'Air-gapped deployment';
+  document.getElementById('br-users').textContent = fmt(userCost);
+  document.getElementById('br-users-detail').textContent = users + ' users × ₹' + userRate(users).toLocaleString('en-IN') + '/yr';
+  document.getElementById('br-sites').textContent = fmt(siteCost);
+  document.getElementById('br-sites-detail').textContent = sites + ' sites × ₹' + siteRate(sites).toLocaleString('en-IN') + '/yr';
+  document.getElementById('br-modules').textContent = moduleCost ? fmt(moduleCost) : '—';
+  document.getElementById('br-modules-detail').textContent = moduleNames.length ? moduleNames.join(', ') : 'None selected';
+  document.getElementById('br-support').textContent = supportCost ? fmt(supportCost) : '—';
+  document.getElementById('br-support-detail').textContent = support === 'basic' ? 'Standard — included' : support === 'pro' ? 'Priority support' : 'Defence SLA';
+  document.getElementById('br-discount').textContent = discount ? '-' + fmt(discount) : '—';
+  document.getElementById('br-disc-detail').textContent = dur + ' year contract' + (discRate ? ' — ' + (discRate*100) + '% off' : ' — no discount');
+  document.getElementById('total-amount').textContent = fmtFull(annual);
+  document.getElementById('impl-cost').textContent = implCost ? fmtFull(implCost) + ' (one-time)' : '₹0 (self-setup)';
+  document.getElementById('year1-total').textContent = fmtFull(year1);
+  document.getElementById('gst-amount').textContent = fmtFull(gst);
+  document.getElementById('total-gst').textContent = fmtFull(year1gst);
+
+  // Savings badge
+  if (discount > 0) {
+    document.getElementById('savings-section').style.display = 'flex';
+    document.getElementById('savings-text').textContent = 'You save ' + fmtFull(discount * parseInt(dur)) + ' over ' + dur + ' years vs annual billing';
+  } else {
+    document.getElementById('savings-section').style.display = 'none';
+  }
+
+  // Config tags
+  const implLabels = { self: 'Self-Setup', assisted: 'Assisted', full: 'Full Deploy' };
+  const supportLabels = { basic: 'Standard Support', pro: 'Priority Support', defence: 'Defence SLA' };
+  const deployLabels = { cloud: 'Cloud', onprem: 'On-Premise', airgap: 'Air-Gapped' };
+  const tags = [
+    sector === 'defence' ? '🛡️ Defence' : '🏭 Enterprise',
+    deployLabels[deploy], users + ' Users', sites + ' Site' + (sites > 1 ? 's' : ''),
+    dur + 'yr Contract', implLabels[impl], supportLabels[support],
+    ...moduleNames
+  ];
+  document.getElementById('config-tags').innerHTML = tags.map(t => `<span class="cs-tag">${t}</span>`).join('');
+}
+
+function updateSlider(id, valId) {
+  document.getElementById(valId).textContent = document.getElementById(id).value;
+}
+
+function openModal() {
+  // Populate config summary
+  const sector = document.querySelector('input[name=sector]:checked').value;
+  const users = document.getElementById('users').value;
+  const sites = document.getElementById('sites').value;
+  const dur = document.querySelector('input[name=duration]:checked').value;
+  const total = document.getElementById('total-amount').textContent;
+  document.getElementById('modal-config-text').textContent =
+    `${sector === 'defence' ? 'Defence' : 'Enterprise'} · ${users} users · ${sites} sites · ${dur}yr contract · Est. ${total}/yr`;
+  document.getElementById('modal-form-area').style.display = 'block';
+  document.getElementById('modal-success-area').style.display = 'none';
+  document.getElementById('quoteModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('quoteModal').classList.remove('open');
+}
+
+function submitQuote() {
+  const name = document.getElementById('q-name').value.trim();
+  const email = document.getElementById('q-email').value.trim();
+  const org = document.getElementById('q-org').value.trim();
+  if (!name || !email || !org) { alert('Please fill Name, Organisation, and Email.'); return; }
+  document.getElementById('modal-form-area').style.display = 'none';
+  document.getElementById('modal-success-area').style.display = 'block';
+}
+
+function copyEstimate() {
+  const sector = document.querySelector('input[name=sector]:checked').value;
+  const users = document.getElementById('users').value;
+  const sites = document.getElementById('sites').value;
+  const dur = document.querySelector('input[name=duration]:checked').value;
+  const range = document.getElementById('est-range').textContent;
+  const total = document.getElementById('total-amount').textContent;
+  const year1 = document.getElementById('total-gst').textContent;
+  const text = `WYNTIQ Pricing Estimate\nTwinStance Solutions LLP · LLPIN: AAQ-0042\n\nConfiguration:\n- Sector: ${sector}\n- Users: ${users}\n- Sites: ${sites}\n- Contract: ${dur} year\n\nAnnual Estimate Range: ${range}\nAnnual Total (calculated): ${total}\nYear 1 incl. GST: ${year1}\n\nNote: Indicative only. Final pricing sent by TwinStance Solutions.\ncontact@tssolutionsllp.com`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✅ Copied to clipboard!';
+    setTimeout(() => btn.textContent = '📋 Copy Estimate Summary', 2500);
+  });
+}
+
+// Close modal on overlay click
+document.getElementById('quoteModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// Init
+calc();
+</script>
+</body>
+</html>

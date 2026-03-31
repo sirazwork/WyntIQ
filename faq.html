@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frequently Asked Questions | WYNTIQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy2:#0f2040;--navy3:#162850;--navy4:#1e3a6e;--gold:#c9a84c;--gold2:#e8c56d;--gold-light:#fdf6e3;--white:#ffffff;--off:#f4f6fb;--light:#eef1f7;--text:#1a2744;--text2:#4a5568;--text3:#8898aa;--border:#dde3ef;--green:#38a169;--red:#e53e3e;--shadow:0 2px 8px rgba(10,22,40,0.08);--shadow-md:0 8px 24px rgba(10,22,40,0.12);--r:10px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--text);}
+.topbar{background:var(--navy);padding:8px 60px;display:flex;justify-content:space-between;}
+.topbar-text{font-size:11px;color:rgba(255,255,255,0.5);}
+.topbar-text span{color:var(--gold);}
+.topbar-links{display:flex;gap:16px;}
+.topbar-links a{font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;}
+nav{background:var(--white);padding:0 60px;height:68px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow);position:sticky;top:0;z-index:1000;border-bottom:3px solid var(--gold);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--navy),var(--navy4));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:17px;color:var(--gold);}
+.nav-logo-text{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:21px;color:var(--navy);letter-spacing:1px;}
+.nav-logo-sub{font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:-2px;}
+.nav-links{display:flex;gap:4px;}
+.nav-link{padding:6px 13px;font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;border-radius:6px;}
+.nav-link:hover{background:var(--light);color:var(--navy);}
+.nav-btn{padding:10px 22px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;text-decoration:none;}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2) 50%,var(--navy3));padding:80px 60px 60px;position:relative;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));}
+.breadcrumb{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:20px;}
+.breadcrumb a{color:var(--gold);text-decoration:none;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:800;color:var(--white);line-height:1.15;margin-bottom:14px;}
+.hero-title .gold{color:var(--gold2);}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.6);line-height:1.8;max-width:640px;margin-bottom:20px;}
+.hero-cats{display:flex;flex-wrap:wrap;gap:8px;}
+.hcat{padding:6px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;}
+.hcat:hover{background:rgba(201,168,76,0.2);border-color:var(--gold);color:var(--gold2);}
+.main{max-width:900px;margin:0 auto;padding:60px 60px 80px;}
+.faq-section{margin-bottom:56px;scroll-margin-top:90px;}
+.faq-section-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:14px;border-bottom:2px solid var(--border);}
+.fsh-icon{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--navy4));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.fsh-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);}
+.fsh-sub{font-size:13px;color:var(--text3);margin-top:2px;}
+.faq-item{border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;}
+.faq-item:hover{border-color:rgba(201,168,76,0.5);}
+.faq-item.open{border-color:var(--navy);}
+.faq-q{padding:18px 22px;display:flex;justify-content:space-between;align-items:flex-start;cursor:pointer;gap:14px;}
+.faq-item.open .faq-q{background:var(--light);}
+.fq-text{font-size:15px;font-weight:600;color:var(--navy);line-height:1.5;}
+.fq-icon{color:var(--gold);font-size:20px;flex-shrink:0;transition:transform 0.3s;margin-top:1px;}
+.faq-item.open .fq-icon{transform:rotate(45deg);}
+.faq-a{display:none;padding:4px 22px 20px;background:var(--white);}
+.faq-item.open .faq-a{display:block;}
+.fa-p{font-size:14px;color:var(--text2);line-height:1.85;margin-bottom:12px;}
+.fa-p:last-of-type{margin-bottom:0;}
+.fa-ul{padding-left:18px;margin-bottom:12px;}
+.fa-ul li{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:5px;}
+.fa-tag{display:inline-block;margin-top:10px;padding:3px 10px;background:var(--gold-light);color:var(--gold);font-size:10px;font-weight:700;border-radius:4px;text-transform:uppercase;letter-spacing:1px;border:1px solid rgba(201,168,76,0.3);}
+.fa-hl{background:var(--off);border-left:3px solid var(--gold);padding:14px 16px;border-radius:0 7px 7px 0;margin:12px 0;}
+.fa-hl-title{font-weight:700;color:var(--navy);font-size:13px;margin-bottom:4px;}
+.fa-hl-text{font-size:13px;color:var(--text2);line-height:1.7;}
+.cta-box{background:linear-gradient(135deg,var(--navy),var(--navy4));border-radius:12px;padding:40px;text-align:center;margin-top:20px;}
+.cta-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--white);margin-bottom:10px;}
+.cta-sub{font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:24px;}
+.btn-gold{padding:13px 32px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:700;font-size:14px;border:none;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block;}
+footer{background:var(--navy);padding:30px 60px;text-align:center;}
+.footer-text{font-size:12px;color:rgba(255,255,255,0.3);}
+.footer-text a{color:var(--gold);text-decoration:none;}
+@media(max-width:768px){.topbar{display:none;}.hero,.main{padding:50px 20px 60px;}nav{padding:0 16px;}.nav-links{display:none;}footer{padding:24px 20px;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-text">A product of <span>TwinStance Solutions LLP</span> · LLPIN: AAQ-0042 · Est. July 2019 · Cuttack, Odisha</div>
+  <div class="topbar-links"><a href="index.html">Home</a><a href="contact.html">Contact</a><a href="mailto:contact@tssolutionsllp.com">Email</a></div>
+</div>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">W</div>
+    <div><div class="nav-logo-text">WYNTIQ</div><div class="nav-logo-sub">by TwinStance Solutions</div></div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="iaf.html">IAF</a>
+    <a class="nav-link" href="army.html">Army</a>
+    <a class="nav-link" href="navy.html">Navy</a>
+    <a class="nav-link" href="security.html">Security</a>
+    <a class="nav-link" href="partners.html">Partners</a>
+    <a class="nav-link" href="careers.html">Careers</a>
+    <a class="nav-link" href="contact.html">Contact</a>
+  </div>
+  <a class="nav-btn" href="app/index.html">Sign In →</a>
+</nav>
+
+<div class="hero">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>FAQ</span></div>
+  <h1 class="hero-title">Frequently Asked <span class="gold">Questions</span></h1>
+  <p class="hero-sub">Everything you need to know about WYNTIQ — from how it works to how it deploys, what makes it different, and how to get started with India's first defence-grade offline IMMS.</p>
+  <div class="hero-cats">
+    <a class="hcat" href="#general">General</a>
+    <a class="hcat" href="#defence">Defence</a>
+    <a class="hcat" href="#enterprise">Enterprise</a>
+    <a class="hcat" href="#technical">Technical</a>
+    <a class="hcat" href="#security">Security</a>
+    <a class="hcat" href="#offline">Offline</a>
+    <a class="hcat" href="#pricing">Pricing</a>
+    <a class="hcat" href="#idex">iDEX</a>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- GENERAL -->
+  <div class="faq-section" id="general">
+    <div class="faq-section-header"><div class="fsh-icon">💡</div><div><div class="fsh-title">General Questions</div><div class="fsh-sub">About WYNTIQ and TwinStance Solutions</div></div></div>
+
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What is WYNTIQ and what does it do?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ is India's first AI-powered, offline-first Integrated Material Management System (IMMS). It is a complete digital platform that manages the entire lifecycle of material demands — from the moment a technician, engineer, or store staff member identifies a requirement, through the approval chain, to the physical issue of the item and the creation of a permanent audit record.</p>
+        <p class="fa-p">Think of WYNTIQ as the digital nervous system of your logistics operation. When a maintenance technician at an IAF base needs a spare part for an aircraft, they raise a demand in WYNTIQ. The system automatically checks whether the item is in stock — if it is, the part is issued immediately without any approval chain. If it is not in stock, the demand is routed digitally through the appropriate approval chain: Officer, Logistics, Accounts, and ultimately to the vendor. Every step is tracked, every person is accountable, and the entire audit trail is permanent and tamper-proof.</p>
+        <p class="fa-p">WYNTIQ is built by TwinStance Solutions LLP — a registered Indian company (LLPIN: AAQ-0042) founded in Cuttack, Odisha in July 2019 — specifically for Indian Defence and Enterprise logistics requirements. This is not a foreign product adapted for India. This is an Indian product built from scratch for Indian conditions, Indian procedures, and Indian operational realities.</p>
+        <span class="fa-tag">Core Product</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Who is WYNTIQ built for?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ serves two primary segments: Indian Defence organisations and Indian Enterprise or Industrial operations.</p>
+        <p class="fa-p">On the Defence side, WYNTIQ is designed specifically for the Indian Air Force (aircraft maintenance and spare parts management), the Indian Army (Mechanical Transport, field logistics, multi-echelon supply chain management), and the Indian Navy (vessel maintenance, port logistics, and at-sea operations). The system is built around Indian Defence procedures, workflows, and the specific operational constraints of Indian forward bases, field deployments, and remote operational environments.</p>
+        <p class="fa-p">On the Enterprise side, WYNTIQ serves Mining operations (remote site equipment maintenance and predictive downtime prevention), Automobile and Two-Wheeler Manufacturing (assembly line logistics and vendor management), Factory and Plant operations (maintenance management and spare parts inventory), and E-Commerce and Warehousing (inventory management and fulfilment operations). The common thread across all these sectors is the need for real-time visibility, individual accountability, and the ability to operate in environments where internet connectivity may be unreliable or unavailable.</p>
+        <span class="fa-tag">Target Market</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What makes WYNTIQ different from existing ERP or logistics systems?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Most logistics and ERP systems in India are either Western products adapted for Indian use, or large enterprise platforms like SAP and Oracle that cost crores to implement and require dedicated IT departments to maintain. WYNTIQ is different in several fundamental ways that matter for the organisations it serves.</p>
+        <div class="fa-hl"><div class="fa-hl-title">Built for India, not adapted</div><div class="fa-hl-text">Every feature, every workflow, every report format is designed for how Indian Defence and enterprise organisations actually operate — not for how Western organisations operate. Indian bureaucratic structures, Indian procurement procedures, Indian approval hierarchies, and Indian documentation requirements are built into the system, not bolted on.</div></div>
+        <div class="fa-hl"><div class="fa-hl-title">Offline-first architecture</div><div class="fa-hl-text">Unlike virtually every competing system, WYNTIQ does not require internet connectivity to function. It was designed offline-first — the system runs identically whether connected or disconnected. This is essential for defence forward bases in Ladakh and Andaman, remote mining sites in Jharkhand and Odisha, and field operations anywhere connectivity cannot be guaranteed.</div></div>
+        <div class="fa-hl"><div class="fa-hl-title">Smart Inventory Bypass</div><div class="fa-hl-text">Most systems require demands to go through the full approval chain regardless of whether the item is in stock. WYNTIQ checks stock first — if the item is available, it is issued immediately without going through any approval chain. Approvals are only triggered when procurement from outside is genuinely needed.</div></div>
+        <div class="fa-hl"><div class="fa-hl-title">Decision explanation, not just tracking</div><div class="fa-hl-text">WYNTIQ explains decisions — why a demand was delayed, who caused the delay, where the bottleneck is, which role is slowing things down the most. This is fundamentally different from systems that just show status.</div></div>
+        <span class="fa-tag">Differentiation</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How long does it take to deploy WYNTIQ?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Deployment time depends on the size and complexity of the organisation and the deployment type. For a typical enterprise deployment with self-setup, the system can be operational within 2-5 business days after account creation. For an assisted deployment with data migration and staff training, 2-3 weeks is typical. For a full on-site deployment at a defence establishment with custom configuration, air-gap setup, and comprehensive training for all user roles, 4-8 weeks is the standard timeline.</p>
+        <p class="fa-p">WYNTIQ is designed to be deployed quickly relative to enterprise systems of comparable capability. There is no requirement for hardware procurement, no database servers to configure from scratch, and no custom coding required for standard deployments. The system is configured through a web-based administration panel. The most time-consuming part of deployment is typically the data entry — loading the inventory catalogue, creating user accounts, and entering initial store balances — which can be done by the organisation's own staff with guidance from TwinStance Solutions.</p>
+        <span class="fa-tag">Implementation</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Does WYNTIQ work on mobile phones and tablets?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. WYNTIQ is designed as a Progressive Web Application (PWA) that runs in any modern browser on any device — smartphones, tablets, laptops, and desktop computers. The interface is fully responsive and adapts to the screen size of the device.</p>
+        <p class="fa-p">For field use, the system is optimised for Android tablets and smartphones. The interface uses large tap targets, clear navigation, and minimal data entry to make it usable even in challenging conditions — wearing gloves, in bright sunlight, or with limited screen visibility. A dedicated Android mobile app is available as an add-on module, providing barcode scanning, push notifications, and enhanced offline local storage.</p>
+        <span class="fa-tag">Devices</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Who is TwinStance Solutions LLP?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">TwinStance Solutions LLP is a registered Indian Limited Liability Partnership (LLPIN: AAQ-0042) founded in July 2019 and headquartered in Cuttack, Odisha. The company was founded with the mission of building technology that solves real problems for India's most critical sectors — defence, industrial, and enterprise logistics.</p>
+        <p class="fa-p">WYNTIQ is TwinStance Solutions' flagship product. The company's development philosophy is grounded in deep understanding of Indian operational realities — including direct insight into how the Indian Armed Forces manage their logistics at the unit level, the constraints of field operations, and the wide gap between the aspirations of Indian defence modernisation and the technology currently available to support it. TwinStance Solutions is committed to the Atmanirbhar Bharat vision — building in India, for India, with Indian talent and Indian capital.</p>
+        <span class="fa-tag">Company</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Is WYNTIQ a SaaS product or a one-time purchase?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ is offered on a subscription basis — an annual licence fee that covers the platform, all updates, and standard support. This ensures organisations always have access to the latest features and security updates without separate upgrade costs. Multi-year contracts receive discounts: 10% for 2 years, 18% for 3 years, and 28% for 5 years.</p>
+        <p class="fa-p">For defence organisations that require on-premise deployment with no data leaving their infrastructure, WYNTIQ is available under an on-premise licence model. For air-gapped environments, a perpetual licence with annual maintenance is also available. All pricing excludes GST at the applicable rate. Contact TwinStance Solutions for a formal quotation based on your specific requirements.</p>
+        <span class="fa-tag">Licensing</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What languages does WYNTIQ support?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ currently operates in English, which is the working language of the Indian Armed Forces and most enterprise operations in India. Hindi language support is under development and expected in an upcoming release. Regional language support for Odia, Tamil, and Marathi is on the roadmap for future releases.</p>
+        <p class="fa-p">All reports, audit logs, and CSV exports are in English. The inventory catalogue supports item names and descriptions in any Unicode language — meaning descriptions can include Hindi, Odia, or any other Indian script — while the interface itself remains in English.</p>
+        <span class="fa-tag">Language</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DEFENCE -->
+  <div class="faq-section" id="defence">
+    <div class="faq-section-header"><div class="fsh-icon">🛡️</div><div><div class="fsh-title">Defence Use</div><div class="fsh-sub">IAF, Army, Navy — specific questions</div></div></div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How does WYNTIQ compare to IMMOLS used by the Indian Air Force?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">IMMOLS — Integrated Materials Management Online System — developed by TCS for the Indian Air Force represented a significant step forward in IAF logistics digitalisation. WYNTIQ is not positioned as a competitor to IMMOLS. It addresses the gaps that IMMOLS leaves unaddressed, particularly at the unit level and at forward operating locations.</p>
+        <p class="fa-p">The most critical gap is offline capability. IMMOLS requires internet connectivity to function. At forward bases in Ladakh, Andaman and Nicobar Islands, and remote stations in Northeast India, connectivity is frequently unavailable. When IMMOLS is unavailable, units revert to paper — losing all efficiency and accountability gains. WYNTIQ works identically with or without internet, making it suited precisely for high-stakes low-connectivity environments where operational decisions cannot wait for connectivity to be restored.</p>
+        <p class="fa-p">Additionally, WYNTIQ introduces capabilities IMMOLS does not provide: AI-powered bottleneck detection that identifies which stage is causing the most delays, predictive stockout alerts before shortages happen, decision explanation that goes beyond status to explain why delays occurred, and auto-escalation for delayed urgent demands without any manual intervention.</p>
+        <span class="fa-tag">IAF</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can WYNTIQ be deployed at a classified defence installation?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. WYNTIQ supports air-gapped deployment — a completely isolated installation with no connection to the internet or any external network whatsoever. In an air-gapped deployment, WYNTIQ runs entirely on the organisation's own infrastructure. No data ever leaves the installation's network perimeter. This is the highest level of data isolation available and is the appropriate configuration for classified defence environments.</p>
+        <p class="fa-p">Air-gapped deployments require on-premise server infrastructure provided by the installation. TwinStance Solutions provides the software, installation documentation, and on-site technical support for initial deployment. Updates are provided via encrypted physical media on a scheduled basis. All personnel involved in on-site support for classified installations are Indian citizens subject to appropriate confidentiality and security agreements.</p>
+        <span class="fa-tag">Classified Deployment</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What is the Smart Inventory Bypass and why does it matter for defence?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">The Smart Inventory Bypass is one of WYNTIQ's most operationally significant features. In current IAF logistics, every demand — even for a part that is sitting on the shelf right next to the technician — must go through the full approval chain: Officer, Logistics, Accounts. This adds unnecessary delay even when there is no procurement decision to make, because the item is already in stock.</p>
+        <p class="fa-p">WYNTIQ's Smart Inventory Bypass works differently. When a demand is raised, the system first checks current stock levels. If the required item is available in the required quantity, the demand routes directly to Logistics for immediate issue — bypassing Officer and Accounts entirely. The part reaches the technician faster. The aircraft returns to service faster. Officers and Accounts staff are not burdened with approving transactions that require no judgment whatsoever.</p>
+        <p class="fa-p">The approval chain is fully preserved for demands that require actual procurement — where officer judgment on priority and accounts control over budget genuinely adds value. Smart bypass does not remove accountability. Every issue is logged, every transaction is audited. It simply removes bureaucratic friction from transactions that are genuinely routine.</p>
+        <span class="fa-tag">Core Feature</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How does WYNTIQ handle Emergency demands differently from Routine demands?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ manages three priority levels with distinct processing rules. For Routine demands, the standard workflow applies with monitoring and flagging for slow-moving demands. For Urgent demands, the officer receives immediate notification and has 4 hours to respond before auto-escalation to the next higher authority. Alternative sources — other units or bases with the item in stock — are automatically identified and presented.</p>
+        <p class="fa-p">For Emergency demands, the response timer is 30 minutes. If the demand is not progressed within 30 minutes, auto-escalation goes to Command level. The Scramble Mode Override becomes available to the Commanding Officer — allowing immediate issue from any available source without waiting for the normal chain. Critically, every override is logged with the authorising officer's credentials, timestamp, justification, and all items issued. Speed is achieved without sacrificing accountability.</p>
+        <span class="fa-tag">Priority Management</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can WYNTIQ generate reports for MCI audits and CAG inspections?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. WYNTIQ's audit trail is specifically designed with defence inspection requirements in mind. Every transaction is permanently logged with the full details required for a stores audit: what was issued, in what quantity, against which demand, on which date, by which person, under whose authority, and against which aircraft or work order. This log cannot be edited, cannot be deleted, and cannot be selectively presented — it is always complete and always available.</p>
+        <p class="fa-p">The Enhanced Audit module provides Court of Inquiry format reports, CAG-ready transaction listings, digital signature support, and CSV exports with hash verification that proves records have not been tampered with since creation. A report that currently takes three officers two weeks to compile from paper registers can be generated in WYNTIQ in under 60 seconds.</p>
+        <span class="fa-tag">Audit</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Does WYNTIQ support the Indian Army's multi-echelon logistics structure?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. WYNTIQ is designed for the full Indian Army logistics hierarchy — Company, Battalion, Brigade, Division, Corps, and Army level. Each echelon has access to the information relevant to its role. A Unit QM sees unit-level detail. A formation logistics officer sees formation-level aggregates across subordinate units. A Corps-level logistics staff officer sees command-level trends and strategic procurement requirements.</p>
+        <p class="fa-p">Inter-unit lateral transfers — where one unit has a surplus that another unit urgently needs — are managed as specific transaction types with full chain-of-custody tracking from the issuing unit's store to the receiving unit's store. This lateral transfer capability can significantly reduce vehicle downtime and equipment unserviceability by making existing holdings available across units rather than waiting weeks for depot procurement.</p>
+        <span class="fa-tag">Army</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How does WYNTIQ support Indian Navy at-sea operations?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Ships at sea may be without reliable internet connectivity for days or weeks. WYNTIQ's offline-first architecture means the system functions identically at sea as in port. Demands are raised, approved, and issued. Maintenance records are created. Inventory is tracked — all without any internet connection. When the ship returns to port or satellite connectivity is briefly available, WYNTIQ synchronises all at-sea data automatically with the shore system.</p>
+        <p class="fa-p">Port logistics staff can see the maintenance records and parts consumption from the at-sea period and begin preparing for replenishment and maintenance before the ship berths — reducing turnaround time and maximising operational availability. Pre-deployment stores planning is supported by WYNTIQ's predictive capability, which generates a recommended stores list based on deployment duration, vessel class, and maintenance history.</p>
+        <span class="fa-tag">Navy</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What happens to WYNTIQ data if a device is lost or captured in the field?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Device loss is a real operational risk in defence environments and WYNTIQ addresses it through multiple layers. First, all data stored on WYNTIQ devices is encrypted with AES-256 — the standard used by intelligence agencies globally. Without the decryption key, data on a lost device is computationally unreadable. Second, remote wipe capability allows an administrator to delete all WYNTIQ data from a lost device the next time it connects to any network.</p>
+        <p class="fa-p">Third, data compartmentalisation limits exposure. Each device caches only the data relevant to its configured role and location — a device at Station A does not contain data from Station B. Even in the worst case of a device being captured and somehow decrypted, the information available is limited to what that specific device's user role and location required. This layered approach ensures that no single device compromise creates a systemic security failure.</p>
+        <span class="fa-tag">Device Security</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Is WYNTIQ approved or certified for use in the Indian Armed Forces?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ is currently in the product development and early deployment phase. Formal certification for deployment within the Indian Armed Forces requires a structured evaluation process by the relevant Service Headquarters and the Defence Cyber Agency. TwinStance Solutions is actively engaged with India's iDEX ecosystem under the Defence Innovation Organisation to pursue this evaluation pathway through the DISC and ADITI programmes.</p>
+        <p class="fa-p">For organisations interested in evaluating WYNTIQ, TwinStance Solutions can provide full demonstrations, technical documentation, and support for structured pilot deployments. The pilot process forms the foundation for a formal evaluation and potential certification pathway. We welcome formal evaluation by any Service Headquarters or designated evaluating authority.</p>
+        <span class="fa-tag">Certification</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can WYNTIQ integrate with existing defence logistics databases?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes, through the API Integration module. WYNTIQ provides a REST API for data exchange with other systems. For defence environments, integration is done on a case-by-case basis during the deployment phase, taking into account specific systems and security requirements. Common scenarios include importing stores catalogues from legacy systems, exporting transaction records to financial accounting systems, and synchronising user data with existing directory services.</p>
+        <p class="fa-p">All integration work is documented and subject to the same security review as the core platform. TwinStance Solutions works directly with installation technical teams to design integration solutions that meet both functional requirements and the security constraints of the specific environment. Integration capabilities and security protocols are available for review as part of the formal evaluation process.</p>
+        <span class="fa-tag">Integration</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ENTERPRISE -->
+  <div class="faq-section" id="enterprise">
+    <div class="faq-section-header"><div class="fsh-icon">🏭</div><div><div class="fsh-title">Enterprise Use</div><div class="fsh-sub">Mining, Auto, Factory, E-Commerce</div></div></div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How does WYNTIQ reduce equipment downtime in manufacturing and mining?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Equipment downtime is typically caused by unexpected failure, scheduled maintenance without parts available, or waiting for approval to issue parts already in stock. WYNTIQ addresses all three simultaneously.</p>
+        <p class="fa-p">For unexpected failures, predictive alerts monitor usage patterns and warn when components are approaching likely failure based on operating hours and historical data. For scheduled maintenance, WYNTIQ links the maintenance calendar to spare parts inventory — auto-generating procurement requests with enough lead time so parts arrive before the maintenance date. For parts already in stock, Smart Inventory Bypass issues them immediately — no approval, no delay. The mechanic gets the part in minutes instead of hours.</p>
+        <p class="fa-p">The financial impact is significant. A coal mine losing ₹10 lakhs per hour of downtime on a key haul truck sees payback on WYNTIQ within the first prevented breakdown. The system also tracks actual downtime costs per equipment type, making the ROI of preventive maintenance visible and compelling to management.</p>
+        <span class="fa-tag">Downtime Reduction</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can WYNTIQ work across multiple plant or mine locations simultaneously?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. Multi-site operation is a core feature — not an add-on. Each site has its own inventory, user list, and transaction history. However, all sites within an organisation can be viewed together by authorised managers. The cross-site visibility feature allows a materials manager to see stock levels at all sites simultaneously, identify surpluses and shortages, and initiate inter-site transfer requests with full chain-of-custody tracking.</p>
+        <p class="fa-p">Sites can operate independently when disconnected from each other — each maintains its local database — and synchronise when connectivity is available. A remote mining site with intermittent satellite connectivity operates WYNTIQ normally during disconnected periods and synchronises with the head office when connectivity returns. No data is lost. No transaction is missed.</p>
+        <span class="fa-tag">Multi-Site</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How does vendor management work in WYNTIQ?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ includes complete vendor management covering the full procurement cycle. When a demand requires external procurement, WYNTIQ automatically generates a Purchase Order to the approved vendor for that item category. The vendor receives the PO, must acknowledge receipt, and confirms delivery when goods are delivered. Receipt is recorded by store staff against the PO. Stock updates automatically. The Vendor Scorecard module tracks on-time delivery rate, quantity accuracy, rejection rate, and response time for every vendor — automatically, without any manual compilation.</p>
+        <span class="fa-tag">Vendor Management</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can WYNTIQ be used by small and medium enterprises, not just large organisations?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. WYNTIQ scales from as few as 5 users at a single site to hundreds of users across multiple sites. The per-user, per-site pricing means small operations pay proportionally less. For a small manufacturing unit with 10-15 users at one location, WYNTIQ can be deployed and operational within days at a cost that is a fraction of enterprise ERP systems like SAP or Oracle.</p>
+        <p class="fa-p">As the organisation grows — more users, more sites, more modules — WYNTIQ scales with it without any system replacement or major re-implementation. The same platform that serves 15 users can serve 500 users. TwinStance Solutions specifically designed WYNTIQ to be accessible to the mid-market Indian manufacturer who cannot afford a ₹2 crore ERP implementation but deserves a world-class logistics management system.</p>
+        <span class="fa-tag">SME Friendly</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What management reports does WYNTIQ generate automatically?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Standard reports in all deployments include daily demand summary, stock position report comparing current levels to minimum and reorder thresholds, demand fulfilment rate, and pending procurement status. The Advanced Analytics module adds bottleneck analysis showing which roles cause the most delays and by how much, vendor performance scorecards, time-to-complete analysis comparing expected versus actual time at each stage, predictive stockout reports with projected dates, and cost centre allocation showing maintenance expenditure by equipment type or department.</p>
+        <p class="fa-p">All reports export as CSV for use in Microsoft Excel. Scheduled reports can be configured to email specified recipients daily, weekly, or monthly — giving management regular visibility without requiring them to log into the system.</p>
+        <span class="fa-tag">Reporting</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How does WYNTIQ support regulatory compliance and ISO certification?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ provides the complete, auditable maintenance records that ISO 9001, ISO 14001, and other management system certifications require. Every maintenance task completed is logged with timestamp, assignee, parts used, and findings. Calibration records, preventive maintenance schedules and their completion status, and change histories are all maintained and immediately accessible for certification auditors.</p>
+        <p class="fa-p">For DGMS compliance in mining, WYNTIQ maintains the equipment maintenance records that demonstrate compliance with statutory safety maintenance requirements. For all sectors, the tamper-proof audit log — permanent, timestamped, user-attributed — provides the documentary evidence that regulatory inspections require. Preparing for a certification audit that currently takes days now takes minutes.</p>
+        <span class="fa-tag">Compliance</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Does WYNTIQ support Just-in-Time manufacturing environments?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. WYNTIQ provides the information precision that JIT requires. The 90-day demand forecasting feature, based on the production schedule and historical consumption rates, allows the materials team to share advance demand signals with vendors so they can plan their own production and delivery. Automatic reorder triggers ensure purchase orders are generated at exactly the right time based on vendor lead times and consumption rates. Real-time stock visibility and instant issue processing means assembly line components are available and issued without delay when needed.</p>
+        <span class="fa-tag">JIT Manufacturing</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TECHNICAL -->
+  <div class="faq-section" id="technical">
+    <div class="faq-section-header"><div class="fsh-icon">⚙️</div><div><div class="fsh-title">Technical Questions</div><div class="fsh-sub">Architecture, devices, integration</div></div></div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What technology is WYNTIQ built on?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ is built as a Progressive Web Application using modern web technologies — HTML5, CSS3, and JavaScript — designed to run in any modern browser without installation. Offline capability uses Service Workers and IndexedDB, which are browser-native technologies that store data locally and enable operation without internet. The backend uses a microservices architecture with separate services for authentication, inventory, demand workflow, notifications, and analytics — allowing individual components to scale independently.</p>
+        <p class="fa-p">Data synchronisation uses an event-sourcing approach — storing a log of all change events rather than overwriting state — which allows intelligent conflict resolution when multiple devices make changes while disconnected. All code is developed and maintained in India by TwinStance Solutions' team in Cuttack, Odisha.</p>
+        <span class="fa-tag">Architecture</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What devices and browsers does WYNTIQ support?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ supports any device with a modern browser. Desktop: Chrome 80+, Firefox 75+, Edge 80+, Safari 13+. Mobile: Chrome for Android 80+, Samsung Internet 10+, Safari on iOS 13+. Internet Explorer is not supported. Minimum hardware: 2GB RAM, any modern processor, 500MB available storage. For offline operation, 1-5GB additional storage for local data caching is recommended.</p>
+        <p class="fa-p">For ruggedised field deployments, WYNTIQ is tested on Samsung Galaxy Tab Active series, Zebra ET tablets, and Panasonic Toughpad devices. These ruggedised tablets are rated for extreme temperatures, drops, and dust — appropriate for field use in defence and mining environments.</p>
+        <span class="fa-tag">Requirements</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What are the six user roles in WYNTIQ and what can each do?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ has six predefined roles with specific permissions reflecting real organisational responsibilities.</p>
+        <ul class="fa-ul">
+          <li><strong>Technician / Requester:</strong> Raise demands, view status of own demands, confirm receipt of issued items.</li>
+          <li><strong>Officer / Approver:</strong> Review and approve or reject demands requiring procurement authorisation. View all demands in area of responsibility.</li>
+          <li><strong>Logistics / Store Manager:</strong> Check inventory, issue parts from store, receive vendor deliveries, process inter-site transfers.</li>
+          <li><strong>Accounts / Finance:</strong> Review and approve budget and expenditure for procurement demands.</li>
+          <li><strong>Vendor:</strong> Receive purchase orders, acknowledge, confirm delivery. Sees only their own POs.</li>
+          <li><strong>Admin / System Administrator:</strong> Full system access — user management, configuration, all reports and transaction history.</li>
+        </ul>
+        <span class="fa-tag">User Roles</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can WYNTIQ integrate with SAP, Oracle, or other ERP systems?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes, through the API Integration add-on module. WYNTIQ provides a REST API for bidirectional data exchange. Pre-built connectors are available for SAP ERP (MM module), Oracle E-Business Suite, and Tally. For other systems, the standard REST API allows custom integration development. Common scenarios include importing vendor master data, exporting completed POs to financial systems, and pulling production schedules for demand forecasting.</p>
+        <p class="fa-p">All API communications are authenticated and encrypted. The API supports both real-time event-driven integration and scheduled batch synchronisation. Integration documentation is comprehensive and suitable for development by the organisation's own IT team or a systems integrator.</p>
+        <span class="fa-tag">ERP Integration</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What happens to data if WYNTIQ's cloud servers go down?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Because WYNTIQ is offline-first, a server outage does not stop users from working. All users with locally cached data continue raising demands, processing approvals, issuing parts, and recording receipts exactly as if the server were available. All actions during a server outage are queued locally and synchronise automatically when the server is restored.</p>
+        <p class="fa-p">Cloud deployments maintain a 99.5% uptime SLA with redundant infrastructure. Data is backed up every 6 hours with 90-day retention. Scheduled maintenance is announced in advance and performed during off-peak hours. For on-premise deployments, availability depends on the organisation's own infrastructure. TwinStance Solutions provides hardware sizing guidance that includes appropriate redundancy recommendations based on criticality.</p>
+        <span class="fa-tag">Reliability</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can we import our existing inventory data into WYNTIQ?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. WYNTIQ supports bulk import through CSV file upload. The import template allows simultaneous loading of the complete item master — part numbers, descriptions, units of measure, categories — and current stock positions including quantities on hand, minimum stock levels, and reorder points. For assisted and full deployments, TwinStance Solutions provides data migration support including data cleaning, test import, and validation before go-live.</p>
+        <span class="fa-tag">Data Migration</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How many users and transactions can WYNTIQ handle?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">The cloud deployment is designed for organisations of up to several thousand users with horizontal auto-scaling — additional capacity is added automatically when load increases. Transaction volume tested for tens of thousands of demands per day across all users. For on-premise deployments, TwinStance Solutions provides hardware sizing guidance based on expected users and transaction volumes.</p>
+        <span class="fa-tag">Scalability</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What is the minimum bandwidth required for WYNTIQ?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Initial application load requires approximately 2MB download — under 30 seconds on 512 kbps. After the initial load, the application is cached and subsequent launches require no download. For data synchronisation, a typical day's activity for a medium-sized unit requires less than 100KB — feasible on slow satellite links or 2G mobile connections. Real-time connected use requires a minimum of 256 kbps. WYNTIQ is intentionally designed to work on the lowest-bandwidth connections found in India's most remote operational environments.</p>
+        <span class="fa-tag">Bandwidth</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Is WYNTIQ a Progressive Web App that can be installed on devices?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. WYNTIQ is a PWA that can be installed on any device directly from the browser — no app store required. On Android, Chrome prompts installation after visiting the application. On iOS, Safari's share menu has an "Add to Home Screen" option. Once installed, WYNTIQ behaves like a native app — its own icon, full-screen launch, offline operation, and push notifications for demands, approvals, and critical alerts.</p>
+        <span class="fa-tag">PWA</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECURITY -->
+  <div class="faq-section" id="security">
+    <div class="faq-section-header"><div class="fsh-icon">🔒</div><div><div class="fsh-title">Security & Data Privacy</div><div class="fsh-sub">Encryption, audit, data sovereignty</div></div></div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Where is WYNTIQ data stored?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">For cloud deployments, all WYNTIQ data is stored on servers located in India, subject to Indian data protection laws. TwinStance Solutions does not store customer data outside India under any circumstances. For on-premise deployments, data stays entirely on the customer's infrastructure — nothing is transmitted to TwinStance Solutions' servers except licence verification, which can be disabled for fully isolated deployments. For air-gapped deployments, data never leaves the customer's network perimeter under any circumstances.</p>
+        <span class="fa-tag">Data Storage</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How is WYNTIQ data encrypted?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Data at rest uses AES-256 encryption — the standard used by intelligence agencies for top-secret information — on both servers and devices. Data in transit uses TLS 1.3, the most current Transport Layer Security protocol, providing encryption and authentication simultaneously. Passwords are never stored in readable form — WYNTIQ uses bcrypt with a high work factor for password hashing, making passwords unrecoverable even from a compromised database.</p>
+        <span class="fa-tag">Encryption</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can the audit trail be edited or deleted by administrators?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">No. The audit trail is append-only — records can be added but never modified or deleted. This applies to every user including administrators and TwinStance Solutions staff. The technical implementation uses a cryptographic hash chain — each record includes a hash of the previous record, making any tampering immediately mathematically detectable. This permanent, tamper-evident audit trail is fundamental to WYNTIQ's accountability promise and its value for Courts of Inquiry, CAG audits, and legal proceedings.</p>
+        <span class="fa-tag">Audit Integrity</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Is WYNTIQ built entirely in India? Who has access to the code?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ is designed, developed, and maintained entirely by TwinStance Solutions LLP — a registered Indian company headquartered in Cuttack, Odisha. All development is done in India by Indian personnel. No foreign entities, foreign personnel, or foreign infrastructure are involved in any aspect of WYNTIQ's development or operation. Source code is not shared with any third party without explicit written agreement, except in the context of formal security evaluations for defence deployments.</p>
+        <span class="fa-tag">Data Sovereignty</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How does WYNTIQ prevent unauthorised access?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ uses layered access control. Authentication requires username and password with configurable policy — minimum complexity, expiry intervals, lockout after failed attempts. Role-based authorisation ensures that even authenticated users can only access features and data their role permits. Session management expires sessions after configurable inactivity periods. Two-factor authentication (SMS OTP or authenticator app) is configurable for sensitive operations in defence deployments.</p>
+        <span class="fa-tag">Access Control</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What happens to our data if we stop using WYNTIQ?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">On account deactivation, organisations have 90 days to export all data in CSV format — inventory records, demand history, audit logs, user records — everything. After deactivation, TwinStance Solutions retains data for 30 days for reactivation or recovery, then permanently deletes it. A deletion certificate is provided on request. For on-premise and air-gapped deployments, all data remains on the organisation's own infrastructure after licence expiry. Database schema documentation is provided to facilitate data access and migration.</p>
+        <span class="fa-tag">Data Portability</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Does WYNTIQ undergo security testing?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">TwinStance Solutions conducts periodic security reviews including vulnerability assessments and code reviews focused on OWASP Top 10 web application security issues. Identified vulnerabilities are prioritised by severity and patched in the next scheduled release or as emergency patches for critical issues. For defence deployments requiring formal security evaluation, TwinStance Solutions can provide technical documentation, source code access, and cooperation with the Defence Cyber Agency or other designated evaluation bodies.</p>
+        <span class="fa-tag">Security Testing</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Is WYNTIQ compliant with India's data protection laws?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ is designed in compliance with India's Digital Personal Data Protection Act, 2023 (DPDPA). TwinStance Solutions processes only personal data necessary for platform operation — user names, rank, contact details, and role — and uses it only for the purposes collected. Users have rights to access, correct, and delete their personal data. TwinStance Solutions does not sell user data, does not use data for advertising or profiling, and does not share data with third parties without explicit consent. The full privacy policy is available on the WYNTIQ website.</p>
+        <span class="fa-tag">Privacy Law</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OFFLINE -->
+  <div class="faq-section" id="offline">
+    <div class="faq-section-header"><div class="fsh-icon">📡</div><div><div class="fsh-title">Offline Operation & Sync</div><div class="fsh-sub">How WYNTIQ works without internet</div></div></div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What exactly does "offline-first" mean?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Offline-first means the system was designed with the assumption that connectivity will be intermittent or absent, rather than treating offline as an exception. In an offline-first system, all core functionality works without any internet — and connectivity, when available, is used to synchronise data rather than enable basic operations.</p>
+        <p class="fa-p">This is fundamentally different from "offline mode" in primarily online systems. In an online-first system with offline mode, users get limited functionality when disconnected — perhaps read-only access to recently cached data. In WYNTIQ's offline-first design, the full system works identically whether connected or not. Demand creation, approval workflows, inventory management, issue processing, and audit logging all function completely without connectivity. The user experience is identical in both states.</p>
+        <span class="fa-tag">Core Concept</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How does sync work when connectivity is restored?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Synchronisation is automatic and background — it starts as soon as connectivity is detected, without any user action. The process sends all locally queued events to the central server, then retrieves changes from the server since the last sync. This bidirectional sync ensures the device has the latest data from all other devices and the server after each cycle. Sync is incremental — only changes since the last sync are transmitted, not the full database — making it fast and efficient even on slow connections. A typical sync of several hours of offline activity completes in seconds on standard mobile data.</p>
+        <span class="fa-tag">Sync Process</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What happens if two devices make conflicting changes while offline?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ uses event-sourcing — storing a log of all change events with timestamps rather than overwriting state. For inventory quantities, a delta-based approach applies both changes: if Device A issued 2 units and Device B issued 3 units while disconnected, sync reduces stock by 5 total. If this creates a negative balance, an alert is generated for the inventory manager.</p>
+        <p class="fa-p">For approval decisions, if two devices both approve the same demand while offline, the system detects the duplicate and records both events, flagging the duplication for administrative review. The workflow design minimises conflict likelihood by routing demands to specific named users rather than role groups — typically only one person is the designated approver for any given demand.</p>
+        <span class="fa-tag">Conflict Resolution</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can WYNTIQ work in a completely network-denied environment?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. In complete network denial — no internet, no local network, no satellite — WYNTIQ continues on individual devices using locally cached data. Each device operates as a standalone WYNTIQ instance with full functionality for the user of that device. The limitation is that devices cannot share information with each other until they are in local network range or connectivity is restored. When the unit returns to connectivity, all devices synchronise and the complete picture of the network-denied period is assembled in the central system.</p>
+        <span class="fa-tag">Network Denial</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Does WYNTIQ support local area network sync between devices without internet?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. WYNTIQ supports LAN synchronisation between devices on the same WiFi network without internet. At a forward base or remote mine site, devices synchronise with each other over local WiFi even when the site has no internet. A designated local sync hub — typically the QM's tablet — holds the latest data for all local devices. When the hub gets even brief connectivity, it synchronises with the central server on behalf of all local devices. Peer-to-peer sync via Bluetooth and WiFi Direct is on the product roadmap for future releases.</p>
+        <span class="fa-tag">Local Sync</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How much local storage does WYNTIQ use on a device?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">For a typical unit with 1,000-5,000 inventory line items and 6 months of transaction history, local cache occupies 200-500MB. The cache is configurable — administrators can balance offline capability against device storage constraints. Devices with limited storage can cache just the most recent 30 days and role-relevant items. Devices needing full offline capability for extended periods can be configured to cache complete history.</p>
+        <span class="fa-tag">Storage</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Does WYNTIQ work in extreme cold like Siachen or Ladakh?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ as software has no temperature limitation. The device hardware determines cold weather capability. Standard tablets operate to 0°C; for Siachen at -50°C, ruggedised devices rated for extreme cold are required. Panasonic Toughpad, Samsung Galaxy Tab Active, and Getac military-grade tablets operate to -20°C or below with glove-friendly touchscreens. TwinStance Solutions can advise on appropriate hardware for specific deployment environments. WYNTIQ's offline-first design is particularly valuable in high-altitude environments where connectivity is most unreliable.</p>
+        <span class="fa-tag">Extreme Conditions</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PRICING -->
+  <div class="faq-section" id="pricing">
+    <div class="faq-section-header"><div class="fsh-icon">💰</div><div><div class="fsh-title">Pricing & Procurement</div><div class="fsh-sub">Costs, licences, GeM</div></div></div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How is WYNTIQ priced?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ uses a hybrid pricing model combining a base platform fee, per-user fees (with volume tiers), per-site fees (with volume tiers), deployment type premium, add-on module fees, implementation fee (one-time), and support tier. This structure — similar to how IBM and TCS price enterprise platforms — ensures that small organisations pay proportionally less while larger organisations receive volume discounts. Multi-year contracts receive discounts of 10%, 18%, and 28% for 2, 3, and 5-year contracts respectively.</p>
+        <p class="fa-p">Pricing is not published publicly because it depends on specific configuration, applicable government pricing frameworks, and negotiated terms. Contact TwinStance Solutions for a formal quotation. An internal pricing calculator is available for authorised use to generate indicative estimates.</p>
+        <span class="fa-tag">Pricing Structure</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Can WYNTIQ be procured through Government e-Marketplace (GeM)?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">TwinStance Solutions is in the process of registering WYNTIQ on GeM, which is the preferred procurement route for many Central Government departments and agencies. GeM registration will enable government organisations, defence establishments, and public sector enterprises to procure WYNTIQ through the standard government procurement process. Until GeM registration is complete, direct procurement from TwinStance Solutions is available with full documentation support for procurement committees.</p>
+        <span class="fa-tag">GeM Procurement</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Is there a free trial?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">TwinStance Solutions offers structured demonstrations rather than open free trials. An unconfigured system with sample data does not accurately represent WYNTIQ configured for a specific organisation's workflows. The demonstration includes a customised walkthrough for the prospect's specific sector and use case, followed by a structured pilot proposal if the organisation wishes to proceed. The pilot allows evaluation with the organisation's own data, users, and workflows — providing a genuine fit assessment. For iDEX evaluations, TwinStance Solutions works with the evaluating organisation to provide the access and time required for a thorough assessment.</p>
+        <span class="fa-tag">Trial Process</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Does WYNTIQ qualify for MSME procurement preferences?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. TwinStance Solutions LLP qualifies as an MSME under Government of India classification criteria. This provides procurement preferences under the Public Procurement Policy for MSMEs when WYNTIQ is being procured by Central Government entities that are required to source a minimum 25% of procurement from MSMEs. TwinStance Solutions can provide required MSME documentation to support procurement decisions utilising this policy preference.</p>
+        <span class="fa-tag">MSME</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What is included in the annual licence fee?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">The annual licence includes platform access for licensed users and sites, all software updates released during the licence period, new features as released, standard email support with 48-hour response, access to documentation and knowledge base, and data backup for cloud deployments. It does not include implementation and onboarding (one-time fees), premium support tiers, add-on modules beyond core platform, custom development, or hardware for on-premise deployments.</p>
+        <span class="fa-tag">What's Included</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Are there special rates for iDEX or government pilot deployments?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Yes. TwinStance Solutions offers special evaluation pricing within the iDEX and ADITI framework, removing pricing as a barrier to thorough evaluation. For government organisations conducting formal evaluations, TwinStance Solutions is open to pricing arrangements that align with the organisation's procurement procedures. Contact TwinStance Solutions directly to discuss the specific requirements of your evaluation process.</p>
+        <span class="fa-tag">Pilot Pricing</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- IDEX -->
+  <div class="faq-section" id="idex">
+    <div class="faq-section-header"><div class="fsh-icon">🇮🇳</div><div><div class="fsh-title">iDEX, ADITI & Atmanirbhar Bharat</div><div class="fsh-sub">India's defence innovation ecosystem</div></div></div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What is iDEX and how does WYNTIQ relate to it?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">iDEX — Innovations for Defence Excellence — is a Ministry of Defence initiative launched by Prime Minister Narendra Modi in 2018, operating under the Defence Innovation Organisation (DIO). iDEX supports Indian startups, MSMEs, innovators, and academic institutions in developing technology that addresses identified defence needs through DISC (Defence India Startup Challenge) and ADITI (Acing Development of Innovative Technologies with iDEX) programmes.</p>
+        <p class="fa-p">WYNTIQ directly addresses iDEX problem statements related to digital logistics management, integrated material management systems, and offline-capable field management — areas consistently identified by the Indian Armed Forces as priority requirements. TwinStance Solutions is actively pursuing evaluation of WYNTIQ through the iDEX ecosystem. Successful iDEX/ADITI selection provides both funding up to ₹25 crore and facilitation of formal Armed Forces evaluation.</p>
+        <span class="fa-tag">iDEX</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How does WYNTIQ contribute to Atmanirbhar Bharat?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ contributes to Atmanirbhar Bharat — Self-Reliant India — in a direct and concrete way: it is an Indian product built by an Indian company replacing dependence on Western logistics software in India's most critical sector. Currently, defence logistics in India relies on either paper or foreign-developed software adapted imperfectly for Indian requirements. WYNTIQ is designed from scratch for Indian Defence procedures, Indian terrain, Indian procurement frameworks, and Indian data sovereignty requirements.</p>
+        <p class="fa-p">Every rupee spent on WYNTIQ stays in India. Every job supporting WYNTIQ is an Indian job. Every piece of sensitive defence operational data managed by WYNTIQ remains in Indian hands, stored on Indian servers, managed by Indian personnel, governed by Indian law. This is not just a commercial advantage — in the context of defence logistics, it is a strategic and security imperative.</p>
+        <span class="fa-tag">Atmanirbhar</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">Why should India have its own IMMS rather than adapting foreign software?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">Three compelling reasons. First: data sovereignty. Defence logistics data contains sensitive operational information — stock positions, maintenance status, supply chains, operational capabilities. This data should be managed by Indian software on Indian servers accessible only to Indian personnel, not routed through foreign infrastructure governed by foreign law.</p>
+        <p class="fa-p">Second: operational alignment. Foreign logistics software is designed for foreign military procedures — NATO doctrine, US Army supply chain management, European inventory practices. Indian Defence has its own structures, terminology, approval hierarchies, and documentary requirements that are fundamentally different. Adaptation always results in compromises. WYNTIQ is built natively for how India's Armed Forces actually work.</p>
+        <p class="fa-p">Third: geopolitical resilience. Dependence on foreign software creates vulnerability — what happens if the vendor country restricts access during a period of political tension? An Indian defence logistics system built and maintained by Indian entities is not subject to this risk. Atmanirbhar Bharat in defence technology is not just about cost or pride — it is about operational independence when it matters most.</p>
+        <span class="fa-tag">India First</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">What is ADITI and is WYNTIQ eligible for ADITI funding?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">ADITI — Acing Development of Innovative Technologies with iDEX — is a scheme for deep technology innovations in defence with grants up to ₹25 crore for selected projects. ADITI focuses on high-priority technology areas including logistics and supply chain management for defence operations. WYNTIQ addresses ADITI focus areas directly — integrated logistics management with offline capability for forward-deployed operations. TwinStance Solutions is eligible for and engaged with the ADITI application process.</p>
+        <span class="fa-tag">ADITI</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How is WYNTIQ aligned with Make in India?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">WYNTIQ embodies Make in India at every level. The product is conceived, designed, coded, tested, and maintained in India by Indian talent. The company is registered in India, employs in India, pays taxes in India, and serves Indian customers with Indian-built technology. For defence procurement, WYNTIQ qualifies for the indigenously designed, developed, and manufactured (IDDM) category under the Defence Acquisition Procedure — the highest priority category in Indian defence procurement, reserved for products that are truly Indian in origin.</p>
+        <span class="fa-tag">Make in India</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)"><span class="fq-text">How can our organisation engage with TwinStance Solutions regarding WYNTIQ?</span><span class="fq-icon">+</span></div>
+      <div class="faq-a">
+        <p class="fa-p">TwinStance Solutions welcomes enquiries from all organisations — whether for formal evaluation, pilot deployment, or commercial procurement. Contact us via the contact form on the website, by email at contact@tssolutionsllp.com, or by requesting a demo. For defence organisations conducting formal evaluations under iDEX or through Service Headquarters channels, initial contact through the appropriate official channel is recommended. TwinStance Solutions is headquartered in Cuttack, Odisha and is available for meetings in Cuttack, Bhubaneswar, Delhi, Mumbai, Bengaluru, and other major cities by arrangement.</p>
+        <span class="fa-tag">Contact</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-box">
+    <h3 class="cta-title">Still have a question?</h3>
+    <p class="cta-sub">Our team responds within 24 hours to all enquiries about WYNTIQ, deployment, pricing, or the iDEX evaluation process.</p>
+    <a class="btn-gold" href="contact.html">Contact TwinStance Solutions →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-text">© 2026 TwinStance Solutions LLP · LLPIN: AAQ-0042 · Cuttack, Odisha · <a href="index.html">Home</a> · <a href="contact.html">Contact</a> · <a href="mailto:contact@tssolutionsllp.com">contact@tssolutionsllp.com</a></div>
+</footer>
+
+<script>
+function toggle(btn){
+  const item=btn.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+</script>
+</body>
+</html>
