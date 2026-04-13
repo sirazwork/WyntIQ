@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="factory" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0a0a1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#factory)"/>
+  <!-- Assembly line tracks -->
+  <rect x="0" y="280" width="800" height="8" fill="rgba(201,168,76,0.3)"/>
+  <rect x="0" y="320" width="800" height="4" fill="rgba(201,168,76,0.15)"/>
+  <!-- Overhead structure -->
+  <rect x="0" y="60" width="800" height="8" fill="#2a2a3a"/>
+  <line x1="100" y1="60" x2="100" y2="0" stroke="#2a2a3a" stroke-width="6"/>
+  <line x1="300" y1="60" x2="300" y2="0" stroke="#2a2a3a" stroke-width="6"/>
+  <line x1="500" y1="60" x2="500" y2="0" stroke="#2a2a3a" stroke-width="6"/>
+  <line x1="700" y1="60" x2="700" y2="0" stroke="#2a2a3a" stroke-width="6"/>
+  <!-- Hanging lights -->
+  <line x1="200" y1="60" x2="200" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <circle cx="200" cy="125" r="8" fill="#fff" opacity="0.9"/>
+  <line x1="400" y1="60" x2="400" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <circle cx="400" cy="115" r="8" fill="#fff" opacity="0.9"/>
+  <line x1="600" y1="60" x2="600" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <circle cx="600" cy="125" r="8" fill="#fff" opacity="0.9"/>
+  <!-- Light cones -->
+  <polygon points="200,133 150,280 250,280" fill="rgba(255,255,200,0.04)"/>
+  <polygon points="400,123 350,280 450,280" fill="rgba(255,255,200,0.05)"/>
+  <polygon points="600,133 550,280 650,280" fill="rgba(255,255,200,0.04)"/>
+  <!-- Robot arm 1 -->
+  <rect x="130" y="150" width="10" height="80" fill="#3a3a4a" rx="3"/>
+  <rect x="135" y="145" width="60" height="8" fill="#3a3a4a" rx="3" transform="rotate(-30 135 145)"/>
+  <rect x="170" y="125" width="40" height="6" fill="#4a4a5a" rx="2" transform="rotate(20 170 125)"/>
+  <circle cx="195" cy="120" r="8" fill="#c9a84c" opacity="0.8"/>
+  <!-- Sparks from robot 1 -->
+  <circle cx="195" cy="112" r="2" fill="#ffaa00" opacity="0.9"/>
+  <circle cx="188" cy="108" r="1.5" fill="#ffcc00" opacity="0.7"/>
+  <circle cx="202" cy="106" r="1" fill="#ff8800" opacity="0.6"/>
+  <!-- Robot arm 2 -->
+  <rect x="360" y="140" width="10" height="90" fill="#3a3a4a" rx="3"/>
+  <rect x="365" y="135" width="70" height="8" fill="#3a3a4a" rx="3" transform="rotate(25 365 135)"/>
+  <circle cx="398" cy="118" r="8" fill="#c9a84c" opacity="0.8"/>
+  <!-- Sparks from robot 2 -->
+  <circle cx="398" cy="110" r="2" fill="#ffaa00" opacity="0.9"/>
+  <circle cx="392" cy="106" r="1.5" fill="#ffcc00" opacity="0.8"/>
+  <!-- Car bodies on assembly line -->
+  <!-- Car 1 -->
+  <rect x="80" y="240" width="140" height="45" fill="#1a2a4a" rx="8"/>
+  <rect x="95" y="220" width="100" height="25" fill="#1a3060" rx="5"/>
+  <rect x="100" y="222" width="40" height="18" fill="#4a7aaa" rx="2" opacity="0.5"/>
+  <rect x="148" y="222" width="40" height="18" fill="#4a7aaa" rx="2" opacity="0.5"/>
+  <circle cx="105" cy="288" r="12" fill="#0a0a1a" stroke="#3a3a4a" stroke-width="2"/>
+  <circle cx="195" cy="288" r="12" fill="#0a0a1a" stroke="#3a3a4a" stroke-width="2"/>
+  <!-- Car 2 -->
+  <rect x="300" y="240" width="140" height="45" fill="#2a1a4a" rx="8"/>
+  <rect x="315" y="220" width="100" height="25" fill="#3a2060" rx="5"/>
+  <rect x="320" y="222" width="40" height="18" fill="#7a4aaa" rx="2" opacity="0.5"/>
+  <rect x="368" y="222" width="40" height="18" fill="#7a4aaa" rx="2" opacity="0.5"/>
+  <circle cx="325" cy="288" r="12" fill="#0a0a1a" stroke="#3a3a4a" stroke-width="2"/>
+  <circle cx="415" cy="288" r="12" fill="#0a0a1a" stroke="#3a3a4a" stroke-width="2"/>
+  <!-- Car 3 partial -->
+  <rect x="560" y="240" width="140" height="45" fill="#1a3a1a" rx="8"/>
+  <rect x="575" y="220" width="100" height="25" fill="#1a4020" rx="5"/>
+  <circle cx="585" cy="288" r="12" fill="#0a0a1a" stroke="#3a3a4a" stroke-width="2"/>
+  <circle cx="675" cy="288" r="12" fill="#0a0a1a" stroke="#3a3a4a" stroke-width="2"/>
+  <!-- Floor -->
+  <rect x="0" y="380" width="800" height="120" fill="#0a0a18"/>
+  <line x1="0" y1="380" x2="800" y2="380" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="20" y="470" font-family="Arial,sans-serif" font-size="11" fill="rgba(201,168,76,0.8)" font-weight="bold" letter-spacing="2">AUTOMOBILE ASSEMBLY LINE</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e1a"/>
+      <stop offset="60%" style="stop-color:#1a2a4a"/>
+      <stop offset="100%" style="stop-color:#2a3a5a"/>
+    </linearGradient>
+    <linearGradient id="mtn1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f4f8"/>
+      <stop offset="40%" style="stop-color:#c8d4e0"/>
+      <stop offset="100%" style="stop-color:#6a7a8a"/>
+    </linearGradient>
+    <linearGradient id="mtn2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8eef4"/>
+      <stop offset="50%" style="stop-color:#8a9aaa"/>
+      <stop offset="100%" style="stop-color:#3a4a5a"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky -->
+  <rect width="800" height="500" fill="url(#sky)"/>
+  <!-- Stars -->
+  <circle cx="50" cy="40" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="150" cy="25" r="1" fill="white" opacity="0.6"/>
+  <circle cx="250" cy="60" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="400" cy="30" r="1" fill="white" opacity="0.5"/>
+  <circle cx="550" cy="45" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="680" cy="20" r="1" fill="white" opacity="0.6"/>
+  <circle cx="720" cy="55" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="100" cy="80" r="1" fill="white" opacity="0.5"/>
+  <circle cx="620" cy="75" r="1" fill="white" opacity="0.6"/>
+  <!-- Back mountains -->
+  <polygon points="0,280 120,100 240,200 360,80 480,160 600,90 720,180 800,130 800,500 0,500" fill="#2a3a5a" opacity="0.8"/>
+  <!-- Mid mountains with snow -->
+  <polygon points="0,320 80,180 160,280 280,120 380,220 460,140 560,230 650,150 720,220 800,170 800,500 0,500" fill="url(#mtn2)"/>
+  <!-- Snow caps on mid mountains -->
+  <polygon points="280,120 250,160 310,165 340,155" fill="white" opacity="0.9"/>
+  <polygon points="460,140 435,175 490,172 510,165" fill="white" opacity="0.9"/>
+  <polygon points="650,150 628,185 675,182 690,175" fill="white" opacity="0.9"/>
+  <!-- Front mountains -->
+  <polygon points="-10,380 80,220 180,340 300,180 420,300 520,200 640,310 760,210 820,300 820,500 -10,500" fill="url(#mtn1)"/>
+  <!-- Snow on front mountains -->
+  <polygon points="300,180 268,225 332,228 355,218" fill="white" opacity="0.95"/>
+  <polygon points="520,200 497,240 548,238 565,228" fill="white" opacity="0.95"/>
+  <!-- Ground snow -->
+  <ellipse cx="400" cy="490" rx="500" ry="30" fill="white" opacity="0.3"/>
+  <!-- Atmosphere glow -->
+  <rect x="0" y="0" width="800" height="500" fill="rgba(100,130,200,0.08)"/>
+  <!-- Label -->
+  <text x="20" y="480" font-family="Arial,sans-serif" font-size="11" fill="rgba(201,168,76,0.8)" font-weight="bold" letter-spacing="2">LADAKH — 5,400M ALTITUDE</text>
+</svg>

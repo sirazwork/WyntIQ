@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="sea" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a2a4a"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#1a3a5a"/>
+    </linearGradient>
+    <linearGradient id="hull" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a4a6a"/>
+      <stop offset="100%" style="stop-color:#1a2a4a"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky -->
+  <rect width="800" height="280" fill="url(#sky)"/>
+  <!-- Horizon glow -->
+  <rect x="0" y="250" width="800" height="30" fill="rgba(201,168,76,0.08)"/>
+  <!-- Sea -->
+  <rect x="0" y="270" width="800" height="230" fill="url(#sea)"/>
+  <!-- Wave lines -->
+  <path d="M 0 290 Q 100 280 200 290 Q 300 300 400 290 Q 500 280 600 290 Q 700 300 800 290" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="none"/>
+  <path d="M 0 310 Q 80 300 160 310 Q 240 320 320 310 Q 400 300 480 310 Q 560 320 640 310 Q 720 300 800 310" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
+  <path d="M 0 340 Q 120 330 240 340 Q 360 350 480 340 Q 600 330 720 340 Q 760 345 800 340" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
+  <!-- Ship hull -->
+  <polygon points="100,310 700,310 720,340 80,340" fill="url(#hull)"/>
+  <!-- Waterline -->
+  <polygon points="80,340 720,340 700,360 100,360" fill="#1a2a3a"/>
+  <!-- Superstructure base -->
+  <rect x="200" y="240" width="400" height="70" fill="#2a3a5a" rx="2"/>
+  <!-- Bridge -->
+  <rect x="300" y="190" width="200" height="55" fill="#1a2a4a" rx="2"/>
+  <!-- Mast -->
+  <rect x="390" y="120" width="8" height="75" fill="#3a4a6a"/>
+  <line x1="394" y1="120" x2="340" y2="150" stroke="#4a5a7a" stroke-width="1.5"/>
+  <line x1="394" y1="120" x2="450" y2="150" stroke="#4a5a7a" stroke-width="1.5"/>
+  <!-- Radar dish -->
+  <ellipse cx="394" cy="118" rx="15" ry="8" fill="none" stroke="#c9a84c" stroke-width="2" opacity="0.8"/>
+  <!-- Gun turret -->
+  <rect x="160" y="295" width="60" height="20" fill="#1a2a4a" rx="3"/>
+  <rect x="175" y="285" width="30" height="15" fill="#0a1628" rx="2"/>
+  <line x1="190" y1="285" x2="210" y2="265" stroke="#1a2a4a" stroke-width="5" stroke-linecap="round"/>
+  <!-- Windows/portholes on bridge -->
+  <rect x="315" y="203" width="25" height="18" fill="#4a7aaa" rx="2" opacity="0.7"/>
+  <rect x="350" y="203" width="25" height="18" fill="#4a7aaa" rx="2" opacity="0.7"/>
+  <rect x="385" y="203" width="25" height="18" fill="#4a7aaa" rx="2" opacity="0.7"/>
+  <rect x="420" y="203" width="25" height="18" fill="#4a7aaa" rx="2" opacity="0.7"/>
+  <rect x="455" y="203" width="25" height="18" fill="#4a7aaa" rx="2" opacity="0.7"/>
+  <!-- Deck details -->
+  <rect x="220" y="285" width="80" height="8" fill="#1a2a4a" rx="2"/>
+  <rect x="500" y="285" width="80" height="8" fill="#1a2a4a" rx="2"/>
+  <!-- Wake lines -->
+  <path d="M 80 345 Q 40 360 0 370" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none"/>
+  <path d="M 720 345 Q 760 360 800 370" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none"/>
+  <!-- Indian flag colour on mast -->
+  <rect x="394" y="130" width="20" height="6" fill="#ff9933" opacity="0.9"/>
+  <rect x="394" y="136" width="20" height="6" fill="white" opacity="0.9"/>
+  <circle cx="404" cy="139" r="2" fill="#000080" opacity="0.9"/>
+  <rect x="394" y="142" width="20" height="6" fill="#138808" opacity="0.9"/>
+  <text x="20" y="480" font-family="Arial,sans-serif" font-size="11" fill="rgba(201,168,76,0.8)" font-weight="bold" letter-spacing="2">INDIAN NAVY — AT-SEA OPERATIONS</text>
+</svg>
