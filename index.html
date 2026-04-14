@@ -58,7 +58,7 @@ nav{background:var(--white);padding:0 60px;height:70px;display:flex;align-items:
 .page.active{display:block;}
 
 /* ═══ HERO ══════════════════════════════════════════════════════════════ */
-.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 40%,var(--navy3) 100%);padding:100px 60px;position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center;}
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 40%,var(--navy3) 100%);padding:100px 60px;position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center;}.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.18;z-index:0;}
 .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(201,168,76,0.08) 0%,transparent 60%),radial-gradient(circle at 80% 20%,rgba(201,168,76,0.05) 0%,transparent 50%);pointer-events:none;}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;width:100%;}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:20px;margin-bottom:24px;}
@@ -236,7 +236,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
   <div class="topbar-right">
     <a href="privacy.html">Privacy Policy</a>
     <div class="topbar-divider"></div>
-    <a onclick="showPage('rti')">RTI</a>
+    <a href="privacy.html">RTI</a>
     <div class="topbar-divider"></div>
     <a href="about.html">About Us</a>
     <div class="topbar-divider"></div>
@@ -245,7 +245,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 </div>
 
 <nav>
-  <a class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">
+  <a class="nav-logo" href="/">
     <div class="nav-logo-icon">W</div>
     <div>
       <div class="nav-logo-text">WYNTIQ</div>
@@ -253,7 +253,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
     </div>
   </a>
   <div class="nav-links">
-    <span class="nav-link" onclick="showPage('home')">Home</span>
+    <a class="nav-link" href="/">Home</a>
     <div class="dropdown">
       <span class="nav-link">Defence ▾</span>
       <div class="dropdown-menu">
@@ -280,13 +280,15 @@ footer{background:var(--navy);padding:60px 60px 30px;}
   </div>
   <div style="display:flex;gap:8px;align-items:center;">
     <button style="padding:10px 18px;background:transparent;border:1px solid var(--border2);border-radius:6px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;" onclick="scrollToDemo()">Live Demo</button>
-    <a class="nav-demo-btn" href="app/index.html">Sign In →</a>
+    <a class="nav-demo-btn" href="/app/index.html">Sign In →</a>
   </div>
 </nav>
 
 <!-- HOME PAGE -->
 <div class="page active" id="page-home">
   <div class="hero">
+    <img class="hero-bg-img" src="https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" onerror="this.style.display='none'">
+    <img class="hero-bg-img" src="images/hero-bg.svg" alt="" style="opacity:0.3;" style="display:none;" id="hero-bg-fallback">
     <div class="hero-grid">
       <div>
         <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-text">India's First Defence-Grade IMMS</span></div>
@@ -294,7 +296,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         <p class="hero-subtitle">WYNTIQ is an <strong>AI-powered, offline-first Integrated Material Management System</strong> — from demand signal to delivery, every step tracked, approved, and audited. Built by TwinStance Solutions.</p>
         <div class="hero-actions">
           <button class="btn-gold" onclick="scrollToDemo()">Request a Demo</button>
-          <button class="btn-outline-white" href="why.html">Why WYNTIQ →</button>
+          <a class="btn-outline-white" href="why.html">Why WYNTIQ →</a>
         </div>
         <div class="hero-trust">
           <div class="trust-item"><div class="trust-val">130+</div><div class="trust-lbl">IAF Bases</div></div>
@@ -332,10 +334,54 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <p class="section-sub" style="margin:0 auto;text-align:center;">Every grounded aircraft, missing supply, or stuck demand is a failure of visibility, accountability, and speed.</p>
     </div>
     <div class="grid-4">
-      <div class="card"><div class="card-icon">✈️</div><div class="card-title">Days to Procure One Part</div><div class="card-desc">Paper forms travel through officer, logistics, accounts, vendor — each adding days. Aircraft stay grounded.</div><span class="card-tag">Defence Critical</span></div>
-      <div class="card"><div class="card-icon">🗺️</div><div class="card-title">Nobody Knows What's Where</div><div class="card-desc">No single system connects bases, depots, vendors. Commanders decide blind. Duplicates pile up.</div><span class="card-tag">Visibility Gap</span></div>
-      <div class="card"><div class="card-icon">📡</div><div class="card-title">Cloud Systems Fail at Edge</div><div class="card-desc">Every platform needs internet. In Siachen, jungles, or jammed environments — software dies when needed most.</div><span class="card-tag">Connectivity</span></div>
-      <div class="card"><div class="card-icon">🔍</div><div class="card-title">Zero Accountability</div><div class="card-desc">Who took the part? Who approved? Who delayed? Manual systems leave no trail. Fraud goes undetected.</div><span class="card-tag">Audit Gap</span></div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="height:140px;overflow:hidden;position:relative;">
+          <img src="images/aircraft-maintenance.svg" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1628,#1e3a6e)';this.style.display='none'">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.7),transparent);"></div>
+          <div style="position:absolute;bottom:10px;left:14px;font-size:28px;">✈️</div>
+        </div>
+        <div style="padding:20px;">
+          <div class="card-title">Days to Procure One Part</div>
+          <div class="card-desc">Paper forms travel through officer, logistics, accounts, vendor — each adding days. Aircraft stay grounded.</div>
+          <span class="card-tag">Defence Critical</span>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="height:140px;overflow:hidden;position:relative;">
+          <img src="images/mountains-ladakh.svg" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a2a3a,#0a1628)';this.style.display='none'">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.7),transparent);"></div>
+          <div style="position:absolute;bottom:10px;left:14px;font-size:28px;">🗺️</div>
+        </div>
+        <div style="padding:20px;">
+          <div class="card-title">Nobody Knows What's Where</div>
+          <div class="card-desc">No single system connects bases, depots, vendors. Commanders decide blind. Duplicates pile up.</div>
+          <span class="card-tag">Visibility Gap</span>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="height:140px;overflow:hidden;position:relative;">
+          <img src="images/mountains-ladakh.svg" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1e2e,#0a1628)';this.style.display='none'">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.7),transparent);"></div>
+          <div style="position:absolute;bottom:10px;left:14px;font-size:28px;">📡</div>
+        </div>
+        <div style="padding:20px;">
+          <div class="card-title">Cloud Systems Fail at Edge</div>
+          <div class="card-desc">Every platform needs internet. In Siachen, jungles, or jammed environments — software dies when needed most.</div>
+          <span class="card-tag">Connectivity</span>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="height:140px;overflow:hidden;position:relative;background:linear-gradient(135deg,#1a0a0a,#3a1010);">
+          <img src="images/factory-floor.svg" style="width:100%;height:100%;object-fit:cover;opacity:0.6;" onerror="this.style.display='none'">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.7),transparent);"></div>
+          <div style="position:absolute;bottom:10px;left:14px;font-size:28px;">🔍</div>
+        </div>
+        <div style="padding:20px;">
+          <div class="card-title">Zero Accountability</div>
+          <div class="card-desc">Who took the part? Who approved? Who delayed? Manual systems leave no trail. Fraud goes undetected.</div>
+          <span class="card-tag">Audit Gap</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -354,7 +400,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 
       <a href="iaf.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;overflow:hidden;display:block;transition:all 0.3s;cursor:pointer;" onmouseover="this.style.borderColor='#c9a84c';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="height:180px;overflow:hidden;position:relative;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Technician_working_on_T-38_Talon.jpg/640px-Technician_working_on_T-38_Talon.jpg" alt="Aircraft maintenance technician" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1628,#1e3a6e)';this.style.display='none'">
+          <img src="images/aircraft-maintenance.svg" alt="Aircraft maintenance technician" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1628,#1e3a6e)';this.style.display='none'">
           <div style="position:absolute;top:10px;left:10px;background:rgba(10,22,40,0.85);padding:4px 10px;border-radius:4px;font-size:11px;font-weight:700;color:#c9a84c;letter-spacing:1px;">✈️ IAF</div>
         </div>
         <div style="padding:22px 22px 24px;">
@@ -366,7 +412,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 
       <a href="army.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;overflow:hidden;display:block;transition:all 0.3s;cursor:pointer;" onmouseover="this.style.borderColor='#c9a84c';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="height:180px;overflow:hidden;position:relative;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Indian_Army_soldier_at_Siachen.jpg/640px-Indian_Army_soldier_at_Siachen.jpg" alt="Indian Army field operations" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a2e1a,#2d4a2d)';this.style.display='none'">
+          <img src="images/army-field.svg" alt="Indian Army field operations" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a2e1a,#2d4a2d)';this.style.display='none'">
           <div style="position:absolute;top:10px;left:10px;background:rgba(10,22,40,0.85);padding:4px 10px;border-radius:4px;font-size:11px;font-weight:700;color:#c9a84c;letter-spacing:1px;">🪖 ARMY</div>
         </div>
         <div style="padding:22px 22px 24px;">
@@ -378,7 +424,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 
       <a href="navy.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;overflow:hidden;display:block;transition:all 0.3s;cursor:pointer;" onmouseover="this.style.borderColor='#c9a84c';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="height:180px;overflow:hidden;position:relative;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/INS_Vikrant_%28IAC-1%29_sea_trials.jpg/640px-INS_Vikrant_%28IAC-1%29_sea_trials.jpg" alt="Indian Navy warship" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1628,#0d2a4a)';this.style.display='none'">
+          <img src="images/navy-vessel.svg" alt="Indian Navy warship" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1628,#0d2a4a)';this.style.display='none'">
           <div style="position:absolute;top:10px;left:10px;background:rgba(10,22,40,0.85);padding:4px 10px;border-radius:4px;font-size:11px;font-weight:700;color:#c9a84c;letter-spacing:1px;">⚓ NAVY</div>
         </div>
         <div style="padding:22px 22px 24px;">
@@ -399,7 +445,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 
       <a href="mining.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;overflow:hidden;display:block;transition:all 0.3s;" onmouseover="this.style.borderColor='#c9a84c';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="height:140px;overflow:hidden;position:relative;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Coal_mining_in_India.jpg/640px-Coal_mining_in_India.jpg" alt="Mining operations India" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a0a,#3a3020)';this.style.display='none'">
+          <img src="images/mining-site.svg" alt="Mining operations India" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a0a,#3a3020)';this.style.display='none'">
           <div style="position:absolute;top:8px;left:8px;background:rgba(10,22,40,0.85);padding:3px 8px;border-radius:4px;font-size:10px;font-weight:700;color:#c9a84c;">⛏️ MINING</div>
         </div>
         <div style="padding:16px 18px 20px;">
@@ -411,7 +457,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 
       <a href="auto.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;overflow:hidden;display:block;transition:all 0.3s;" onmouseover="this.style.borderColor='#c9a84c';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="height:140px;overflow:hidden;position:relative;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Hyundai_Motor_Manufacturing_Alabama.jpg/640px-Hyundai_Motor_Manufacturing_Alabama.jpg" alt="Auto assembly line" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#2d2d4a)';this.style.display='none'">
+          <img src="images/auto-factory.svg" alt="Auto assembly line" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#2d2d4a)';this.style.display='none'">
           <div style="position:absolute;top:8px;left:8px;background:rgba(10,22,40,0.85);padding:3px 8px;border-radius:4px;font-size:10px;font-weight:700;color:#c9a84c;">🚗 AUTO</div>
         </div>
         <div style="padding:16px 18px 20px;">
@@ -430,7 +476,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 
       <a href="factory.html" style="text-decoration:none;background:#f0f3f9;border:2px solid #dde3ef;border-radius:12px;overflow:hidden;display:block;transition:all 0.3s;" onmouseover="this.style.borderColor='#c9a84c';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(10,22,40,0.15)'" onmouseout="this.style.borderColor='#dde3ef';this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="height:140px;overflow:hidden;position:relative;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Factory_floor_of_a_manufacturing_plant.jpg/640px-Factory_floor_of_a_manufacturing_plant.jpg" alt="Factory plant floor" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a0a0a,#3a2020)';this.style.display='none'">
+          <img src="images/factory-floor.svg" alt="Factory plant floor" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a0a0a,#3a2020)';this.style.display='none'">
           <div style="position:absolute;top:8px;left:8px;background:rgba(10,22,40,0.85);padding:3px 8px;border-radius:4px;font-size:10px;font-weight:700;color:#c9a84c;">🏭 FACTORY</div>
         </div>
         <div style="padding:16px 18px 20px;">
@@ -468,7 +514,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       </div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
         <div style="position:relative;border-radius:10px;overflow:hidden;height:220px;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Technician_working_on_T-38_Talon.jpg/640px-Technician_working_on_T-38_Talon.jpg" alt="IAF aircraft maintenance" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#162850,#0a1628)';this.style.display='none'">
+          <img src="images/aircraft-maintenance.svg" alt="IAF aircraft maintenance" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#162850,#0a1628)';this.style.display='none'">
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.9) 0%,transparent 50%);"></div>
           <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;">
             <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;color:var(--white);">IAF Maintenance</div>
@@ -476,7 +522,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
           </div>
         </div>
         <div style="position:relative;border-radius:10px;overflow:hidden;height:220px;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Siachen_glacier_with_mountains.jpg/640px-Siachen_glacier_with_mountains.jpg" alt="Siachen high altitude" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a2a3a,#0a1628)';this.style.display='none'">
+          <img src="images/mountains-ladakh.svg" alt="Siachen high altitude" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a2a3a,#0a1628)';this.style.display='none'">
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.9) 0%,transparent 50%);"></div>
           <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;">
             <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;color:var(--white);">Siachen / Ladakh</div>
@@ -484,7 +530,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
           </div>
         </div>
         <div style="position:relative;border-radius:10px;overflow:hidden;height:220px;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/INS_Vikrant_%28IAC-1%29_sea_trials.jpg/640px-INS_Vikrant_%28IAC-1%29_sea_trials.jpg" alt="Indian Navy at sea" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1e2e,#0a1628)';this.style.display='none'">
+          <img src="images/navy-vessel.svg" alt="Indian Navy at sea" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1e2e,#0a1628)';this.style.display='none'">
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.9) 0%,transparent 50%);"></div>
           <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;">
             <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;color:var(--white);">Navy — At Sea</div>
@@ -492,7 +538,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
           </div>
         </div>
         <div style="position:relative;border-radius:10px;overflow:hidden;height:220px;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Coal_mining_in_India.jpg/640px-Coal_mining_in_India.jpg" alt="India coal mining" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a0a,#0a1628)';this.style.display='none'">
+          <img src="images/mining-site.svg" alt="India coal mining" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a0a,#0a1628)';this.style.display='none'">
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.9) 0%,transparent 50%);"></div>
           <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;">
             <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;color:var(--white);">Remote Mining Sites</div>
@@ -507,18 +553,70 @@ footer{background:var(--navy);padding:60px 60px 30px;}
   </div>
 
   <!-- FEATURES -->
-  <div class="section">
+  <div class="section" style="background:var(--off-white);">
     <div class="section-header" style="text-align:center;"><div class="section-tag" style="justify-content:center;">Platform Features</div><h2 class="section-title" style="text-align:center;">Everything You Need. Nothing You Don't.</h2></div>
-    <div class="grid-3">
-      <div class="card"><div class="card-icon">📡</div><div class="card-title">Offline First — For Real</div><div class="card-desc">Works without internet. Mesh sync when in range. Full functionality from Siachen to Andaman. Real PWA — not fake offline.</div><span class="card-tag">Field Ready</span></div>
-      <div class="card"><div class="card-icon">🧠</div><div class="card-title">Decision Explanation</div><div class="card-desc">System explains WHY requests were approved, WHY delays happened, WHO caused them. Not just tracking — understanding.</div><span class="card-tag">AI Powered</span></div>
-      <div class="card"><div class="card-icon">⚡</div><div class="card-title">Bottleneck Detection</div><div class="card-desc">Automatically identifies which role is slowing things. "80% delays at officer stage." Real data, real insight.</div><span class="card-tag">Analytics</span></div>
-      <div class="card"><div class="card-icon">⏱️</div><div class="card-title">Time-to-Complete Tracking</div><div class="card-desc">Expected vs actual time per step. See exactly where time is wasted. This is the money feature.</div><span class="card-tag">Accountability</span></div>
-      <div class="card"><div class="card-icon">🚨</div><div class="card-title">Auto Priority Escalation</div><div class="card-desc">System auto-pushes urgent requests up. Notifies higher authority if delayed beyond threshold.</div><span class="card-tag">Smart</span></div>
-      <div class="card"><div class="card-icon">🔮</div><div class="card-title">Predictive Alerts</div><div class="card-desc">"This item will stockout in 2 days." "This request will be delayed." Before problems happen.</div><span class="card-tag">Predictive</span></div>
-      <div class="card"><div class="card-icon">📊</div><div class="card-title">CSV Audit Export</div><div class="card-desc">Tamper-proof logs. Every action permanent, traceable, exportable as CSV. Real compliance.</div><span class="card-tag">Compliance</span></div>
-      <div class="card"><div class="card-icon">🎯</div><div class="card-title">One-Click Ops View</div><div class="card-desc">One screen: what's critical, what's delayed, what needs action. No 10 dashboards. One truth.</div><span class="card-tag">Command</span></div>
-      <div class="card"><div class="card-icon">🔐</div><div class="card-title">Role-Based Access</div><div class="card-desc">Technician, Officer, Logistics, Accounts, Vendor, Admin — each sees only what they need.</div><span class="card-tag">Secure</span></div>
+
+    <!-- BIG FEATURE ROW 1: Offline + AI side by side with image -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+      <div style="background:var(--navy);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;">
+        <div style="padding:32px;">
+          <div style="font-size:36px;margin-bottom:14px;">📡</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--gold2);margin-bottom:10px;">Offline First — For Real</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:12px;">Works without internet. Mesh sync when in range. Full functionality from Siachen to Andaman.</div>
+          <span style="display:inline-block;padding:3px 10px;background:rgba(201,168,76,0.2);color:var(--gold2);font-size:10px;font-weight:700;border-radius:4px;text-transform:uppercase;letter-spacing:1px;">Field Ready</span>
+        </div>
+        <div style="position:relative;min-height:200px;overflow:hidden;">
+          <img src="images/mountains-ladakh.svg" style="width:100%;height:100%;object-fit:cover;opacity:0.7;" onerror="this.parentElement.style.background='linear-gradient(135deg,#162850,#0a1628)';this.style.display='none'">
+          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,22,40,0.8),transparent);"></div>
+          <div style="position:absolute;bottom:14px;left:14px;font-size:11px;color:rgba(255,255,255,0.5);">Siachen Glacier, Ladakh</div>
+        </div>
+      </div>
+      <div style="background:var(--navy);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;">
+        <div style="padding:32px;">
+          <div style="font-size:36px;margin-bottom:14px;">🧠</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--gold2);margin-bottom:10px;">AI Decision Explanation</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:12px;">Not just status. WHY was it delayed. WHO caused it. WHAT to do next. Real intelligence.</div>
+          <span style="display:inline-block;padding:3px 10px;background:rgba(201,168,76,0.2);color:var(--gold2);font-size:10px;font-weight:700;border-radius:4px;text-transform:uppercase;letter-spacing:1px;">AI Powered</span>
+        </div>
+        <div style="position:relative;min-height:200px;overflow:hidden;">
+          <img src="images/aircraft-maintenance.svg" style="width:100%;height:100%;object-fit:cover;opacity:0.7;" onerror="this.parentElement.style.background='linear-gradient(135deg,#162850,#0a1628)';this.style.display='none'">
+          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,22,40,0.8),transparent);"></div>
+          <div style="position:absolute;bottom:14px;left:14px;font-size:11px;color:rgba(255,255,255,0.5);">Aircraft maintenance, IAF</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURE GRID 3x2 -->
+    <div class="grid-3" style="margin-bottom:24px;">
+      <div class="card" style="border-top:3px solid var(--gold);"><div class="card-icon">⚡</div><div class="card-title">Bottleneck Detection</div><div class="card-desc">Identifies which role causes the most delays. "68% of delays at Officer stage." Real data, actionable insight.</div><span class="card-tag">Analytics</span></div>
+      <div class="card" style="border-top:3px solid var(--gold);"><div class="card-icon">⏱️</div><div class="card-title">Time-to-Complete Tracking</div><div class="card-desc">Expected vs actual time per step. See exactly where hours are being lost. This is the money feature.</div><span class="card-tag">Accountability</span></div>
+      <div class="card" style="border-top:3px solid var(--gold);"><div class="card-icon">🚨</div><div class="card-title">Auto Priority Escalation</div><div class="card-desc">System auto-pushes urgent demands up the chain. Notifies higher authority if delayed beyond threshold.</div><span class="card-tag">Smart</span></div>
+      <div class="card" style="border-top:3px solid var(--gold);"><div class="card-icon">🔮</div><div class="card-title">Predictive Alerts</div><div class="card-desc">"This item stockouts in 2 days." "This demand will be delayed." Before problems happen — not after.</div><span class="card-tag">Predictive</span></div>
+      <div class="card" style="border-top:3px solid var(--gold);"><div class="card-icon">📊</div><div class="card-title">Tamper-Proof Audit</div><div class="card-desc">Hash-chained audit trail. Every action permanent, attributable, exportable as CSV. Court of Inquiry ready.</div><span class="card-tag">Compliance</span></div>
+      <div class="card" style="border-top:3px solid var(--gold);"><div class="card-icon">🔐</div><div class="card-title">Role-Based Access</div><div class="card-desc">Technician, Officer, Logistics, Accounts, Vendor, Admin — each sees and does only what their role allows.</div><span class="card-tag">Secure</span></div>
+    </div>
+
+    <!-- SMART BYPASS HIGHLIGHT -->
+    <div style="background:linear-gradient(135deg,var(--navy),var(--navy4));border-radius:12px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
+      <div>
+        <div style="display:inline-block;padding:4px 14px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);border-radius:20px;font-size:11px;font-weight:700;color:var(--gold2);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Unique to WYNTIQ</div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,32px);color:var(--white);font-weight:800;margin-bottom:14px;line-height:1.3;">Smart Inventory Bypass</div>
+        <div style="font-size:15px;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:20px;">If the part is in stock — it is issued immediately. No officer approval. No accounts clearance. No delay. The approval chain only activates when procurement from outside is genuinely needed. Speed without sacrificing accountability.</div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <div style="text-align:center;"><div style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:var(--gold2);">~4 min</div><div style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;">With WYNTIQ</div></div>
+          <div style="text-align:center;"><div style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:rgba(255,255,255,0.3);">4+ hrs</div><div style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;">Without</div></div>
+        </div>
+      </div>
+      <div style="position:relative;border-radius:10px;overflow:hidden;height:260px;">
+        <img src="images/navy-vessel.svg" style="width:100%;height:100%;object-fit:cover;opacity:0.6;" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1e2e,#0a1628)';this.style.display='none'">
+        <div style="position:absolute;inset:0;background:rgba(10,22,40,0.4);display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;padding:20px;">
+            <div style="font-size:48px;margin-bottom:10px;">⚡</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--white);">Part in stock?</div>
+            <div style="font-size:14px;color:var(--gold2);font-weight:700;margin-top:4px;">Issued immediately. No approval needed.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -545,7 +643,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         <div class="demo-tab" onclick="switchDemo('analytics',this)">📊 Analytics</div>
       </div>
       <div class="demo-content" id="demo-demands">
-        <div class="demo-notice">👁️ Limited demo — <span id="demo-clicks-label">5</span> clicks remaining. <a onclick="scrollToContact()" style="color:var(--gold);cursor:pointer;font-weight:600;">Request full access →</a></div>
+        <div class="demo-notice">👁️ Limited demo — <span id="demo-clicks-label">5</span> clicks remaining. <a href="contact.html" style="color:var(--gold);cursor:pointer;font-weight:600;">Request full access →</a></div>
         <div class="demo-row"><span class="demo-label">DS-001 · Fuel Pump Assembly · AN-32</span><span class="demo-badge db-green">Issued ✅</span></div>
         <div class="demo-row"><span class="demo-label">DS-002 · Hydraulic Seal Kit · MiG-21</span><span class="demo-badge db-orange">Accounts</span></div>
         <div class="demo-row"><span class="demo-label">DS-003 · Engine Oil Filter ×6 · Truck-MT</span><span class="demo-badge db-blue">Officer Review</span></div>
@@ -595,7 +693,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="why-item"><div class="why-num">05</div><div class="why-title">AI That Explains, Not Just Shows</div><div class="why-desc">Not just "status: delayed." WYNTIQ explains why — who caused it, where it's stuck, how long, what should happen next.</div></div>
       <div class="why-item"><div class="why-num">06</div><div class="why-title">iDEX / ADITI Aligned</div><div class="why-desc">Built for India's defence innovation framework. TwinStance Solutions — LLPIN AAQ-0042 — Cuttack, Odisha. Est. 2019.</div></div>
     </div>
-    <div style="text-align:center;margin-top:40px;"><button class="btn-gold" href="why.html">Full Why WYNTIQ →</button></div>
+    <div style="text-align:center;margin-top:40px;"><a class="btn-gold" href="why.html">Full Why WYNTIQ →</a></div>
   </div>
 
   <!-- CTA -->
@@ -637,7 +735,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 <!-- IAF PAGE -->
 <div class="page" id="page-iaf">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Air Force</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Air Force</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Indian Air Force</span></h1>
     <p class="inner-hero-sub">Purpose-built for IAF aircraft maintenance, spare parts procurement, and IMMS — replacing paper-based systems with offline-capable digital workflow aligned to IAF procedures.</p>
   </div>
@@ -685,14 +783,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         </div>
       </div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request IAF Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request IAF Demo →</button></div>
   </div>
 </div>
 
 <!-- ARMY PAGE -->
 <div class="page" id="page-army">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Army</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Army</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Indian Army</span></h1>
     <p class="inner-hero-sub">From MT operations to forward base logistics — WYNTIQ digitises Army supply chain management with offline capability for field operations across India's most demanding terrain.</p>
   </div>
@@ -721,14 +819,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         <div style="padding:16px;background:var(--white);border-radius:8px;border-left:4px solid var(--gold);"><div style="font-weight:700;color:var(--navy);margin-bottom:6px;">❌ Problem: Slow Procurement</div><div style="font-size:13px;color:var(--text2);line-height:1.7;">Procurement requests take weeks through manual approval chains even for urgent operational needs.</div><div style="font-size:13px;color:var(--green);font-weight:600;margin-top:6px;">✅ WYNTIQ: Digital approval chain with auto-escalation for urgent demands. Hours, not weeks.</div></div>
       </div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Army Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Army Demo →</button></div>
   </div>
 </div>
 
 <!-- NAVY PAGE -->
 <div class="page" id="page-navy">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Navy</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Navy</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Indian Navy</span></h1>
     <p class="inner-hero-sub">Naval vessel maintenance, port logistics, and multi-base supply chain — built for Indian Naval operational requirements at sea and ashore.</p>
   </div>
@@ -747,14 +845,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">🛡️</div><div class="card-title">Classified Supply Handling</div><div class="card-desc">Role-based access with military-grade segregation. Classified equipment tracked separately from routine supplies. Complete audit trail with clearance-level logging.</div></div>
       <div class="card"><div class="card-icon">📊</div><div class="card-title">Fleet Readiness Dashboard</div><div class="card-desc">Commanding Admiral's view — one screen shows entire fleet status: fully operational, maintenance-limited, refit, and parts-critical vessels. Decision-making at command speed.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Navy Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Navy Demo →</button></div>
   </div>
 </div>
 
 <!-- MINING PAGE -->
 <div class="page" id="page-mining">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Industries</span><span>/</span>Mining</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Industries</span><span>/</span>Mining</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Mining Operations</span></h1>
     <p class="inner-hero-sub">Remote mining sites share the same logistics challenge as forward military bases — no internet, critical equipment, massive cost of downtime. WYNTIQ was built for exactly this environment.</p>
   </div>
@@ -773,14 +871,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">💰</div><div class="card-title">Downtime Cost Tracking</div><div class="card-desc">Real financial impact of every equipment stoppage. WYNTIQ tracks and reports actual downtime cost per machine per day — making the ROI of preventive maintenance visible to management.</div></div>
       <div class="card"><div class="card-icon">🚛</div><div class="card-title">Heavy Equipment Fleet</div><div class="card-desc">Dumpers, excavators, drilling rigs, conveyors, crushing plants — every major asset tracked with full maintenance history, current status, and next service due date visible at a glance.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Mining Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Mining Demo →</button></div>
   </div>
 </div>
 
 <!-- AUTO PAGE -->
 <div class="page" id="page-auto">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Industries</span><span>/</span>Auto Manufacturing</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Industries</span><span>/</span>Auto Manufacturing</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Auto & Bike Manufacturing</span></h1>
     <p class="inner-hero-sub">Assembly line logistics for automobile and two-wheeler manufacturers — real-time parts tracking, vendor management, and production floor supply chain intelligence built for India's automotive sector.</p>
   </div>
@@ -799,14 +897,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">⚡</div><div class="card-title">Rapid Issue for Production</div><div class="card-desc">Production floor worker needs a part — WYNTIQ checks stock, issues immediately if available, no approval chain for standard production parts. Approval only for non-standard or high-value items.</div></div>
       <div class="card"><div class="card-icon">🔮</div><div class="card-title">90-Day Demand Forecasting</div><div class="card-desc">Based on production schedule and historical usage — predict parts requirements 30, 60, and 90 days ahead. Vendors get advance notice. Bulk ordering at better rates. Zero stockouts.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Auto Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Auto Demo →</button></div>
   </div>
 </div>
 
 <!-- ECOMMERCE PAGE -->
 <div class="page" id="page-ecommerce">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Industries</span><span>/</span>E-Commerce</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Industries</span><span>/</span>E-Commerce</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">E-Commerce & Logistics</span></h1>
     <p class="inner-hero-sub">Warehouse management, last-mile tracking, vendor coordination — real-time visibility across your entire supply chain from order to delivery.</p>
   </div>
@@ -824,14 +922,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">🔮</div><div class="card-title">Demand Forecasting</div><div class="card-desc">AI analyses historical sales patterns, seasonality, and promotions to predict demand 30-90 days ahead. Stock the right products before customers order them. Never lose a sale to stockout.</div></div>
       <div class="card"><div class="card-icon">💰</div><div class="card-title">True Logistics Cost Analytics</div><div class="card-desc">Know your real cost per order — procurement, warehousing, pick-pack, last-mile, returns. Identify which SKUs are profitable and which are margin destroyers. Data-driven pricing decisions.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request E-Commerce Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request E-Commerce Demo →</button></div>
   </div>
 </div>
 
 <!-- FACTORY PAGE -->
 <div class="page" id="page-factory">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Industries</span><span>/</span>Factory & Plant</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Industries</span><span>/</span>Factory & Plant</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Factory & Plant Operations</span></h1>
     <p class="inner-hero-sub">Maintenance management, spare parts tracking, production floor logistics — for manufacturers who cannot afford unplanned downtime.</p>
   </div>
@@ -850,14 +948,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">📊</div><div class="card-title">OEE & Availability Reporting</div><div class="card-desc">Overall Equipment Effectiveness (OEE) linked to maintenance and parts data. Know exactly why availability dropped, which machine, which failure mode, what the fix cost. Drive continuous improvement.</div></div>
       <div class="card"><div class="card-icon">🚨</div><div class="card-title">Breakdown Emergency Response</div><div class="card-desc">Machine breaks down — WYNTIQ immediately checks which spare parts are available, which engineer is nearest, and what the fastest resolution path is. From breakdown to repair start in minutes, not hours.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Factory Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Factory Demo →</button></div>
   </div>
 </div>
 
 <!-- WHY PAGE -->
 <div class="page" id="page-why">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span>Why WYNTIQ</div>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span>Why WYNTIQ</div>
     <h1 class="inner-hero-title">Why <span class="gold">WYNTIQ?</span></h1>
     <p class="inner-hero-sub">The honest answer. What makes WYNTIQ genuinely different from every other logistics platform in India.</p>
   </div>
@@ -891,14 +989,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         </table>
       </div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Demo →</button></div>
   </div>
 </div>
 
 <!-- ABOUT PAGE -->
 <div class="page" id="page-about">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span>About Us</div>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span>About Us</div>
     <h1 class="inner-hero-title">About <span class="gold">TwinStance Solutions</span></h1>
     <p class="inner-hero-sub">A registered Indian company building technology for India's most critical sectors — defence, enterprise, and industrial logistics.</p>
   </div>
@@ -927,7 +1025,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 <!-- PRIVACY PAGE -->
 <div class="page" id="page-privacy">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span>Privacy Policy</div>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span>Privacy Policy</div>
     <h1 class="inner-hero-title">Privacy <span class="gold">Policy</span></h1>
     <p class="inner-hero-sub">TwinStance Solutions LLP · LLPIN: AAQ-0042 · Last updated: March 2026</p>
   </div>
@@ -951,7 +1049,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 <!-- RTI PAGE -->
 <div class="page" id="page-rti">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span>RTI</div>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span>RTI</div>
     <h1 class="inner-hero-title">Right to <span class="gold">Information</span></h1>
     <p class="inner-hero-sub">TwinStance Solutions LLP · LLPIN: AAQ-0042 · Transparency Disclosure</p>
   </div>
@@ -989,19 +1087,19 @@ footer{background:var(--navy);padding:60px 60px 30px;}
     <div>
       <div class="footer-col-title">Defence</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('iaf')">Indian Air Force</a></li>
-        <li><a onclick="showPage('army')">Indian Army</a></li>
-        <li><a onclick="showPage('navy')">Indian Navy</a></li>
+        <li><a href="iaf.html">Indian Air Force</a></li>
+        <li><a href="army.html">Indian Army</a></li>
+        <li><a href="navy.html">Indian Navy</a></li>
         <li><a href="why.html">Why WYNTIQ</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-col-title">Industries</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('mining')">Mining</a></li>
-        <li><a onclick="showPage('auto')">Auto Manufacturing</a></li>
-        <li><a onclick="showPage('ecommerce')">E-Commerce</a></li>
-        <li><a onclick="showPage('factory')">Factory & Plant</a></li>
+        <li><a href="mining.html">Mining</a></li>
+        <li><a href="auto.html">Auto Manufacturing</a></li>
+        <li><a href="#">E-Commerce</a></li>
+        <li><a href="factory.html">Factory & Plant</a></li>
       </ul>
     </div>
     <div>
@@ -1014,7 +1112,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         <li><a href="partners.html">Partners &amp; iDEX</a></li>
         <li><a href="contact.html">Contact Us</a></li>
         <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="app/index.html" target="_blank">Sign In to WYNTIQ</a></li>
+        <li><a href="/app/index.html" target="_blank">Sign In to WYNTIQ</a></li>
       </ul>
     </div>
   </div>
@@ -1036,13 +1134,11 @@ function showPage(id) {
 }
 
 function scrollToDemo() {
-  showPage('home');
-  setTimeout(() => document.getElementById('demo-section').scrollIntoView({behavior:'smooth'}), 100);
+  document.getElementById('demo-section').scrollIntoView({behavior:'smooth'});
 }
 
 function scrollToContact() {
-  showPage('home');
-  setTimeout(() => document.getElementById('contact-section').scrollIntoView({behavior:'smooth'}), 100);
+  document.getElementById('contact-section').scrollIntoView({behavior:'smooth'});
 }
 
 function switchDemo(tab, btn) {
