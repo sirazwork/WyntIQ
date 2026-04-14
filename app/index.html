@@ -236,7 +236,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
   <div class="topbar-right">
     <a href="privacy.html">Privacy Policy</a>
     <div class="topbar-divider"></div>
-    <a onclick="showPage('rti')">RTI</a>
+    <a href="privacy.html">RTI</a>
     <div class="topbar-divider"></div>
     <a href="about.html">About Us</a>
     <div class="topbar-divider"></div>
@@ -245,7 +245,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 </div>
 
 <nav>
-  <a class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">
+  <a class="nav-logo" href="/">
     <div class="nav-logo-icon">W</div>
     <div>
       <div class="nav-logo-text">WYNTIQ</div>
@@ -253,7 +253,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
     </div>
   </a>
   <div class="nav-links">
-    <span class="nav-link" onclick="showPage('home')">Home</span>
+    <a class="nav-link" href="/">Home</a>
     <div class="dropdown">
       <span class="nav-link">Defence ▾</span>
       <div class="dropdown-menu">
@@ -280,7 +280,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
   </div>
   <div style="display:flex;gap:8px;align-items:center;">
     <button style="padding:10px 18px;background:transparent;border:1px solid var(--border2);border-radius:6px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;" onclick="scrollToDemo()">Live Demo</button>
-    <a class="nav-demo-btn" href="app/index.html">Sign In →</a>
+    <a class="nav-demo-btn" href="/app/index.html">Sign In →</a>
   </div>
 </nav>
 
@@ -296,7 +296,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         <p class="hero-subtitle">WYNTIQ is an <strong>AI-powered, offline-first Integrated Material Management System</strong> — from demand signal to delivery, every step tracked, approved, and audited. Built by TwinStance Solutions.</p>
         <div class="hero-actions">
           <button class="btn-gold" onclick="scrollToDemo()">Request a Demo</button>
-          <button class="btn-outline-white" href="why.html">Why WYNTIQ →</button>
+          <a class="btn-outline-white" href="why.html">Why WYNTIQ →</a>
         </div>
         <div class="hero-trust">
           <div class="trust-item"><div class="trust-val">130+</div><div class="trust-lbl">IAF Bases</div></div>
@@ -643,7 +643,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         <div class="demo-tab" onclick="switchDemo('analytics',this)">📊 Analytics</div>
       </div>
       <div class="demo-content" id="demo-demands">
-        <div class="demo-notice">👁️ Limited demo — <span id="demo-clicks-label">5</span> clicks remaining. <a onclick="scrollToContact()" style="color:var(--gold);cursor:pointer;font-weight:600;">Request full access →</a></div>
+        <div class="demo-notice">👁️ Limited demo — <span id="demo-clicks-label">5</span> clicks remaining. <a href="contact.html" style="color:var(--gold);cursor:pointer;font-weight:600;">Request full access →</a></div>
         <div class="demo-row"><span class="demo-label">DS-001 · Fuel Pump Assembly · AN-32</span><span class="demo-badge db-green">Issued ✅</span></div>
         <div class="demo-row"><span class="demo-label">DS-002 · Hydraulic Seal Kit · MiG-21</span><span class="demo-badge db-orange">Accounts</span></div>
         <div class="demo-row"><span class="demo-label">DS-003 · Engine Oil Filter ×6 · Truck-MT</span><span class="demo-badge db-blue">Officer Review</span></div>
@@ -693,7 +693,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="why-item"><div class="why-num">05</div><div class="why-title">AI That Explains, Not Just Shows</div><div class="why-desc">Not just "status: delayed." WYNTIQ explains why — who caused it, where it's stuck, how long, what should happen next.</div></div>
       <div class="why-item"><div class="why-num">06</div><div class="why-title">iDEX / ADITI Aligned</div><div class="why-desc">Built for India's defence innovation framework. TwinStance Solutions — LLPIN AAQ-0042 — Cuttack, Odisha. Est. 2019.</div></div>
     </div>
-    <div style="text-align:center;margin-top:40px;"><button class="btn-gold" href="why.html">Full Why WYNTIQ →</button></div>
+    <div style="text-align:center;margin-top:40px;"><a class="btn-gold" href="why.html">Full Why WYNTIQ →</a></div>
   </div>
 
   <!-- CTA -->
@@ -735,7 +735,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 <!-- IAF PAGE -->
 <div class="page" id="page-iaf">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Air Force</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Air Force</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Indian Air Force</span></h1>
     <p class="inner-hero-sub">Purpose-built for IAF aircraft maintenance, spare parts procurement, and IMMS — replacing paper-based systems with offline-capable digital workflow aligned to IAF procedures.</p>
   </div>
@@ -783,14 +783,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         </div>
       </div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request IAF Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request IAF Demo →</button></div>
   </div>
 </div>
 
 <!-- ARMY PAGE -->
 <div class="page" id="page-army">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Army</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Army</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Indian Army</span></h1>
     <p class="inner-hero-sub">From MT operations to forward base logistics — WYNTIQ digitises Army supply chain management with offline capability for field operations across India's most demanding terrain.</p>
   </div>
@@ -819,14 +819,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         <div style="padding:16px;background:var(--white);border-radius:8px;border-left:4px solid var(--gold);"><div style="font-weight:700;color:var(--navy);margin-bottom:6px;">❌ Problem: Slow Procurement</div><div style="font-size:13px;color:var(--text2);line-height:1.7;">Procurement requests take weeks through manual approval chains even for urgent operational needs.</div><div style="font-size:13px;color:var(--green);font-weight:600;margin-top:6px;">✅ WYNTIQ: Digital approval chain with auto-escalation for urgent demands. Hours, not weeks.</div></div>
       </div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Army Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Army Demo →</button></div>
   </div>
 </div>
 
 <!-- NAVY PAGE -->
 <div class="page" id="page-navy">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Navy</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Defence</span><span>/</span>Indian Navy</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Indian Navy</span></h1>
     <p class="inner-hero-sub">Naval vessel maintenance, port logistics, and multi-base supply chain — built for Indian Naval operational requirements at sea and ashore.</p>
   </div>
@@ -845,14 +845,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">🛡️</div><div class="card-title">Classified Supply Handling</div><div class="card-desc">Role-based access with military-grade segregation. Classified equipment tracked separately from routine supplies. Complete audit trail with clearance-level logging.</div></div>
       <div class="card"><div class="card-icon">📊</div><div class="card-title">Fleet Readiness Dashboard</div><div class="card-desc">Commanding Admiral's view — one screen shows entire fleet status: fully operational, maintenance-limited, refit, and parts-critical vessels. Decision-making at command speed.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Navy Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Navy Demo →</button></div>
   </div>
 </div>
 
 <!-- MINING PAGE -->
 <div class="page" id="page-mining">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Industries</span><span>/</span>Mining</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Industries</span><span>/</span>Mining</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Mining Operations</span></h1>
     <p class="inner-hero-sub">Remote mining sites share the same logistics challenge as forward military bases — no internet, critical equipment, massive cost of downtime. WYNTIQ was built for exactly this environment.</p>
   </div>
@@ -871,14 +871,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">💰</div><div class="card-title">Downtime Cost Tracking</div><div class="card-desc">Real financial impact of every equipment stoppage. WYNTIQ tracks and reports actual downtime cost per machine per day — making the ROI of preventive maintenance visible to management.</div></div>
       <div class="card"><div class="card-icon">🚛</div><div class="card-title">Heavy Equipment Fleet</div><div class="card-desc">Dumpers, excavators, drilling rigs, conveyors, crushing plants — every major asset tracked with full maintenance history, current status, and next service due date visible at a glance.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Mining Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Mining Demo →</button></div>
   </div>
 </div>
 
 <!-- AUTO PAGE -->
 <div class="page" id="page-auto">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Industries</span><span>/</span>Auto Manufacturing</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Industries</span><span>/</span>Auto Manufacturing</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Auto & Bike Manufacturing</span></h1>
     <p class="inner-hero-sub">Assembly line logistics for automobile and two-wheeler manufacturers — real-time parts tracking, vendor management, and production floor supply chain intelligence built for India's automotive sector.</p>
   </div>
@@ -897,14 +897,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">⚡</div><div class="card-title">Rapid Issue for Production</div><div class="card-desc">Production floor worker needs a part — WYNTIQ checks stock, issues immediately if available, no approval chain for standard production parts. Approval only for non-standard or high-value items.</div></div>
       <div class="card"><div class="card-icon">🔮</div><div class="card-title">90-Day Demand Forecasting</div><div class="card-desc">Based on production schedule and historical usage — predict parts requirements 30, 60, and 90 days ahead. Vendors get advance notice. Bulk ordering at better rates. Zero stockouts.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Auto Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Auto Demo →</button></div>
   </div>
 </div>
 
 <!-- ECOMMERCE PAGE -->
 <div class="page" id="page-ecommerce">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Industries</span><span>/</span>E-Commerce</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Industries</span><span>/</span>E-Commerce</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">E-Commerce & Logistics</span></h1>
     <p class="inner-hero-sub">Warehouse management, last-mile tracking, vendor coordination — real-time visibility across your entire supply chain from order to delivery.</p>
   </div>
@@ -922,14 +922,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">🔮</div><div class="card-title">Demand Forecasting</div><div class="card-desc">AI analyses historical sales patterns, seasonality, and promotions to predict demand 30-90 days ahead. Stock the right products before customers order them. Never lose a sale to stockout.</div></div>
       <div class="card"><div class="card-icon">💰</div><div class="card-title">True Logistics Cost Analytics</div><div class="card-desc">Know your real cost per order — procurement, warehousing, pick-pack, last-mile, returns. Identify which SKUs are profitable and which are margin destroyers. Data-driven pricing decisions.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request E-Commerce Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request E-Commerce Demo →</button></div>
   </div>
 </div>
 
 <!-- FACTORY PAGE -->
 <div class="page" id="page-factory">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span><span>Industries</span><span>/</span>Factory & Plant</a>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span><span>Industries</span><span>/</span>Factory & Plant</a>
     <h1 class="inner-hero-title">WYNTIQ for <span class="gold">Factory & Plant Operations</span></h1>
     <p class="inner-hero-sub">Maintenance management, spare parts tracking, production floor logistics — for manufacturers who cannot afford unplanned downtime.</p>
   </div>
@@ -948,14 +948,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
       <div class="card"><div class="card-icon">📊</div><div class="card-title">OEE & Availability Reporting</div><div class="card-desc">Overall Equipment Effectiveness (OEE) linked to maintenance and parts data. Know exactly why availability dropped, which machine, which failure mode, what the fix cost. Drive continuous improvement.</div></div>
       <div class="card"><div class="card-icon">🚨</div><div class="card-title">Breakdown Emergency Response</div><div class="card-desc">Machine breaks down — WYNTIQ immediately checks which spare parts are available, which engineer is nearest, and what the fastest resolution path is. From breakdown to repair start in minutes, not hours.</div></div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Factory Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Factory Demo →</button></div>
   </div>
 </div>
 
 <!-- WHY PAGE -->
 <div class="page" id="page-why">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span>Why WYNTIQ</div>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span>Why WYNTIQ</div>
     <h1 class="inner-hero-title">Why <span class="gold">WYNTIQ?</span></h1>
     <p class="inner-hero-sub">The honest answer. What makes WYNTIQ genuinely different from every other logistics platform in India.</p>
   </div>
@@ -989,14 +989,14 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         </table>
       </div>
     </div>
-    <div style="text-align:center;"><button class="btn-gold" onclick="scrollToContact()">Request Demo →</button></div>
+    <div style="text-align:center;"><button class="btn-gold" href="contact.html">Request Demo →</button></div>
   </div>
 </div>
 
 <!-- ABOUT PAGE -->
 <div class="page" id="page-about">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span>About Us</div>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span>About Us</div>
     <h1 class="inner-hero-title">About <span class="gold">TwinStance Solutions</span></h1>
     <p class="inner-hero-sub">A registered Indian company building technology for India's most critical sectors — defence, enterprise, and industrial logistics.</p>
   </div>
@@ -1025,7 +1025,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 <!-- PRIVACY PAGE -->
 <div class="page" id="page-privacy">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span>Privacy Policy</div>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span>Privacy Policy</div>
     <h1 class="inner-hero-title">Privacy <span class="gold">Policy</span></h1>
     <p class="inner-hero-sub">TwinStance Solutions LLP · LLPIN: AAQ-0042 · Last updated: March 2026</p>
   </div>
@@ -1049,7 +1049,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
 <!-- RTI PAGE -->
 <div class="page" id="page-rti">
   <div class="inner-hero">
-    <div class="inner-breadcrumb"><a onclick="showPage('home')">Home</a><span>/</span>RTI</div>
+    <div class="inner-breadcrumb"><a href="/">Home</a><span>/</span>RTI</div>
     <h1 class="inner-hero-title">Right to <span class="gold">Information</span></h1>
     <p class="inner-hero-sub">TwinStance Solutions LLP · LLPIN: AAQ-0042 · Transparency Disclosure</p>
   </div>
@@ -1087,19 +1087,19 @@ footer{background:var(--navy);padding:60px 60px 30px;}
     <div>
       <div class="footer-col-title">Defence</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('iaf')">Indian Air Force</a></li>
-        <li><a onclick="showPage('army')">Indian Army</a></li>
-        <li><a onclick="showPage('navy')">Indian Navy</a></li>
+        <li><a href="iaf.html">Indian Air Force</a></li>
+        <li><a href="army.html">Indian Army</a></li>
+        <li><a href="navy.html">Indian Navy</a></li>
         <li><a href="why.html">Why WYNTIQ</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-col-title">Industries</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('mining')">Mining</a></li>
-        <li><a onclick="showPage('auto')">Auto Manufacturing</a></li>
-        <li><a onclick="showPage('ecommerce')">E-Commerce</a></li>
-        <li><a onclick="showPage('factory')">Factory & Plant</a></li>
+        <li><a href="mining.html">Mining</a></li>
+        <li><a href="auto.html">Auto Manufacturing</a></li>
+        <li><a href="#">E-Commerce</a></li>
+        <li><a href="factory.html">Factory & Plant</a></li>
       </ul>
     </div>
     <div>
@@ -1112,7 +1112,7 @@ footer{background:var(--navy);padding:60px 60px 30px;}
         <li><a href="partners.html">Partners &amp; iDEX</a></li>
         <li><a href="contact.html">Contact Us</a></li>
         <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="app/index.html" target="_blank">Sign In to WYNTIQ</a></li>
+        <li><a href="/app/index.html" target="_blank">Sign In to WYNTIQ</a></li>
       </ul>
     </div>
   </div>
@@ -1134,13 +1134,11 @@ function showPage(id) {
 }
 
 function scrollToDemo() {
-  showPage('home');
-  setTimeout(() => document.getElementById('demo-section').scrollIntoView({behavior:'smooth'}), 100);
+  document.getElementById('demo-section').scrollIntoView({behavior:'smooth'});
 }
 
 function scrollToContact() {
-  showPage('home');
-  setTimeout(() => document.getElementById('contact-section').scrollIntoView({behavior:'smooth'}), 100);
+  document.getElementById('contact-section').scrollIntoView({behavior:'smooth'});
 }
 
 function switchDemo(tab, btn) {
