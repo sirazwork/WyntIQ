@@ -65,8 +65,10 @@ body{background:#f5f8fc}
           <label>Users<input id="users" type="number" min="1" value="10"></label>
           <label>Devices<input id="devices" type="number" min="1" value="5"></label>
           <label>Sites<input id="sites" type="number" min="1" value="1"></label>
-          <label>Base price<input id="basePrice" type="number" min="0" value="120000"></label>
-          <label>Implementation<input id="implementation" type="number" min="0" value="50000"></label>
+          <label>User price / year<input id="userRate" type="number" min="0" value="12000"></label>
+          <label>Device price / year<input id="deviceRate" type="number" min="0" value="8000"></label>
+          <label>Site price / year<input id="siteRate" type="number" min="0" value="75000"></label>
+          <label>Activation mode<select id="activationMode"><option value="both">Online + Offline</option><option value="online">Online only</option><option value="offline">Offline only</option></select></label>
           <label>Discount %<input id="discount" type="number" min="0" max="100" value="0"></label>
           <label>Payment timing<select id="paymentTiming" onchange="applyPaymentDiscount()"><option value="20">Paid now - 20% discount</option><option value="10">Paid within 7 days - 10% discount</option><option value="5">Paid within 15 days - 5% discount</option><option value="0">Standard quote - no discount</option></select></label>
           <label>Tax / GST %<input id="tax" type="number" min="0" value="0"></label>
@@ -78,10 +80,9 @@ body{background:#f5f8fc}
         <div class="tool-actions">
           <button class="btn btn-gold" onclick="generateQuote()">Generate Quote</button>
           <button class="btn btn-ghost" onclick="exportQuotePdf()">Export Quote PDF</button>
-          <button class="btn btn-ghost" onclick="generateActivation('online')">Online Activation Payload</button>
-          <button class="btn btn-ghost" onclick="generateActivation('offline')">Offline Activation Payload</button>
+          <button class="btn btn-ghost" onclick="generateActivation()">Activation Payload</button>
         </div>
-        <div class="tool-note">Pricing benchmark: lightweight inventory tools can be very low-cost, while CMMS/asset systems commonly sit around USD 45-150 per user/month and field-service platforms can run much higher. WYNTIQ presets are positioned as competitive India-friendly pricing for offline-first logistics with custom deployment needs. Production licensing should use private-key signing on a server or secure desktop admin utility.</div>
+        <div class="tool-note">Pricing benchmark: lightweight inventory tools can be very low-cost, while CMMS/asset systems commonly sit around USD 45-150 per user/month and field-service platforms can run much higher. WYNTIQ quotes now calculate one product price from users, devices, and sites. Activation can be online and offline under the same license payload. Production licensing should use private-key signing on a server or secure desktop admin utility.</div>
       </section>
       <section class="tool-card">
         <h2>Output</h2>
@@ -98,23 +99,25 @@ body{background:#f5f8fc}
 function val(id){return document.getElementById(id).value.trim();}
 function money(n){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(n);}
 const presets={
-  trial:{licenseType:'TRIAL_7_DAY',basePrice:0,implementation:0,users:5,devices:2,sites:1,discount:0,tax:0,notes:'Free 7-day trial. Product pauses or moves to read-only after expiry unless extended or converted to paid activation.'},
-  extension:{licenseType:'TRIAL_EXTENSION',basePrice:10000,implementation:0,users:5,devices:2,sites:1,discount:0,tax:18,notes:'30-day trial extension for continued evaluation. Extension is temporary and does not create paid production rights.'},
-  pilot:{licenseType:'PAID_ANNUAL',basePrice:125000,implementation:50000,users:10,devices:5,sites:1,discount:10,tax:18,notes:'Guided pilot for one site or unit, including onboarding, core configuration, and evaluation support.'},
-  professional:{licenseType:'PAID_ANNUAL',basePrice:240000,implementation:50000,users:15,devices:10,sites:1,discount:10,tax:18,notes:'Professional annual license for a small operational team or single-site deployment.'},
-  site:{licenseType:'SITE_LICENSE',basePrice:750000,implementation:150000,users:50,devices:25,sites:1,discount:10,tax:18,notes:'Site license for one base, plant, mine, unit, or operational location with deployment support.'},
-  enterprise:{licenseType:'ENTERPRISE',basePrice:1800000,implementation:300000,users:150,devices:75,sites:3,discount:10,tax:18,notes:'Enterprise rollout for multi-site deployment, admin training, support planning, and custom workflow scope.'},
-  defence:{licenseType:'ENTERPRISE',basePrice:2500000,implementation:500000,users:200,devices:100,sites:3,discount:0,tax:18,notes:'Defence / secure deployment estimate. Final quote depends on security review, offline activation, installation controls, support level, and procurement scope.'}
+  trial:{licenseType:'TRIAL_7_DAY',users:5,devices:2,sites:1,userRate:0,deviceRate:0,siteRate:0,discount:0,tax:0,activationMode:'both',notes:'Free 7-day trial. Product pauses or moves to read-only after expiry unless extended or converted to paid activation.'},
+  extension:{licenseType:'TRIAL_EXTENSION',users:5,devices:2,sites:1,userRate:1200,deviceRate:1000,siteRate:2000,discount:0,tax:18,activationMode:'both',notes:'30-day trial extension for continued evaluation. Extension is temporary and does not create paid production rights.'},
+  pilot:{licenseType:'PAID_ANNUAL',users:10,devices:5,sites:1,userRate:12000,deviceRate:8000,siteRate:75000,discount:10,tax:18,activationMode:'both',notes:'Guided pilot for one site or unit, including onboarding, core configuration, and evaluation support.'},
+  professional:{licenseType:'PAID_ANNUAL',users:15,devices:10,sites:1,userRate:12000,deviceRate:8000,siteRate:75000,discount:10,tax:18,activationMode:'both',notes:'Professional annual license for a small operational team or single-site deployment.'},
+  site:{licenseType:'SITE_LICENSE',users:50,devices:25,sites:1,userRate:10000,deviceRate:7500,siteRate:150000,discount:10,tax:18,activationMode:'both',notes:'Site license for one base, plant, mine, unit, or operational location with online and offline activation support.'},
+  enterprise:{licenseType:'ENTERPRISE',users:150,devices:75,sites:3,userRate:9000,deviceRate:7000,siteRate:250000,discount:10,tax:18,activationMode:'both',notes:'Enterprise rollout for multi-site deployment, admin training, support planning, and custom workflow scope.'},
+  defence:{licenseType:'ENTERPRISE',users:200,devices:100,sites:3,userRate:12000,deviceRate:10000,siteRate:350000,discount:0,tax:18,activationMode:'both',notes:'Defence / secure deployment estimate with online and offline activation. Final quote depends on security review, installation controls, support level, and procurement scope.'}
 };
 function setField(id,value){document.getElementById(id).value=value;}
 function applyPreset(key){
   const p=presets[key];
   setField('licenseType',p.licenseType);
-  setField('basePrice',p.basePrice);
-  setField('implementation',p.implementation);
   setField('users',p.users);
   setField('devices',p.devices);
   setField('sites',p.sites);
+  setField('userRate',p.userRate);
+  setField('deviceRate',p.deviceRate);
+  setField('siteRate',p.siteRate);
+  setField('activationMode',p.activationMode);
   setField('discount',p.discount);
   setField('tax',p.tax);
   setField('notes',p.notes);
@@ -125,11 +128,9 @@ function applyMarketRecommended(){
   const users=Number(val('users')||10);
   const sites=Number(val('sites')||1);
   const devices=Number(val('devices')||5);
-  const annualPerUser=12000;
-  const deviceFee=8000;
-  const siteFee=75000;
-  setField('basePrice',(users*annualPerUser)+(devices*deviceFee)+(sites*siteFee));
-  setField('implementation',sites>1?150000:75000);
+  setField('userRate',users>100?9000:12000);
+  setField('deviceRate',devices>50?7000:8000);
+  setField('siteRate',sites>1?250000:75000);
   setField('tax',18);
   applyPaymentDiscount();
   generateQuote();
@@ -148,11 +149,19 @@ function expiryFor(type){
   return d.toISOString().slice(0,10);
 }
 function quoteData(){
-  const base=Number(val('basePrice')||0);
-  const implementation=Number(val('implementation')||0);
+  const users=Number(val('users')||0);
+  const devices=Number(val('devices')||0);
+  const sites=Number(val('sites')||0);
+  const userRate=Number(val('userRate')||0);
+  const deviceRate=Number(val('deviceRate')||0);
+  const siteRate=Number(val('siteRate')||0);
   const discount=Number(val('discount')||0);
   const tax=Number(val('tax')||0);
-  const subtotal=base+implementation;
+  const userTotal=users*userRate;
+  const deviceTotal=devices*deviceRate;
+  const siteTotal=sites*siteRate;
+  const productPrice=userTotal+deviceTotal+siteTotal;
+  const subtotal=productPrice;
   const discountAmount=subtotal*discount/100;
   const afterDiscount=subtotal-discountAmount;
   const taxAmount=afterDiscount*tax/100;
@@ -167,23 +176,27 @@ function quoteData(){
     sector:val('sector'),
     platform:val('platform'),
     licenseType:type,
-    users:Number(val('users')||0),
-    devices:Number(val('devices')||0),
-    sites:Number(val('sites')||0),
+    users,
+    devices,
+    sites,
+    activationMode:val('activationMode'),
     expiryDate:expiryFor(type),
     modules:val('modules').split(',').map(x=>x.trim()).filter(Boolean),
-    pricing:{base,implementation,subtotal,discountPercent:discount,discountAmount,taxPercent:tax,taxAmount,total},
+    pricing:{userRate,deviceRate,siteRate,userTotal,deviceTotal,siteTotal,productPrice,subtotal,discountPercent:discount,discountAmount,taxPercent:tax,taxAmount,total},
     paymentTiming:document.getElementById('paymentTiming').selectedOptions[0].textContent,
     notes:val('notes')
   };
 }
 function setOutput(obj){document.getElementById('output').textContent=JSON.stringify(obj,null,2);}
 function generateQuote(){setOutput({...quoteData(),summary:'Draft quotation. Verify commercial terms before sending.'});}
-function generateActivation(mode){
+function generateActivation(){
   const q=quoteData();
+  const modes=q.activationMode==='both'?['online','offline']:[q.activationMode];
   const payload={
     activationId:'WYA-'+Date.now().toString(36).toUpperCase(),
-    mode,
+    activationModes:modes,
+    onlineActivation:modes.includes('online') ? { enabled:true, serverVerification:true, periodicCheckInDays:30 } : { enabled:false },
+    offlineActivation:modes.includes('offline') ? { enabled:true, requestCodeRequired:true, signedOfflineCodeRequired:true } : { enabled:false },
     product:'WYNTIQ',
     edition:q.licenseType.includes('ENTERPRISE')?'Enterprise':q.licenseType.includes('TRIAL')?'Trial':'Professional',
     customer:q.customer,
@@ -191,7 +204,7 @@ function generateActivation(mode){
     email:q.email,
     platform:q.platform,
     licenseType:q.licenseType,
-    machineOrSiteId:val('machineId') || (mode==='offline'?'REQUEST_REQUIRED':'ONLINE_DEVICE_BIND'),
+    machineOrSiteId:val('machineId') || 'ONLINE_OR_OFFLINE_BINDING_ALLOWED',
     users:q.users,
     devices:q.devices,
     sites:q.sites,
@@ -207,7 +220,7 @@ async function copyOutput(){await navigator.clipboard.writeText(document.getElem
 function exportQuotePdf(){
   const q=quoteData();
   const rows=[
-    ['Quote ID',q.quoteId],['Created',new Date(q.createdAt).toLocaleString()],['Customer',q.customer],['Company',q.company],['Email',q.email],['Sector',q.sector],['Platform',q.platform],['License Type',q.licenseType],['Users',q.users],['Devices',q.devices],['Sites',q.sites],['Expiry / Valid Until',q.expiryDate],['Modules',q.modules.join(', ')],['Base Price',money(q.pricing.base)],['Implementation',money(q.pricing.implementation)],['Subtotal',money(q.pricing.subtotal)],['Discount',q.pricing.discountPercent+'% ('+money(q.pricing.discountAmount)+')'],['Tax / GST',q.pricing.taxPercent+'% ('+money(q.pricing.taxAmount)+')'],['Total',money(q.pricing.total)],['Payment Timing',q.paymentTiming],['Notes',q.notes]
+    ['Quote ID',q.quoteId],['Created',new Date(q.createdAt).toLocaleString()],['Customer',q.customer],['Company',q.company],['Email',q.email],['Sector',q.sector],['Platform',q.platform],['License Type',q.licenseType],['Activation Mode',q.activationMode],['Users',q.users+' x '+money(q.pricing.userRate)+' = '+money(q.pricing.userTotal)],['Devices',q.devices+' x '+money(q.pricing.deviceRate)+' = '+money(q.pricing.deviceTotal)],['Sites',q.sites+' x '+money(q.pricing.siteRate)+' = '+money(q.pricing.siteTotal)],['Expiry / Valid Until',q.expiryDate],['Modules',q.modules.join(', ')],['Product Price',money(q.pricing.productPrice)],['Discount',q.pricing.discountPercent+'% ('+money(q.pricing.discountAmount)+')'],['Tax / GST',q.pricing.taxPercent+'% ('+money(q.pricing.taxAmount)+')'],['Total',money(q.pricing.total)],['Payment Timing',q.paymentTiming],['Notes',q.notes]
   ];
   const table=rows.map(r=>`<tr><th>${r[0]}</th><td>${String(r[1]).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</td></tr>`).join('');
   const win=window.open('','_blank');
