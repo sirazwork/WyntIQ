@@ -5,8 +5,17 @@
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="shortcut icon" href="../favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="refresh" content="0; url=../trial.html?access=demo">
-<script>window.location.replace('../trial.html?access=demo');</script>
+<meta name="robots" content="noindex,nofollow">
+<script>
+const WYNTIQ_DEMO_KEY = 'wyntiq-private-demo-2026';
+const demoParams = new URLSearchParams(window.location.search);
+if (demoParams.get('demo_key') === WYNTIQ_DEMO_KEY) {
+  sessionStorage.setItem('wyntiq_demo_access', WYNTIQ_DEMO_KEY);
+  window.history.replaceState({}, document.title, window.location.pathname);
+} else if (sessionStorage.getItem('wyntiq_demo_access') !== WYNTIQ_DEMO_KEY) {
+  window.location.replace('../trial.html?access=demo');
+}
+</script>
 <title>WYNTIQ — Integrated Material Management System</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
