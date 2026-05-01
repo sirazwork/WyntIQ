@@ -5,6 +5,8 @@
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="shortcut icon" href="../favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="0; url=../trial.html?access=demo">
+<script>window.location.replace('../trial.html?access=demo');</script>
 <title>WYNTIQ — Integrated Material Management System</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
@@ -276,7 +278,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       </div>
     </div>
     <div class="login-title">Open the WYNTIQ Demo</div>
-    <div class="login-desc">Use the public demo instantly or switch roles to inspect the full workflow</div>
+    <div class="login-desc">Demo access is controlled through the WYNTIQ request form</div>
 
     <div style="margin-bottom:14px;">
       <label class="login-label">Your Role</label>
@@ -320,8 +322,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <input class="login-input" id="l-pass" type="password" placeholder="Enter password" value="demo123"/>
     <div class="login-err" id="l-err">Invalid credentials. Check username and password.</div>
     <div class="login-actions">
-      <button class="login-btn" id="public-demo-btn" onclick="openPublicDemo()">Enter Public Demo →</button>
-      <button class="login-btn secondary" id="signin-btn">Sign In with Selected Role</button>
+      <button class="login-btn" id="controlled-access-btn" onclick="openPublicDemo()">Request Demo Access</button>
+      <button class="login-btn secondary" id="signin-btn">Controlled Access Required</button>
     </div>
     <div class="login-hint">
       Public sandbox credentials — all roles use password: <b style="color:rgba(255,255,255,0.6);">demo123</b><br>

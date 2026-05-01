@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WYNTIQ Free Trial</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta name="description" content="Request a WYNTIQ free trial for Windows, Linux, and the live web demo.">
+<meta name="description" content="Request a WYNTIQ free trial, guided demo access, and contact from the TwinStance Solutions team.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
@@ -15,10 +15,10 @@
 .trial-wrap{padding:72px 0;background:var(--soft)}
 .trial-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:start}
 .trial-panel{background:#fff;border:1px solid var(--line-soft);border-radius:14px;padding:26px;box-shadow:var(--shadow)}
-.trial-panel.darkish{background:linear-gradient(135deg,#08101e,#10213f);color:#fff;border-color:rgba(255,255,255,.08)}
-.trial-panel.darkish p{color:rgba(255,255,255,.7)}
+.trial-panel.darkish{background:#f8fbff;color:var(--ink);border-color:#d8e4f0}
+.trial-panel.darkish p{color:var(--muted)}
 .trial-list{display:grid;gap:10px;margin-top:18px}
-.trial-item{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:13px}
+.trial-item{padding:12px 14px;border-radius:10px;background:#fff;border:1px solid #d8e4f0;font-size:13px}
 .trial-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .trial-form .full{grid-column:1 / -1}
 .trial-form input,.trial-form select,.trial-form textarea{width:100%;padding:13px 14px;border:1px solid #d7deeb;border-radius:10px;background:#fff;color:var(--text);outline:none}
@@ -30,12 +30,27 @@
 </style>
 </head>
 <body>
-<div class="topline"><div class="container"><div>Request the WYNTIQ free trial and receive Windows, Linux, and demo access links by email</div><div>Free Trial Intake</div></div></div>
+<div class="topline"><div class="container"><div>Request the WYNTIQ free trial, guided demo access, and deployment discussion</div><div>Free Trial Intake</div></div></div>
 <nav class="nav">
   <div class="container">
     <a class="brand" href="index.html"><div class="brand-mark">W</div><div><div class="brand-name">WYNTIQ</div><div class="brand-sub">offline logistics command</div></div></a>
-    <div class="nav-links"><a href="index.html">Home</a><a href="capabilities.html">Capabilities</a><a class="active" href="trial.html">Free Trial</a><a href="army.html">Army</a><a href="iaf.html">Air Force</a><a href="navy.html">Navy</a><a href="mining.html">Mining</a></div>
-    <div class="nav-actions"><a class="btn btn-gold" href="app/index.html">Open Live Demo</a></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="capabilities.html">Capabilities</a>
+      <div class="nav-drop">
+        <button class="nav-drop-btn" type="button">Sectors</button>
+        <div class="nav-menu">
+          <a href="army.html">Army</a>
+          <a href="iaf.html">Air Force</a>
+          <a href="navy.html">Navy</a>
+          <a href="mining.html">Mining</a>
+          <a href="oil-gas.html">Oil & Gas</a>
+          <a href="disaster-response.html">Disaster Response</a>
+        </div>
+      </div>
+      <a class="active" href="trial.html">Free Trial</a>
+    </div>
+    <div class="nav-actions"><a class="btn btn-gold" href="trial.html">Contact Us</a></div>
   </div>
 </nav>
 
@@ -43,8 +58,8 @@
   <div class="container">
     <div class="hero-copy">
       <div class="eyebrow"><span class="eyebrow-dot"></span>WYNTIQ free trial</div>
-      <h1>Get the trial by email, then tell us what you are trying to solve.</h1>
-      <p>Request access once and we will email the trial links immediately. A short follow-up email arrives about 10 minutes later so we can understand your project requirements and use case.</p>
+      <h1>Request trial or demo access, then tell us what you are trying to solve.</h1>
+      <p>Share your contact details, sector, and use case first. We will use that to send the right trial or guided demo access and follow up with the next step.</p>
       <div class="hero-metrics">
         <div class="hero-metric"><strong>Win</strong><span>trial delivery</span></div>
         <div class="hero-metric"><strong>Linux</strong><span>trial delivery</span></div>
@@ -63,7 +78,7 @@
         <p>We are keeping the trial flow simple and useful for both sides.</p>
         <div class="trial-list">
           <div class="trial-item">1. Submit your details and use case.</div>
-          <div class="trial-item">2. Receive trial links by email right away.</div>
+          <div class="trial-item">2. Receive the right trial or guided demo access by email.</div>
           <div class="trial-item">3. Receive a short qualification email about 10 minutes later.</div>
           <div class="trial-item">4. If there is a fit, we move you into guided trial or deployment discussion.</div>
         </div>
@@ -71,7 +86,7 @@
       <div class="trial-panel">
         <div class="section-tag">Free Trial Request</div>
         <h2 style="font-size:38px;line-height:1.05;margin-bottom:10px;">Request WYNTIQ Trial Access</h2>
-        <p class="helper" style="margin-bottom:18px;">This saves your lead inside the TwinStance CRM under WYNTIQ trial tags, sends you the trial links, and schedules a short follow-up email.</p>
+        <p class="helper" style="margin-bottom:18px;">This saves your lead inside the TwinStance CRM under WYNTIQ trial tags, shares access through the controlled trial flow, and schedules a short follow-up email.</p>
         <div class="success-box" id="trial-success">Trial request received. Check your email for the access links.</div>
         <form class="trial-form" id="trial-form">
           <input required id="name" name="name" placeholder="Full name">
@@ -108,7 +123,7 @@
   </div>
 </section>
 
-<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="brand" style="margin-bottom:16px"><div class="brand-mark">W</div><div><div class="brand-name" style="color:#fff">WYNTIQ</div><div class="brand-sub">by TwinStance Solutions</div></div></div><p>Offline-first logistics command for assets, inventory, audit trails, readiness, and disconnected operations.</p></div><div><h4>Sectors</h4><a href="army.html">Army</a><a href="iaf.html">Air Force</a><a href="navy.html">Navy</a><a href="mining.html">Mining</a></div><div><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="trial-license.html">Trial Terms</a><a href="activation-policy.html">Activation Policy</a></div><div><h4>Contact</h4><a href="app/index.html">Open Demo</a><a href="mailto:siraz@tssolutionsllp.com">siraz@tssolutionsllp.com</a><a href="mailto:sales@tssolutionsllp.com">sales@tssolutionsllp.com</a><a href="https://www.tssolutionsllp.com">tssolutionsllp.com</a></div></div><div class="footer-bottom"><div>Copyright 2026 TwinStance Solutions LLP. All rights reserved.</div><div>Made in India. Offline-first. Field-ready.</div></div></div></footer>
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="brand" style="margin-bottom:16px"><div class="brand-mark">W</div><div><div class="brand-name" style="color:#fff">WYNTIQ</div><div class="brand-sub">by TwinStance Solutions</div></div></div><p>Offline-first logistics command for assets, inventory, audit trails, readiness, and disconnected operations.</p></div><div><h4>Sectors</h4><a href="army.html">Army</a><a href="iaf.html">Air Force</a><a href="navy.html">Navy</a><a href="mining.html">Mining</a></div><div><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a href="trial-license.html">Trial Terms</a><a href="activation-policy.html">Activation Policy</a></div><div><h4>Contact</h4><a href="trial.html">Request Demo Access</a><a href="mailto:contact@tssolutionsllp.com">contact@tssolutionsllp.com</a><a href="mailto:sales@tssolutionsllp.com">sales@tssolutionsllp.com</a><a href="https://www.tssolutionsllp.com">tssolutionsllp.com</a></div></div><div class="footer-bottom"><div>Copyright 2026 TwinStance Solutions LLP. All rights reserved.</div><div>Made in India. Offline-first. Field-ready.</div></div></div></footer>
 
 <div class="toast" id="toast"></div>
 <script>
