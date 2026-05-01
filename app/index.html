@@ -50,6 +50,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .role-pill-desc{font-size:9px;color:rgba(255,255,255,0.35);margin-top:1px;}
 .login-btn{width:100%;padding:13px;background:var(--accent);border:none;border-radius:8px;font-size:14px;font-weight:700;color:#fff;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;letter-spacing:0.5px;}
 .login-btn:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 4px 15px rgba(14,165,233,0.4);}
+.login-btn.secondary{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.14);color:#fff;}
+.login-btn.secondary:hover{background:rgba(255,255,255,0.16);box-shadow:none;}
+.login-actions{display:grid;gap:10px;margin-top:10px;}
 .login-err{font-size:11px;color:#fca5a5;margin-top:8px;padding:8px 10px;background:rgba(239,68,68,0.1);border-radius:6px;display:none;}
 .login-hint{margin-top:14px;padding:10px 12px;background:rgba(255,255,255,0.04);border-radius:8px;font-size:10px;color:rgba(255,255,255,0.3);line-height:1.6;}
 
@@ -272,8 +275,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
         <div class="login-brand-sub">by TwinStance Solutions</div>
       </div>
     </div>
-    <div class="login-title">Sign In</div>
-    <div class="login-desc">Select your role then enter credentials</div>
+    <div class="login-title">Open the WYNTIQ Demo</div>
+    <div class="login-desc">Use the public demo instantly or switch roles to inspect the full workflow</div>
 
     <div style="margin-bottom:14px;">
       <label class="login-label">Your Role</label>
@@ -315,10 +318,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <input class="login-input" id="l-user" placeholder="Enter username" value="demo"/>
     <label class="login-label">Password</label>
     <input class="login-input" id="l-pass" type="password" placeholder="Enter password" value="demo123"/>
-    <div class="login-err" id="l-err">❌ Invalid credentials. Check username and password.</div>
-    <button class="login-btn" id="signin-btn">Sign In →</button>
+    <div class="login-err" id="l-err">Invalid credentials. Check username and password.</div>
+    <div class="login-actions">
+      <button class="login-btn" id="public-demo-btn" onclick="openPublicDemo()">Enter Public Demo →</button>
+      <button class="login-btn secondary" id="signin-btn">Sign In with Selected Role</button>
+    </div>
     <div class="login-hint">
-      Demo credentials — all roles use password: <b style="color:rgba(255,255,255,0.6);">demo123</b><br>
+      Public sandbox credentials — all roles use password: <b style="color:rgba(255,255,255,0.6);">demo123</b><br>
       Technician: demo · Officer: officer · Logistics: logistics<br>
       Accounts: accounts · Vendor: vendor · Admin: admin
     </div>
@@ -725,6 +731,13 @@ function pickRole(role) {
   document.getElementById('l-err').style.display = 'none';
 }
 
+function openPublicDemo() {
+  pickRole('technician');
+  document.getElementById('l-user').value = 'demo';
+  document.getElementById('l-pass').value = 'demo123';
+  doLogin();
+}
+
 function doLogin() {
   const user = document.getElementById('l-user').value.trim();
   const pass = document.getElementById('l-pass').value.trim();
@@ -734,12 +747,12 @@ function doLogin() {
   const found = USERS_DB[user];
   if (!found || found.pass !== pass) {
     err.style.display = 'block';
-    err.textContent = '❌ Invalid username or password. Try: demo / demo123';
+    err.textContent = 'Invalid username or password. Try: demo / demo123';
     return;
   }
   if (!found.active) {
     err.style.display = 'block';
-    err.textContent = '❌ Account disabled. Contact admin.';
+    err.textContent = 'Account disabled. Contact admin.';
     return;
   }
 
