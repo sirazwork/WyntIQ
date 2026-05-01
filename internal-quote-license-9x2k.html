@@ -27,6 +27,9 @@ body{background:#f5f8fc}
 .tool-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
 .output-box{white-space:pre-wrap;background:#132238;color:#eaf2ff;border-radius:12px;padding:16px;font:13px/1.6 Consolas,monospace;min-height:220px;overflow:auto}
 .tool-note{margin-top:14px;padding:14px;border-radius:10px;background:#fff8e4;border:1px solid #dac27e;color:#61470f;font-size:13px;line-height:1.7}
+.preset-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.preset-grid button{padding:10px;border:1px solid #d8e4f0;border-radius:9px;background:#f8fbff;color:#132238;font-weight:800;font-size:12px;cursor:pointer}
+.preset-grid button:hover{border-color:#d6a63a;background:#fff8e4}
 @media(max-width:900px){.tool-grid,.tool-form{grid-template-columns:1fr}.tool-form .full{grid-column:auto}}
 </style>
 </head>
@@ -42,6 +45,16 @@ body{background:#f5f8fc}
     <div class="tool-grid">
       <section class="tool-card">
         <h2>Customer and Quote</h2>
+        <div class="preset-grid">
+          <button type="button" onclick="applyPreset('trial')">Free Trial</button>
+          <button type="button" onclick="applyPreset('extension')">Trial Extension</button>
+          <button type="button" onclick="applyPreset('pilot')">Guided Pilot</button>
+          <button type="button" onclick="applyPreset('professional')">Professional</button>
+          <button type="button" onclick="applyPreset('site')">Site License</button>
+          <button type="button" onclick="applyPreset('enterprise')">Enterprise</button>
+          <button type="button" onclick="applyPreset('defence')">Defence Secure</button>
+          <button type="button" onclick="applyMarketRecommended()">Market Fit</button>
+        </div>
         <form class="tool-form" id="quote-form">
           <label>Customer name<input id="customer" value="Customer Name"></label>
           <label>Company<input id="company" value="Company / Unit"></label>
@@ -52,8 +65,10 @@ body{background:#f5f8fc}
           <label>Users<input id="users" type="number" min="1" value="10"></label>
           <label>Devices<input id="devices" type="number" min="1" value="5"></label>
           <label>Sites<input id="sites" type="number" min="1" value="1"></label>
-          <label>Base price<input id="basePrice" type="number" min="0" value="0"></label>
+          <label>Base price<input id="basePrice" type="number" min="0" value="120000"></label>
+          <label>Implementation<input id="implementation" type="number" min="0" value="50000"></label>
           <label>Discount %<input id="discount" type="number" min="0" max="100" value="0"></label>
+          <label>Payment timing<select id="paymentTiming" onchange="applyPaymentDiscount()"><option value="20">Paid now - 20% discount</option><option value="10">Paid within 7 days - 10% discount</option><option value="5">Paid within 15 days - 5% discount</option><option value="0">Standard quote - no discount</option></select></label>
           <label>Tax / GST %<input id="tax" type="number" min="0" value="0"></label>
           <label>Expiry date<input id="expiry" type="date"></label>
           <label>Machine / Site ID<input id="machineId" placeholder="Machine ID or site identifier"></label>
@@ -62,10 +77,11 @@ body{background:#f5f8fc}
         </form>
         <div class="tool-actions">
           <button class="btn btn-gold" onclick="generateQuote()">Generate Quote</button>
+          <button class="btn btn-ghost" onclick="exportQuotePdf()">Export Quote PDF</button>
           <button class="btn btn-ghost" onclick="generateActivation('online')">Online Activation Payload</button>
           <button class="btn btn-ghost" onclick="generateActivation('offline')">Offline Activation Payload</button>
         </div>
-        <div class="tool-note">Production licensing should use private-key signing on a server or secure desktop admin utility. Do not rely on a public static HTML page to protect real license secrets.</div>
+        <div class="tool-note">Pricing benchmark: lightweight inventory tools can be very low-cost, while CMMS/asset systems commonly sit around USD 45-150 per user/month and field-service platforms can run much higher. WYNTIQ presets are positioned as competitive India-friendly pricing for offline-first logistics with custom deployment needs. Production licensing should use private-key signing on a server or secure desktop admin utility.</div>
       </section>
       <section class="tool-card">
         <h2>Output</h2>
@@ -81,6 +97,44 @@ body{background:#f5f8fc}
 <script>
 function val(id){return document.getElementById(id).value.trim();}
 function money(n){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(n);}
+const presets={
+  trial:{licenseType:'TRIAL_7_DAY',basePrice:0,implementation:0,users:5,devices:2,sites:1,discount:0,tax:0,notes:'Free 7-day trial. Product pauses or moves to read-only after expiry unless extended or converted to paid activation.'},
+  extension:{licenseType:'TRIAL_EXTENSION',basePrice:10000,implementation:0,users:5,devices:2,sites:1,discount:0,tax:18,notes:'30-day trial extension for continued evaluation. Extension is temporary and does not create paid production rights.'},
+  pilot:{licenseType:'PAID_ANNUAL',basePrice:125000,implementation:50000,users:10,devices:5,sites:1,discount:10,tax:18,notes:'Guided pilot for one site or unit, including onboarding, core configuration, and evaluation support.'},
+  professional:{licenseType:'PAID_ANNUAL',basePrice:240000,implementation:50000,users:15,devices:10,sites:1,discount:10,tax:18,notes:'Professional annual license for a small operational team or single-site deployment.'},
+  site:{licenseType:'SITE_LICENSE',basePrice:750000,implementation:150000,users:50,devices:25,sites:1,discount:10,tax:18,notes:'Site license for one base, plant, mine, unit, or operational location with deployment support.'},
+  enterprise:{licenseType:'ENTERPRISE',basePrice:1800000,implementation:300000,users:150,devices:75,sites:3,discount:10,tax:18,notes:'Enterprise rollout for multi-site deployment, admin training, support planning, and custom workflow scope.'},
+  defence:{licenseType:'ENTERPRISE',basePrice:2500000,implementation:500000,users:200,devices:100,sites:3,discount:0,tax:18,notes:'Defence / secure deployment estimate. Final quote depends on security review, offline activation, installation controls, support level, and procurement scope.'}
+};
+function setField(id,value){document.getElementById(id).value=value;}
+function applyPreset(key){
+  const p=presets[key];
+  setField('licenseType',p.licenseType);
+  setField('basePrice',p.basePrice);
+  setField('implementation',p.implementation);
+  setField('users',p.users);
+  setField('devices',p.devices);
+  setField('sites',p.sites);
+  setField('discount',p.discount);
+  setField('tax',p.tax);
+  setField('notes',p.notes);
+  setField('expiry','');
+  generateQuote();
+}
+function applyMarketRecommended(){
+  const users=Number(val('users')||10);
+  const sites=Number(val('sites')||1);
+  const devices=Number(val('devices')||5);
+  const annualPerUser=12000;
+  const deviceFee=8000;
+  const siteFee=75000;
+  setField('basePrice',(users*annualPerUser)+(devices*deviceFee)+(sites*siteFee));
+  setField('implementation',sites>1?150000:75000);
+  setField('tax',18);
+  applyPaymentDiscount();
+  generateQuote();
+}
+function applyPaymentDiscount(){setField('discount',val('paymentTiming'));}
 function expiryFor(type){
   const explicit=val('expiry');
   if(explicit) return explicit;
@@ -95,9 +149,13 @@ function expiryFor(type){
 }
 function quoteData(){
   const base=Number(val('basePrice')||0);
+  const implementation=Number(val('implementation')||0);
   const discount=Number(val('discount')||0);
   const tax=Number(val('tax')||0);
-  const afterDiscount=base-(base*discount/100);
+  const subtotal=base+implementation;
+  const discountAmount=subtotal*discount/100;
+  const afterDiscount=subtotal-discountAmount;
+  const taxAmount=afterDiscount*tax/100;
   const total=afterDiscount+(afterDiscount*tax/100);
   const type=val('licenseType');
   return {
@@ -114,7 +172,8 @@ function quoteData(){
     sites:Number(val('sites')||0),
     expiryDate:expiryFor(type),
     modules:val('modules').split(',').map(x=>x.trim()).filter(Boolean),
-    pricing:{base,discountPercent:discount,taxPercent:tax,total},
+    pricing:{base,implementation,subtotal,discountPercent:discount,discountAmount,taxPercent:tax,taxAmount,total},
+    paymentTiming:document.getElementById('paymentTiming').selectedOptions[0].textContent,
     notes:val('notes')
   };
 }
@@ -145,6 +204,16 @@ function generateActivation(mode){
   setOutput(payload);
 }
 async function copyOutput(){await navigator.clipboard.writeText(document.getElementById('output').textContent);}
+function exportQuotePdf(){
+  const q=quoteData();
+  const rows=[
+    ['Quote ID',q.quoteId],['Created',new Date(q.createdAt).toLocaleString()],['Customer',q.customer],['Company',q.company],['Email',q.email],['Sector',q.sector],['Platform',q.platform],['License Type',q.licenseType],['Users',q.users],['Devices',q.devices],['Sites',q.sites],['Expiry / Valid Until',q.expiryDate],['Modules',q.modules.join(', ')],['Base Price',money(q.pricing.base)],['Implementation',money(q.pricing.implementation)],['Subtotal',money(q.pricing.subtotal)],['Discount',q.pricing.discountPercent+'% ('+money(q.pricing.discountAmount)+')'],['Tax / GST',q.pricing.taxPercent+'% ('+money(q.pricing.taxAmount)+')'],['Total',money(q.pricing.total)],['Payment Timing',q.paymentTiming],['Notes',q.notes]
+  ];
+  const table=rows.map(r=>`<tr><th>${r[0]}</th><td>${String(r[1]).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</td></tr>`).join('');
+  const win=window.open('','_blank');
+  win.document.write(`<!doctype html><html><head><title>${q.quoteId} WYNTIQ Quote</title><style>body{font-family:Arial,sans-serif;color:#132238;margin:36px}h1{font-size:30px;margin:0 0 6px}.muted{color:#5c687a;margin-bottom:24px}table{width:100%;border-collapse:collapse;margin-top:20px}th,td{text-align:left;border:1px solid #d8e4f0;padding:10px;vertical-align:top}th{width:220px;background:#f5f8fc}.total{font-size:22px;font-weight:800;margin-top:22px}.note{margin-top:24px;font-size:12px;color:#5c687a;line-height:1.6}@media print{button{display:none}}</style></head><body><h1>WYNTIQ Quotation</h1><div class="muted">TwinStance Solutions LLP | contact@tssolutionsllp.com | sales@tssolutionsllp.com</div><table>${table}</table><div class="total">Total: ${money(q.pricing.total)}</div><div class="note">This quotation is a draft generated from the internal WYNTIQ pricing tool. Final commercial terms, taxes, deployment scope, support, activation, and licensing conditions are subject to written confirmation by TwinStance Solutions LLP.</div><button onclick="window.print()" style="margin-top:24px;padding:12px 18px">Print / Save as PDF</button><script>setTimeout(()=>window.print(),300)<\\/script></body></html>`);
+  win.document.close();
+}
 function downloadOutput(){
   const blob=new Blob([document.getElementById('output').textContent],{type:'application/json'});
   const a=document.createElement('a');
