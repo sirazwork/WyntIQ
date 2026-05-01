@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>WYNTIQ Internal Quote & Activation Tool</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=20260501-nav6">
+<style>
+body{background:#f5f8fc}
+.tool-shell{padding:34px 0 70px}
+.tool-head{margin-bottom:24px}
+.tool-head h1{font-size:clamp(34px,5vw,58px);line-height:1.02;margin:10px 0;color:#132238}
+.tool-head p{max-width:800px;color:#5c687a;line-height:1.8}
+.tool-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
+.tool-card{background:#fff;border:1px solid #d8e4f0;border-radius:14px;padding:22px;box-shadow:0 14px 36px rgba(19,34,56,.07)}
+.tool-card h2{font-size:24px;margin-bottom:14px}
+.tool-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tool-form label{display:grid;gap:6px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.8px;color:#46566a}
+.tool-form input,.tool-form select,.tool-form textarea{width:100%;padding:12px;border:1px solid #ccd9e8;border-radius:8px;background:#fff;color:#132238}
+.tool-form textarea{min-height:96px;resize:vertical}
+.tool-form .full{grid-column:1/-1}
+.tool-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.output-box{white-space:pre-wrap;background:#132238;color:#eaf2ff;border-radius:12px;padding:16px;font:13px/1.6 Consolas,monospace;min-height:220px;overflow:auto}
+.tool-note{margin-top:14px;padding:14px;border-radius:10px;background:#fff8e4;border:1px solid #dac27e;color:#61470f;font-size:13px;line-height:1.7}
+@media(max-width:900px){.tool-grid,.tool-form{grid-template-columns:1fr}.tool-form .full{grid-column:auto}}
+</style>
+</head>
+<body>
+<main class="tool-shell">
+  <div class="container">
+    <div class="tool-head">
+      <div class="access-brand" style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><div class="brand-mark">W</div><div><div class="brand-name">WYNTIQ</div><div class="brand-sub">internal tool</div></div></div>
+      <div class="section-tag">Unlisted admin page</div>
+      <h1>Quote and activation workspace.</h1>
+      <p>Use this hidden page to draft customer quotes, define license scope, and prepare online/offline activation payloads. This is an internal planning tool and is not listed in navigation or sitemap.</p>
+    </div>
+    <div class="tool-grid">
+      <section class="tool-card">
+        <h2>Customer and Quote</h2>
+        <form class="tool-form" id="quote-form">
+          <label>Customer name<input id="customer" value="Customer Name"></label>
+          <label>Company<input id="company" value="Company / Unit"></label>
+          <label>Email<input id="email" type="email" value="customer@example.com"></label>
+          <label>Sector<select id="sector"><option>Defence / Government</option><option>Army</option><option>Air Force</option><option>Navy</option><option>Mining</option><option>Oil & Gas</option><option>Disaster Response</option><option>Enterprise</option></select></label>
+          <label>Platform<select id="platform"><option>Windows EXE</option><option>Linux build</option><option>Windows + Linux</option><option>Web demo</option><option>On-prem deployment</option></select></label>
+          <label>License type<select id="licenseType"><option>TRIAL_7_DAY</option><option>TRIAL_EXTENSION</option><option>PAID_ANNUAL</option><option>PAID_3_YEAR</option><option>PERPETUAL</option><option>SITE_LICENSE</option><option>ENTERPRISE</option><option>EMERGENCY_UNLOCK</option></select></label>
+          <label>Users<input id="users" type="number" min="1" value="10"></label>
+          <label>Devices<input id="devices" type="number" min="1" value="5"></label>
+          <label>Sites<input id="sites" type="number" min="1" value="1"></label>
+          <label>Base price<input id="basePrice" type="number" min="0" value="0"></label>
+          <label>Discount %<input id="discount" type="number" min="0" max="100" value="0"></label>
+          <label>Tax / GST %<input id="tax" type="number" min="0" value="0"></label>
+          <label>Expiry date<input id="expiry" type="date"></label>
+          <label>Machine / Site ID<input id="machineId" placeholder="Machine ID or site identifier"></label>
+          <label class="full">Enabled modules<textarea id="modules">inventory, demands, assets, qr, audit, readiness, sync-diagnostics</textarea></label>
+          <label class="full">Notes<textarea id="notes">Trial is valid for 7 days unless extended. Paid activation required after expiry.</textarea></label>
+        </form>
+        <div class="tool-actions">
+          <button class="btn btn-gold" onclick="generateQuote()">Generate Quote</button>
+          <button class="btn btn-ghost" onclick="generateActivation('online')">Online Activation Payload</button>
+          <button class="btn btn-ghost" onclick="generateActivation('offline')">Offline Activation Payload</button>
+        </div>
+        <div class="tool-note">Production licensing should use private-key signing on a server or secure desktop admin utility. Do not rely on a public static HTML page to protect real license secrets.</div>
+      </section>
+      <section class="tool-card">
+        <h2>Output</h2>
+        <div class="output-box" id="output">Generate a quote or activation payload.</div>
+        <div class="tool-actions">
+          <button class="btn btn-gold" onclick="copyOutput()">Copy Output</button>
+          <button class="btn btn-ghost" onclick="downloadOutput()">Download JSON</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+<script>
+function val(id){return document.getElementById(id).value.trim();}
+function money(n){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(n);}
+function expiryFor(type){
+  const explicit=val('expiry');
+  if(explicit) return explicit;
+  const d=new Date();
+  if(type==='TRIAL_7_DAY') d.setDate(d.getDate()+7);
+  else if(type==='TRIAL_EXTENSION') d.setDate(d.getDate()+30);
+  else if(type==='PAID_ANNUAL') d.setFullYear(d.getFullYear()+1);
+  else if(type==='PAID_3_YEAR') d.setFullYear(d.getFullYear()+3);
+  else if(type==='EMERGENCY_UNLOCK') d.setDate(d.getDate()+3);
+  else d.setFullYear(d.getFullYear()+10);
+  return d.toISOString().slice(0,10);
+}
+function quoteData(){
+  const base=Number(val('basePrice')||0);
+  const discount=Number(val('discount')||0);
+  const tax=Number(val('tax')||0);
+  const afterDiscount=base-(base*discount/100);
+  const total=afterDiscount+(afterDiscount*tax/100);
+  const type=val('licenseType');
+  return {
+    quoteId:'WYQ-'+Date.now().toString(36).toUpperCase(),
+    createdAt:new Date().toISOString(),
+    customer:val('customer'),
+    company:val('company'),
+    email:val('email'),
+    sector:val('sector'),
+    platform:val('platform'),
+    licenseType:type,
+    users:Number(val('users')||0),
+    devices:Number(val('devices')||0),
+    sites:Number(val('sites')||0),
+    expiryDate:expiryFor(type),
+    modules:val('modules').split(',').map(x=>x.trim()).filter(Boolean),
+    pricing:{base,discountPercent:discount,taxPercent:tax,total},
+    notes:val('notes')
+  };
+}
+function setOutput(obj){document.getElementById('output').textContent=JSON.stringify(obj,null,2);}
+function generateQuote(){setOutput({...quoteData(),summary:'Draft quotation. Verify commercial terms before sending.'});}
+function generateActivation(mode){
+  const q=quoteData();
+  const payload={
+    activationId:'WYA-'+Date.now().toString(36).toUpperCase(),
+    mode,
+    product:'WYNTIQ',
+    edition:q.licenseType.includes('ENTERPRISE')?'Enterprise':q.licenseType.includes('TRIAL')?'Trial':'Professional',
+    customer:q.customer,
+    company:q.company,
+    email:q.email,
+    platform:q.platform,
+    licenseType:q.licenseType,
+    machineOrSiteId:val('machineId') || (mode==='offline'?'REQUEST_REQUIRED':'ONLINE_DEVICE_BIND'),
+    users:q.users,
+    devices:q.devices,
+    sites:q.sites,
+    modules:q.modules,
+    issuedAt:q.createdAt,
+    expiresAt:q.expiryDate,
+    status:q.licenseType==='TRIAL_7_DAY'?'trial_active':'pending_payment_or_issue',
+    signaturePlaceholder:'SIGN_WITH_PRIVATE_KEY_IN_PRODUCTION'
+  };
+  setOutput(payload);
+}
+async function copyOutput(){await navigator.clipboard.writeText(document.getElementById('output').textContent);}
+function downloadOutput(){
+  const blob=new Blob([document.getElementById('output').textContent],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='wyntiq-quote-activation.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>

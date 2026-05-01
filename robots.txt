@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /app/
 Disallow: /private-demo-access-7q4m.html
+Disallow: /internal-quote-license-9x2k.html
 
 Sitemap: https://www.wyntiq.com/sitemap.xml

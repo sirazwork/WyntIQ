@@ -174,6 +174,18 @@ button,input,select,textarea{font:inherit}
 .factor-card{background:#fff;border:1px solid #d8e4f0;border-radius:12px;padding:18px}
 .factor-card h3{font-size:17px;margin-bottom:8px}
 .factor-card p{font-size:14px;line-height:1.7;color:var(--muted)}
+.guide-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:24px;align-items:start}
+.guide-nav{position:sticky;top:98px;background:#fff;border:1px solid #d8e4f0;border-radius:14px;padding:18px;box-shadow:0 14px 34px rgba(19,34,56,.06)}
+.guide-nav h3{font-size:18px;margin-bottom:10px}
+.guide-nav a{display:block;padding:10px 12px;border-radius:9px;color:#46566a;font-size:13px;font-weight:800}
+.guide-nav a:hover{background:#edf4fb;color:#102238}
+.guide-stack{display:grid;gap:18px}
+.guide-card{background:#fff;border:1px solid #d8e4f0;border-radius:14px;padding:24px;box-shadow:0 14px 34px rgba(19,34,56,.06)}
+.guide-card h2{font-size:30px;margin-bottom:12px}
+.guide-card h3{font-size:18px;margin:18px 0 8px}
+.guide-card p,.guide-card li{font-size:14px;line-height:1.8;color:var(--muted)}
+.guide-card ol,.guide-card ul{padding-left:20px;display:grid;gap:8px}
+.guide-note{margin-top:14px;padding:14px 16px;border-radius:10px;background:#f5f8fc;border:1px solid #d8e4f0;color:#314156;font-size:13px;line-height:1.7}
 .toast{position:fixed;right:22px;bottom:22px;background:#0a1628;color:#fff;border-left:4px solid var(--gold);border-radius:8px;padding:13px 16px;box-shadow:0 18px 40px rgba(0,0,0,.22);display:none;z-index:100}
 .toast.show{display:block}
 @media(max-width:900px){
@@ -189,11 +201,11 @@ button,input,select,textarea{font:inherit}
   .nav-menu{position:static;width:100%;min-width:0;margin-top:8px;box-shadow:none;opacity:1;visibility:visible;transform:none;pointer-events:auto;display:none}
   .nav-drop:focus-within .nav-menu,.nav-drop:hover .nav-menu{display:grid}
   .mobile-only{display:inline-flex}
-  .hero .container,.mesh-panel,.compare,.legal-grid{grid-template-columns:1fr}
+  .hero .container,.mesh-panel,.compare,.legal-grid,.guide-grid{grid-template-columns:1fr}
   .grid-2,.grid-3,.visual-grid,.bento,.footer-grid,.contact-box,.trust-strip,.process-grid,.pricing-grid,.factor-grid{grid-template-columns:1fr}
   .contact-box textarea,.contact-box button{grid-column:auto}
   .hero{min-height:auto}
-  .legal-nav{position:static}
+  .legal-nav,.guide-nav{position:static}
 }
 @media(max-width:780px){
   .topline{display:none}
