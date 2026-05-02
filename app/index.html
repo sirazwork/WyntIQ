@@ -16,19 +16,19 @@ if (demoParams.get('demo_key') === WYNTIQ_DEMO_KEY) {
   window.location.replace('../trial.html?access=demo');
 }
 </script>
-<title>WYNTIQ — Integrated Material Management System</title>
+<title>WYNTIQ - Offline Logistics Operations Demo</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
 :root{
-  --bg:#f0f4f8;--surface:#fff;--surface2:#f8fafc;--border:#e2e8f0;--border2:#cbd5e1;
-  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
-  --accent:#0ea5e9;--accent-dark:#0284c7;--accent-light:#e0f2fe;
-  --green:#10b981;--green-light:#d1fae5;--orange:#f59e0b;--orange-light:#fef3c7;
-  --red:#ef4444;--red-light:#fee2e2;--purple:#8b5cf6;--purple-light:#ede9fe;
-  --navy:#1e3a5f;--navy2:#152d4a;
-  --shadow-md:0 4px 6px rgba(0,0,0,0.07);--shadow-lg:0 10px 25px rgba(0,0,0,0.12);
+  --bg:#080f1e;--surface:#0a1628;--surface2:#0f2040;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#f8fbff;--text2:rgba(255,255,255,0.62);--text3:rgba(255,255,255,0.35);
+  --accent:#c9a84c;--accent-dark:#b8943a;--accent-light:rgba(201,168,76,0.12);
+  --green:#48bb78;--green-light:rgba(72,187,120,0.15);--orange:#f6ad55;--orange-light:rgba(246,173,85,0.15);
+  --red:#fc8181;--red-light:rgba(252,129,129,0.15);--purple:#9f7aea;--purple-light:rgba(159,122,234,0.15);
+  --navy:#04090f;--navy2:#0a1628;
+  --shadow-md:0 14px 28px rgba(0,0,0,0.25);--shadow-lg:0 24px 48px rgba(0,0,0,0.45);
   --r:10px;--r-sm:6px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -37,13 +37,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 /* ═══ LOGIN ══════════════════════════════════════════════════════════════ */
 #login-screen{
   position:fixed;inset:0;
-  background:linear-gradient(135deg,#0f1e35 0%,#1e3a5f 50%,#0c2a4a 100%);
+  background:radial-gradient(ellipse at 40% 50%,rgba(15,32,64,.8),transparent 65%),#080f1e;
   display:flex;align-items:center;justify-content:center;z-index:99999;
 }
 .login-grid{position:absolute;inset:0;opacity:0.04;background-image:repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,#fff,#fff 1px,transparent 1px,transparent 40px);}
-.login-box{background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:36px;width:440px;position:relative;z-index:1;}
+.login-box{background:#0a1628;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:36px;width:440px;position:relative;z-index:1;box-shadow:0 32px 64px rgba(0,0,0,.65);}
 .login-logo{display:flex;align-items:center;gap:10px;margin-bottom:24px;}
-.login-logo-box{width:40px;height:40px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#fff;}
+.login-logo-box{width:40px;height:40px;background:#0f2040;border:1px solid rgba(201,168,76,.25);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#c9a84c;}
 .login-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;color:#fff;}
 .login-brand-sub{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1.5px;text-transform:uppercase;}
 .login-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px;}
@@ -59,8 +59,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .role-pill-icon{font-size:18px;margin-bottom:3px;}
 .role-pill-name{font-size:10px;font-weight:600;color:#fff;}
 .role-pill-desc{font-size:9px;color:rgba(255,255,255,0.35);margin-top:1px;}
-.login-btn{width:100%;padding:13px;background:var(--accent);border:none;border-radius:8px;font-size:14px;font-weight:700;color:#fff;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;letter-spacing:0.5px;}
-.login-btn:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 4px 15px rgba(14,165,233,0.4);}
+.login-btn{width:100%;padding:13px;background:linear-gradient(135deg,#b8943a,#c9a84c,#d4b55a);border:none;border-radius:8px;font-size:14px;font-weight:800;color:#080f1e;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;letter-spacing:0.5px;}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(201,168,76,0.28);}
 .login-btn.secondary{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.14);color:#fff;}
 .login-btn.secondary:hover{background:rgba(255,255,255,0.16);box-shadow:none;}
 .login-actions{display:grid;gap:10px;margin-top:10px;}
@@ -71,14 +71,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 #app-shell{display:none;flex-direction:column;min-height:100vh;}
 
 /* NAVBAR */
-.navbar{background:var(--navy);height:54px;display:flex;align-items:center;padding:0 16px;justify-content:space-between;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+.navbar{background:#04090f;height:54px;display:flex;align-items:center;padding:0 16px;justify-content:space-between;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25);border-bottom:1px solid rgba(255,255,255,.07);}
 .nav-brand{display:flex;align-items:center;gap:10px;}
-.logo-box{width:30px;height:30px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:#fff;}
+.logo-box{width:30px;height:30px;background:#0f2040;border:1px solid rgba(201,168,76,.25);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:#c9a84c;}
 .brand-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff;}
 .brand-sub{font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:-2px;}
 .nav-tabs{display:flex;gap:2px;background:rgba(255,255,255,0.07);padding:3px;border-radius:7px;}
 .nav-tab{padding:5px 11px;border-radius:5px;font-size:11px;font-weight:500;color:rgba(255,255,255,0.5);cursor:pointer;border:none;background:transparent;transition:all 0.2s;white-space:nowrap;position:relative;}
-.nav-tab.active{background:var(--accent);color:#fff;}
+.nav-tab.active{background:rgba(201,168,76,.14);color:#c9a84c;}
 .tab-dot{position:absolute;top:-2px;right:-2px;width:7px;height:7px;border-radius:50%;background:var(--red);border:1px solid var(--navy);display:none;}
 .tab-dot.show{display:block;}
 .nav-right{display:flex;align-items:center;gap:10px;}
@@ -286,39 +286,39 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
         <div class="login-brand-sub">by TwinStance Solutions</div>
       </div>
     </div>
-    <div class="login-title">Open the WYNTIQ Demo</div>
-    <div class="login-desc">Demo access is controlled through the WYNTIQ request form</div>
+    <div class="login-title">Works Without Internet.<br>Syncs When It Matters.</div>
+    <div class="login-desc">Controlled preview of the WYNTIQ desktop operations experience</div>
 
     <div style="margin-bottom:14px;">
       <label class="login-label">Your Role</label>
       <div class="role-grid">
         <div class="role-pill sel" id="rp-technician" onclick="pickRole('technician')">
-          <div class="role-pill-icon">👷</div>
+          <div class="role-pill-icon">TN</div>
           <div class="role-pill-name">Technician</div>
           <div class="role-pill-desc">Raise demands</div>
         </div>
         <div class="role-pill" id="rp-officer" onclick="pickRole('officer')">
-          <div class="role-pill-icon">⭐</div>
+          <div class="role-pill-icon">OF</div>
           <div class="role-pill-name">Officer</div>
           <div class="role-pill-desc">Approve</div>
         </div>
         <div class="role-pill" id="rp-logistics" onclick="pickRole('logistics')">
-          <div class="role-pill-icon">🚛</div>
+          <div class="role-pill-icon">LG</div>
           <div class="role-pill-name">Logistics</div>
           <div class="role-pill-desc">Issue stock</div>
         </div>
         <div class="role-pill" id="rp-accounts" onclick="pickRole('accounts')">
-          <div class="role-pill-icon">💰</div>
+          <div class="role-pill-icon">AC</div>
           <div class="role-pill-name">Accounts</div>
           <div class="role-pill-desc">Budget</div>
         </div>
         <div class="role-pill" id="rp-vendor" onclick="pickRole('vendor')">
-          <div class="role-pill-icon">🏭</div>
+          <div class="role-pill-icon">VN</div>
           <div class="role-pill-name">Vendor</div>
           <div class="role-pill-desc">Supply orders</div>
         </div>
         <div class="role-pill" id="rp-admin" onclick="pickRole('admin')">
-          <div class="role-pill-icon">🔧</div>
+          <div class="role-pill-icon">AD</div>
           <div class="role-pill-name">Admin</div>
           <div class="role-pill-desc">Manage users</div>
         </div>
@@ -331,14 +331,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
     <input class="login-input" id="l-pass" type="password" placeholder="Enter password" value="demo123"/>
     <div class="login-err" id="l-err">Invalid credentials. Check username and password.</div>
     <div class="login-actions">
-      <button class="login-btn" id="controlled-access-btn" onclick="openPublicDemo()">Request Demo Access</button>
-      <button class="login-btn secondary" id="signin-btn">Controlled Access Required</button>
+      <button class="login-btn" id="controlled-access-btn" onclick="openPublicDemo()">Open Guided Demo</button>
+      <button class="login-btn secondary" id="signin-btn">Sign In With Selected Role</button>
     </div>
-    <div class="login-hint">
-      Public sandbox credentials — all roles use password: <b style="color:rgba(255,255,255,0.6);">demo123</b><br>
-      Technician: demo · Officer: officer · Logistics: logistics<br>
-      Accounts: accounts · Vendor: vendor · Admin: admin
-    </div>
+    <div class="login-hint">This browser demo mirrors the desktop workflow for evaluation. Production WYNTIQ runs as a licensed Windows/Linux desktop app with local SQLite storage, offline sync bundles, audit records, and activation control.</div>
   </div>
 </div>
 
@@ -354,16 +350,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <div class="logo-box">W</div>
       <div>
         <div class="brand-text">WYNTIQ</div>
-        <div class="brand-sub">TwinStance Solutions</div>
+        <div class="brand-sub">Offline Logistics Command</div>
       </div>
     </div>
     <div class="nav-tabs" id="nav-tabs">
-      <button class="nav-tab active" onclick="goPage('dashboard',this)">📊 Dashboard<span class="tab-dot" id="td-dash"></span></button>
-      <button class="nav-tab" onclick="goPage('demand',this)" id="tab-demand">📋 Demands<span class="tab-dot" id="td-demand"></span></button>
-      <button class="nav-tab" onclick="goPage('inventory',this)">📦 Inventory<span class="tab-dot" id="td-inv"></span></button>
-      <button class="nav-tab" onclick="goPage('map',this)">🗺️ Map</button>
-      <button class="nav-tab" onclick="goPage('audit',this)">🔍 Audit</button>
-      <button class="nav-tab" onclick="goPage('admin',this)" id="tab-admin" style="display:none;">⚙️ Admin</button>
+      <button class="nav-tab active" onclick="goPage('dashboard',this)">Overview<span class="tab-dot" id="td-dash"></span></button>
+      <button class="nav-tab" onclick="goPage('demand',this)" id="tab-demand">Demands<span class="tab-dot" id="td-demand"></span></button>
+      <button class="nav-tab" onclick="goPage('inventory',this)">Inventory<span class="tab-dot" id="td-inv"></span></button>
+      <button class="nav-tab" onclick="goPage('map',this)">Live Map</button>
+      <button class="nav-tab" onclick="goPage('audit',this)">Audit Trail</button>
+      <button class="nav-tab" onclick="goPage('admin',this)" id="tab-admin" style="display:none;">Users</button>
     </div>
     <div class="nav-right" style="position:relative;">
       <div class="notif-btn" id="notif-btn" onclick="toggleNotif()">
@@ -652,12 +648,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 // ═══════════════════════════════════════════════════════════════ DATA ════
 
 const USERS_DB = {
-  demo:      {pass:'demo123',name:'Cpl. R. Sharma',role:'technician',unit:'Pathankot AB',email:'sharma@iaf.in',active:true,lastLogin:'2026-03-29 09:15'},
-  officer:   {pass:'demo123',name:'Sqn Ldr. P. Kumar',role:'officer',unit:'Pathankot AB',email:'kumar@iaf.in',active:true,lastLogin:'2026-03-29 08:45'},
-  logistics: {pass:'demo123',name:'Sgt. V. Singh',role:'logistics',unit:'Pathankot AB',email:'singh@iaf.in',active:true,lastLogin:'2026-03-29 09:00'},
-  accounts:  {pass:'demo123',name:'Accts. M. Joshi',role:'accounts',unit:'Air HQ',email:'joshi@iaf.in',active:true,lastLogin:'2026-03-29 08:30'},
-  vendor:    {pass:'demo123',name:'HAL Vendor',role:'vendor',unit:'HAL Bangalore',email:'vendor@hal.in',active:true,lastLogin:'2026-03-28 14:00'},
-  admin:     {pass:'demo123',name:'Admin — TwinStance',role:'admin',unit:'TwinStance Solutions',email:'admin@tssolutionsllp.com',active:true,lastLogin:'2026-03-29 07:00'},
+  demo:      {pass:'demo123',name:'Demo User',role:'technician',unit:'Demo Unit',email:'demo@wyntiq.local',active:true,lastLogin:'2026-04-23 09:15'},
+  officer:   {pass:'demo123',name:'Flt Lt Mehta A.',role:'officer',unit:'7 Sqn',email:'officer@wyntiq.local',active:true,lastLogin:'2026-04-23 08:45'},
+  logistics: {pass:'demo123',name:'Sgt. Patel K.',role:'logistics',unit:'7 Sqn',email:'logistics@wyntiq.local',active:true,lastLogin:'2026-04-23 09:00'},
+  accounts:  {pass:'demo123',name:'Accts Off. Singh',role:'accounts',unit:'Base HQ',email:'accounts@wyntiq.local',active:true,lastLogin:'2026-04-23 08:30'},
+  vendor:    {pass:'demo123',name:'HAL Supplies',role:'vendor',unit:'Vendor',email:'vendor@wyntiq.local',active:true,lastLogin:'2026-04-22 14:00'},
+  admin:     {pass:'demo123',name:'Sys Admin',role:'admin',unit:'TwinStance',email:'admin@tssolutionsllp.com',active:true,lastLogin:'2026-04-23 07:00'},
 };
 
 const ROLE_COLORS = {technician:'#0ea5e9',officer:'#8b5cf6',logistics:'#10b981',accounts:'#f59e0b',vendor:'#f97316',admin:'#ef4444'};
@@ -697,12 +693,11 @@ let demandN = 5;
 
 // INVENTORY
 let inventory = [
-  {part:'FP-AN32-007',name:'Fuel Pump Assembly',cat:'Fuel Systems',qty:2,min:5,loc:'Store A, Shelf 2',lastIssuedTo:'Cpl. R. Sharma',updatedAt:'2026-03-25'},
-  {part:'HY-MIG-021',name:'Hydraulic Seal Kit',cat:'Hydraulics',qty:0,min:3,loc:'Store B, Shelf 1',lastIssuedTo:'Sgt. T. Verma',updatedAt:'2026-03-20'},
-  {part:'EO-MT-007',name:'Engine Oil Filter',cat:'Engine Parts',qty:18,min:10,loc:'Store A, Shelf 5',lastIssuedTo:'Dvr. R. Das',updatedAt:'2026-03-22'},
-  {part:'AV-SU30-CB4',name:'Avionics Circuit Board',cat:'Avionics',qty:0,min:2,loc:'Store C, Secure',lastIssuedTo:'Flt Lt. B. Krishnan',updatedAt:'2026-03-28'},
-  {part:'LG-JAG-003',name:'Landing Gear Actuator',cat:'Landing Gear',qty:4,min:2,loc:'Store B, Shelf 4',lastIssuedTo:'—',updatedAt:'2026-03-15'},
-  {part:'EL-GEN-012',name:'Generator Brush Set',cat:'Electrical',qty:1,min:5,loc:'Store A, Shelf 8',lastIssuedTo:'Cpl. M. Iyer',updatedAt:'2026-03-18'},
+  {part:'HAL-OF-2234',name:'Engine Oil Filter',cat:'Aviation',qty:12,min:5,loc:'A1-R2',lastIssuedTo:'Cpl. Sharma R.',updatedAt:'2026-04-23'},
+  {part:'HYD-5606',name:'Hydraulic Fluid MIL-H-5606',cat:'Aviation',qty:3,min:5,loc:'A1-R4',lastIssuedTo:'Cpl. Sharma R.',updatedAt:'2026-04-23'},
+  {part:'TYR-MLG-08',name:'Tyre - Main Landing Gear',cat:'Aviation',qty:0,min:2,loc:'B2-R1',lastIssuedTo:'Sgt. Kumar B.',updatedAt:'2026-04-23'},
+  {part:'OXY-A-001',name:'Oxygen Cylinder A-Type',cat:'Aviation',qty:8,min:4,loc:'B1-R3',lastIssuedTo:'Flt Lt Mehta A.',updatedAt:'2026-04-22'},
+  {part:'BAT-12V7A',name:'UPS Battery 12V 7Ah',cat:'Electrical',qty:1,min:3,loc:'E1-R2',lastIssuedTo:'Tech. Yadav M.',updatedAt:'2026-04-21'},
 ];
 
 // MAP ASSETS
