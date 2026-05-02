@@ -14,7 +14,7 @@
 <style>
 :root{--hero-bg:url('assets/site-home-hero.png')}
 .license-matrix{overflow-x:auto;border:1px solid #bdd1e5;border-radius:10px;background:#fff;box-shadow:0 16px 34px rgba(19,34,56,.07)}
-.license-table{width:100%;min-width:1120px;border-collapse:collapse;font-size:13px}
+.license-table{width:100%;min-width:1040px;border-collapse:collapse;font-size:13px}
 .license-table th,.license-table td{border:1px solid #c7d8ea;padding:14px 12px;text-align:center;vertical-align:middle}
 .license-table th{background:#dbe8f4;color:#002b5c;font-weight:900}
 .license-table th:first-child,.license-table td:first-child{position:sticky;left:0;text-align:left;background:#fff;z-index:1;width:230px}
@@ -28,7 +28,7 @@
 .dash{color:#9aa8b7;font-weight:900}
 .table-cta{font-weight:900;color:#d64514;text-decoration:none}
 .pricing-note{margin-top:18px;padding:16px 18px;background:#fff8e4;border:1px solid #dac27e;border-radius:12px;color:#61470f;line-height:1.7;font-size:14px}
-@media(max-width:760px){.license-matrix{border-radius:8px}.license-table{min-width:980px}.license-table th,.license-table td{padding:12px 10px}.license-table th:first-child,.license-table td:first-child{width:190px}}
+@media(max-width:760px){.license-matrix{border-radius:8px}.license-table{min-width:900px}.license-table th,.license-table td{padding:12px 10px}.license-table th:first-child,.license-table td:first-child{width:190px}}
 </style>
 </head>
 <body>
@@ -131,8 +131,8 @@
   <div class="container">
     <div class="section-head">
       <div class="section-tag">Flexible Licensing</div>
-      <h2>Example pricing by deployment stage.</h2>
-      <p>Below are example prices for typical WYNTIQ use cases. Custom pricing is available based on your users, operational scope, deployment strategy, and payment timing.</p>
+      <h2>Simple user-based pricing.</h2>
+      <p>Paid WYNTIQ licensing starts from INR 15,000 per named user. Final pricing is kept simple and depends on user count, deployment requirements, and approved discounts.</p>
     </div>
     <div class="license-matrix">
       <table class="license-table" aria-label="WYNTIQ example pricing and licensing matrix">
@@ -140,31 +140,30 @@
           <tr>
             <th>Available Features</th>
             <th><span class="license-plan">Free Trial</span><span class="license-price">Free</span><span class="license-sub">7-day approved evaluation</span></th>
-            <th><span class="license-plan">Trial Extension</span><span class="license-price">INR 15,000</span><span class="license-sub">Extra evaluation time</span></th>
-            <th><span class="license-plan">Guided Pilot</span><span class="license-price">From INR 1.20L</span><span class="license-sub">Small operational team</span></th>
-            <th><span class="license-plan">Professional</span><span class="license-price">From INR 2.40L</span><span class="license-sub">Named user license</span></th>
-            <th><span class="license-plan">Site License</span><span class="license-price">From INR 5.00L</span><span class="license-sub">Expanded user scope</span></th>
-            <th><span class="license-plan">Enterprise</span><span class="license-price">From INR 12.00L</span><span class="license-sub">Large rollout</span></th>
-            <th><span class="license-plan">Defence Secure</span><span class="license-price">From INR 18.00L</span><span class="license-sub">Controlled environments</span></th>
+            <th><span class="license-plan">Guided Pilot</span><span class="license-price">From INR 15,000/user</span><span class="license-sub">Small operational team</span></th>
+            <th><span class="license-plan">Professional</span><span class="license-price">From INR 15,000/user</span><span class="license-sub">Named user license</span></th>
+            <th><span class="license-plan">Site License</span><span class="license-price">From INR 15,000/user</span><span class="license-sub">Expanded user scope</span></th>
+            <th><span class="license-plan">Enterprise</span><span class="license-price">From INR 15,000/user</span><span class="license-sub">Large rollout</span></th>
+            <th><span class="license-plan">Defence Secure</span><span class="license-price">Custom</span><span class="license-sub">Controlled environments</span></th>
             <th><span class="license-plan">Market Fit</span><span class="license-price">Custom</span><span class="license-sub">Optimized quotation</span></th>
           </tr>
         </thead>
         <tbody>
-          <tr><td><span class="feature-title">Named User Licensing</span><span class="feature-sub">Technicians, officers, operators, auditors, and administrators</span></td><td>5 users</td><td>5 users</td><td>10 users</td><td>20 users</td><td>50 users</td><td>150 users</td><td>150 users</td><td>Custom</td></tr>
-          <tr><td><span class="feature-title">Inventory Command</span><span class="feature-sub">Stock visibility, issue flow, low-stock signals, and demand linkage</span></td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td><span class="feature-title">Asset & QR Workflow</span><span class="feature-sub">Asset identity, custodian, movement, QR tags, and field checks</span></td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td><span class="feature-title">Audit Trail</span><span class="feature-sub">Role-aware actions and accountable operational records</span></td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td><span class="feature-title">Online + Offline Activation</span><span class="feature-sub">Connected verification and disconnected field activation</span></td><td class="dash">Limited</td><td class="dash">Limited</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td><span class="feature-title">Unlimited Devices</span><span class="feature-sub">Approved desktops, laptops, tablets, and field terminals included</span></td><td class="dash">Trial use</td><td class="dash">Trial use</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td><span class="feature-title">Unlimited Sites</span><span class="feature-sub">Operational locations included without separate site pricing</span></td><td class="dash">Trial use</td><td class="dash">Trial use</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td><span class="feature-title">Admin & Rollout Support</span><span class="feature-sub">Guided setup, user planning, configuration, and deployment support</span></td><td class="dash">-</td><td class="dash">-</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td>Custom</td></tr>
-          <tr><td><span class="feature-title">Secure / Controlled Deployment</span><span class="feature-sub">Security review, restricted activation, and controlled operating environments</span></td><td class="dash">-</td><td class="dash">-</td><td class="dash">-</td><td class="dash">-</td><td class="dash">Optional</td><td class="check">✓</td><td class="check">✓</td><td>Custom</td></tr>
-          <tr><td><span class="feature-title">Optional Update Maintenance</span><span class="feature-sub">Future WYNTIQ product updates during the selected term with no additional upgrade fee</span></td><td class="dash">-</td><td class="dash">-</td><td>1 year</td><td>1 year</td><td>2 years</td><td>3 years</td><td>3 years</td><td>1-5 years</td></tr>
-          <tr><td><span class="feature-title">Best Fit</span><span class="feature-sub">Recommended use case for each licensing path</span></td><td>First look</td><td>Longer review</td><td>Proof of value</td><td>Team deployment</td><td>Large unit</td><td>Organisation rollout</td><td>Sensitive operations</td><td><a class="table-cta" href="contact.html">Contact sales</a></td></tr>
+          <tr><td><span class="feature-title">Named User Licensing</span><span class="feature-sub">Technicians, officers, operators, auditors, and administrators</span></td><td>5 users</td><td>10+ users</td><td>20+ users</td><td>50+ users</td><td>150+ users</td><td>Custom</td><td>Custom</td></tr>
+          <tr><td><span class="feature-title">Inventory Command</span><span class="feature-sub">Stock visibility, issue flow, low-stock signals, and demand linkage</span></td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td><span class="feature-title">Asset & QR Workflow</span><span class="feature-sub">Asset identity, custodian, movement, QR tags, and field checks</span></td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td><span class="feature-title">Audit Trail</span><span class="feature-sub">Role-aware actions and accountable operational records</span></td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td><span class="feature-title">Online + Offline Activation</span><span class="feature-sub">Connected verification and disconnected field activation</span></td><td class="dash">Limited</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td><span class="feature-title">Unlimited Devices</span><span class="feature-sub">Approved desktops, laptops, tablets, and field terminals included</span></td><td class="dash">Trial use</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td><span class="feature-title">Unlimited Sites</span><span class="feature-sub">Operational locations included without separate site pricing</span></td><td class="dash">Trial use</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+          <tr><td><span class="feature-title">Admin & Rollout Support</span><span class="feature-sub">Guided setup, user planning, configuration, and deployment support</span></td><td class="dash">-</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td>Custom</td></tr>
+          <tr><td><span class="feature-title">Secure / Controlled Deployment</span><span class="feature-sub">Security review, restricted activation, and controlled operating environments</span></td><td class="dash">-</td><td class="dash">-</td><td class="dash">-</td><td class="dash">Optional</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td>Custom</td></tr>
+          <tr><td><span class="feature-title">Optional Update Maintenance</span><span class="feature-sub">Future WYNTIQ product updates during the selected term with no additional upgrade fee</span></td><td class="dash">-</td><td>1 year</td><td>1 year</td><td>2 years</td><td>3 years</td><td>3 years</td><td>1-5 years</td></tr>
+          <tr><td><span class="feature-title">Best Fit</span><span class="feature-sub">Recommended use case for each licensing path</span></td><td>First look</td><td>Proof of value</td><td>Team deployment</td><td>Large unit</td><td>Organisation rollout</td><td>Sensitive operations</td><td><a class="table-cta" href="contact.html">Contact sales</a></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="pricing-note">Prices shown are examples for planning and discussion, not a final offer. WYNTIQ offers discounts for faster payment or approved strategic customers. The license is a one-time payment. Optional maintenance can be added for 1, 2, 3, or 5 years and includes future WYNTIQ product updates during that term with no additional upgrade fee.</div>
+    <div class="pricing-note">Pricing starts from INR 15,000 per named user as an example planning rate. Final quotes may receive discounts based on payment timing, user count, sector, and strategic fit. The license is a one-time payment. Optional update maintenance can be added for 1, 2, 3, or 5 years and includes future WYNTIQ product updates during that term with no additional upgrade fee.</div>
   </div>
 </section>
 

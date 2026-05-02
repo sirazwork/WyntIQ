@@ -100,12 +100,12 @@ function val(id){return document.getElementById(id).value.trim();}
 function money(n){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(n);}
 const presets={
   trial:{licenseType:'TRIAL_7_DAY',users:5,userRate:0,discount:0,tax:0,maintenanceYears:0,maintenanceRate:0,activationMode:'both',notes:'Free 7-day trial. Product pauses or moves to read-only after expiry unless extended or converted to paid activation.'},
-  extension:{licenseType:'TRIAL_EXTENSION',users:5,userRate:3000,discount:0,tax:18,maintenanceYears:0,maintenanceRate:0,activationMode:'both',notes:'Trial extension example. Extension is temporary and does not create paid production rights.'},
-  pilot:{licenseType:'ONE_TIME_LICENSE',users:10,userRate:12000,discount:10,tax:18,maintenanceYears:1,maintenanceRate:15,activationMode:'both',notes:'Guided pilot example: one-time license based on named users. Devices and sites are included. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'},
-  professional:{licenseType:'PROFESSIONAL',users:20,userRate:12000,discount:10,tax:18,maintenanceYears:1,maintenanceRate:15,activationMode:'both',notes:'Professional example: one-time license for an operational team. Devices and sites are included. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'},
-  site:{licenseType:'SITE_LICENSE',users:50,userRate:10000,discount:10,tax:18,maintenanceYears:2,maintenanceRate:15,activationMode:'both',notes:'Site License example: expanded user scope with online and offline activation support. Devices and sites are included. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'},
-  enterprise:{licenseType:'ENTERPRISE',users:150,userRate:8000,discount:10,tax:18,maintenanceYears:3,maintenanceRate:15,activationMode:'both',notes:'Enterprise example: large user-base rollout, admin training, support planning, and custom workflow scope. Devices and sites are included. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'},
-  defence:{licenseType:'DEFENCE_SECURE',users:150,userRate:12000,discount:0,tax:18,maintenanceYears:3,maintenanceRate:18,activationMode:'both',notes:'Defence Secure example with online and offline activation. Final quote depends on security review, installation controls, support level, and procurement scope. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'}
+  extension:{licenseType:'TRIAL_EXTENSION',users:5,userRate:0,discount:0,tax:0,maintenanceYears:0,maintenanceRate:0,activationMode:'both',notes:'Trial extension is free and handled case by case based on customer requirements. Extension is temporary and does not create paid production rights.'},
+  pilot:{licenseType:'ONE_TIME_LICENSE',users:10,userRate:15000,discount:10,tax:18,maintenanceYears:1,maintenanceRate:15,activationMode:'both',notes:'Guided pilot example: one-time license based on named users. Devices and sites are included. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'},
+  professional:{licenseType:'PROFESSIONAL',users:20,userRate:15000,discount:10,tax:18,maintenanceYears:1,maintenanceRate:15,activationMode:'both',notes:'Professional example: one-time license for an operational team. Devices and sites are included. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'},
+  site:{licenseType:'SITE_LICENSE',users:50,userRate:15000,discount:10,tax:18,maintenanceYears:2,maintenanceRate:15,activationMode:'both',notes:'Site License example: expanded user scope with online and offline activation support. Devices and sites are included. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'},
+  enterprise:{licenseType:'ENTERPRISE',users:150,userRate:15000,discount:10,tax:18,maintenanceYears:3,maintenanceRate:15,activationMode:'both',notes:'Enterprise example: large user-base rollout, admin training, support planning, and custom workflow scope. Devices and sites are included. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'},
+  defence:{licenseType:'DEFENCE_SECURE',users:150,userRate:15000,discount:0,tax:18,maintenanceYears:3,maintenanceRate:18,activationMode:'both',notes:'Defence Secure example with online and offline activation. Final quote depends on security review, installation controls, support level, and procurement scope. Optional maintenance includes future WYNTIQ product updates during the selected term with no additional upgrade fee.'}
 };
 function setField(id,value){document.getElementById(id).value=value;}
 function applyPreset(key){
@@ -124,7 +124,7 @@ function applyPreset(key){
 }
 function applyMarketRecommended(){
   const users=Number(val('users')||10);
-  setField('userRate',users>100?9000:12000);
+  setField('userRate',15000);
   setField('tax',18);
   setField('maintenanceYears',1);
   setField('maintenanceRate',15);
