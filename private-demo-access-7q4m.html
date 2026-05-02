@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>WYNTIQ Private Demo Access</title>
+<title>WYNTIQ Demo Workspace</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,11 @@ body{background:#f5f8fc;min-height:100vh}
 .access-card h1{font-size:clamp(34px,5vw,58px);line-height:1.02;margin-bottom:14px;color:#132238}
 .access-card p{font-size:16px;line-height:1.8;color:#5c687a;max-width:620px}
 .access-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.access-note{margin-top:22px;padding:14px 16px;background:#f5f8fc;border:1px solid #d8e4f0;border-radius:10px;font-size:13px;color:#5c687a}
+.access-highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.access-highlight{background:#f5f8fc;border:1px solid #d8e4f0;border-radius:12px;padding:14px}
+.access-highlight strong{display:block;color:#132238;font-size:13px;margin-bottom:5px}
+.access-highlight span{display:block;color:#5c687a;font-size:12px;line-height:1.5}
+@media(max-width:720px){.access-highlights{grid-template-columns:1fr}.access-card{padding:24px}}
 </style>
 </head>
 <body>
@@ -27,16 +31,20 @@ body{background:#f5f8fc;min-height:100vh}
   <section class="access-card">
     <div class="access-brand">
       <div class="brand-mark">W</div>
-      <div><div class="brand-name">WYNTIQ</div><div class="brand-sub">private demo access</div></div>
+      <div><div class="brand-name">WYNTIQ</div><div class="brand-sub">offline logistics command</div></div>
     </div>
-    <div class="access-kicker">Unlisted access page</div>
-    <h1>Open the WYNTIQ online demo.</h1>
-    <p>This page is not linked from the public website. Share it only with prospects or internal users who should be able to access the online demo environment.</p>
+    <div class="access-kicker">Demo workspace</div>
+    <h1>Experience WYNTIQ in action.</h1>
+    <p>Step into a focused product walkthrough built for operational teams evaluating offline-first inventory, asset movement, audit trails, QR workflows, and field readiness.</p>
     <div class="access-actions">
       <a class="btn btn-gold" href="app/index.html?demo_key=wyntiq-private-demo-2026">Open Online Demo</a>
       <a class="btn btn-ghost" href="trial.html">Back to Trial Form</a>
     </div>
-    <div class="access-note">Access is controlled by an unlisted link and browser session token. For stronger protection later, move this behind server-side authentication or a password-protected hosting rule.</div>
+    <div class="access-highlights">
+      <div class="access-highlight"><strong>Operational View</strong><span>Review stock, assets, demands, and field movement from one workspace.</span></div>
+      <div class="access-highlight"><strong>Offline Ready</strong><span>See how WYNTIQ supports disconnected teams and delayed synchronization.</span></div>
+      <div class="access-highlight"><strong>Audit Focused</strong><span>Explore traceable records designed for accountable logistics operations.</span></div>
+    </div>
   </section>
 </main>
 </body>
