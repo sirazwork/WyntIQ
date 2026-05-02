@@ -61,14 +61,16 @@ body{background:#f5f8fc}
           <label>Email<input id="email" type="email" value="customer@example.com"></label>
           <label>Sector<select id="sector"><option>Defence / Government</option><option>Army</option><option>Air Force</option><option>Navy</option><option>Mining</option><option>Oil & Gas</option><option>Disaster Response</option><option>Enterprise</option></select></label>
           <label>Platform<select id="platform"><option>Windows EXE</option><option>Linux build</option><option>Windows + Linux</option><option>Web demo</option><option>On-prem deployment</option></select></label>
-          <label>License type<select id="licenseType"><option>TRIAL_7_DAY</option><option>TRIAL_EXTENSION</option><option>PAID_ANNUAL</option><option>PAID_3_YEAR</option><option>PERPETUAL</option><option>SITE_LICENSE</option><option>ENTERPRISE</option><option>EMERGENCY_UNLOCK</option></select></label>
+          <label>License type<select id="licenseType"><option>TRIAL_7_DAY</option><option>TRIAL_EXTENSION</option><option>ONE_TIME_LICENSE</option><option>PROFESSIONAL</option><option>SITE_LICENSE</option><option>ENTERPRISE</option><option>DEFENCE_SECURE</option><option>EMERGENCY_UNLOCK</option></select></label>
           <label>Users<input id="users" type="number" min="1" value="10"></label>
-          <label>Price per user / year<input id="userRate" type="number" min="0" value="12000"></label>
+          <label>Price per user / one-time<input id="userRate" type="number" min="0" value="12000"></label>
           <label>Included devices<input id="devicesIncluded" type="text" value="Unlimited" readonly></label>
           <label>Included sites<input id="sitesIncluded" type="text" value="Unlimited" readonly></label>
           <label>Activation mode<select id="activationMode"><option value="both">Online + Offline</option><option value="online">Online only</option><option value="offline">Offline only</option></select></label>
           <label>Discount %<input id="discount" type="number" min="0" max="100" value="0"></label>
           <label>Payment timing<select id="paymentTiming" onchange="applyPaymentDiscount()"><option value="20">Paid now - 20% discount</option><option value="10">Paid within 7 days - 10% discount</option><option value="5">Paid within 15 days - 5% discount</option><option value="0">Standard quote - no discount</option></select></label>
+          <label>Maintenance term<select id="maintenanceYears"><option value="0">No maintenance</option><option value="1">1 year optional</option><option value="2">2 years optional</option><option value="3">3 years optional</option><option value="5">5 years optional</option></select></label>
+          <label>Maintenance % / year<input id="maintenanceRate" type="number" min="0" value="15"></label>
           <label>Tax / GST %<input id="tax" type="number" min="0" value="0"></label>
           <label>Expiry date<input id="expiry" type="date"></label>
           <label>Machine / Site ID<input id="machineId" placeholder="Machine ID or site identifier"></label>
@@ -80,7 +82,7 @@ body{background:#f5f8fc}
           <button class="btn btn-ghost" onclick="exportQuotePdf()">Export Quote PDF</button>
           <button class="btn btn-ghost" onclick="generateActivation()">Activation Payload</button>
         </div>
-        <div class="tool-note">WYNTIQ uses one simple commercial model: annual product pricing by named user count. Devices and sites are included without a separate line-item price, so the quote is easier for officers, technicians, operators, and administrators to understand. Activation can be online and offline under the same license payload.</div>
+        <div class="tool-note">WYNTIQ uses one simple commercial model: one-time product pricing by named user count. Devices and sites are included without a separate line-item price. There are no mandatory yearly fees; maintenance, upgrades, and support coverage are optional and can be added for 1, 2, 3, or 5 years.</div>
       </section>
       <section class="tool-card">
         <h2>Output</h2>
@@ -97,13 +99,13 @@ body{background:#f5f8fc}
 function val(id){return document.getElementById(id).value.trim();}
 function money(n){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(n);}
 const presets={
-  trial:{licenseType:'TRIAL_7_DAY',users:5,userRate:0,discount:0,tax:0,activationMode:'both',notes:'Free 7-day trial. Product pauses or moves to read-only after expiry unless extended or converted to paid activation.'},
-  extension:{licenseType:'TRIAL_EXTENSION',users:5,userRate:1200,discount:0,tax:18,activationMode:'both',notes:'30-day trial extension for continued evaluation. Extension is temporary and does not create paid production rights.'},
-  pilot:{licenseType:'PAID_ANNUAL',users:10,userRate:12000,discount:10,tax:18,activationMode:'both',notes:'Guided pilot for approved users, including onboarding, core configuration, and evaluation support. Devices and sites are included.'},
-  professional:{licenseType:'PAID_ANNUAL',users:15,userRate:12000,discount:10,tax:18,activationMode:'both',notes:'Professional annual license for a small operational team. Devices and sites are included.'},
-  site:{licenseType:'SITE_LICENSE',users:50,userRate:10000,discount:10,tax:18,activationMode:'both',notes:'Expanded annual license for a larger operational group with online and offline activation support. Devices and sites are included.'},
-  enterprise:{licenseType:'ENTERPRISE',users:150,userRate:9000,discount:10,tax:18,activationMode:'both',notes:'Enterprise rollout for a larger user base, admin training, support planning, and custom workflow scope. Devices and sites are included.'},
-  defence:{licenseType:'ENTERPRISE',users:200,userRate:12000,discount:0,tax:18,activationMode:'both',notes:'Defence / secure deployment estimate with online and offline activation. Final quote depends on security review, installation controls, support level, and procurement scope. Devices and sites are included.'}
+  trial:{licenseType:'TRIAL_7_DAY',users:5,userRate:0,discount:0,tax:0,maintenanceYears:0,maintenanceRate:0,activationMode:'both',notes:'Free 7-day trial. Product pauses or moves to read-only after expiry unless extended or converted to paid activation.'},
+  extension:{licenseType:'TRIAL_EXTENSION',users:5,userRate:3000,discount:0,tax:18,maintenanceYears:0,maintenanceRate:0,activationMode:'both',notes:'Trial extension example. Extension is temporary and does not create paid production rights.'},
+  pilot:{licenseType:'ONE_TIME_LICENSE',users:10,userRate:12000,discount:10,tax:18,maintenanceYears:1,maintenanceRate:15,activationMode:'both',notes:'Guided pilot example: one-time license based on named users. Devices and sites are included. Maintenance is optional.'},
+  professional:{licenseType:'PROFESSIONAL',users:20,userRate:12000,discount:10,tax:18,maintenanceYears:1,maintenanceRate:15,activationMode:'both',notes:'Professional example: one-time license for an operational team. Devices and sites are included. Maintenance is optional.'},
+  site:{licenseType:'SITE_LICENSE',users:50,userRate:10000,discount:10,tax:18,maintenanceYears:2,maintenanceRate:15,activationMode:'both',notes:'Site License example: expanded user scope with online and offline activation support. Devices and sites are included. Maintenance is optional.'},
+  enterprise:{licenseType:'ENTERPRISE',users:150,userRate:8000,discount:10,tax:18,maintenanceYears:3,maintenanceRate:15,activationMode:'both',notes:'Enterprise example: large user-base rollout, admin training, support planning, and custom workflow scope. Devices and sites are included. Maintenance is optional.'},
+  defence:{licenseType:'DEFENCE_SECURE',users:150,userRate:12000,discount:0,tax:18,maintenanceYears:3,maintenanceRate:18,activationMode:'both',notes:'Defence Secure example with online and offline activation. Final quote depends on security review, installation controls, support level, and procurement scope. Maintenance is optional.'}
 };
 function setField(id,value){document.getElementById(id).value=value;}
 function applyPreset(key){
@@ -114,6 +116,8 @@ function applyPreset(key){
   setField('activationMode',p.activationMode);
   setField('discount',p.discount);
   setField('tax',p.tax);
+  setField('maintenanceYears',p.maintenanceYears);
+  setField('maintenanceRate',p.maintenanceRate);
   setField('notes',p.notes);
   setField('expiry','');
   generateQuote();
@@ -122,6 +126,8 @@ function applyMarketRecommended(){
   const users=Number(val('users')||10);
   setField('userRate',users>100?9000:12000);
   setField('tax',18);
+  setField('maintenanceYears',1);
+  setField('maintenanceRate',15);
   applyPaymentDiscount();
   generateQuote();
 }
@@ -132,10 +138,8 @@ function expiryFor(type){
   const d=new Date();
   if(type==='TRIAL_7_DAY') d.setDate(d.getDate()+7);
   else if(type==='TRIAL_EXTENSION') d.setDate(d.getDate()+30);
-  else if(type==='PAID_ANNUAL') d.setFullYear(d.getFullYear()+1);
-  else if(type==='PAID_3_YEAR') d.setFullYear(d.getFullYear()+3);
   else if(type==='EMERGENCY_UNLOCK') d.setDate(d.getDate()+3);
-  else d.setFullYear(d.getFullYear()+10);
+  else return 'One-time license; maintenance optional';
   return d.toISOString().slice(0,10);
 }
 function quoteData(){
@@ -143,13 +147,17 @@ function quoteData(){
   const userRate=Number(val('userRate')||0);
   const discount=Number(val('discount')||0);
   const tax=Number(val('tax')||0);
+  const maintenanceYears=Number(val('maintenanceYears')||0);
+  const maintenanceRate=Number(val('maintenanceRate')||0);
   const userTotal=users*userRate;
   const productPrice=userTotal;
   const subtotal=productPrice;
   const discountAmount=subtotal*discount/100;
   const afterDiscount=subtotal-discountAmount;
-  const taxAmount=afterDiscount*tax/100;
-  const total=afterDiscount+(afterDiscount*tax/100);
+  const maintenanceAmount=afterDiscount*maintenanceRate/100*maintenanceYears;
+  const taxableAmount=afterDiscount+maintenanceAmount;
+  const taxAmount=taxableAmount*tax/100;
+  const total=taxableAmount+taxAmount;
   const type=val('licenseType');
   return {
     quoteId:'WYQ-'+Date.now().toString(36).toUpperCase(),
@@ -166,7 +174,7 @@ function quoteData(){
     activationMode:val('activationMode'),
     expiryDate:expiryFor(type),
     modules:val('modules').split(',').map(x=>x.trim()).filter(Boolean),
-    pricing:{userRate,userTotal,productPrice,subtotal,discountPercent:discount,discountAmount,taxPercent:tax,taxAmount,total},
+    pricing:{userRate,userTotal,productPrice,subtotal,discountPercent:discount,discountAmount,afterDiscount,maintenanceYears,maintenanceRate,maintenanceAmount,taxPercent:tax,taxAmount,total},
     paymentTiming:document.getElementById('paymentTiming').selectedOptions[0].textContent,
     notes:val('notes')
   };
@@ -195,6 +203,7 @@ function generateActivation(){
     modules:q.modules,
     issuedAt:q.createdAt,
     expiresAt:q.expiryDate,
+    maintenanceYears:q.pricing.maintenanceYears,
     status:q.licenseType==='TRIAL_7_DAY'?'trial_active':'pending_payment_or_issue',
     signaturePlaceholder:'SIGN_WITH_PRIVATE_KEY_IN_PRODUCTION'
   };
@@ -203,12 +212,13 @@ function generateActivation(){
 async function copyOutput(){await navigator.clipboard.writeText(document.getElementById('output').textContent);}
 function exportQuotePdf(){
   const q=quoteData();
+  const maintenanceLabel=q.pricing.maintenanceYears>0 ? q.pricing.maintenanceYears+' year(s) x '+q.pricing.maintenanceRate+'% = '+money(q.pricing.maintenanceAmount) : 'Not included';
   const rows=[
-    ['Quote ID',q.quoteId],['Created',new Date(q.createdAt).toLocaleString()],['Customer',q.customer],['Company',q.company],['Email',q.email],['Sector',q.sector],['Platform',q.platform],['License Type',q.licenseType],['Activation Mode',q.activationMode],['Users',q.users+' x '+money(q.pricing.userRate)+' = '+money(q.pricing.userTotal)],['Devices','Unlimited included'],['Sites','Unlimited included'],['Expiry / Valid Until',q.expiryDate],['Modules',q.modules.join(', ')],['Product Price',money(q.pricing.productPrice)],['Discount',q.pricing.discountPercent+'% ('+money(q.pricing.discountAmount)+')'],['Tax / GST',q.pricing.taxPercent+'% ('+money(q.pricing.taxAmount)+')'],['Total',money(q.pricing.total)],['Payment Timing',q.paymentTiming],['Notes',q.notes]
+    ['Quote ID',q.quoteId],['Created',new Date(q.createdAt).toLocaleString()],['Customer',q.customer],['Company',q.company],['Email',q.email],['Sector',q.sector],['Platform',q.platform],['License Type',q.licenseType],['Activation Mode',q.activationMode],['Users',q.users+' x '+money(q.pricing.userRate)+' = '+money(q.pricing.userTotal)],['Devices','Unlimited included'],['Sites','Unlimited included'],['License Validity',q.expiryDate],['Modules',q.modules.join(', ')],['One-Time Product Price',money(q.pricing.productPrice)],['Discount',q.pricing.discountPercent+'% ('+money(q.pricing.discountAmount)+')'],['Optional Maintenance',maintenanceLabel],['Tax / GST',q.pricing.taxPercent+'% ('+money(q.pricing.taxAmount)+')'],['Total',money(q.pricing.total)],['Payment Timing',q.paymentTiming],['Notes',q.notes]
   ];
   const table=rows.map(r=>`<tr><th>${r[0]}</th><td>${String(r[1]).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</td></tr>`).join('');
   const win=window.open('','_blank');
-  win.document.write(`<!doctype html><html><head><title>${q.quoteId} WYNTIQ Quote</title><style>body{font-family:Arial,sans-serif;color:#132238;margin:36px}h1{font-size:30px;margin:0 0 6px}.muted{color:#5c687a;margin-bottom:24px}table{width:100%;border-collapse:collapse;margin-top:20px}th,td{text-align:left;border:1px solid #d8e4f0;padding:10px;vertical-align:top}th{width:220px;background:#f5f8fc}.total{font-size:22px;font-weight:800;margin-top:22px}.note{margin-top:24px;font-size:12px;color:#5c687a;line-height:1.6}@media print{button{display:none}}</style></head><body><h1>WYNTIQ Quotation</h1><div class="muted">TwinStance Solutions LLP | contact@tssolutionsllp.com | sales@tssolutionsllp.com</div><table>${table}</table><div class="total">Total: ${money(q.pricing.total)}</div><div class="note">This quotation is a draft generated from the internal WYNTIQ pricing tool. Final commercial terms, taxes, deployment scope, support, activation, and licensing conditions are subject to written confirmation by TwinStance Solutions LLP.</div><button onclick="window.print()" style="margin-top:24px;padding:12px 18px">Print / Save as PDF</button><script>setTimeout(()=>window.print(),300)<\\/script></body></html>`);
+  win.document.write(`<!doctype html><html><head><title>${q.quoteId} WYNTIQ Quote</title><style>body{font-family:Arial,sans-serif;color:#132238;margin:36px}h1{font-size:30px;margin:0 0 6px}.muted{color:#5c687a;margin-bottom:24px}table{width:100%;border-collapse:collapse;margin-top:20px}th,td{text-align:left;border:1px solid #d8e4f0;padding:10px;vertical-align:top}th{width:220px;background:#f5f8fc}.total{font-size:22px;font-weight:800;margin-top:22px}.note{margin-top:24px;font-size:12px;color:#5c687a;line-height:1.6}@media print{button{display:none}}</style></head><body><h1>WYNTIQ Quotation</h1><div class="muted">TwinStance Solutions LLP | contact@tssolutionsllp.com | sales@tssolutionsllp.com</div><table>${table}</table><div class="total">Total: ${money(q.pricing.total)}</div><div class="note">This quotation is a draft generated from the internal WYNTIQ pricing tool. The product license is quoted as a one-time payment by named user count. Maintenance, upgrades, and support coverage are optional. Final commercial terms, taxes, activation, and licensing conditions are subject to written confirmation by TwinStance Solutions LLP.</div><button onclick="window.print()" style="margin-top:24px;padding:12px 18px">Print / Save as PDF</button><script>setTimeout(()=>window.print(),300)<\\/script></body></html>`);
   win.document.close();
 }
 function downloadOutput(){
